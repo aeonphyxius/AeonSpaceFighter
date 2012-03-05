@@ -1,14 +1,11 @@
 package com.aeonphyxius.engine;
 
-import java.util.ArrayList;
 import java.util.Random;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
-//import com.aeonphyxius.gamecomponents.drawable.Enemy;
 import com.aeonphyxius.gamecomponents.drawable.Enemy;
 import com.aeonphyxius.gamecomponents.drawable.Player;
 import com.aeonphyxius.gamecomponents.manager.BackGroundManager;
-import com.aeonphyxius.gamecomponents.manager.EnemyManager;
 import com.aeonphyxius.gamecomponents.manager.Squadron;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 import com.aeonphyxius.gamecomponents.manager.WeaponManager;
@@ -305,10 +302,11 @@ public class GameRenderer implements Renderer {
 	 * 
 	 */
 	private void detectCollisions() {
+		Enemy tempEnemy;
 		for (int y = 0; y < 3; y++) {
 			if (WeaponManager.getInstance().getPlayeFireList().get(y).shotFired) {
 				int squadronNum = SquadronManager.getInstance().getSquadronList().size();
-				for (int x = 0; x < squadronNum; x++) { // lopp all the squadrons
+				for (int x = 0; x < squadronNum; x++) { // loop all the squadrons
 					// Check if the squadron is on screen or isn't destroyed
 					if (!SquadronManager.getInstance().getSquadronList().get(x).isDestroyed()
 						&& SquadronManager.getInstance().getSquadronList().get(x).getSquadronPosY() < 4.25) {
@@ -316,7 +314,7 @@ public class GameRenderer implements Renderer {
 						int enemyNum = SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().size();
 						
 						for (int i = 0; i < enemyNum; i++){	// loop all the enemies inside the squadron
-							Enemy tempEnemy = SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(i);
+							tempEnemy 	= SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(i);
 							if (!tempEnemy.isDestroyed){
 								if ((WeaponManager.getInstance().getPlayeFireList().get(y).posY >= tempEnemy.posY - 1 && 										
 										WeaponManager.getInstance().getPlayeFireList().get(y).posY <= tempEnemy.posY) &&										
@@ -353,22 +351,14 @@ public class GameRenderer implements Renderer {
 
 	@Override
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
-
 		gl.glViewport(0, 0, width, height);
-
 		gl.glMatrixMode(GL10.GL_PROJECTION);
 		gl.glLoadIdentity();
-
 		gl.glOrthof(0f, 1f, 0f, 1f, -1f, 1f);
-
 	}
 
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-
-		EnemyManager.getInstance().initializeInterceptors();
-		EnemyManager.getInstance().initializeScouts();
-		EnemyManager.getInstance().initializeWarships();
 		
 		WeaponManager.getInstance().initializePlayerWeapon();
 		textureLoader = new Texture(gl);
@@ -387,8 +377,5 @@ public class GameRenderer implements Renderer {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		// background.loadTexture(gl,Engine.BACKGROUND_LAYER_ONE,// Engine.context);
-		// background2.loadTexture(gl,Engine.BACKGROUND_LAYER_TWO, // Engine.context);
 	}
-
 }

@@ -50,17 +50,17 @@ public class Enemy {
 		damage++;
 		switch (enemyType) {
 		case Engine.TYPE_INTERCEPTOR:
-			if (damage == Engine.INTERCEPTOR_SHIELDS) {
+			if (damage >= Engine.INTERCEPTOR_SHIELDS) {
 				isDestroyed = true;
 			}
 			break;
 		case Engine.TYPE_SCOUT:
-			if (damage == Engine.SCOUT_SHIELDS) {
+			if (damage >= Engine.SCOUT_SHIELDS) {
 				isDestroyed = true;
 			}
 			break;
 		case Engine.TYPE_WARSHIP:
-			if (damage == Engine.WARSHIP_SHIELDS) {
+			if (damage >= Engine.WARSHIP_SHIELDS) {
 				isDestroyed = true;
 			}
 			break;
