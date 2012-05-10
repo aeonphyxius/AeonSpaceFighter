@@ -15,8 +15,7 @@ import android.opengl.GLSurfaceView.Renderer;
 * 
 * <P>All related rendering operations.
 *  
-* <P>Note that {@link BigDecimal} is used to model the price - not double or float. 
-* See {@link #Guitar(String, BigDecimal, Integer)} for more information.
+* <P>This class contains logic to display enemies, player and firepower. 
 *  
 * @author Alejandro Santiago
 * @version 1.0
