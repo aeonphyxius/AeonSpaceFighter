@@ -15,7 +15,7 @@ import android.opengl.GLSurfaceView.Renderer;
 * 
 * <P>All related rendering operations.
 *  
-* <P>This class contains logic to display enemies, player and firepower.
+* <P>This class contains logic to display enemies, player and firepower. 
 *  
 * @author Alejandro Santiago
 * @version 1.0
