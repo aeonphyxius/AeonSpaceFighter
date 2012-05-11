@@ -2,9 +2,7 @@ package com.aeonphyxius.activity;
 
 
 import com.aeonphyxius.R;
-import com.aeonphyxius.R.layout;
 import com.aeonphyxius.engine.Engine;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

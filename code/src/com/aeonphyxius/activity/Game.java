@@ -30,6 +30,7 @@ public class Game extends Activity {
         super.onCreate(savedInstanceState);
         gameView = new GameView(this);
         setContentView(gameView);
+        this.gameDisplayMetrics = new DisplayMetrics();
     }
     @Override
     protected void onResume() {

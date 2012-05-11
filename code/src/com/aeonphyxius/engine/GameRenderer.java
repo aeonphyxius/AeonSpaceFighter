@@ -39,7 +39,6 @@ public class GameRenderer implements Renderer {
 	@Override
 	public void onDrawFrame(GL10 gl) {
 		loopStart = System.currentTimeMillis();
-		// TODO Auto-generated method stub
 		try {
 			if (loopRunTime < Engine.GAME_THREAD_FPS_SLEEP) {
 				Thread.sleep(Engine.GAME_THREAD_FPS_SLEEP - loopRunTime);
@@ -53,6 +52,7 @@ public class GameRenderer implements Renderer {
 		BackGroundManager.getInstance().scrollBackground(gl);
 
 		movePlayer1(gl);
+		System.out.println("AAAAA");
 		moveEnemy(gl);
 
 		detectCollisions();
@@ -94,6 +94,7 @@ public class GameRenderer implements Renderer {
 	}
 
 	private void moveEnemy(GL10 gl) {
+		System.out.println("moveEnemy");
 		for (int x = 0; x < Engine.TOTAL_INTERCEPTORS + Engine.TOTAL_SCOUTS	+ Engine.TOTAL_WARSHIPS - 1; x++) {
 			if (!EnemyManager.getInstance().getEnemyList().get(x).isDestroyed) {
 				Random randomPos = new Random();
@@ -109,7 +110,7 @@ public class GameRenderer implements Renderer {
 					gl.glMatrixMode(GL10.GL_MODELVIEW);
 					gl.glLoadIdentity();
 					gl.glPushMatrix();
-					gl.glScalef(.15f, .15f, 1f);
+					gl.glScalef(.25f, .25f, 25f);
 
 					if (EnemyManager.getInstance().getEnemyList().get(x).posY >= 3) {
 						EnemyManager.getInstance().getEnemyList().get(x).posY -= Engine.INTERCEPTOR_SPEED;
@@ -117,7 +118,8 @@ public class GameRenderer implements Renderer {
 						if (!EnemyManager.getInstance().getEnemyList().get(x).isLockedOn) {
 							EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX = Engine.playerBankPosX;
 							EnemyManager.getInstance().getEnemyList().get(x).isLockedOn = true;
-							EnemyManager.getInstance().getEnemyList().get(x).incrementXToTarget = (float) ((EnemyManager
+							EnemyManager.getInstance().getEnemyList().get(x).incrementXToTarget = 
+									(float) ((EnemyManager
 									.getInstance().getEnemyList().get(x).lockOnPosX - EnemyManager
 									.getInstance().getEnemyList().get(x).posX) / (EnemyManager
 											.getInstance().getEnemyList().get(x).posY / (Engine.INTERCEPTOR_SPEED * 4)));
@@ -188,6 +190,7 @@ public class GameRenderer implements Renderer {
 					break;
 				
 				case Engine.TYPE_WARSHIP:
+					System.out.println("1");
 					if (EnemyManager.getInstance().getEnemyList().get(x).posY < 0) {
 						EnemyManager.getInstance().getEnemyList().get(x).posY = (randomPos.nextFloat() * 4) + 4;
 						EnemyManager.getInstance().getEnemyList().get(x).posX = randomPos.nextFloat() * 3;
@@ -410,7 +413,6 @@ public class GameRenderer implements Renderer {
 
 	@Override
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
-		// TODO Auto-generated method stub
 
 		gl.glViewport(0, 0, width, height);
 
@@ -423,10 +425,11 @@ public class GameRenderer implements Renderer {
 
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-		// TODO Auto-generated method stub
+
 		initializeInterceptors();
 		initializeScouts();
 		initializeWarships();
+		
 		WeaponManager.getInstance().initializePlayerWeapon();
 		textureLoader = new Texture(gl);
 		spriteSheets = textureLoader.loadTexture(gl, Engine.CHARACTER_SHEET,Engine.context, 1);
@@ -439,10 +442,8 @@ public class GameRenderer implements Renderer {
 		gl.glDepthFunc(GL10.GL_LEQUAL);
 
 		BackGroundManager.getInstance().loadTextures(gl);
-		// background.loadTexture(gl,Engine.BACKGROUND_LAYER_ONE,
-		// Engine.context);
-		// background2.loadTexture(gl,Engine.BACKGROUND_LAYER_TWO,
-		// Engine.context);
+		// background.loadTexture(gl,Engine.BACKGROUND_LAYER_ONE,// Engine.context);
+		// background2.loadTexture(gl,Engine.BACKGROUND_LAYER_TWO, // Engine.context);
 	}
 
 }
