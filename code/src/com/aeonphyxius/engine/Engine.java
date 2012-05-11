@@ -1,13 +1,11 @@
 package com.aeonphyxius.engine;
 
 import com.aeonphyxius.R;
-import com.aeonphyxius.R.drawable;
-import com.aeonphyxius.R.raw;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.Display;
 import android.view.View;
+
 
 public class Engine {
 	/*Constants that will be used in the game*/
@@ -70,6 +68,7 @@ public class Engine {
 	public static Display display;
 	public static int playerFlightAction = 0;
 	public static float playerBankPosX = 1.75f;
+	
 	/*Kill game and exit*/
 	public boolean onExit(View v) {
         try
