@@ -63,44 +63,16 @@ public class GameRenderer implements Renderer {
 		loopRunTime = ((loopEnd - loopStart));
 	}
 
-	private void initializeInterceptors() {
-		for (int x = 0; x < Engine.TOTAL_INTERCEPTORS - 1; x++) {
-			Enemy interceptor = new Enemy(Engine.TYPE_INTERCEPTOR,
-					Engine.ATTACK_RANDOM);
-			EnemyManager.getInstance().getEnemyList().add(x, interceptor);
-		}
-	}
 
-	private void initializeScouts() {
-		for (int x = Engine.TOTAL_INTERCEPTORS - 1; x < Engine.TOTAL_INTERCEPTORS
-				+ Engine.TOTAL_SCOUTS - 1; x++) {
-			Enemy interceptor;
-			if (x >= (Engine.TOTAL_INTERCEPTORS + Engine.TOTAL_SCOUTS) / 2) {
-				interceptor = new Enemy(Engine.TYPE_SCOUT, Engine.ATTACK_RIGHT);
-			} else {
-				interceptor = new Enemy(Engine.TYPE_SCOUT, Engine.ATTACK_LEFT);
-			}
-			EnemyManager.getInstance().getEnemyList().add(x, interceptor);
-		}
-	}
-
-	private void initializeWarships() {
-		for (int x = Engine.TOTAL_INTERCEPTORS + Engine.TOTAL_SCOUTS - 1; x < Engine.TOTAL_INTERCEPTORS
-				+ Engine.TOTAL_SCOUTS + Engine.TOTAL_WARSHIPS - 1; x++) {
-			Enemy interceptor = new Enemy(Engine.TYPE_WARSHIP,
-					Engine.ATTACK_RANDOM);
-			EnemyManager.getInstance().getEnemyList().add(x, interceptor);
-		}
-	}
 
 	private void moveEnemy(GL10 gl) {
-		System.out.println("moveEnemy");
-		for (int x = 0; x < Engine.TOTAL_INTERCEPTORS + Engine.TOTAL_SCOUTS	+ Engine.TOTAL_WARSHIPS - 1; x++) {
+		//for (int x = 0; x < Engine.TOTAL_INTERCEPTORS + Engine.TOTAL_SCOUTS + Engine.TOTAL_WARSHIPS - 1; x++) {
+		for (int x = 0; x < Engine.TOTAL_INTERCEPTORS - 1; x++) {
 			if (!EnemyManager.getInstance().getEnemyList().get(x).isDestroyed) {
 				Random randomPos = new Random();
 				switch (EnemyManager.getInstance().getEnemyList().get(x).enemyType) {
 				
-				case Engine.TYPE_INTERCEPTOR:
+				case Engine.TYPE_INTERCEPTOR: // Interceptor
 					if (EnemyManager.getInstance().getEnemyList().get(x).posY < 0) {
 						EnemyManager.getInstance().getEnemyList().get(x).posY = (randomPos.nextFloat() * 4) + 4;
 						EnemyManager.getInstance().getEnemyList().get(x).posX = randomPos.nextFloat() * 3;
@@ -110,7 +82,7 @@ public class GameRenderer implements Renderer {
 					gl.glMatrixMode(GL10.GL_MODELVIEW);
 					gl.glLoadIdentity();
 					gl.glPushMatrix();
-					gl.glScalef(.25f, .25f, 25f);
+					gl.glScalef(.15f, .15f, 1f);
 
 					if (EnemyManager.getInstance().getEnemyList().get(x).posY >= 3) {
 						EnemyManager.getInstance().getEnemyList().get(x).posY -= Engine.INTERCEPTOR_SPEED;
@@ -118,40 +90,34 @@ public class GameRenderer implements Renderer {
 						if (!EnemyManager.getInstance().getEnemyList().get(x).isLockedOn) {
 							EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX = Engine.playerBankPosX;
 							EnemyManager.getInstance().getEnemyList().get(x).isLockedOn = true;
-							EnemyManager.getInstance().getEnemyList().get(x).incrementXToTarget = 
-									(float) ((EnemyManager
+							EnemyManager.getInstance().getEnemyList().get(x).incrementXToTarget = (float) ((EnemyManager
 									.getInstance().getEnemyList().get(x).lockOnPosX - EnemyManager
 									.getInstance().getEnemyList().get(x).posX) / (EnemyManager
 											.getInstance().getEnemyList().get(x).posY / (Engine.INTERCEPTOR_SPEED * 4)));
 						}
 						EnemyManager.getInstance().getEnemyList().get(x).posY -= (Engine.INTERCEPTOR_SPEED * 4);
-						EnemyManager.getInstance().getEnemyList().get(x).posX += EnemyManager
-								.getInstance().getEnemyList().get(x).incrementXToTarget;
+						EnemyManager.getInstance().getEnemyList().get(x).posX += EnemyManager.getInstance().getEnemyList().get(x).incrementXToTarget;
 
 					}
-					gl.glTranslatef(EnemyManager.getInstance().getEnemyList()
-							.get(x).posX, EnemyManager.getInstance()
-							.getEnemyList().get(x).posY, 0f);
+					
+					gl.glTranslatef(EnemyManager.getInstance().getEnemyList().get(x).posX, EnemyManager.getInstance().getEnemyList().get(x).posY, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
-					gl.glTranslatef(0.25f, .25f, 0.0f);
-					EnemyManager.getInstance().getEnemyList().get(x).draw(gl, spriteSheets);
+					gl.glTranslatef(0.24f, .25f, 0.0f);
+					EnemyManager.getInstance().getEnemyList().get(x)
+					.draw(gl, spriteSheets);
 					gl.glPopMatrix();
 					gl.glLoadIdentity();
 
 					break;
-				
 				case Engine.TYPE_SCOUT:
 					if (EnemyManager.getInstance().getEnemyList().get(x).posY <= 0) {
 						EnemyManager.getInstance().getEnemyList().get(x).posY = (randomPos.nextFloat() * 4) + 4;
 						EnemyManager.getInstance().getEnemyList().get(x).isLockedOn = false;
 						EnemyManager.getInstance().getEnemyList().get(x).posT = Engine.SCOUT_SPEED;
-						EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX = EnemyManager
-								.getInstance().getEnemyList().get(x)
-								.getNextScoutX();
-						EnemyManager.getInstance().getEnemyList().get(x).lockOnPosY = EnemyManager
-								.getInstance().getEnemyList().get(x)
-								.getNextScoutY();
+						EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX = EnemyManager.getInstance().getEnemyList().get(x).getNextScoutX();
+						EnemyManager.getInstance().getEnemyList().get(x).lockOnPosY = EnemyManager.getInstance().getEnemyList().get(x).getNextScoutY();
+						
 						if (EnemyManager.getInstance().getEnemyList().get(x).attackDirection == Engine.ATTACK_LEFT) {
 							EnemyManager.getInstance().getEnemyList().get(x).posX = 0;
 						} else {
@@ -167,30 +133,20 @@ public class GameRenderer implements Renderer {
 						EnemyManager.getInstance().getEnemyList().get(x).posY -= Engine.SCOUT_SPEED;
 
 					} else {
-						EnemyManager.getInstance().getEnemyList().get(x).posX = EnemyManager
-								.getInstance().getEnemyList().get(x)
-								.getNextScoutX();
-						EnemyManager.getInstance().getEnemyList().get(x).posY = EnemyManager
-								.getInstance().getEnemyList().get(x)
-								.getNextScoutY();
+						EnemyManager.getInstance().getEnemyList().get(x).posX = EnemyManager.getInstance().getEnemyList().get(x).getNextScoutX();
+						EnemyManager.getInstance().getEnemyList().get(x).posY = EnemyManager.getInstance().getEnemyList().get(x).getNextScoutY();
 						EnemyManager.getInstance().getEnemyList().get(x).posT += Engine.SCOUT_SPEED;
-
 					}
-					gl.glTranslatef(EnemyManager.getInstance().getEnemyList()
-							.get(x).posX, EnemyManager.getInstance()
-							.getEnemyList().get(x).posY, 0f);
+					gl.glTranslatef(EnemyManager.getInstance().getEnemyList().get(x).posX, EnemyManager.getInstance().getEnemyList().get(x).posY, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
 					gl.glTranslatef(0.50f, .25f, 0.0f);
-					EnemyManager.getInstance().getEnemyList().get(x)
-					.draw(gl, spriteSheets);
+					EnemyManager.getInstance().getEnemyList().get(x).draw(gl, spriteSheets);
 					gl.glPopMatrix();
 					gl.glLoadIdentity();
 
 					break;
-				
 				case Engine.TYPE_WARSHIP:
-					System.out.println("1");
 					if (EnemyManager.getInstance().getEnemyList().get(x).posY < 0) {
 						EnemyManager.getInstance().getEnemyList().get(x).posY = (randomPos.nextFloat() * 4) + 4;
 						EnemyManager.getInstance().getEnemyList().get(x).posX = randomPos.nextFloat() * 3;
@@ -207,39 +163,31 @@ public class GameRenderer implements Renderer {
 
 					} else {
 						if (!EnemyManager.getInstance().getEnemyList().get(x).isLockedOn) {
-							EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX = randomPos
-									.nextFloat() * 3;
+							EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX = randomPos.nextFloat() * 3;
 							EnemyManager.getInstance().getEnemyList().get(x).isLockedOn = true;
-							EnemyManager.getInstance().getEnemyList().get(x).incrementXToTarget = (float) ((EnemyManager
-									.getInstance().getEnemyList().get(x).lockOnPosX - EnemyManager
-									.getInstance().getEnemyList().get(x).posX) / (EnemyManager
-											.getInstance().getEnemyList().get(x).posY / (Engine.WARSHIP_SPEED * 4)));
+							EnemyManager.getInstance().getEnemyList().get(x).incrementXToTarget = 
+									(float) ((
+											EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX - 
+											EnemyManager.getInstance().getEnemyList().get(x).posX) / 
+											(EnemyManager.getInstance().getEnemyList().get(x).posY / (Engine.WARSHIP_SPEED * 4)));
 						}
 						EnemyManager.getInstance().getEnemyList().get(x).posY -= (Engine.WARSHIP_SPEED * 2);
-						EnemyManager.getInstance().getEnemyList().get(x).posX += EnemyManager
-								.getInstance().getEnemyList().get(x).incrementXToTarget;
-
+						EnemyManager.getInstance().getEnemyList().get(x).posX += EnemyManager.getInstance().getEnemyList().get(x).incrementXToTarget;
 					}
-					gl.glTranslatef(EnemyManager.getInstance().getEnemyList()
-							.get(x).posX, EnemyManager.getInstance()
-							.getEnemyList().get(x).posY, 0f);
+					gl.glTranslatef(EnemyManager.getInstance().getEnemyList().get(x).posX, EnemyManager.getInstance().getEnemyList().get(x).posY, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
 					gl.glTranslatef(0.75f, .25f, 0.0f);
-					EnemyManager.getInstance().getEnemyList().get(x)
-					.draw(gl, spriteSheets);
+					EnemyManager.getInstance().getEnemyList().get(x).draw(gl, spriteSheets);
 					gl.glPopMatrix();
 					gl.glLoadIdentity();
-
 					break;
-
 				}
-
 			}
 		}
-
 	}
-
+	
+	
 	/**
 	 * Method to move
 	 * 
@@ -253,32 +201,20 @@ public class GameRenderer implements Renderer {
 				gl.glMatrixMode(GL10.GL_MODELVIEW);
 				gl.glLoadIdentity();
 				gl.glPushMatrix();
-				gl.glScalef(.15f, .15f, 1f);
+				gl.glScalef(.15f, .15f, 1f);				
 				
-				//if (goodGuyBankFrames < Engine.PLAYER_FRAMES_BETWEEN_ANI && Engine.playerBankPosX > 0) {
 				if (Engine.playerBankPosX > 0) {
 					Engine.playerBankPosX -= Engine.PLAYER_BANK_SPEED;
 					gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
-					gl.glTranslatef(0.0f, 0.34f, 0.0f);
-					//goodGuyBankFrames += 1;
-				} /*else if (goodGuyBankFrames >= Engine.PLAYER_FRAMES_BETWEEN_ANI
-						&& Engine.playerBankPosX > 0) {
-					Engine.playerBankPosX -= Engine.PLAYER_BANK_SPEED;
+					gl.glTranslatef(0.0f, 0.34f, 0.0f);// texture position
+				} else {
 					gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
-					gl.glLoadIdentity();
-					//gl.glTranslatef(0.0f, 0.25f, 0.0f);
-					gl.glTranslatef(0.0f, 0.0f, 0.0f);
-				} */else {
-					gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
-					gl.glMatrixMode(GL10.GL_TEXTURE);
-					gl.glLoadIdentity();
-					//gl.glTranslatef(0.0f, 0.0f, 0.0f);
-					gl.glTranslatef(0.33f, 0.0f, 0.0f);
-				}
-				
+					gl.glLoadIdentity();					
+					gl.glTranslatef(0.33f, 0.0f, 0.0f); // texture position
+				}				
 				player1.draw(gl, spriteSheets);
 				gl.glPopMatrix();
 				gl.glLoadIdentity();
@@ -288,30 +224,18 @@ public class GameRenderer implements Renderer {
 				gl.glMatrixMode(GL10.GL_MODELVIEW);
 				gl.glLoadIdentity();
 				gl.glPushMatrix();
-				gl.glScalef(.15f, .15f, 1f);
-				//if (goodGuyBankFrames < Engine.PLAYER_FRAMES_BETWEEN_ANI && Engine.playerBankPosX < 3) {
+				gl.glScalef(.15f, .15f, 1f);				
 				if (Engine.playerBankPosX < 5.5f) {
 					Engine.playerBankPosX += Engine.PLAYER_BANK_SPEED;
 					gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
-					//gl.glTranslatef(0.25f, 0.0f, 0.0f);
-					gl.glTranslatef(0.66f, 0.34f, 0.0f);
-					//goodGuyBankFrames += 1;
-				} /*else if (goodGuyBankFrames >= Engine.PLAYER_FRAMES_BETWEEN_ANI && Engine.playerBankPosX < 3) {
+					gl.glTranslatef(0.66f, 0.34f, 0.0f);// texture position
+				} else {
 					gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
-					gl.glTranslatef(0.66f, 0.0f, 0.0f);
-					System.out.println("2");
-					//gl.glTranslatef(0.50f, 0.0f, 0.0f);
-					Engine.playerBankPosX += Engine.PLAYER_BANK_SPEED;
-				} */else {
-					gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
-					gl.glMatrixMode(GL10.GL_TEXTURE);
-					gl.glLoadIdentity();
-					gl.glTranslatef(0.33f, 0.0f, 0.0f);
-					//gl.glTranslatef(0.0f, 0.0f, 0.0f);
+					gl.glTranslatef(0.33f, 0.0f, 0.0f); // texture position					
 				}
 				player1.draw(gl, spriteSheets);
 				// Recover previous Matrix
@@ -329,9 +253,7 @@ public class GameRenderer implements Renderer {
 				gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
 				gl.glMatrixMode(GL10.GL_TEXTURE);
 				gl.glLoadIdentity();
-				//gl.glTranslatef(0.0f, 0.0f, 0.0f);
 				gl.glTranslatef(0.33f, 0.0f, 0.0f);
-				//goodGuyBankFrames = 0;
 				player1.draw(gl, spriteSheets);
 				// Recover previous Matrix
 				gl.glPopMatrix();
@@ -348,7 +270,6 @@ public class GameRenderer implements Renderer {
 				gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
 				gl.glMatrixMode(GL10.GL_TEXTURE);
 				gl.glLoadIdentity();
-				//gl.glTranslatef(0.0f, 0.0f, 0.0f);
 				gl.glTranslatef(0.33f, 0.0f, 0.0f);
 				player1.draw(gl, spriteSheets);
 				// Recover previous Matrix
@@ -368,8 +289,8 @@ public class GameRenderer implements Renderer {
 	private void detectCollisions() {
 		for (int y = 0; y < 3; y++) {
 			if (WeaponManager.getInstance().getPlayeFireList().get(y).shotFired) {
-				for (int x = 0; x < Engine.TOTAL_INTERCEPTORS
-						+ Engine.TOTAL_SCOUTS + Engine.TOTAL_WARSHIPS - 1; x++) {
+				//for (int x = 0; x < Engine.TOTAL_INTERCEPTORS + Engine.TOTAL_SCOUTS + Engine.TOTAL_WARSHIPS - 1; x++) {
+				for (int x = 0; x < Engine.TOTAL_INTERCEPTORS - 1; x++) {
 					if (!EnemyManager.getInstance().getEnemyList().get(x).isDestroyed
 							&& EnemyManager.getInstance().getEnemyList().get(x).posY < 4.25) {
 						if ((WeaponManager.getInstance().getPlayeFireList()
@@ -426,9 +347,9 @@ public class GameRenderer implements Renderer {
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
-		initializeInterceptors();
-		initializeScouts();
-		initializeWarships();
+		EnemyManager.getInstance().initializeInterceptors();
+		EnemyManager.getInstance().initializeScouts();
+		EnemyManager.getInstance().initializeWarships();
 		
 		WeaponManager.getInstance().initializePlayerWeapon();
 		textureLoader = new Texture(gl);

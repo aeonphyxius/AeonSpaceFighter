@@ -13,18 +13,19 @@ public final class R {
     public static final class drawable {
         public static final int backgroundstars=0x7f020000;
         public static final int character_sprite=0x7f020001;
-        public static final int debris=0x7f020002;
-        public static final int destruction=0x7f020003;
-        public static final int exitselector=0x7f020004;
-        public static final int icon=0x7f020005;
-        public static final int spaceship_sprite=0x7f020006;
-        public static final int spaceship_sprite2=0x7f020007;
-        public static final int starfighter=0x7f020008;
-        public static final int starfighterexitbtn=0x7f020009;
-        public static final int starfighterexitbtndown=0x7f02000a;
-        public static final int starfighterstartbtn=0x7f02000b;
-        public static final int starfighterstartbtndown=0x7f02000c;
-        public static final int startselector=0x7f02000d;
+        public static final int character_sprite2=0x7f020002;
+        public static final int debris=0x7f020003;
+        public static final int destruction=0x7f020004;
+        public static final int exitselector=0x7f020005;
+        public static final int icon=0x7f020006;
+        public static final int spaceship_sprite=0x7f020007;
+        public static final int spaceship_sprite2=0x7f020008;
+        public static final int starfighter=0x7f020009;
+        public static final int starfighterexitbtn=0x7f02000a;
+        public static final int starfighterexitbtndown=0x7f02000b;
+        public static final int starfighterstartbtn=0x7f02000c;
+        public static final int starfighterstartbtndown=0x7f02000d;
+        public static final int startselector=0x7f02000e;
     }
     public static final class id {
         public static final int btnExit=0x7f060003;
