@@ -7,6 +7,7 @@ import com.aeonphyxius.gamecomponents.drawable.Enemy;
 import com.aeonphyxius.gamecomponents.drawable.Player;
 import com.aeonphyxius.gamecomponents.manager.BackGroundManager;
 import com.aeonphyxius.gamecomponents.manager.EnemyManager;
+import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 import com.aeonphyxius.gamecomponents.manager.WeaponManager;
 import android.opengl.GLSurfaceView.Renderer;
 
@@ -51,8 +52,7 @@ public class GameRenderer implements Renderer {
 
 		BackGroundManager.getInstance().scrollBackground(gl);
 
-		movePlayer1(gl);
-		System.out.println("AAAAA");
+		movePlayer1(gl);		
 		moveEnemy(gl);
 
 		detectCollisions();
@@ -66,8 +66,10 @@ public class GameRenderer implements Renderer {
 
 
 	private void moveEnemy(GL10 gl) {
+		int squadronNum = SquadronManager.getInstance().getSquadronList().size();
 		//for (int x = 0; x < Engine.TOTAL_INTERCEPTORS + Engine.TOTAL_SCOUTS + Engine.TOTAL_WARSHIPS - 1; x++) {
-		for (int x = 0; x < Engine.TOTAL_INTERCEPTORS - 1; x++) {
+		//for (int x = 0; x < Engine.TOTAL_INTERCEPTORS - 1; x++) {
+		for (int x = 0; x < squadronNum - 1; x++) {
 			if (!EnemyManager.getInstance().getEnemyList().get(x).isDestroyed) {
 				Random randomPos = new Random();
 				switch (EnemyManager.getInstance().getEnemyList().get(x).enemyType) {
@@ -363,6 +365,11 @@ public class GameRenderer implements Renderer {
 		gl.glDepthFunc(GL10.GL_LEQUAL);
 
 		BackGroundManager.getInstance().loadTextures(gl);
+		try{
+			SquadronManager.getInstance().loadSquadronsLevel(1);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		// background.loadTexture(gl,Engine.BACKGROUND_LAYER_ONE,// Engine.context);
 		// background2.loadTexture(gl,Engine.BACKGROUND_LAYER_TWO, // Engine.context);
 	}
