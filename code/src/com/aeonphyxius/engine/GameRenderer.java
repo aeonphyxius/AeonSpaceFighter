@@ -1,12 +1,15 @@
 package com.aeonphyxius.engine;
 
+import java.util.ArrayList;
 import java.util.Random;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 //import com.aeonphyxius.gamecomponents.drawable.Enemy;
+import com.aeonphyxius.gamecomponents.drawable.Enemy;
 import com.aeonphyxius.gamecomponents.drawable.Player;
 import com.aeonphyxius.gamecomponents.manager.BackGroundManager;
 import com.aeonphyxius.gamecomponents.manager.EnemyManager;
+import com.aeonphyxius.gamecomponents.manager.Squadron;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 import com.aeonphyxius.gamecomponents.manager.WeaponManager;
 import android.opengl.GLSurfaceView.Renderer;
@@ -66,154 +69,136 @@ public class GameRenderer implements Renderer {
 
 
 	private void moveEnemy(GL10 gl) {
-		int squadronNum = SquadronManager.getInstance().getSquadronList().size();
-		//for (int x = 0; x < Engine.TOTAL_INTERCEPTORS + Engine.TOTAL_SCOUTS + Engine.TOTAL_WARSHIPS - 1; x++) {
-		//for (int x = 0; x < Engine.TOTAL_INTERCEPTORS - 1; x++) {
-		for (int x = 0; x < squadronNum - 1; x++) {
-			if (!EnemyManager.getInstance().getEnemyList().get(x).isDestroyed) {
+		int squadronNum = SquadronManager.getInstance().getSquadronList().size();		
+		Squadron tempSquadron;
+		
+		for (int x = 0; x < squadronNum - 1; x++) {	
+			tempSquadron = SquadronManager.getInstance().getSquadronList().get(x);
+			if (!tempSquadron.isDestroyed()) {
 				Random randomPos = new Random();
-				//switch (EnemyManager.getInstance().getEnemyList().get(x).enemyType) {
-				switch (SquadronManager.getInstance().getSquadronList().get(x).getSquadronEnemyType()) {
+				int enemyNum = tempSquadron.getEnemyList().size();		
+				
+				switch (tempSquadron.getSquadronEnemyType()) { 
 				
 				case Engine.TYPE_INTERCEPTOR: // Interceptor
-					int enemyNum = SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().size();
+					
 					for (int i = 0; i < enemyNum; i++){
-						/*if (EnemyManager.getInstance().getEnemyList().get(x).posY < 0) {
-							EnemyManager.getInstance().getEnemyList().get(x).posY = (randomPos.nextFloat() * 4) + 4;
-							EnemyManager.getInstance().getEnemyList().get(x).posX = randomPos.nextFloat() * 3;
-							EnemyManager.getInstance().getEnemyList().get(x).isLockedOn = false;
-							EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX = 0;
-						}*/
-						if (SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).posY < 0) {
-							SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).posY = (randomPos.nextFloat() * 4) + 4;
-							SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).posX = randomPos.nextFloat() * 3;
-							SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).isLockedOn = false;
-							SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).lockOnPosX = 0;
+						Enemy tempEnemy = SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(i);
+
+						if (tempSquadron.getSquadronPosY() < 0) {
+							tempSquadron.setSquadronPosY( (randomPos.nextFloat() * 4) + 4);
+							tempEnemy.posX = randomPos.nextFloat() * 3;
+							tempEnemy.isLockedOn = false;
+							tempEnemy.lockOnPosX = 0;
 						}
 						gl.glMatrixMode(GL10.GL_MODELVIEW);
 						gl.glLoadIdentity();
 						gl.glPushMatrix();
 						gl.glScalef(.15f, .15f, 1f);
-	
-						/*
-						if (EnemyManager.getInstance().getEnemyList().get(x).posY >= 3) {
-							EnemyManager.getInstance().getEnemyList().get(x).posY -= Engine.INTERCEPTOR_SPEED;
+						
+						if (tempEnemy.posY >= 3) {
+							tempEnemy.posY -= Engine.INTERCEPTOR_SPEED;
 						} else {
-							if (!EnemyManager.getInstance().getEnemyList().get(x).isLockedOn) {
-								EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX = Engine.playerBankPosX;
-								EnemyManager.getInstance().getEnemyList().get(x).isLockedOn = true;
-								EnemyManager.getInstance().getEnemyList().get(x).incrementXToTarget = (float) ((EnemyManager
-										.getInstance().getEnemyList().get(x).lockOnPosX - EnemyManager
-										.getInstance().getEnemyList().get(x).posX) / (EnemyManager
-												.getInstance().getEnemyList().get(x).posY / (Engine.INTERCEPTOR_SPEED * 4)));
+							if (!tempEnemy.isLockedOn) {
+								tempEnemy.lockOnPosX = Engine.playerBankPosX;
+								tempEnemy.isLockedOn = true;
+								tempEnemy.incrementXToTarget = (float) (
+										(tempEnemy.lockOnPosX - 
+										tempEnemy.posX) / 
+										(tempSquadron.getSquadronPosY()  / (Engine.INTERCEPTOR_SPEED * 4)));
 							}
-							EnemyManager.getInstance().getEnemyList().get(x).posY -= (Engine.INTERCEPTOR_SPEED * 4);
-							EnemyManager.getInstance().getEnemyList().get(x).posX += EnemyManager.getInstance().getEnemyList().get(x).incrementXToTarget;
+							tempSquadron.setSquadronPosY(tempSquadron.getSquadronPosY()-(Engine.INTERCEPTOR_SPEED * 4));
+							tempEnemy.posX += tempEnemy.incrementXToTarget;
 	
-						}*/
-						
-						
-						if (SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).posY >= 3) {
-							SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).posY -= Engine.INTERCEPTOR_SPEED;
-						} else {
-							if (!SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).isLockedOn) {
-								SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).lockOnPosX = Engine.playerBankPosX;
-								SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).isLockedOn = true;
-								SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).incrementXToTarget = (float) (
-										(SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).lockOnPosX - 
-										SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).posX) / 
-										(SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).posY / (Engine.INTERCEPTOR_SPEED * 4)));
-							}
-							SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).posY -= (Engine.INTERCEPTOR_SPEED * 4);
-							SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).posX += SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).incrementXToTarget;
-	
-						}						
-						
-						
-						gl.glTranslatef(SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).posX, 
-										SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).posY, 0f);
+						}
+						gl.glTranslatef(tempEnemy.posX, tempSquadron.getSquadronPosY(), 0f);
 						
 						gl.glMatrixMode(GL10.GL_TEXTURE);
 						gl.glLoadIdentity();
 						gl.glTranslatef(0.24f, .25f, 0.0f);
 						
-						SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(x).draw(gl, spriteSheets);
+						tempEnemy.draw(gl, spriteSheets);
 						gl.glPopMatrix();
 						gl.glLoadIdentity();
 					}
 
 					break;
 				case Engine.TYPE_SCOUT:
-					if (EnemyManager.getInstance().getEnemyList().get(x).posY <= 0) {
-						EnemyManager.getInstance().getEnemyList().get(x).posY = (randomPos.nextFloat() * 4) + 4;
-						EnemyManager.getInstance().getEnemyList().get(x).isLockedOn = false;
-						EnemyManager.getInstance().getEnemyList().get(x).posT = Engine.SCOUT_SPEED;
-						EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX = EnemyManager.getInstance().getEnemyList().get(x).getNextScoutX();
-						EnemyManager.getInstance().getEnemyList().get(x).lockOnPosY = EnemyManager.getInstance().getEnemyList().get(x).getNextScoutY();
-						
-						if (EnemyManager.getInstance().getEnemyList().get(x).attackDirection == Engine.ATTACK_LEFT) {
-							EnemyManager.getInstance().getEnemyList().get(x).posX = 0;
-						} else {
-							EnemyManager.getInstance().getEnemyList().get(x).posX = 3f;
+					for (int i = 0; i < enemyNum; i++){
+						Enemy tempEnemy = SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(i);
+						if (tempSquadron.getSquadronPosY() <= 0) {
+							tempSquadron.setSquadronPosY( (randomPos.nextFloat() * 4) + 4);							
+							tempEnemy.isLockedOn = false;
+							tempEnemy.posT = Engine.SCOUT_SPEED;
+							tempEnemy.lockOnPosX = tempEnemy.getNextScoutX();
+							tempEnemy.lockOnPosY = tempEnemy.getNextScoutY();
+							
+							if (tempEnemy.attackDirection == Engine.ATTACK_LEFT) {
+								tempEnemy.posX = 0;
+							} else {
+								tempEnemy.posX = 3f;
+							}
 						}
+						gl.glMatrixMode(GL10.GL_MODELVIEW);
+						gl.glLoadIdentity();
+						gl.glPushMatrix();
+						gl.glScalef(.15f, .15f, 1f);
+	
+						if (tempSquadron.getSquadronPosY() >= 2.75f) {
+							tempSquadron.setSquadronPosY(tempSquadron.getSquadronPosY() - Engine.SCOUT_SPEED);
+	
+						} else {
+							tempEnemy.posX = tempEnemy.getNextScoutX();
+							tempEnemy.posY = tempEnemy.getNextScoutY();
+							tempEnemy.posT += Engine.SCOUT_SPEED;
+						}
+						gl.glTranslatef(tempEnemy.posX, tempSquadron.getSquadronPosY(), 0f);
+						gl.glMatrixMode(GL10.GL_TEXTURE);
+						gl.glLoadIdentity();
+						gl.glTranslatef(0.50f, .25f, 0.0f);
+						tempEnemy.draw(gl, spriteSheets);
+						gl.glPopMatrix();
+						gl.glLoadIdentity();
 					}
-					gl.glMatrixMode(GL10.GL_MODELVIEW);
-					gl.glLoadIdentity();
-					gl.glPushMatrix();
-					gl.glScalef(.15f, .15f, 1f);
-
-					if (EnemyManager.getInstance().getEnemyList().get(x).posY >= 2.75f) {
-						EnemyManager.getInstance().getEnemyList().get(x).posY -= Engine.SCOUT_SPEED;
-
-					} else {
-						EnemyManager.getInstance().getEnemyList().get(x).posX = EnemyManager.getInstance().getEnemyList().get(x).getNextScoutX();
-						EnemyManager.getInstance().getEnemyList().get(x).posY = EnemyManager.getInstance().getEnemyList().get(x).getNextScoutY();
-						EnemyManager.getInstance().getEnemyList().get(x).posT += Engine.SCOUT_SPEED;
-					}
-					gl.glTranslatef(EnemyManager.getInstance().getEnemyList().get(x).posX, EnemyManager.getInstance().getEnemyList().get(x).posY, 0f);
-					gl.glMatrixMode(GL10.GL_TEXTURE);
-					gl.glLoadIdentity();
-					gl.glTranslatef(0.50f, .25f, 0.0f);
-					EnemyManager.getInstance().getEnemyList().get(x).draw(gl, spriteSheets);
-					gl.glPopMatrix();
-					gl.glLoadIdentity();
 
 					break;
+					
+					
 				case Engine.TYPE_WARSHIP:
-					if (EnemyManager.getInstance().getEnemyList().get(x).posY < 0) {
-						EnemyManager.getInstance().getEnemyList().get(x).posY = (randomPos.nextFloat() * 4) + 4;
-						EnemyManager.getInstance().getEnemyList().get(x).posX = randomPos.nextFloat() * 3;
-						EnemyManager.getInstance().getEnemyList().get(x).isLockedOn = false;
-						EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX = 0;
-					}
-					gl.glMatrixMode(GL10.GL_MODELVIEW);
-					gl.glLoadIdentity();
-					gl.glPushMatrix();
-					gl.glScalef(.15f, .15f, 1f);
-
-					if (EnemyManager.getInstance().getEnemyList().get(x).posY >= 3) {
-						EnemyManager.getInstance().getEnemyList().get(x).posY -= Engine.WARSHIP_SPEED;
-
-					} else {
-						if (!EnemyManager.getInstance().getEnemyList().get(x).isLockedOn) {
-							EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX = randomPos.nextFloat() * 3;
-							EnemyManager.getInstance().getEnemyList().get(x).isLockedOn = true;
-							EnemyManager.getInstance().getEnemyList().get(x).incrementXToTarget = 
-									(float) ((
-											EnemyManager.getInstance().getEnemyList().get(x).lockOnPosX - 
-											EnemyManager.getInstance().getEnemyList().get(x).posX) / 
-											(EnemyManager.getInstance().getEnemyList().get(x).posY / (Engine.WARSHIP_SPEED * 4)));
+					for (int i = 0; i < enemyNum; i++){
+						Enemy tempEnemy = SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(i);
+						if (tempSquadron.getSquadronPosY() < 0) {
+							tempSquadron.setSquadronPosY( (randomPos.nextFloat() * 4) + 4);
+							tempEnemy.posX = randomPos.nextFloat() * 3;
+							tempEnemy.isLockedOn = false;
+							tempEnemy.lockOnPosX = 0;
 						}
-						EnemyManager.getInstance().getEnemyList().get(x).posY -= (Engine.WARSHIP_SPEED * 2);
-						EnemyManager.getInstance().getEnemyList().get(x).posX += EnemyManager.getInstance().getEnemyList().get(x).incrementXToTarget;
+						gl.glMatrixMode(GL10.GL_MODELVIEW);
+						gl.glLoadIdentity();
+						gl.glPushMatrix();
+						gl.glScalef(.15f, .15f, 1f);
+	
+						if (tempSquadron.getSquadronPosY() >= 3) {
+							tempSquadron.setSquadronPosY(tempSquadron.getSquadronPosY() - Engine.WARSHIP_SPEED);
+	
+						} else {
+							if (!tempEnemy.isLockedOn) {
+								tempEnemy.lockOnPosX = randomPos.nextFloat() * 3;
+								tempEnemy.isLockedOn = true;
+								tempEnemy.incrementXToTarget = 
+										(float) ((tempEnemy.lockOnPosX - tempEnemy.posX) / (tempSquadron.getSquadronPosY()/ (Engine.WARSHIP_SPEED * 4)));
+							}
+							tempSquadron.setSquadronPosY(tempSquadron.getSquadronPosY() - (Engine.WARSHIP_SPEED * 2));
+							tempEnemy.posX += tempEnemy.incrementXToTarget;
+						}
+						gl.glTranslatef(tempEnemy.posX, tempSquadron.getSquadronPosY(), 0f);
+						gl.glMatrixMode(GL10.GL_TEXTURE);
+						gl.glLoadIdentity();
+						gl.glTranslatef(0.75f, .25f, 0.0f);
+						tempEnemy.draw(gl, spriteSheets);
+						gl.glPopMatrix();
+						gl.glLoadIdentity();
 					}
-					gl.glTranslatef(EnemyManager.getInstance().getEnemyList().get(x).posX, EnemyManager.getInstance().getEnemyList().get(x).posY, 0f);
-					gl.glMatrixMode(GL10.GL_TEXTURE);
-					gl.glLoadIdentity();
-					gl.glTranslatef(0.75f, .25f, 0.0f);
-					EnemyManager.getInstance().getEnemyList().get(x).draw(gl, spriteSheets);
-					gl.glPopMatrix();
-					gl.glLoadIdentity();
 					break;
 				}
 			}
@@ -322,39 +307,40 @@ public class GameRenderer implements Renderer {
 	private void detectCollisions() {
 		for (int y = 0; y < 3; y++) {
 			if (WeaponManager.getInstance().getPlayeFireList().get(y).shotFired) {
-				//for (int x = 0; x < Engine.TOTAL_INTERCEPTORS + Engine.TOTAL_SCOUTS + Engine.TOTAL_WARSHIPS - 1; x++) {
-				for (int x = 0; x < Engine.TOTAL_INTERCEPTORS - 1; x++) {
-					if (!EnemyManager.getInstance().getEnemyList().get(x).isDestroyed
-							&& EnemyManager.getInstance().getEnemyList().get(x).posY < 4.25) {
-						if ((WeaponManager.getInstance().getPlayeFireList()
-								.get(y).posY >= EnemyManager.getInstance()
-								.getEnemyList().get(x).posY - 1 && WeaponManager
-								.getInstance().getPlayeFireList().get(y).posY <= EnemyManager
-								.getInstance().getEnemyList().get(x).posY)
-								&& (WeaponManager.getInstance()
-										.getPlayeFireList().get(y).posX <= EnemyManager
-										.getInstance().getEnemyList().get(x).posX + 1 && WeaponManager
-										.getInstance().getPlayeFireList()
-										.get(y).posX >= EnemyManager
-										.getInstance().getEnemyList().get(x).posX - 1)) {
-							int nextShot = 0;
-							EnemyManager.getInstance().getEnemyList().get(x)
-							.applyDamage();
-							WeaponManager.getInstance().getPlayeFireList()
-							.get(y).shotFired = false;
-							if (y == 3) {
-								nextShot = 0;
-							} else {
-								nextShot = y + 1;
-							}
-							if (WeaponManager.getInstance().getPlayeFireList()
-									.get(nextShot).shotFired == false) {
-								WeaponManager.getInstance().getPlayeFireList()
-								.get(nextShot).shotFired = true;
-								WeaponManager.getInstance().getPlayeFireList()
-								.get(nextShot).posX = Engine.playerBankPosX;
-								WeaponManager.getInstance().getPlayeFireList()
-								.get(nextShot).posY = 1.25f;
+				int squadronNum = SquadronManager.getInstance().getSquadronList().size();
+				for (int x = 0; x < squadronNum; x++) { // lopp all the squadrons
+					// Check if the squadron is on screen or isn't destroyed
+					if (!SquadronManager.getInstance().getSquadronList().get(x).isDestroyed()
+						&& SquadronManager.getInstance().getSquadronList().get(x).getSquadronPosY() < 4.25) {
+						
+						int enemyNum = SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().size();
+						
+						for (int i = 0; i < enemyNum; i++){	// loop all the enemies inside the squadron
+							Enemy tempEnemy = SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(i);
+							if (!tempEnemy.isDestroyed){
+								if ((WeaponManager.getInstance().getPlayeFireList().get(y).posY >= tempEnemy.posY - 1 && 										
+										WeaponManager.getInstance().getPlayeFireList().get(y).posY <= tempEnemy.posY) &&										
+										(WeaponManager.getInstance().getPlayeFireList().get(y).posX <= tempEnemy.posX + 1 && 
+										WeaponManager.getInstance().getPlayeFireList().get(y).posX >= tempEnemy.posX - 1)) {
+									
+									int nextShot = 0;
+									
+									tempEnemy.applyDamage();
+									if (tempEnemy.isDestroyed) // Add this destroyed enemy to the counter at Squadron level
+										SquadronManager.getInstance().getSquadronList().get(x).increaseEnemiesDestroyed();
+									
+									WeaponManager.getInstance().getPlayeFireList().get(y).shotFired = false;
+									if (y == 3) {
+										nextShot = 0;
+									} else {
+										nextShot = y + 1;
+									}
+									if (WeaponManager.getInstance().getPlayeFireList().get(nextShot).shotFired == false) {
+										WeaponManager.getInstance().getPlayeFireList().get(nextShot).shotFired = true;
+										WeaponManager.getInstance().getPlayeFireList().get(nextShot).posX = Engine.playerBankPosX;
+										WeaponManager.getInstance().getPlayeFireList().get(nextShot).posY = 1.25f;
+									}
+								}
 							}
 						}
 					}

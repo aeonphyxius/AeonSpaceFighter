@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <squadrons>
-	<squadron ypos="10" enemy="1" xpos1 ="1" xpos2="2" xpos3="3" xpos4="4"/>	
+	<squadron ypos="10" enemy="2" xpos1="1" xpos2="2" xpos3="3" xpos4="4"/>	
 	<squadron ypos="14" enemy="2" xpos1="1" xpos2="3" xpos3="4" />	
 	<squadron ypos="18" enemy="3" xpos1="1" xpos2="3" xpos3="4"/>
 	<squadron ypos="20" enemy="3" xpos1="1" xpos2="3" xpos3="4"/>

@@ -7,15 +7,50 @@ import com.aeonphyxius.gamecomponents.drawable.Enemy;
 public class Squadron {
 	
 	private ArrayList<Enemy> enemyList;
-	private int squadronPosY;
+	private float squadronPosY;
 	private int squadronEnemyType;	
+	private int squadronNumEnemies;
+	private int squadronEnemiesDestroyed;
 	
 	
-	public Squadron(ArrayList<Enemy> enemyList, int ypos, int squadronEnemyType){
+	public Squadron(ArrayList<Enemy> enemyList, float ypos, int squadronEnemyType, int squadronNumEnemies,int squadronEnemiesDestroyed){
 		this.enemyList = enemyList;		
 		this.squadronPosY = ypos;
 		this.squadronEnemyType = squadronEnemyType;
+		this.squadronNumEnemies = squadronNumEnemies;
+		this.squadronEnemiesDestroyed = squadronEnemiesDestroyed;		
 	}
+
+
+	public boolean isDestroyed(){
+		return squadronNumEnemies <= squadronEnemiesDestroyed;
+	}
+	
+	public void increaseEnemiesDestroyed(){
+		squadronEnemiesDestroyed++;
+	}
+	public int getSquadronNumEnemies() {
+		return squadronNumEnemies;
+	}
+
+
+
+	public void setSquadronNumEnemies(int squadronNumEnemies) {
+		this.squadronNumEnemies = squadronNumEnemies;
+	}
+
+
+
+	public int getSquadronEnemiesDestroyed() {
+		return squadronEnemiesDestroyed;
+	}
+
+
+
+	public void setSquadronEnemiesDestroyed(int squadronEnemiesDestroyed) {
+		this.squadronEnemiesDestroyed = squadronEnemiesDestroyed;
+	}
+
 
 
 	public int getSquadronEnemyType() {
@@ -37,12 +72,12 @@ public class Squadron {
 	}
 
 
-	public int getSquadronPosY() {
+	public float getSquadronPosY() {
 		return squadronPosY;
 	}
 
 
-	public void setSquadronPosY(int squadronPosY) {
+	public void setSquadronPosY(float squadronPosY) {
 		this.squadronPosY = squadronPosY;
 	}
 	
