@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <squadrons>
-	<squadron ypos="10" enemy1="1" xpos1 ="1" enemy2="1" xpos2="2" enemy3="1" xpos3="3" enemy4="1" xpos4="4"/>	
-	<squadron ypos="14" enemy1="2" xpos1="1" enemy2="2" xpos2="3" enemy3="2" xpos3="4" />	
-	<squadron ypos="18" enemy1="3" xpos1="1" enemy2="3" xpos2="3" enemy3="3" xpos3="4"/>
-	<squadron ypos="20" enemy1="3" xpos1="1" enemy2="3" xpos2="3" enemy3="3" xpos3="4"/>
-	<squadron ypos="30" enemy1="3" xpos1="1" enemy2="3" xpos2="3" enemy3="3" xpos3="4"/>
-	<squadron ypos="40" enemy1="3" xpos1="1" enemy2="3" xpos2="3" enemy3="3" xpos3="4"/>
-	<squadron ypos="45" enemy1="3" xpos1="1" enemy2="3" xpos2="3" enemy3="3" xpos3="4"/>
+	<squadron ypos="10" enemy="1" xpos1 ="1" xpos2="2" xpos3="3" xpos4="4"/>	
+	<squadron ypos="14" enemy="2" xpos1="1" xpos2="3" xpos3="4" />	
+	<squadron ypos="18" enemy="3" xpos1="1" xpos2="3" xpos3="4"/>
+	<squadron ypos="20" enemy="3" xpos1="1" xpos2="3" xpos3="4"/>
+	<squadron ypos="30" enemy="3" xpos1="1" xpos2="3" xpos3="4"/>
+	<squadron ypos="40" enemy="3" xpos1="1" xpos2="3" xpos3="4"/>
+	<squadron ypos="45" enemy="3" xpos1="1" xpos2="3" xpos3="4"/>
 </squadrons>

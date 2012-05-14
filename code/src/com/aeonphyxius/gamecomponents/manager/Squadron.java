@@ -8,14 +8,25 @@ public class Squadron {
 	
 	private ArrayList<Enemy> enemyList;
 	private int squadronPosY;
+	private int squadronEnemyType;	
 	
 	
-	public Squadron(ArrayList<Enemy> enemyList, int ypos){
-		this.enemyList = enemyList;
+	public Squadron(ArrayList<Enemy> enemyList, int ypos, int squadronEnemyType){
+		this.enemyList = enemyList;		
 		this.squadronPosY = ypos;
+		this.squadronEnemyType = squadronEnemyType;
 	}
 
 
+	public int getSquadronEnemyType() {
+		return squadronEnemyType;
+	}
+
+	public void setSquadronEnemyType(int squadronEnemyType) {
+		this.squadronEnemyType = squadronEnemyType;
+	}
+
+	
 	public ArrayList<Enemy> getEnemyList() {
 		return enemyList;
 	}
