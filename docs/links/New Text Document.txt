@@ -1,2 +1,0 @@
-        int height = Engine.display.getHeight() / 4;
-        int playableArea = Engine.display.getHeight() - height;
