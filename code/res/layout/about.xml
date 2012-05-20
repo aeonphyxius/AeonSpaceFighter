@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView android:id="@+id/aboutBkgImage"
+    	android:src="@drawable/welcome"  
+    	android:layout_width="match_parent" 
+    	android:layout_height="match_parent"
+    	android:contentDescription="@string/AboutBkgImg">
+    </ImageView>
+    <RelativeLayout
+        android:id="@+id/backBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp">
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:contentDescription="@string/AboutBackImg"
+            android:src="@drawable/backselector" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/AboutThanks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/backBottom"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:text="@string/AboutMsg4" />     
+
+    <TextView
+        android:id="@+id/AboutMsg1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/AboutMsg1" />
+
+    <TextView
+        android:id="@+id/AboutContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:text="@string/AboutMsg3" />
+
+    <TextView
+        android:id="@+id/AboutInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/AboutContact"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="30dp"
+        android:text="@string/AboutMsg2" />
+    
+</RelativeLayout>

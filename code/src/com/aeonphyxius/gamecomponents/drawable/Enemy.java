@@ -11,6 +11,13 @@ import com.aeonphyxius.engine.Engine;
 
 public class Enemy {
 
+	private static final int TYPE_INTERCEPTOR = 1;
+	private static final int TYPE_SCOUT = 2;
+	private static final int TYPE_WARSHIP = 3;
+	private static final int ATTACK_RANDOM = 0;	
+	private static final int ATTACK_RIGHT = 1;
+	private static final int ATTACK_LEFT = 2;
+	
 	public float posY = 0f;
 	public float posX = 0f;
 	public float posT = 0f;
@@ -49,17 +56,17 @@ public class Enemy {
 	public void applyDamage() {
 		damage++;
 		switch (enemyType) {
-		case Engine.TYPE_INTERCEPTOR:
+		case TYPE_INTERCEPTOR:
 			if (damage >= Engine.INTERCEPTOR_SHIELDS) {
 				isDestroyed = true;
 			}
 			break;
-		case Engine.TYPE_SCOUT:
+		case TYPE_SCOUT:
 			if (damage >= Engine.SCOUT_SHIELDS) {
 				isDestroyed = true;
 			}
 			break;
-		case Engine.TYPE_WARSHIP:
+		case TYPE_WARSHIP:
 			if (damage >= Engine.WARSHIP_SHIELDS) {
 				isDestroyed = true;
 			}
@@ -96,13 +103,13 @@ public class Enemy {
 		attackDirection = direction;
 		posY = (randomPos.nextFloat() * 4) + 4;
 		switch (attackDirection) {
-		case Engine.ATTACK_LEFT:
+		case ATTACK_LEFT:
 			posX = 0;
 			break;
-		case Engine.ATTACK_RANDOM:
+		case ATTACK_RANDOM:
 			posX = randomPos.nextFloat() * 3;
 			break;
-		case Engine.ATTACK_RIGHT:
+		case ATTACK_RIGHT:
 			posX = 3;
 			break;
 		}

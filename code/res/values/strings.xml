@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, StarfighterActivity!</string>
-    <string name="app_name">AeonSpaceFighter</string>
+    <string name="app_name">Aeon Space Fighter</string>
+    <string name="welcome">Game developed by Alejandro Santiago @aeonphyxius</string>
+    <string name="mainexitdes">Exit button description</string>
+    <string name="mainoptionsdes">Main menu options button</string>
+    <string name="mainstartdes">Main menu start button</string>
+    <string name="mainaboutdes">Main menu about button</string>
+    <string name="mainmenu">Main menu background</string>
+    <string name="AboutBkgImg">Background image for About screen</string>
+    <string name="AboutBackImg">Back button for About screen</string>
+    <string name="AboutMsg1">This game have been developed as a final thesis of my masters degree. </string>
+    <string name="AboutMsg4">Thanks Estela for all your support and patince during this time. All those nights awake would have not been possible without you.</string>
+    <string name="AboutMsg2">You cand find more information on my webpage http://www.aeonphyxius and find more about my projects at http://www.aeonphyxius/projects</string>
+    <string name="AboutMsg3">Please do not hesitate to contact if you have any question or sugestion at \r\n http://www.aeonphyxius.com/contact/ \r\n or using my email: \r\n alejandro@aeonphyxius.com</string>
+    <string name="ButtonImg">Image for a button</string>
 </resources>

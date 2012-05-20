@@ -6,16 +6,20 @@
     <uses-sdk android:minSdkVersion="10" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".activity.StarfighterActivity"
+        <activity android:name=".activity.WelcomeActivity"
                   android:label="@string/app_name" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainMenu" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.MainMenuActivity" android:screenOrientation="portrait"></activity>
         <service android:name=".engine.Music"></service>
-        <activity android:name=".activity.Game" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.GameActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.AboutActivity"></activity>
+        <activity android:name=".activity.OptionsActivity"></activity>
+        <activity android:name=".activity.SoundOptionsActivity"></activity>
+        <activity android:name=".activity.DiffOptionsActivity"></activity>
 
     </application>
 </manifest>

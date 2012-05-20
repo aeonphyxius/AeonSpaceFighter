@@ -3,25 +3,41 @@ package com.aeonphyxius.gamecomponents.manager;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.microedition.khronos.opengles.GL10;
-
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.gamecomponents.drawable.BackGround;
 
+/**
+* BackGroundManager Object.
+* 
+* <P>Manager for all game background layers.
+*  
+* <P>This class contains logic manage the game's background layers. 
+*  
+* @author Alejandro Santiago
+* @version 1.0
+* @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+*/
 
 public class BackGroundManager {
 
 	private static BackGroundManager instance = null;
+	private ArrayList<BackGround> background_list;
 
+	/**
+	 * Class constructor. Only to be called from Singleton implementation
+	 */
 	protected BackGroundManager() {
 		background_list = new ArrayList<BackGround>();
 
-		// Add 3 layers for our background
+		// Add 2 layers for our background
 		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_1, 1f, 0f));
 		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_2, .5f,	1.5f));
-		// TODO add the 3rd layer and the correct background images.
-		// background_list.add(new BackGround());
 	}
 
+	/**
+	 * Singleton implementation
+	 * @return the unique instance of this class
+	 */
 	public static BackGroundManager getInstance() {
 		if (instance == null) {
 			instance = new BackGroundManager();
@@ -29,26 +45,25 @@ public class BackGroundManager {
 		return instance;
 	}
 
-	private ArrayList<BackGround> background_list;
+	
 
 	/**
-	 * 
-	 * @param gl
+	 * Loading all background textures.
+	 * @param gl Open GL handler
 	 */
 	public void loadTextures(GL10 gl) {
-		background_list.get(0).loadTexture(gl, Engine.BACKGROUND_LAYER_ONE,
-				Engine.context);
-		background_list.get(1).loadTexture(gl, Engine.BACKGROUND_LAYER_TWO,
-				Engine.context);
+		background_list.get(0).loadTexture(gl, Engine.BACKGROUND_LAYER_ONE,	Engine.context);
+		background_list.get(1).loadTexture(gl, Engine.BACKGROUND_LAYER_TWO, Engine.context);
 	}
 
 	/**
-	 * 
-	 * @param gl
+	 * Moves background layers to simulate scrolling
+	 * @param gl Open GL handler
 	 */
 	public void scrollBackground(GL10 gl) {
 		BackGround tempBG;
 
+		// loop throw all background layers.
 		for (Iterator<BackGround> i = background_list.iterator(); i.hasNext();) {
 			tempBG = i.next();
 

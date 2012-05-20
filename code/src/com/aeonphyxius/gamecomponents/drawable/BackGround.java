@@ -5,16 +5,26 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
-
 import javax.microedition.khronos.opengles.GL10;
-
 import com.aeonphyxius.engine.DrawableComponent;
 import com.aeonphyxius.engine.Engine;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLUtils;
+
+
+/**
+* BackGround Object.
+* 
+* <P> Class to manage a background layer. Contains all logic to display an image as a background,
+*  
+* <P> and load the texture. 
+*  
+* @author Alejandro Santiago
+* @version 1.0
+* @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+*/
 
 public class BackGround implements DrawableComponent{
 
@@ -49,6 +59,7 @@ public class BackGround implements DrawableComponent{
 	
 	
 
+	
 	public float getScrollElapse() {
 		return scrollElapse;
 	}
@@ -89,6 +100,9 @@ public class BackGround implements DrawableComponent{
 	}
 
 
+	/**
+	 * Default class constructor. Will load default values for scroll elapse, scaleX and translateX
+	 */
 	public BackGround() {
 		scroll = 0.f;
 		scrollElapse = Engine.SCROLL_BACKGROUND_1;
@@ -109,6 +123,12 @@ public class BackGround implements DrawableComponent{
 		indexBuffer.position(0);
 	}
 
+	/**
+	 * Class constructor, with scroll elapse, scaleX, translateX values. To be used 
+	 * @param se
+	 * @param scaleX
+	 * @param translateX
+	 */
 	public BackGround(float se,float scaleX, float translateX) {
 		scroll = 0.f;
 		scrollElapse = se;
@@ -131,6 +151,10 @@ public class BackGround implements DrawableComponent{
 		indexBuffer.position(0);
 	}
 
+	/**
+	 * To draw current background layer
+	 * @param gl Open GL handler
+	 */
 	public void draw(GL10 gl) {
 		gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[0]);
 
@@ -152,11 +176,17 @@ public class BackGround implements DrawableComponent{
 	}
 
 
+	/**
+	 * Loading an image as a texture of this background layer
+	 * @param gl Open GL handler
+	 * @param texture texture number
+	 * @param context application context with all resources
+	 */
 	public void loadTexture(GL10 gl,int texture, Context context) {
 		InputStream imagestream = context.getResources().openRawResource(texture);
 		Bitmap bitmap = null;
 		try {
-
+			// load the image
 			bitmap = BitmapFactory.decodeStream(imagestream);
 
 		}catch(Exception e){
@@ -170,6 +200,7 @@ public class BackGround implements DrawableComponent{
 			}
 		}
 
+		// Bind texture
 		gl.glGenTextures(1, textures, 0);
 		gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[0]);
 
@@ -181,6 +212,7 @@ public class BackGround implements DrawableComponent{
 
 		GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
 
+		// clear
 		bitmap.recycle();
 	}
 }

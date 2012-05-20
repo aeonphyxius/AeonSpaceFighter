@@ -25,14 +25,10 @@ import android.opengl.GLSurfaceView.Renderer;
 
 public class GameRenderer implements Renderer {
 
+
 	private Player player1 = new Player();
-	// private Enemy[] enemies = new Enemy[Engine.TOTAL_INTERCEPTORS +
-	// Engine.TOTAL_SCOUTS + Engine.TOTAL_WARSHIPS - 1];
 	private Texture textureLoader;
 	private int[] spriteSheets = new int[4];
-	// private Weapon[] playerFire = new Weapon[4];
-
-	//private int goodGuyBankFrames = 0;
 	private long loopStart = 0;
 	private long loopEnd = 0;
 	private long loopRunTime = 0;
@@ -65,6 +61,10 @@ public class GameRenderer implements Renderer {
 
 
 
+	/**
+	 * Moves all the enemies on screen. Also moves down the enemies above the visible area
+	 * @param gl
+	 */
 	private void moveEnemy(GL10 gl) {
 		int squadronNum = SquadronManager.getInstance().getSquadronList().size();		
 		Squadron tempSquadron;
@@ -204,7 +204,7 @@ public class GameRenderer implements Renderer {
 	
 	
 	/**
-	 * Method to move
+	 * Moves the player depending player input
 	 * 
 	 * @param gl
 	 */
@@ -299,11 +299,14 @@ public class GameRenderer implements Renderer {
 	}
 
 	/**
-	 * 
+	 * Detects collision between all the weapons on screen and the enemies. 
 	 */
 	private void detectCollisions() {
 		Enemy tempEnemy;
-		for (int y = 0; y < 3; y++) {
+		int weaponsSize = WeaponManager.getInstance().getPlayeFireList().size();
+		
+		for (int y = 0; y < weaponsSize; y++) {
+		
 			if (WeaponManager.getInstance().getPlayeFireList().get(y).shotFired) {
 				int squadronNum = SquadronManager.getInstance().getSquadronList().size();
 				for (int x = 0; x < squadronNum; x++) { // loop all the squadrons
