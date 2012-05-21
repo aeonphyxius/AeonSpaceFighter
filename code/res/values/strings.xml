@@ -2,7 +2,7 @@
 <resources>
     <string name="hello">Hello World, StarfighterActivity!</string>
     <string name="app_name">Aeon Space Fighter</string>
-    <string name="welcome">Game developed by Alejandro Santiago @aeonphyxius</string>
+    <string name="welcome">Game developed by @aeonphyxius</string>
     <string name="mainexitdes">Exit button description</string>
     <string name="mainoptionsdes">Main menu options button</string>
     <string name="mainstartdes">Main menu start button</string>

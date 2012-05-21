@@ -101,17 +101,24 @@ public class MainMenuActivity extends Activity {
         
         // Exit button click event. Cleans the application and exits
         exit.setOnClickListener(new OnClickListener(){ 
-			@Override
+			
+        	@Override
 			public void onClick(View v) {
-				// Exits the game
+				// Start exit activity !!!!
+				Intent exit = new Intent(getApplicationContext(),ExitActivity.class);
+				MainMenuActivity.this.finish();
+				MainMenuActivity.this.startActivity(exit);
+        		
+			/*	// Exits the game
 				boolean clean = false;
 				//clean = Engine.onExit(v);	
 				//if (clean)
 				//{
 					int pid= android.os.Process.myPid();
-					android.os.Process.killProcess(pid);
+					android.os.Process.killProcess(pid);*/
 				//}
 			}
+        	
         });
     }
 

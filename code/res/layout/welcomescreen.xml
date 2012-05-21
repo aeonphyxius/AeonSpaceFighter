@@ -7,7 +7,7 @@
     	android:src="@drawable/welcome" 
     	android:layout_width="match_parent" 
     	android:layout_height="match_parent">
-    </ImageView>
+    </ImageView>    
     <TextView 
     	android:text="@string/welcome" 
     	android:id="@+id/creditsText"
@@ -15,4 +15,22 @@
     	android:layout_height="wrap_content" 
     	android:layout_width="wrap_content">
     </TextView>
+      <RelativeLayout
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal"        
+        android:layout_marginBottom="150dp"
+        android:layout_marginLeft="100dp">
+        
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"            
+            android:layout_alignParentRight="true"
+            android:src="@drawable/intro" />
+
+    </RelativeLayout>
+
 </FrameLayout>

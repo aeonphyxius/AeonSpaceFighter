@@ -20,6 +20,7 @@
         <activity android:name=".activity.OptionsActivity"></activity>
         <activity android:name=".activity.SoundOptionsActivity"></activity>
         <activity android:name=".activity.DiffOptionsActivity"></activity>
+        <activity android:name=".activity.ExitActivity"></activity>
 
     </application>
 </manifest>
