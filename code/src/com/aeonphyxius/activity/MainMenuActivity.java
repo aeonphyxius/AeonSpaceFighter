@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 
 import com.aeonphyxius.R;
 import com.aeonphyxius.engine.Engine;
+import com.aeonphyxius.engine.MusicManager;
 import com.aeonphyxius.engine.impl.OldMusic;
 
 /**
@@ -50,7 +51,7 @@ public class MainMenuActivity extends Activity {
         Engine.context = getApplicationContext();
        
         // TODO : fix music
-        if (!Engine.isMuted){
+       /* if (!Engine.isMuted){
 	        // Fire up background music
 	       Engine.musicThread = new Thread(){
 	        	public void run(){
@@ -59,6 +60,13 @@ public class MainMenuActivity extends Activity {
 	        	}
 	        };	        
 	        Engine.musicThread.start();
+        }*/
+        try{
+        	MusicManager.getInstance().loadMusic();
+        	MusicManager.getInstance().loadSounds();
+        	MusicManager.getInstance().playMusic();
+        }catch (Exception e){
+        	e.printStackTrace();
         }
                 
         // Set menu button options
