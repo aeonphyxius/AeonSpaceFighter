@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 
 import com.aeonphyxius.R;
 import com.aeonphyxius.engine.Engine;
-import com.aeonphyxius.engine.Music;
+import com.aeonphyxius.engine.impl.OldMusic;
 
 /**
 * MainMenuActivity Object.
@@ -26,6 +26,23 @@ import com.aeonphyxius.engine.Music;
 public class MainMenuActivity extends Activity {
     /** Called when the activity is first created. */
 	
+	/*@Override
+	public void onResume (){
+		if (Engine.musicThread.)
+			Engine.musicThread.resume();
+	}
+	
+	
+	@Override
+	public void onPause (){
+		try {
+			Engine.musicThread.wait();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}*/
+	
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,17 +50,17 @@ public class MainMenuActivity extends Activity {
         Engine.context = getApplicationContext();
        
         // TODO : fix music
-        // Fire up background music
-       Engine.musicThread = new Thread(){
-        	public void run(){
-        		Intent bgmusic = new Intent(getApplicationContext(), Music.class);
-        		startService(bgmusic);
-  
-        	}
-        };
-        Engine.musicThread.start();
-        
-        
+        if (!Engine.isMuted){
+	        // Fire up background music
+	       Engine.musicThread = new Thread(){
+	        	public void run(){
+	        		Intent bgmusic = new Intent(getApplicationContext(), OldMusic.class);
+	        		startService(bgmusic);  
+	        	}
+	        };	        
+	        Engine.musicThread.start();
+        }
+                
         // Set menu button options
         ImageButton start = (ImageButton)findViewById(R.id.btnStart);
         ImageButton exit = (ImageButton)findViewById(R.id.btnExit);

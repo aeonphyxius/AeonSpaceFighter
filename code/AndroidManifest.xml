@@ -14,7 +14,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainMenuActivity" android:screenOrientation="portrait"></activity>
-        <service android:name=".engine.Music"></service>
+        <service android:name=".engine.impl.OldMusic"></service>
         <activity android:name=".activity.GameActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.AboutActivity"></activity>
         <activity android:name=".activity.OptionsActivity"></activity>

@@ -1,6 +1,8 @@
 package com.aeonphyxius.engine;
 
 import com.aeonphyxius.R;
+import com.aeonphyxius.engine.impl.OldMusic;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.Display;
@@ -63,6 +65,7 @@ public static final int WARSHIP_SHIELDS = 5;
 public static final float PLAYER_BULLET_SPEED = .125f;
 /*Game Variables*/
 
+public static boolean isMuted = false;
 public static Context context;
 public static Thread musicThread;
 public static Display display;
@@ -75,7 +78,7 @@ public static int difficulty = 2;
 public boolean onExit(View v) {
         try
         {
-         Intent bgmusic = new Intent(context, Music.class);
+         Intent bgmusic = new Intent(context, OldMusic.class);
          context.stopService(bgmusic);
          musicThread.stop();
 

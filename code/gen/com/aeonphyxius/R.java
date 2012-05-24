@@ -103,7 +103,8 @@ public final class R {
         public static final int welcomescreen=0x7f030008;
     }
     public static final class raw {
-        public static final int warfieldedit=0x7f040000;
+        public static final int stunt=0x7f040000;
+        public static final int warfieldedit=0x7f040001;
     }
     public static final class string {
         public static final int AboutBackImg=0x7f050009;
