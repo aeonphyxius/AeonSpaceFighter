@@ -2,6 +2,7 @@ package com.aeonphyxius.activity;
 
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.GameView;
+import com.aeonphyxius.engine.MusicManager;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -39,12 +40,14 @@ public class GameActivity extends Activity {
     protected void onResume() {
        super.onResume();
        gameView.onResume();
+       MusicManager.getInstance().resumeMusic();
     }
 
     @Override
     protected void onPause() {
        super.onPause();
        gameView.onPause();
+       MusicManager.getInstance().pauseMusic();
     }
 
    	@Override

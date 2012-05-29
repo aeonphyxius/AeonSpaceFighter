@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.microedition.khronos.opengles.GL10;
 
 import com.aeonphyxius.engine.Engine;
+import com.aeonphyxius.engine.MusicManager;
 import com.aeonphyxius.gamecomponents.drawable.Weapon;
 
 
@@ -70,12 +71,13 @@ public class WeaponManager {
 							nextShot = x + 1;
 						}
 						if (playeFireList.get(nextShot).shotFired == false){
+							MusicManager.getInstance().playSound("blaster");
 							playeFireList.get(nextShot).shotFired = true;
 							playeFireList.get(nextShot).posX = Engine.playerBankPosX;
 							playeFireList.get(nextShot).posY = 1.25f;
 						}
 						
-					}
+					}					
 					playeFireList.get(x).posY += Engine.PLAYER_BULLET_SPEED;
 					gl.glMatrixMode(GL10.GL_MODELVIEW);
 					gl.glLoadIdentity();

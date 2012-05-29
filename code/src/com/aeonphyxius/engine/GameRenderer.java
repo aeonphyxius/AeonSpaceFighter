@@ -304,37 +304,39 @@ public class GameRenderer implements Renderer {
 	private void detectCollisions() {
 		Enemy tempEnemy;
 		int weaponsSize = WeaponManager.getInstance().getPlayeFireList().size();
+		int squadronNum = SquadronManager.getInstance().getSquadronList().size();
 		
-		for (int y = 0; y < weaponsSize; y++) {
+		for (int shootNum = 0; shootNum < weaponsSize; shootNum++) {
 		
-			if (WeaponManager.getInstance().getPlayeFireList().get(y).shotFired) {
-				int squadronNum = SquadronManager.getInstance().getSquadronList().size();
-				for (int x = 0; x < squadronNum; x++) { // loop all the squadrons
+			if (WeaponManager.getInstance().getPlayeFireList().get(shootNum).shotFired) {
+				//int squadronNum = SquadronManager.getInstance().getSquadronList().size();
+				for (int sqNum = 0; sqNum < squadronNum; sqNum++) { // loop all the squadrons
 					// Check if the squadron is on screen or isn't destroyed
-					if (!SquadronManager.getInstance().getSquadronList().get(x).isDestroyed()
-						&& SquadronManager.getInstance().getSquadronList().get(x).getSquadronPosY() < 4.25) {
+					if (!SquadronManager.getInstance().getSquadronList().get(sqNum).isDestroyed() && SquadronManager.getInstance().getSquadronList().get(sqNum).getSquadronPosY() < 5.25) { // TODO : Fix with a constant
 						
-						int enemyNum = SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().size();
+						int enemyNum = SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().size();
 						
-						for (int i = 0; i < enemyNum; i++){	// loop all the enemies inside the squadron
-							tempEnemy 	= SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(i);
+						for (int sqMember = 0; sqMember < enemyNum; sqMember++){	// loop all the enemies inside the squadron
+							tempEnemy 	= SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember);
 							if (!tempEnemy.isDestroyed){
-								if ((WeaponManager.getInstance().getPlayeFireList().get(y).posY >= tempEnemy.posY - 1 && 										
-										WeaponManager.getInstance().getPlayeFireList().get(y).posY <= tempEnemy.posY) &&										
-										(WeaponManager.getInstance().getPlayeFireList().get(y).posX <= tempEnemy.posX + 1 && 
-										WeaponManager.getInstance().getPlayeFireList().get(y).posX >= tempEnemy.posX - 1)) {
+								if ((WeaponManager.getInstance().getPlayeFireList().get(shootNum).posY >= tempEnemy.posY - 1 && 										
+										WeaponManager.getInstance().getPlayeFireList().get(shootNum).posY <= tempEnemy.posY) &&										
+										(WeaponManager.getInstance().getPlayeFireList().get(shootNum).posX <= tempEnemy.posX + 1 && 
+										WeaponManager.getInstance().getPlayeFireList().get(shootNum).posX >= tempEnemy.posX - 1)) {
 									
 									int nextShot = 0;
 									
-									tempEnemy.applyDamage();
-									if (tempEnemy.isDestroyed) // Add this destroyed enemy to the counter at Squadron level
-										SquadronManager.getInstance().getSquadronList().get(x).increaseEnemiesDestroyed();
+									SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).applyDamage();
+									if (!SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).isDestroyed) // Add this destroyed enemy to the counter at Squadron level
+										SquadronManager.getInstance().getSquadronList().get(sqNum).increaseEnemiesDestroyed();
 									
-									WeaponManager.getInstance().getPlayeFireList().get(y).shotFired = false;
-									if (y == 3) {
+									//SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().set(i,tempEnemy);
+									
+									WeaponManager.getInstance().getPlayeFireList().get(shootNum).shotFired = false;
+									if (shootNum == 3) {
 										nextShot = 0;
 									} else {
-										nextShot = y + 1;
+										nextShot = shootNum + 1;
 									}
 									if (WeaponManager.getInstance().getPlayeFireList().get(nextShot).shotFired == false) {
 										WeaponManager.getInstance().getPlayeFireList().get(nextShot).shotFired = true;
@@ -363,6 +365,7 @@ public class GameRenderer implements Renderer {
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		
+		MusicManager.getInstance().playMusic();
 		WeaponManager.getInstance().initializePlayerWeapon();
 		textureLoader = new Texture(gl);
 		spriteSheets = textureLoader.loadTexture(gl, Engine.CHARACTER_SHEET,Engine.context, 1);

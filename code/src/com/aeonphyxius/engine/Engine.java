@@ -1,12 +1,8 @@
 package com.aeonphyxius.engine;
 
 import com.aeonphyxius.R;
-import com.aeonphyxius.engine.impl.OldMusic;
-
 import android.content.Context;
-import android.content.Intent;
 import android.view.Display;
-import android.view.View;
 
 
 public class Engine {
@@ -27,6 +23,8 @@ public static final int PLAYER_RELEASE = 3;
 public static final int PLAYER_BANK_RIGHT_1 = 4;
 public static final int PLAYER_FRAMES_BETWEEN_ANI = 9;
 public static final float PLAYER_BANK_SPEED = .1f;
+
+public static final float EFFECTS_VOLUME = 0.3f;
 
 // sprites
 public static int CHARACTER_SHEET = R.drawable.character_sprite;
@@ -65,29 +63,13 @@ public static final int WARSHIP_SHIELDS = 5;
 public static final float PLAYER_BULLET_SPEED = .125f;
 /*Game Variables*/
 
-public static boolean isMuted = false;
+public static boolean isMuted = true;
 public static Context context;
 public static Thread musicThread;
 public static Display display;
 public static int playerFlightAction = 0;
 public static float playerBankPosX = 1.75f;
-public static boolean sound = true;
 public static int difficulty = 2;
-
-/*Kill game and exit*/
-public boolean onExit(View v) {
-        try
-        {
-         Intent bgmusic = new Intent(context, OldMusic.class);
-         context.stopService(bgmusic);
-         musicThread.stop();
-
-         return true;
-        }catch(Exception e){
-         return false;
-        }
-     
-}
 
 
 }

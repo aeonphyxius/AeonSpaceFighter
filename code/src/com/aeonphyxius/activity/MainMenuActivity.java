@@ -6,11 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-
 import com.aeonphyxius.R;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.MusicManager;
-import com.aeonphyxius.engine.impl.OldMusic;
 
 /**
 * MainMenuActivity Object.
@@ -63,12 +61,13 @@ public class MainMenuActivity extends Activity {
         }*/
         try{
         	MusicManager.getInstance().loadMusic();
-        	MusicManager.getInstance().loadSounds();
-        	MusicManager.getInstance().playMusic();
+        	MusicManager.getInstance().loadSounds();       	
+        	
         }catch (Exception e){
         	e.printStackTrace();
         }
-                
+            
+        //
         // Set menu button options
         ImageButton start = (ImageButton)findViewById(R.id.btnStart);
         ImageButton exit = (ImageButton)findViewById(R.id.btnExit);

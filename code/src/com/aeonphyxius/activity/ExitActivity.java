@@ -39,13 +39,8 @@ public class ExitActivity extends Activity {
                    ExitActivity.this.finish();
                    overridePendingTransition(R.layout.fadein,R.layout.fadeout);
                    // Exits the game
-   					boolean clean = false;
-   					//		clean = Engine.onExit(v);	
-   					//	if (clean)
-   					//{
    					int pid= android.os.Process.myPid();
    					android.os.Process.killProcess(pid);
-   					//}
         		}
         	}, Engine.GAME_THREAD_DELAY);
         

@@ -49,7 +49,7 @@ public class SoundOptionsActivity extends Activity {
         yes.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Engine.sound= true; // Set sound to true
+				Engine.isMuted= false; // Set sound to true
 				// Closes this activity
 				SoundOptionsActivity.this.finish();
 			}        	
@@ -59,7 +59,7 @@ public class SoundOptionsActivity extends Activity {
         no.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Engine.sound = false;
+				Engine.isMuted = true;
 				// Closes this activity
 				SoundOptionsActivity.this.finish();
 			}        	

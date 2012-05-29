@@ -1,9 +1,9 @@
 package com.aeonphyxius.engine;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -16,7 +16,6 @@ import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.net.Uri;
 import com.aeonphyxius.engine.impl.*;
 
 
@@ -26,11 +25,10 @@ public class MusicManager {
 	private static MusicManager instance = null;
 	private Map<String, SoundImpl> soundList;
 	private MusicImpl music;
-	//private Map<String, SoundImpl> audioList;
 
 	/**
-	 * Singleton implementation
-	 * @return the unique instance of this class
+	 * Singleton pattern implementation
+	 * @return the unique instance of the Music Manager
 	 */
 	public static MusicManager getInstance() {
 		if (instance == null) {
@@ -40,6 +38,13 @@ public class MusicManager {
 	}
 	
 	private MusicManager(){
+		soundList = new HashMap<String, SoundImpl>();
+	}
+	
+	public void playSound(String soundName){
+		if (!Engine.isMuted){
+			soundList.get(soundName).play(Engine.EFFECTS_VOLUME);
+		}
 		
 	}
 	
@@ -50,7 +55,7 @@ public class MusicManager {
 	public void loadSounds() throws Exception {
 
 		AssetManager assetManager = Engine.context.getAssets();
-		String fileName = "sounds.xml";
+		String fileName = "sound.xml";
 		InputStream is;
 
 		try {
@@ -86,7 +91,15 @@ public class MusicManager {
 				tempSrc = attributes.getValue("src");
 
 				// load the sound file into our soundpool.
-				tempId = soundPool.load("//assets/"+tempSrc,1);
+				AssetFileDescriptor descriptor = null;
+				try {
+					descriptor = Engine.context.getAssets().openFd(tempSrc);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				tempId = soundPool.load(descriptor,1);
 				
 				// create a new sound and insert it into the sounds list
 				tempSound = new SoundImpl(soundPool,tempId);
@@ -100,12 +113,18 @@ public class MusicManager {
 	 */
 	public void loadMusic(){
 		AssetFileDescriptor assetDescriptor=null;
-	
+		
 		try {
-			assetDescriptor = new AssetFileDescriptor(Engine.context.getContentResolver().openFileDescriptor(Uri.fromFile(new File("//assets/level01.ogg")),""),0,-1);
+			assetDescriptor = Engine.context.getAssets().openFd("level01.ogg"); 
+					//new AssetFileDescriptor(Engine.context.getContentResolver().openFileDescriptor(Uri.fromFile(new File("//assets/level01.ogg")),""),0,-1);
 		} catch (FileNotFoundException ex) {
             // fall through and open the fallback ringtone below
-        }
+			ex.printStackTrace();
+        } catch (IOException e) {
+        	// Problem reading the music file
+			e.printStackTrace();
+		}
+		
 		music = new MusicImpl(assetDescriptor);
 	}
 	
@@ -113,8 +132,24 @@ public class MusicManager {
 	 * 
 	 */
 	public void playMusic(){
-		music.play();
+		if (!Engine.isMuted){
+			music.play();
+		}
+		
+	}
+
+	public void pauseMusic(){
+		if (!Engine.isMuted){
+			music.pause();
+		}
+		
 	}
 	
+	public void resumeMusic(){
+		if (!Engine.isMuted){
+			music.play();
+		}
+		
+	}
 
 }

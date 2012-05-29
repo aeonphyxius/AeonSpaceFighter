@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <sounds>
-	<sound name="coin" src="coin.ogg" />	
+	<sound name="coin" src="coin.ogg"/>	
 	<sound name="hit" src="hit.ogg" />
+	<sound name="blaster" src="blaster.ogg" />
+	<sound name="finalEnemy" src="finalEnemy.ogg" />	
 </sounds>
