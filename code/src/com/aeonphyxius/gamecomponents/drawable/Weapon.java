@@ -24,10 +24,10 @@ public class Weapon {
 		};
 	   
 	    private float texture[] = {          
-	    		0.48f, 0.53f,
-	    		0.53f, 0.53f,
-	    		0.53f, 0.56f,
-	    		0.48f, 0.56f, 
+	    		0.484f, 0.443f,
+	    		0.527f, 0.443f,
+	    		0.527f, 0.506f,
+	    		0.484f, 0.506f, 
 	    };
 	        
 	    private byte indices[] = {

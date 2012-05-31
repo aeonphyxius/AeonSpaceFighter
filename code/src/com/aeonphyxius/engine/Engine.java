@@ -61,6 +61,22 @@ public static final int SCOUT_SHIELDS = 3;
 public static final int INTERCEPTOR_SHIELDS = 1;
 public static final int WARSHIP_SHIELDS = 5;
 public static final float PLAYER_BULLET_SPEED = .125f;
+
+// Player configuration
+public static final int DIFF_EASY = 1;
+public static final int DIFF_NORMAL = 2;
+public static final int DIFF_HARD = 3;
+public static final int LIVES_EASY = 3;
+public static final int LIVES_NORMAL = 2;
+public static final int LIVES_HARD = 2;
+public static final int SHIELD_EASY = 100;
+public static final int SHIELD_NORMAL = 80;
+public static final int SHIELD_HARD = 60;
+public static final int DAMAGE_EASY = 0;
+public static final int DAMAGE_NORMAL = 10;
+public static final int DAMAGE_HARD = 20;
+
+
 /*Game Variables*/
 
 public static boolean isMuted = true;

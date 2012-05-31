@@ -20,7 +20,7 @@ import android.widget.ImageButton;
 * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
 */
 
-public class AboutActivity extends Activity {
+public class AboutActivity extends Activity implements OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState)  {
@@ -36,12 +36,17 @@ public class AboutActivity extends Activity {
         back.setHapticFeedbackEnabled(Engine.HAPTIC_BUTTON_FEEDBACK);
         
         // Back button onclick listener. Goes back to options menu
-        back.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// Close this activity screen
-                AboutActivity.this.finish();
-			}        	
-        });        
+        back.setOnClickListener(this);        
     }
+
+	@Override
+	public void onClick(View view) {
+		
+		//switch (view.getId()){
+		//case R.id.btnBack:
+			 AboutActivity.this.finish();
+		//break;
+		//}
+		
+	}
 }

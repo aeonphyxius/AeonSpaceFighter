@@ -20,7 +20,7 @@ import android.widget.ImageButton;
 * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
 */
 
-public class DiffOptionsActivity extends Activity {
+public class DiffOptionsActivity extends Activity implements OnClickListener{
 
     @Override
     public void onCreate(Bundle savedInstanceState)  {
@@ -47,46 +47,39 @@ public class DiffOptionsActivity extends Activity {
         hard.getBackground().setAlpha(Engine.MENU_BUTTON_ALPHA);
         hard.setHapticFeedbackEnabled(Engine.HAPTIC_BUTTON_FEEDBACK);
 
-        //  Easy level button onclick listener. Set game's difficulty level to easy
-        easy.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// Set difficulty level to easy (1)
-				Engine.difficulty = 1; 
-				// Close this activity screen
-                DiffOptionsActivity.this.finish();
-			}        	
-        });  
+        //  Set activity buttons onclick event
+        easy.setOnClickListener(this);
+        normal.setOnClickListener(this);
+        hard.setOnClickListener(this);  
+        back.setOnClickListener(this);  
         
-        //  Normal level button onclick listener. Set game's difficulty level to normal
-        normal.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// Set difficulty level to normal (2)
-				Engine.difficulty = 2; 
-				// Close this activity screen
-                DiffOptionsActivity.this.finish();
-			}        	
-        });  
-        
-        //  Hard level button onclick listener. Set game's difficulty level to hard
-        hard.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// Set difficulty level to hard (3)
-				Engine.difficulty = 3; 				
-                // Close this activity screen
-				DiffOptionsActivity.this.finish();
-			}        	
-        });  
-        
-        // Back button onclick listener. Goes back to options menu
-        back.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// Close this activity screen
-                DiffOptionsActivity.this.finish();
-			}        	
-        });        
     }
+
+	@Override
+	public void onClick(View view) {
+		switch (view.getId()){
+		case R.id.btnBack: // Click on back
+			// Close this activity screen
+            DiffOptionsActivity.this.finish();
+		break;
+		case R.id.btnHard: // Click on difficulty level HARD
+			// Set difficulty level to hard (3)
+			Engine.difficulty = 3; 				
+            // Close this activity screen
+			DiffOptionsActivity.this.finish();
+			break;
+		case R.id.btnNornmal: // Click on difficulty level NORMAL
+			// Set difficulty level to normal (2)
+			Engine.difficulty = 2; 
+			// Close this activity screen
+            DiffOptionsActivity.this.finish();
+			break;
+		case R.id.btnEasy: // Click on difficulty level EASY
+			// Set difficulty level to easy (1)
+			Engine.difficulty = 1; 
+			// Close this activity screen
+            DiffOptionsActivity.this.finish();
+			break;
+		}
+	}
 }

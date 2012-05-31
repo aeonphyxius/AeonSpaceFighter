@@ -7,6 +7,7 @@ import com.aeonphyxius.gamecomponents.drawable.Enemy;
 import com.aeonphyxius.gamecomponents.drawable.Player;
 import com.aeonphyxius.gamecomponents.drawable.Weapon;
 import com.aeonphyxius.gamecomponents.manager.BackGroundManager;
+import com.aeonphyxius.gamecomponents.manager.HUDManager;
 import com.aeonphyxius.gamecomponents.manager.Squadron;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 import com.aeonphyxius.gamecomponents.manager.WeaponManager;
@@ -27,13 +28,14 @@ import android.opengl.GLSurfaceView.Renderer;
 public class GameRenderer implements Renderer {
 
 
-	private Player player1 = new Player();
+	//private Player player1 = new Player();
 	private Texture textureLoader;
 	private int[] spriteSheets = new int[4];
 	private long loopStart = 0;
 	private long loopEnd = 0;
 	private long loopRunTime = 0;
 
+	
 	@Override
 	public void onDrawFrame(GL10 gl) {
 		loopStart = System.currentTimeMillis();
@@ -51,8 +53,8 @@ public class GameRenderer implements Renderer {
 
 		movePlayer1(gl);		
 		moveEnemy(gl);
-
 		detectCollisions();
+		
 
 		gl.glEnable(GL10.GL_BLEND);
 		gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA);
@@ -219,7 +221,7 @@ public class GameRenderer implements Renderer {
 	 * @param gl
 	 */
 	private void movePlayer1(GL10 gl) {
-		if (!player1.isDestroyed()) {
+		if (!Player.getInstance().isDestroyed()) {
 			switch (Engine.playerFlightAction) {
 			
 			case Engine.PLAYER_BANK_LEFT_1: // Going LEFT
@@ -240,7 +242,7 @@ public class GameRenderer implements Renderer {
 					gl.glLoadIdentity();					
 					gl.glTranslatef(0.33f, 0.0f, 0.0f); // texture position
 				}				
-				player1.draw(gl, spriteSheets);
+				Player.getInstance().draw(gl, spriteSheets);
 				gl.glPopMatrix();
 				gl.glLoadIdentity();
 				break;
@@ -262,7 +264,7 @@ public class GameRenderer implements Renderer {
 					gl.glLoadIdentity();
 					gl.glTranslatef(0.33f, 0.0f, 0.0f); // texture position					
 				}
-				player1.draw(gl, spriteSheets);
+				Player.getInstance().draw(gl, spriteSheets);
 				// Recover previous Matrix
 				gl.glPopMatrix();
 				gl.glLoadIdentity();
@@ -279,7 +281,7 @@ public class GameRenderer implements Renderer {
 				gl.glMatrixMode(GL10.GL_TEXTURE);
 				gl.glLoadIdentity();
 				gl.glTranslatef(0.33f, 0.0f, 0.0f);
-				player1.draw(gl, spriteSheets);
+				Player.getInstance().draw(gl, spriteSheets);
 				// Recover previous Matrix
 				gl.glPopMatrix();
 				gl.glLoadIdentity();
@@ -296,7 +298,7 @@ public class GameRenderer implements Renderer {
 				gl.glMatrixMode(GL10.GL_TEXTURE);
 				gl.glLoadIdentity();
 				gl.glTranslatef(0.33f, 0.0f, 0.0f);
-				player1.draw(gl, spriteSheets);
+				Player.getInstance().draw(gl, spriteSheets);
 				// Recover previous Matrix
 				gl.glPopMatrix();
 				gl.glLoadIdentity();
@@ -304,6 +306,7 @@ public class GameRenderer implements Renderer {
 			}
 			
 			WeaponManager.getInstance().firePlayerWeapon(gl, spriteSheets);
+			HUDManager.getInstance().draw(gl, spriteSheets);
 		}
 
 	}

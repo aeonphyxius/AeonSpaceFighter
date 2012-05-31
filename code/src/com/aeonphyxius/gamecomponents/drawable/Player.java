@@ -11,7 +11,8 @@ import com.aeonphyxius.engine.DrawableComponent;
 import com.aeonphyxius.engine.Engine;
 
 public class Player implements DrawableComponent {
-	
+
+	private static Player instance = null;
 	private PlayerData data;
 	private FloatBuffer vertexBuffer;
 	private FloatBuffer textureBuffer;
@@ -29,30 +30,47 @@ public class Player implements DrawableComponent {
 			0.33f, 0.0f, 
 			0.33f, 0.30f, 
 			0.0f,0.33f, };
-	//private float texture[] = { 0.0f, 0.0f, 0.25f, 0.0f, 0.25f, 0.25f, 0.0f,0.25f, };
+
 
 	private byte indices[] = { 
 			0, 1, 2, 
 			0, 2, 3, 
 			};
-	//private byte indices[] = { 0, 1, 2, 0, 2, 3, };
 
+
+	
+	public static Player getInstance() {
+		if (instance == null) {
+			instance = new Player();
+		}
+		return instance;
+	}
+	
 	public void applyDamage() {
-		data.damage++;
-		if (data.damage == Engine.PLAYER_SHIELDS) {
-			data.isDestroyed = true;
+		data.increaseDamage();
+		if (data.getDamage() == Engine.PLAYER_SHIELDS) {
+			data.setDestroyed(true);
 		}
 
 	}
 	
+	
+	public PlayerData getData() {
+		return data;
+	}
+
+	public void setData(PlayerData data) {
+		this.data = data;
+	}
+
 	public boolean isDestroyed(){
-		return data.isDestroyed;
+		return data.isDestroyed();
 	}
 	
 	/**
 	 * 
 	 */
-	public Player() {
+	private Player() {
 		data = new PlayerData();
 		
 		ByteBuffer byteBuf = ByteBuffer.allocateDirect(vertices.length * 4);
