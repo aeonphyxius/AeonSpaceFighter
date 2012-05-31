@@ -34,6 +34,7 @@ public class GameRenderer implements Renderer {
 	private long loopStart = 0;
 	private long loopEnd = 0;
 	private long loopRunTime = 0;
+	private final float POS_Y = 0.6f;
 
 	
 	@Override
@@ -232,12 +233,12 @@ public class GameRenderer implements Renderer {
 				
 				if (Engine.playerBankPosX > 0) {
 					Engine.playerBankPosX -= Engine.PLAYER_BANK_SPEED;
-					gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
+					gl.glTranslatef(Engine.playerBankPosX, POS_Y, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
 					gl.glTranslatef(0.0f, 0.34f, 0.0f);// texture position
 				} else {
-					gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
+					gl.glTranslatef(Engine.playerBankPosX, POS_Y, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();					
 					gl.glTranslatef(0.33f, 0.0f, 0.0f); // texture position
@@ -254,12 +255,12 @@ public class GameRenderer implements Renderer {
 				gl.glScalef(.15f, .15f, 1f);				
 				if (Engine.playerBankPosX < 5.5f) {
 					Engine.playerBankPosX += Engine.PLAYER_BANK_SPEED;
-					gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
+					gl.glTranslatef(Engine.playerBankPosX, POS_Y, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
 					gl.glTranslatef(0.66f, 0.34f, 0.0f);// texture position
 				} else {
-					gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
+					gl.glTranslatef(Engine.playerBankPosX, POS_Y, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
 					gl.glTranslatef(0.33f, 0.0f, 0.0f); // texture position					
@@ -277,7 +278,7 @@ public class GameRenderer implements Renderer {
 				gl.glPushMatrix();
 				// Transformations to display the player
 				gl.glScalef(.15f, .15f, 1f);
-				gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
+				gl.glTranslatef(Engine.playerBankPosX,POS_Y, 0f);
 				gl.glMatrixMode(GL10.GL_TEXTURE);
 				gl.glLoadIdentity();
 				gl.glTranslatef(0.33f, 0.0f, 0.0f);
@@ -294,7 +295,7 @@ public class GameRenderer implements Renderer {
 				gl.glPushMatrix();
 				// Transformations to display the player
 				gl.glScalef(.15f, .15f, 1f);
-				gl.glTranslatef(Engine.playerBankPosX, 0f, 0f);
+				gl.glTranslatef(Engine.playerBankPosX, POS_Y, 0f);
 				gl.glMatrixMode(GL10.GL_TEXTURE);
 				gl.glLoadIdentity();
 				gl.glTranslatef(0.33f, 0.0f, 0.0f);

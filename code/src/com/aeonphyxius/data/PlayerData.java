@@ -13,7 +13,7 @@ public class PlayerData {
 		this.damage = 0;
 		this.points = 0;
 		this.isDestroyed = false;
-		this.shield = 100;
+		
 		
 		
 		switch(Engine.difficulty){
@@ -33,6 +33,8 @@ public class PlayerData {
 			this.shield = Engine.SHIELD_HARD;
 			break;			
 		}
+		lives = 5;
+		this.shield = 75;
 		
 	}
 
@@ -41,6 +43,20 @@ public class PlayerData {
 	}
 	public int getShield() {
 		return shield;
+	}
+	
+	public int getShieldPercentage() {
+		if (shield == 100){
+			return 4;
+		}else if(shield < 100 && shield >=75){
+			return 3;		
+		}else if(shield < 75 && shield >=50){
+			return 2;		
+		}else if(shield <50 && shield >=25){
+			return 1;
+		}
+		
+		return 0;
 	}
 
 	public void setShield(int shield) {

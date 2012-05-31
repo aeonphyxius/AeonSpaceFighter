@@ -7,7 +7,6 @@ import com.aeonphyxius.gamecomponents.drawable.HUDShield;
 import com.aeonphyxius.gamecomponents.drawable.Player;
 
 
-
 public class HUDManager implements DrawableComponent {
 	
 
@@ -19,8 +18,7 @@ public class HUDManager implements DrawableComponent {
 		}
 		return instance;
 	}
-	
-	
+		
 	
 	/**
 	 * 
@@ -51,15 +49,16 @@ public class HUDManager implements DrawableComponent {
 		gl.glLoadIdentity();
 		gl.glPushMatrix();
 		// Transformations to display the player
-		gl.glScalef(.05f, .05f, 1f);
+		gl.glScalef(.08f, .06f, 1f);
 				
-		gl.glTranslatef(10.0f, 18f, 0f); // Position
+		gl.glTranslatef(05.f, 15f, 0f); // Position
 		
 		gl.glMatrixMode(GL10.GL_TEXTURE);
 		gl.glLoadIdentity();
 		gl.glTranslatef(0.f, 0.f, 0.0f);
 		//gl.glScalef(1.0f, -1.0f, 1.0f);
 		
+		HUDShield.getInstance().setShieldTexture(Player.getInstance().getData().getShieldPercentage());
 		HUDShield.getInstance().draw(gl, spriteSheet);
 		// Recover previous Matrix
 		gl.glPopMatrix();
