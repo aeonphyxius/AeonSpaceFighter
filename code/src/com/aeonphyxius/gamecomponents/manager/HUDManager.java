@@ -2,6 +2,7 @@ package com.aeonphyxius.gamecomponents.manager;
 
 import javax.microedition.khronos.opengles.GL10;
 import com.aeonphyxius.engine.DrawableComponent;
+import com.aeonphyxius.gamecomponents.drawable.HUDControl;
 import com.aeonphyxius.gamecomponents.drawable.HUDLives;
 import com.aeonphyxius.gamecomponents.drawable.HUDShield;
 import com.aeonphyxius.gamecomponents.drawable.Player;
@@ -33,8 +34,57 @@ public class HUDManager implements DrawableComponent {
 	 * @param spriteSheet
 	 */
 	public void draw(GL10 gl, int[] spriteSheet) {
-		drawLives  (gl,spriteSheet);
+		drawLives  (gl,spriteSheet);		
 		drawShields(gl,spriteSheet);
+		drawControl (gl,spriteSheet);
+	}
+	
+	public void drawControl(GL10 gl, int[] spriteSheet) {
+		
+		// Background
+		gl.glMatrixMode(GL10.GL_MODELVIEW);		
+		// Save Matrix before conversions
+		gl.glLoadIdentity();
+		gl.glPushMatrix();
+		// Transformations to display the player
+		gl.glScalef(1.f, .10f, 1f);				
+		gl.glTranslatef(0.f, 0.f, 0f); // Position
+		
+		gl.glMatrixMode(GL10.GL_TEXTURE);
+		gl.glLoadIdentity();
+		gl.glTranslatef(0.f, 0.f, 0.0f);
+		//gl.glScalef(1.0f, -1.0f, 1.0f);
+				
+		HUDControl.getInstance().drawBkg(gl, spriteSheet);
+		// Recover previous Matrix
+		gl.glPopMatrix();
+		gl.glLoadIdentity();
+		
+		// Arrows
+		gl.glMatrixMode(GL10.GL_MODELVIEW);		
+		// Save Matrix before conversions
+		gl.glLoadIdentity();
+		gl.glPushMatrix();
+		// Transformations to display the player
+		gl.glScalef(1.f, .1f, 1f);				
+		gl.glTranslatef(0.f, 0.f, 0f); // Position
+		
+		gl.glMatrixMode(GL10.GL_TEXTURE);
+		gl.glLoadIdentity();
+		gl.glTranslatef(0.f, 0.f, 0.0f);
+		//gl.glScalef(1.0f, -1.0f, 1.0f);
+				
+		HUDControl.getInstance().draw(gl, spriteSheet);
+		// Recover previous Matrix
+		gl.glPopMatrix();
+		gl.glLoadIdentity();
+		
+		
+		
+	
+		
+		
+		
 	}
 	
 	/**

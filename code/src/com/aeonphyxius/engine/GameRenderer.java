@@ -88,7 +88,7 @@ public class GameRenderer implements Renderer {
 
 						if (!tempEnemy.isDestroyed){							
 						
-							if (tempSquadron.getSquadronPosY() < 0) {
+							if (tempSquadron.getSquadronPosY() < 1) {
 								tempSquadron.setSquadronPosY( (randomPos.nextFloat() * 4) + 4);
 								tempEnemy.posX = randomPos.nextFloat() * 3;
 								tempEnemy.isLockedOn = false;
@@ -321,9 +321,11 @@ public class GameRenderer implements Renderer {
 		int squadronNum = SquadronManager.getInstance().getSquadronList().size();
 		int enemyNum;
 		Weapon tempWeapon;
-		
-		for (int shootNum = 0; shootNum < weaponsSize; shootNum++) {		
-			if (WeaponManager.getInstance().getPlayeFireList().get(shootNum).shotFired) {
+		int shootNum = 0;
+		boolean isTargeted = false;
+		//for (int shootNum = 0; shootNum < weaponsSize; shootNum++) {		
+		while (shootNum  < weaponsSize) {
+			//if (WeaponManager.getInstance().getPlayeFireList().get(shootNum).shotFired) {
 				//int squadronNum = SquadronManager.getInstance().getSquadronList().size();
 				for (int sqNum = 0; sqNum < squadronNum; sqNum++) { // loop all the squadrons
 					// Check if the squadron is on screen or isn't destroyed
@@ -339,19 +341,23 @@ public class GameRenderer implements Renderer {
 							
 							if (!tempEnemy.isDestroyed){
 								if ((tempWeapon.posY >= tempEnemy.posY - 1 && tempWeapon.posY <= tempEnemy.posY) &&										
-									(tempWeapon.posX <= tempEnemy.posX + 1 && tempWeapon.posX >= tempEnemy.posX - 1)) {
-									
-									int nextShoot = 0;
+									(tempWeapon.posX <= tempEnemy.posX + 1 && tempWeapon.posX >= tempEnemy.posX - 1)) {									
+									//int nextShoot = 0;
 									
 									SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).applyDamage();
-									if (!SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).isDestroyed) // Add this destroyed enemy to the counter at Squadron level
+									if (!SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).isDestroyed){ // Add this destroyed enemy to the counter at Squadron level
 										SquadronManager.getInstance().getSquadronList().get(sqNum).increaseEnemiesDestroyed();
+									}
 									
 									//SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().set(i,tempEnemy);
 									
-									WeaponManager.getInstance().getPlayeFireList().get(shootNum).shotFired = false;
+									//WeaponManager.getInstance().getPlayeFireList().remove(shootNum).shotFired = false;
+									WeaponManager.getInstance().getPlayeFireList().remove(SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember));
+									weaponsSize --;
+									isTargeted  =true;
 									
-									if (shootNum == 3) { // TODO: fix with a constant
+									
+									/*if (shootNum == 3) { // TODO: fix with a constant
 										nextShoot = 0;
 									} else {
 										nextShoot = shootNum + 1;
@@ -361,13 +367,19 @@ public class GameRenderer implements Renderer {
 										WeaponManager.getInstance().getPlayeFireList().get(nextShoot).shotFired = true;
 										WeaponManager.getInstance().getPlayeFireList().get(nextShoot).posX = Engine.playerBankPosX;
 										WeaponManager.getInstance().getPlayeFireList().get(nextShoot).posY = 1.25f;
-									}
+									}*/
 								}
 							}
 						}
 					}
-				}
+				//}
 			}
+				if (!isTargeted){
+					shootNum++;
+				}else{
+					isTargeted=false;
+				}
+					
 		}
 	}
 
