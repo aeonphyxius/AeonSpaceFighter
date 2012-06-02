@@ -17,6 +17,7 @@ public static final boolean LOOP_BACKGROUND_MUSIC = true;
 public static final int GAME_THREAD_FPS_SLEEP = (1000/60);
 public static float SCROLL_BACKGROUND_1 = .002f;
 public static float SCROLL_BACKGROUND_2 = .007f;
+public static float SHOOT_SLEEP = 250f;
 
 public static final int PLAYER_BANK_LEFT_1 = 1;
 public static final int PLAYER_RELEASE = 3;
@@ -33,6 +34,15 @@ public static final int BACKGROUND_LAYER_ONE = R.drawable.level_01_bg;
 public static final int BACKGROUND_LAYER_TWO = R.drawable.debris;
 public static final int PLAYER_SHEET = R.drawable.spaceship_sprite;
 public static final int SPLASH_SCREEN_MUSIC = R.raw.warfieldedit;
+
+public static final int TEXTURE_ITEMS = 1;
+public static final int TEXTURE_PLAYER = 2;
+public static final int LEFT_TEXTURE_POSITION=1;
+public static final int RIGHT_TEXTURE_POSITION=3;
+
+public static final float PLAYER_POS_Y = 0.6f;
+public static final float PLAYER_FIRE_START_Y = 1.5f;
+public static final float PLAYER_FIRE_START_X = 0.34f;
 
 
 public static int TOTAL_INTERCEPTORS = 10;
@@ -55,12 +65,13 @@ public static final float BEZIER_Y_1 = 0f;
 public static final float BEZIER_Y_2 = 2.4f;
 public static final float BEZIER_Y_3 = 1.5f;
 public static final float BEZIER_Y_4 = 2.6f;
+public static final float SQUADRON_MIN_Y = 0.5F;
 
 public static final int PLAYER_SHIELDS = 5;
 public static final int SCOUT_SHIELDS = 3;
 public static final int INTERCEPTOR_SHIELDS = 1;
 public static final int WARSHIP_SHIELDS = 5;
-public static final float PLAYER_BULLET_SPEED = .125f;
+public static final float PLAYER_BULLET_SPEED = .075f;
 
 // Player configuration
 public static final int DIFF_EASY = 1;

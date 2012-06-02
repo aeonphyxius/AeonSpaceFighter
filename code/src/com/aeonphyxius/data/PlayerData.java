@@ -2,6 +2,20 @@ package com.aeonphyxius.data;
 
 import com.aeonphyxius.engine.Engine;
 
+/**
+ * HUDControl Object.
+ * 
+ * <P>
+ * HUD component to show the control area
+ * 
+ * <P>
+ * This class contains logic to display the user  controls at the bottom of the playable area 
+ * 
+ * @author Alejandro Santiago
+ * @version 1.0
+ * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+ */
+
 public class PlayerData {
 	private boolean isDestroyed;
 	private int damage;
@@ -13,8 +27,6 @@ public class PlayerData {
 		this.damage = 0;
 		this.points = 0;
 		this.isDestroyed = false;
-		
-		
 		
 		switch(Engine.difficulty){
 		case Engine.DIFF_EASY:			
@@ -33,17 +45,29 @@ public class PlayerData {
 			this.shield = Engine.SHIELD_HARD;
 			break;			
 		}
-		lives = 5;
-		this.shield = 75;
-		
 	}
 
 	public void increaseDamage(){
 		this.damage += Engine.difficulty;
 	}
+	
 	public int getShield() {
 		return shield;
 	}
+
+	public int getDamagePercentage() {
+		if (damage == 100){
+			return 4;
+		}else if(damage < 100 && damage >=75){
+			return 3;		
+		}else if(damage < 75 && damage >=50){
+			return 2;		
+		}else if(damage <50 && damage >=25){
+			return 1;
+		}		
+		return 0;
+	}
+	
 	
 	public int getShieldPercentage() {
 		if (shield == 100){
@@ -54,8 +78,7 @@ public class PlayerData {
 			return 2;		
 		}else if(shield <50 && shield >=25){
 			return 1;
-		}
-		
+		}		
 		return 0;
 	}
 

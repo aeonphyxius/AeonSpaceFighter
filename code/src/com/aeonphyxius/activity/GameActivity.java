@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
+import android.view.Window;
+import android.view.WindowManager;
 
 /**
 * Game Activity Object.
@@ -32,6 +34,8 @@ public class GameActivity extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         gameView = new GameView(this);
         setContentView(gameView);
         this.gameDisplayMetrics = new DisplayMetrics();

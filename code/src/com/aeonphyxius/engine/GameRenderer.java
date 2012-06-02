@@ -34,7 +34,7 @@ public class GameRenderer implements Renderer {
 	private long loopStart = 0;
 	private long loopEnd = 0;
 	private long loopRunTime = 0;
-	private final float POS_Y = 0.6f;
+	
 
 	
 	@Override
@@ -52,10 +52,11 @@ public class GameRenderer implements Renderer {
 
 		BackGroundManager.getInstance().scrollBackground(gl);
 
-		movePlayer1(gl);		
+		Player.getInstance().draw(gl, spriteSheets);
+		WeaponManager.getInstance().drawrWeapon(gl, spriteSheets);
 		moveEnemy(gl);
-		detectCollisions();
-		
+		HUDManager.getInstance().draw(gl, spriteSheets);
+		detectCollisions();		
 
 		gl.glEnable(GL10.GL_BLEND);
 		gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA);
@@ -88,7 +89,7 @@ public class GameRenderer implements Renderer {
 
 						if (!tempEnemy.isDestroyed){							
 						
-							if (tempSquadron.getSquadronPosY() < 1) {
+							if (tempSquadron.getSquadronPosY() < Engine.SQUADRON_MIN_Y) {
 								tempSquadron.setSquadronPosY( (randomPos.nextFloat() * 4) + 4);
 								tempEnemy.posX = randomPos.nextFloat() * 3;
 								tempEnemy.isLockedOn = false;
@@ -132,7 +133,7 @@ public class GameRenderer implements Renderer {
 						Enemy tempEnemy = SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(i);
 						if (!tempEnemy.isDestroyed){							
 						
-							if (tempSquadron.getSquadronPosY() <= 0) {
+							if (tempSquadron.getSquadronPosY() < Engine.SQUADRON_MIN_Y) {
 								tempSquadron.setSquadronPosY( (randomPos.nextFloat() * 4) + 4);							
 								tempEnemy.isLockedOn = false;
 								tempEnemy.posT = Engine.SCOUT_SPEED;
@@ -176,7 +177,7 @@ public class GameRenderer implements Renderer {
 						Enemy tempEnemy = SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().get(i);
 						if (!tempEnemy.isDestroyed){							
 						
-							if (tempSquadron.getSquadronPosY() < 0) {
+							if (tempSquadron.getSquadronPosY() < Engine.SQUADRON_MIN_Y) {
 								tempSquadron.setSquadronPosY( (randomPos.nextFloat() * 4) + 4);
 								tempEnemy.posX = randomPos.nextFloat() * 3;
 								tempEnemy.isLockedOn = false;
@@ -216,101 +217,7 @@ public class GameRenderer implements Renderer {
 	}
 	
 	
-	/**
-	 * Moves the player depending player input
-	 * 
-	 * @param gl
-	 */
-	private void movePlayer1(GL10 gl) {
-		if (!Player.getInstance().isDestroyed()) {
-			switch (Engine.playerFlightAction) {
-			
-			case Engine.PLAYER_BANK_LEFT_1: // Going LEFT
-				gl.glMatrixMode(GL10.GL_MODELVIEW);
-				gl.glLoadIdentity();
-				gl.glPushMatrix();
-				gl.glScalef(.15f, .15f, 1f);				
-				
-				if (Engine.playerBankPosX > 0) {
-					Engine.playerBankPosX -= Engine.PLAYER_BANK_SPEED;
-					gl.glTranslatef(Engine.playerBankPosX, POS_Y, 0f);
-					gl.glMatrixMode(GL10.GL_TEXTURE);
-					gl.glLoadIdentity();
-					gl.glTranslatef(0.0f, 0.34f, 0.0f);// texture position
-				} else {
-					gl.glTranslatef(Engine.playerBankPosX, POS_Y, 0f);
-					gl.glMatrixMode(GL10.GL_TEXTURE);
-					gl.glLoadIdentity();					
-					gl.glTranslatef(0.33f, 0.0f, 0.0f); // texture position
-				}				
-				Player.getInstance().draw(gl, spriteSheets);
-				gl.glPopMatrix();
-				gl.glLoadIdentity();
-				break;
-				
-			case Engine.PLAYER_BANK_RIGHT_1: // Going RIGHT
-				gl.glMatrixMode(GL10.GL_MODELVIEW);
-				gl.glLoadIdentity();
-				gl.glPushMatrix();
-				gl.glScalef(.15f, .15f, 1f);				
-				if (Engine.playerBankPosX < 5.5f) {
-					Engine.playerBankPosX += Engine.PLAYER_BANK_SPEED;
-					gl.glTranslatef(Engine.playerBankPosX, POS_Y, 0f);
-					gl.glMatrixMode(GL10.GL_TEXTURE);
-					gl.glLoadIdentity();
-					gl.glTranslatef(0.66f, 0.34f, 0.0f);// texture position
-				} else {
-					gl.glTranslatef(Engine.playerBankPosX, POS_Y, 0f);
-					gl.glMatrixMode(GL10.GL_TEXTURE);
-					gl.glLoadIdentity();
-					gl.glTranslatef(0.33f, 0.0f, 0.0f); // texture position					
-				}
-				Player.getInstance().draw(gl, spriteSheets);
-				// Recover previous Matrix
-				gl.glPopMatrix();
-				gl.glLoadIdentity();
-				break;
-				
-			case Engine.PLAYER_RELEASE: // Stay
-				gl.glMatrixMode(GL10.GL_MODELVIEW);
-				// Save Matrix before conversions
-				gl.glLoadIdentity();
-				gl.glPushMatrix();
-				// Transformations to display the player
-				gl.glScalef(.15f, .15f, 1f);
-				gl.glTranslatef(Engine.playerBankPosX,POS_Y, 0f);
-				gl.glMatrixMode(GL10.GL_TEXTURE);
-				gl.glLoadIdentity();
-				gl.glTranslatef(0.33f, 0.0f, 0.0f);
-				Player.getInstance().draw(gl, spriteSheets);
-				// Recover previous Matrix
-				gl.glPopMatrix();
-				gl.glLoadIdentity();
-				break;
-				
-			default:
-				gl.glMatrixMode(GL10.GL_MODELVIEW);
-				// Save Matrix before conversions
-				gl.glLoadIdentity();
-				gl.glPushMatrix();
-				// Transformations to display the player
-				gl.glScalef(.15f, .15f, 1f);
-				gl.glTranslatef(Engine.playerBankPosX, POS_Y, 0f);
-				gl.glMatrixMode(GL10.GL_TEXTURE);
-				gl.glLoadIdentity();
-				gl.glTranslatef(0.33f, 0.0f, 0.0f);
-				Player.getInstance().draw(gl, spriteSheets);
-				// Recover previous Matrix
-				gl.glPopMatrix();
-				gl.glLoadIdentity();
-				break;
-			}
-			
-			WeaponManager.getInstance().firePlayerWeapon(gl, spriteSheets);
-			HUDManager.getInstance().draw(gl, spriteSheets);
-		}
 
-	}
 
 	/**
 	 * Detects collision between all the weapons on screen and the enemies. 
@@ -320,66 +227,35 @@ public class GameRenderer implements Renderer {
 		int weaponsSize = WeaponManager.getInstance().getPlayeFireList().size();
 		int squadronNum = SquadronManager.getInstance().getSquadronList().size();
 		int enemyNum;
-		Weapon tempWeapon;
-		int shootNum = 0;
-		boolean isTargeted = false;
-		//for (int shootNum = 0; shootNum < weaponsSize; shootNum++) {		
-		while (shootNum  < weaponsSize) {
-			//if (WeaponManager.getInstance().getPlayeFireList().get(shootNum).shotFired) {
-				//int squadronNum = SquadronManager.getInstance().getSquadronList().size();
-				for (int sqNum = 0; sqNum < squadronNum; sqNum++) { // loop all the squadrons
-					// Check if the squadron is on screen or isn't destroyed
-					if (!SquadronManager.getInstance().getSquadronList().get(sqNum).isDestroyed() 
-							&& SquadronManager.getInstance().getSquadronList().get(sqNum).getSquadronPosY() < 5.25) { // TODO : Fix with a constant
-						
-						enemyNum = SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().size();
-						
-						for (int sqMember = 0; sqMember < enemyNum; sqMember++){	// loop all the enemies inside the squadron
-							// Get the enemy & the firedWeapon
-							tempEnemy  = SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember);
-							tempWeapon = WeaponManager.getInstance().getPlayeFireList().get(shootNum);
+		Weapon tempWeapon;		
+		
+		for (int shootNum =0; shootNum  < weaponsSize; shootNum++) {
+				if (WeaponManager.getInstance().getPlayeFireList().get(shootNum).shootFired){
+					for (int sqNum = 0; sqNum < squadronNum; sqNum++) { // loop all the squadrons
+						if (!SquadronManager.getInstance().getSquadronList().get(sqNum).isDestroyed() ){
+								//&& SquadronManager.getInstance().getSquadronList().get(sqNum).getSquadronPosY() < 5.25) { // TODO : Fix with a constant
 							
-							if (!tempEnemy.isDestroyed){
-								if ((tempWeapon.posY >= tempEnemy.posY - 1 && tempWeapon.posY <= tempEnemy.posY) &&										
-									(tempWeapon.posX <= tempEnemy.posX + 1 && tempWeapon.posX >= tempEnemy.posX - 1)) {									
-									//int nextShoot = 0;
-									
-									SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).applyDamage();
-									if (!SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).isDestroyed){ // Add this destroyed enemy to the counter at Squadron level
-										SquadronManager.getInstance().getSquadronList().get(sqNum).increaseEnemiesDestroyed();
+							enemyNum = SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().size();						
+							for (int sqMember = 0; sqMember < enemyNum; sqMember++){	// loop all the enemies inside the squadron
+
+								tempEnemy  = SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember);
+								tempWeapon = WeaponManager.getInstance().getPlayeFireList().get(shootNum);
+								
+								if (!tempEnemy.isDestroyed){
+									if ((tempWeapon.posY >= tempEnemy.posY  && tempWeapon.posY <= tempEnemy.posY + 1) &&										
+										(tempWeapon.posX <= tempEnemy.posX + 1 && tempWeapon.posX >= tempEnemy.posX )) {									
+										
+										SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).applyDamage();
+										if (!SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).isDestroyed){ // Add this destroyed enemy to the counter at Squadron level
+											SquadronManager.getInstance().getSquadronList().get(sqNum).increaseEnemiesDestroyed();
+										}									
+										WeaponManager.getInstance().getPlayeFireList().remove(shootNum).shootFired = false;										
 									}
-									
-									//SquadronManager.getInstance().getSquadronList().get(x).getEnemyList().set(i,tempEnemy);
-									
-									//WeaponManager.getInstance().getPlayeFireList().remove(shootNum).shotFired = false;
-									WeaponManager.getInstance().getPlayeFireList().remove(SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember));
-									weaponsSize --;
-									isTargeted  =true;
-									
-									
-									/*if (shootNum == 3) { // TODO: fix with a constant
-										nextShoot = 0;
-									} else {
-										nextShoot = shootNum + 1;
-									}
-									
-									if (WeaponManager.getInstance().getPlayeFireList().get(nextShoot).shotFired == false) {
-										WeaponManager.getInstance().getPlayeFireList().get(nextShoot).shotFired = true;
-										WeaponManager.getInstance().getPlayeFireList().get(nextShoot).posX = Engine.playerBankPosX;
-										WeaponManager.getInstance().getPlayeFireList().get(nextShoot).posY = 1.25f;
-									}*/
 								}
 							}
 						}
 					}
-				//}
-			}
-				if (!isTargeted){
-					shootNum++;
-				}else{
-					isTargeted=false;
-				}
-					
+			}		
 		}
 	}
 
@@ -396,8 +272,7 @@ public class GameRenderer implements Renderer {
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		
-		MusicManager.getInstance().playMusic();
-		WeaponManager.getInstance().initializePlayerWeapon();
+		MusicManager.getInstance().playMusic();		
 		textureLoader = new Texture(gl);
 		spriteSheets = textureLoader.loadTexture(gl, Engine.CHARACTER_SHEET,Engine.context, 1);
 		spriteSheets = textureLoader.loadTexture(gl, Engine.WEAPONS_SHEET,Engine.context, 2);
