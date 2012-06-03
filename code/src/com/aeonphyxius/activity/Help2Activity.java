@@ -6,10 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
  
 /**Help1Activity
 * AboutActivity Object.
@@ -23,7 +21,7 @@ import android.view.View.OnClickListener;
 * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
 */
 
-public class Help2Activity extends Activity implements OnClickListener {
+public class Help2Activity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState)  {
@@ -39,18 +37,10 @@ public class Help2Activity extends Activity implements OnClickListener {
     @Override
    	public boolean onTouchEvent(MotionEvent event) {
 		// load about screen
-    	/*Help2Activity.this.finish();
-		Intent help3 = new Intent(getApplicationContext(),Help3Activity.class);
-		Help2Activity.this.startActivity(help3);*/
-		
-    	return true;
-    }
-
-	@Override
-	public void onClick(View arg0) {
-		Help2Activity.this.finish();
+    	
 		Intent help3 = new Intent(getApplicationContext(),Help3Activity.class);
 		Help2Activity.this.startActivity(help3);
-		
-	}
+		Help2Activity.this.finish();
+    	return true;
+    }
 }

@@ -37,7 +37,7 @@ public class Help3Activity extends Activity  {
     @Override
    	public boolean onTouchEvent(MotionEvent event) {		
 		Help3Activity.this.finish();
-    	return true;
+    	return false;
     }
 
 
