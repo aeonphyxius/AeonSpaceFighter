@@ -44,14 +44,14 @@ public class GameActivity extends Activity {
     protected void onResume() {
        super.onResume();
        gameView.onResume();
-       //MusicManager.getInstance().resumeMusic();
+       MusicManager.getInstance().resumeMusic();
     }
 
     @Override
     protected void onPause() {
        super.onPause();
        gameView.onPause();
-       //MusicManager.getInstance().pauseMusic();
+       MusicManager.getInstance().pauseMusic();
     }
 
    	@Override
@@ -60,8 +60,8 @@ public class GameActivity extends Activity {
    		float x = event.getX();
         float y = event.getY();
         Engine.display.getMetrics(gameDisplayMetrics);
-        int height =  gameDisplayMetrics.heightPixels / 4;
-        int playableArea = gameDisplayMetrics.heightPixels - height;
+        int height =  gameDisplayMetrics.heightPixels / 7;
+        int playableArea = (gameDisplayMetrics.heightPixels - height);
         if (y > playableArea){
         	switch (event.getAction()){
         	case MotionEvent.ACTION_DOWN:
@@ -74,10 +74,8 @@ public class GameActivity extends Activity {
         	case MotionEvent.ACTION_UP:
         		Engine.playerFlightAction = PLAYER_RELEASE;
         		break;
-        	}
-        	
+        	}        	
         }
-
 		return false;
     }
 	

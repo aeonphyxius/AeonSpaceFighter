@@ -54,10 +54,11 @@ public class HUDManager implements DrawableComponent {
 	 * @param spriteSheet array containing all sprites ids
 	 */
 	public void draw(GL10 gl, int[] spriteSheet) {
+		
+		drawControl (gl,spriteSheet);
 		drawLives  (gl,spriteSheet);		
 		drawShields(gl,spriteSheet);
 		drawDamage (gl,spriteSheet);
-		drawControl (gl,spriteSheet);
 		drawScore (gl,spriteSheet);
 	}
 	
@@ -78,7 +79,7 @@ public class HUDManager implements DrawableComponent {
 			gl.glLoadIdentity();	
 			gl.glPushMatrix();							// Save Matrix before transformations
 			gl.glScalef(.025f, .025f, 1f);				// Scale the original image
-			gl.glTranslatef(i+32.0f, 36.5f, 0f); 		// Position on screen (-0.1) because at 0 there is a small space at the bottom 		
+			gl.glTranslatef(i+32.0f, 37.5f, 0f); 		// Position on screen (-0.1) because at 0 there is a small space at the bottom 		
 			gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 			gl.glLoadIdentity();
 			gl.glTranslatef(0.f, 0.f, 0.0f);			// Set texture
@@ -110,7 +111,7 @@ public class HUDManager implements DrawableComponent {
 		gl.glLoadIdentity();
 		gl.glPushMatrix();							// Save Matrix before transformations
 		gl.glScalef(.10f, .08f, 1f);				// Scale the original image
-		gl.glTranslatef(06.f, 11f, 0f);				// Position on screen
+		gl.glTranslatef(06.f, 11.3f, 0f);				// Position on screen
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();				
 		gl.glTranslatef(0.f, 0.f, 0.0f);
@@ -126,11 +127,11 @@ public class HUDManager implements DrawableComponent {
 	 */
 	public void drawControl(GL10 gl, int[] spriteSheet) {
 		
-		// Background
+		// Background BOTTOM
 		gl.glMatrixMode(GL10.GL_MODELVIEW);
 		gl.glLoadIdentity();	
 		gl.glPushMatrix();							// Save Matrix before transformations
-		gl.glScalef(1.f, .10f, 1f);					// Scale the original image
+		gl.glScalef(1.f, .11f, 1f);					// Scale the original image
 		gl.glTranslatef(0.0f, -0.1f, 0f); 			// Position on screen (-0.1) because at 0 there is a small space at the bottom 		
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();
@@ -138,6 +139,21 @@ public class HUDManager implements DrawableComponent {
 		HUDControl.getInstance().drawBkg(gl, spriteSheet); // Draw black background for controls zone
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();		
+		
+		// Background TOP
+		gl.glMatrixMode(GL10.GL_MODELVIEW);
+		gl.glLoadIdentity();	
+		gl.glPushMatrix();							// Save Matrix before transformations
+		gl.glScalef(1.f, .15f, 1f);					// Scale the original image
+		gl.glTranslatef(0.0f, 5.9f, 0f); 			// Position on screen (-0.1) because at 0 there is a small space at the bottom 		
+		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
+		gl.glLoadIdentity();
+		gl.glTranslatef(0.f, 0.f, 0.0f);			// Set texture
+		HUDControl.getInstance().drawBkg(gl, spriteSheet); // Draw black background for controls zone
+		gl.glPopMatrix();							// Recover previous Matrix
+		gl.glLoadIdentity();		
+		
+		
 		
 		// Left Arrow
 		gl.glMatrixMode(GL10.GL_MODELVIEW);		
@@ -178,7 +194,7 @@ public class HUDManager implements DrawableComponent {
 		gl.glLoadIdentity();
 		gl.glPushMatrix();							// Save Matrix before transformations
 		gl.glScalef(.10f, .08f, 1f);				// Scale the original image	
-		gl.glTranslatef(04.f, 11f, 0f);				// Position on screen
+		gl.glTranslatef(04.f, 11.3f, 0f);				// Position on screen
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();
 		gl.glTranslatef(0.f, 0.f, 0.0f);			// Texture Start position for shields icon
@@ -200,7 +216,7 @@ public class HUDManager implements DrawableComponent {
 			gl.glLoadIdentity();
 			gl.glPushMatrix();							// Save Matrix before transformations
 			gl.glScalef(.05f, .05f, 1f);				// Scale the original image	
-			gl.glTranslatef(i+0.5f, 18f, 0f); 			// Position on screen			
+			gl.glTranslatef(i+0.5f, 18.5f, 0f); 			// Position on screen			
 			gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 			gl.glLoadIdentity();
 			gl.glTranslatef(0.33f, 0.67f, 0.0f);		// Texture Start position for lives icon			

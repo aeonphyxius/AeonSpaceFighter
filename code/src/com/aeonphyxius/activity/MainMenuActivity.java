@@ -82,6 +82,18 @@ public class MainMenuActivity extends Activity {
         help.getBackground().setAlpha(Engine.MENU_BUTTON_ALPHA);
         help.setHapticFeedbackEnabled(Engine.HAPTIC_BUTTON_FEEDBACK);
                 
+        
+        // About button click event. Loads About activity
+        help.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// load about screen
+				Intent help = new Intent(getApplicationContext(),Help1Activity.class);
+				MainMenuActivity.this.startActivity(help);
+
+			}        	
+        });
+        
         // About button click event. Loads About activity
         about.setOnClickListener(new OnClickListener(){
 			@Override

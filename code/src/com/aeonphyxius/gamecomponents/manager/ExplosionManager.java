@@ -69,8 +69,9 @@ public class ExplosionManager implements DrawableComponent {
 				gl.glMatrixMode(GL10.GL_MODELVIEW);
 				gl.glLoadIdentity();
 				gl.glPushMatrix();							// Save Matrix before transformations
-				gl.glScalef(.05f, .05f, 1f);				// Scale the original image
-				gl.glTranslatef(explosionList.get(i).x + 0.6f, explosionList.get(i).y+0.6f, 0f);				// Position on screen
+				gl.glScalef(.15f, .15f, 1f);				// Scale the original image (same % as the ships)
+				gl.glTranslatef(explosionList.get(i).x+0.25f, explosionList.get(i).y, 0f);				// Position on screen
+				gl.glScalef(.35f, .35f, 1f);					// Scale the original image (half more to make it even more small)
 				gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 				gl.glLoadIdentity();				
 				Explosion.getInstance().draw(gl, spriteSheet,explosionList.get(i).animation);	
