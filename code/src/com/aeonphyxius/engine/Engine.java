@@ -65,11 +65,12 @@ public static final float BEZIER_Y_1 = 0f;
 public static final float BEZIER_Y_2 = 2.4f;
 public static final float BEZIER_Y_3 = 1.5f;
 public static final float BEZIER_Y_4 = 2.6f;
-public static final float SQUADRON_MIN_Y = 0.5F;
+public static final float SQUADRON_MIN_Y = 0.F;
 
-public static final int PLAYER_SHIELDS = 5;
-public static final int SCOUT_SHIELDS = 3;
+public static final int PLAYER_SHIELDS = 1;
+public static final int SCOUT_SHIELDS = 1;
 public static final int INTERCEPTOR_SHIELDS = 1;
+
 public static final int WARSHIP_SHIELDS = 5;
 public static final float PLAYER_BULLET_SPEED = .075f;
 
@@ -81,11 +82,11 @@ public static final int LIVES_EASY = 3;
 public static final int LIVES_NORMAL = 2;
 public static final int LIVES_HARD = 2;
 public static final int SHIELD_EASY = 100;
-public static final int SHIELD_NORMAL = 80;
-public static final int SHIELD_HARD = 60;
-public static final int DAMAGE_EASY = 0;
-public static final int DAMAGE_NORMAL = 10;
-public static final int DAMAGE_HARD = 20;
+public static final int SHIELD_NORMAL = 75;
+public static final int SHIELD_HARD = 50;
+public static final int DAMAGE_EASY = 100;
+public static final int DAMAGE_NORMAL = 100;
+public static final int DAMAGE_HARD = 75;
 
 
 /*Game Variables*/

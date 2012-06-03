@@ -18,8 +18,7 @@ import com.aeonphyxius.gamecomponents.drawable.Enemy;
 
 public class SquadronManager {
 	
-	private static SquadronManager instance = null;
-	
+	private static SquadronManager instance = null;	
 	private ArrayList<Squadron> squadronList;
 	
 	protected SquadronManager() {
@@ -73,47 +72,49 @@ public class SquadronManager {
 	        	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 	        	int enemy;
 	        	int xpos;
+	        	int dir;
 	        	int numEnemies = 0;
 	        	
 	            if (localName.equals("squadron")) {
 
 	            	int ypos = Integer.parseInt(attributes.getValue("ypos"));	            	
 	            	enemy = Integer.parseInt(attributes.getValue("enemy"));
+	            	dir = Integer.parseInt(attributes.getValue("dir"));
 	            	
 	            	
 	            	// Enemy1	                
 	                xpos = Integer.parseInt(attributes.getValue("xpos1"));
-	                enemyList.add(new Enemy (enemy,xpos));
+	                enemyList.add(new Enemy (enemy,dir,xpos,ypos));
 	                numEnemies ++;
 	                
 	                // Enemy2	                
 	                xpos = Integer.parseInt(attributes.getValue("xpos2"));
-	                enemyList.add(new Enemy (enemy,xpos));
+	                enemyList.add(new Enemy (enemy,dir,xpos,ypos));
 	                numEnemies ++;
 	                
 	                // Enemy3
 	                if (attributes.getValue("xpos3")!=null){	                	
 	                	xpos = Integer.parseInt(attributes.getValue("xpos3"));
-	                	enemyList.add(new Enemy (enemy,xpos));
+	                	enemyList.add(new Enemy (enemy,dir,xpos,ypos));
 	                	numEnemies ++;
 	                }
 	                
 	                // Enemy4
 	                if (attributes.getValue("xpos4")!=null){	                	
 	                	xpos = Integer.parseInt(attributes.getValue("xpos4"));
-	                	enemyList.add(new Enemy (enemy,xpos));
+	                	enemyList.add(new Enemy (enemy,dir,xpos,ypos));
 	                	numEnemies ++;
 	                }
 	                
 	                // Enemy5
 	                if (attributes.getValue("xpos5")!=null){	                	
 	                	xpos = Integer.parseInt(attributes.getValue("xpos5"));
-	                	enemyList.add(new Enemy (enemy,xpos));
+	                	enemyList.add(new Enemy (enemy,dir,xpos,ypos));
 	                	numEnemies ++;
 	                }
 	                
 	                System.out.print("Squadron ypos:"+ypos);
-	                Squadron sq = new Squadron(enemyList,ypos,enemy,numEnemies,0);
+	                Squadron sq = new Squadron(enemyList,enemy,numEnemies,0);
 	                squadronList.add(sq);
 	            }
 	        }

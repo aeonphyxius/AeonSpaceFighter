@@ -48,7 +48,12 @@ public class PlayerData {
 	}
 
 	public void increaseDamage(){
-		this.damage += Engine.difficulty;
+		if (this.shield > 0){
+			this.shield -= 25;
+		}else{
+			this.damage -=25;
+		}
+		
 	}
 	
 	public int getShield() {

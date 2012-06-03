@@ -29,14 +29,21 @@ public class Player extends EngineGL implements DrawableComponent {
 		playerTexture=new TextureRegion( new float[] { 0.0f, 0.0f, 0.33f, 0.0f, 0.33f, 0.30f, 0.0f,0.33f, } );
 	}	
 	
+	public void increasePoints(){
+		this.data.setPoints(this.data.getPoints()+10);
+	}
 	
 	public void applyDamage() {
 		data.increaseDamage();
-		if (data.getDamage() == Engine.PLAYER_SHIELDS) {
+		
+		/*if (data.getDamage() == Engine.PLAYER_SHIELDS) {
 			data.setDestroyed(true);
-		}
-
+		}*/
 	}	
+	
+	/*public BoundingBox getBoundingBox(){
+		
+	}*/
 	
 	public PlayerData getData() {
 		return data;

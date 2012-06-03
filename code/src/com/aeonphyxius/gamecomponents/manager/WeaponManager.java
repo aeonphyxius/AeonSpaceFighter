@@ -65,7 +65,7 @@ public class WeaponManager {
 	 * @param gl OpenGL handler
 	 * @param spriteSheet array containing all sprites ids
 	 */
-	public void drawrWeapon(GL10 gl,int[] spriteSheets){
+	public void drawWeapon(GL10 gl,int[] spriteSheets){
 		
 		float elapsed = System.currentTimeMillis() - lastShoot;
 		
@@ -76,30 +76,32 @@ public class WeaponManager {
 			playeFireList.add(new Weapon());			
 		}
 		
-		if (playeFireList.get(0).shootFired == false){
-			playeFireList.remove(playeFireList.get(0));
-		}		
-		
-		for(int x = 0; x < playeFireList.size(); x++  ){
-
-			if (playeFireList.get(x).posY > 6.5f){ // TODO: add constant
-				playeFireList.get(x).shootFired = false;
-			}else if(playeFireList.get(x).shootFired){
-
-				playeFireList.get(x).posY += Engine.PLAYER_BULLET_SPEED;
-				gl.glMatrixMode(GL10.GL_MODELVIEW);
-				gl.glLoadIdentity();
-				gl.glPushMatrix();
-				gl.glScalef(.15f, .15f, 0f);
-				gl.glTranslatef(playeFireList.get(x).posX, playeFireList.get(x).posY, 0f); // TODO: add a constant
-				gl.glScalef(.4f, .4f, 0f);
-				gl.glMatrixMode(GL10.GL_TEXTURE);
-				gl.glLoadIdentity();
-				gl.glTranslatef(0.0f,0.0f, 0.0f); 
+		if(playeFireList.size()>0){
+			if (playeFireList.get(0).shootFired == false){
+				playeFireList.remove(playeFireList.get(0));
+			}		
+			
+			for(int x = 0; x < playeFireList.size(); x++  ){
 	
-				playeFireList.get(x).draw(gl,spriteSheets);
-				gl.glPopMatrix();
-				gl.glLoadIdentity();
+				if (playeFireList.get(x).posY > 6.5f){ // TODO: add constant
+					playeFireList.get(x).shootFired = false;
+				}else if(playeFireList.get(x).shootFired){
+	
+					playeFireList.get(x).posY += Engine.PLAYER_BULLET_SPEED;
+					gl.glMatrixMode(GL10.GL_MODELVIEW);
+					gl.glLoadIdentity();
+					gl.glPushMatrix();
+					gl.glScalef(.15f, .15f, 0f);
+					gl.glTranslatef(playeFireList.get(x).posX, playeFireList.get(x).posY, 0f); // TODO: add a constant
+					gl.glScalef(.4f, .4f, 0f);
+					gl.glMatrixMode(GL10.GL_TEXTURE);
+					gl.glLoadIdentity();
+					gl.glTranslatef(0.0f,0.0f, 0.0f); 
+		
+					playeFireList.get(x).draw(gl,spriteSheets);
+					gl.glPopMatrix();
+					gl.glLoadIdentity();
+				}
 			}
 		}
 	}
