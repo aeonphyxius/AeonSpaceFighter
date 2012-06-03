@@ -8,6 +8,8 @@ import java.util.Random;
 import javax.microedition.khronos.opengles.GL10;
 
 import com.aeonphyxius.engine.Engine;
+import com.aeonphyxius.engine.MusicManager;
+import com.aeonphyxius.gamecomponents.manager.ExplosionManager;
 
 public class Enemy {
 
@@ -59,16 +61,22 @@ public class Enemy {
 		case TYPE_INTERCEPTOR:
 			if (damage >= Engine.INTERCEPTOR_SHIELDS) {
 				isDestroyed = true;
+				ExplosionManager.getInstance().addExplosion(this.posX,this.posY);
+				//MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION);
 			}
 			break;
 		case TYPE_SCOUT:
 			if (damage >= Engine.SCOUT_SHIELDS) {
 				isDestroyed = true;
+				ExplosionManager.getInstance().addExplosion(this.posX,this.posY);
+				//MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION);
 			}
 			break;
 		case TYPE_WARSHIP:
 			if (damage >= Engine.WARSHIP_SHIELDS) {
 				isDestroyed = true;
+				ExplosionManager.getInstance().addExplosion(this.posX,this.posY);
+				//MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION);
 			}
 			break;
 		}

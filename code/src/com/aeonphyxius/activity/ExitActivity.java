@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Window;
 import android.view.WindowManager;
 
 /**
@@ -29,6 +30,8 @@ public class ExitActivity extends Activity {
     	Engine.display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // display the splash screen image
         setContentView(R.layout.exitscreen);
         // start up the splash screen and main menu in a time delayed thread

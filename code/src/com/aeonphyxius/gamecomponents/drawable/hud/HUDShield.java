@@ -44,19 +44,23 @@ public class HUDShield extends EngineGL{
 	private HUDShield() {
 		textureRegionList = new Vector<TextureRegion>();
 
-		TextureRegion tempTextureRegion = new TextureRegion( new float[] { 0.758f, 0.52f, 0.875f, 0.52f, 0.875f, 0.637f, 0.758f,0.637f,});
+		TextureRegion tempTextureRegion = new TextureRegion( new float[] { 0.730f, 0.501f, 0.857f, 0.501f, 0.857f, 0.630f, 0.730f,0.630f,});
 		textureRegionList.add(tempTextureRegion); // Texture for shields at 0 %
 		
-		tempTextureRegion = new TextureRegion( new float[] {0.758f, 0.691f, 0.877f, 0.691f,	0.877f, 0.814f,	0.758f,0.814f,});
+		//tempTextureRegion = new TextureRegion( new float[] {0.758f, 0.691f, 0.877f, 0.691f,	0.877f, 0.814f,	0.758f,0.814f,});
+		tempTextureRegion = new TextureRegion( new float[] { 0.730f, 0.673f, 0.857f, 0.673f, 0.857f, 0.802f, 0.730f,0.802f,});
 		textureRegionList.add(tempTextureRegion); // Texture for shields at 25 %
 		
-		tempTextureRegion = new TextureRegion( new float[] { 0.611f, 0.683f,0.730f, 0.683f,	0.730f, 0.805f,	0.611f,0.805f,});
+		//tempTextureRegion = new TextureRegion( new float[] { 0.611f, 0.683f,0.730f, 0.683f,	0.730f, 0.805f,	0.611f,0.805f,});
+		tempTextureRegion = new TextureRegion( new float[] { 0.576f, 0.673f, 0.701f, 0.673f, 0.701f, 0.802f, 0.576f,0.802f,});
 		textureRegionList.add(tempTextureRegion); // Texture for shields at 50 %
 		
-		tempTextureRegion = new TextureRegion( new float[] { 0.332f, 0.683f, 0.453f, 0.683f, 0.453f, 0.805f, 0.332f,0.805f,});
+		//tempTextureRegion = new TextureRegion( new float[] { 0.332f, 0.683f, 0.453f, 0.683f, 0.453f, 0.805f, 0.332f,0.805f,});
+		tempTextureRegion = new TextureRegion( new float[] { 0.419f, 0.673f, 0.548f, 0.673f, 0.548f, 0.802f, 0.419f,0.802f,});
 		textureRegionList.add(tempTextureRegion); // Texture for shields at 75 %
 		
-		tempTextureRegion = new TextureRegion( new float[] { 0.475f, 0.685f, 0.591f, 0.685f, 0.591f, 0.805f, 0.475f,0.805f,});
+		//tempTextureRegion = new TextureRegion( new float[] { 0.475f, 0.685f, 0.591f, 0.685f, 0.591f, 0.805f, 0.475f,0.805f,});
+		tempTextureRegion = new TextureRegion( new float[] { 0.269f, 0.673f, 0.398f, 0.673f, 0.398f, 0.802f, 0.269f,0.802f,});
 		textureRegionList.add(tempTextureRegion); // Texture for shields at 100 %
 	}
 	

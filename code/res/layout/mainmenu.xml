@@ -6,59 +6,96 @@
     <ImageView android:id="@+id/mainMenuImage"
     	android:src="@drawable/mainmenu"  
     	android:layout_width="match_parent" 
-    	android:layout_height="match_parent"
+    	android:layout_height="match_parent"    	
     	android:contentDescription="@string/mainmenu">
     </ImageView>
     <RelativeLayout
-        android:id="@+id/buttonsbottom"
+        android:id="@+id/buttonsExit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="120dp">
-        <ImageButton 
-        	android:id="@+id/btnAbout" 
-        	android:clickable="true"
-        	android:layout_alignParentLeft="true"
-        	android:layout_width="wrap_content" 
-        	android:src="@drawable/aboutselector" 
-        	android:layout_height="wrap_content"
-			android:contentDescription="@string/mainaboutdes">
-        </ImageButton>
+        android:layout_marginBottom="20dp">
     	<ImageButton 
     		android:id="@+id/btnExit"  
-    		android:layout_width="wrap_content" 
-    		android:src="@drawable/exitselector" 
-    		android:layout_height="wrap_content" 
-    		android:layout_alignParentRight="true"
-    		android:clickable="true" 
-    		android:contentDescription="@string/mainexitdes">
+    		android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignParentTop="true"
+    	    android:layout_centerHorizontal="true"
+    	    android:clickable="true"
+    		android:contentDescription="@string/mainexitdes"
+    		android:src="@drawable/exitselector">
     	</ImageButton>    
-    </RelativeLayout>    
+    </RelativeLayout>
+        <RelativeLayout
+        android:id="@+id/buttonsHelp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp">     
+       	<ImageButton
+        android:id="@+id/btnHelp"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_alignParentTop="true"
+    	android:layout_centerHorizontal="true"
+    	android:clickable="true"
+        android:contentDescription="@string/mainoptionsdes"
+        android:src="@drawable/helpselector" />    
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/buttonsAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="140dp">
+        <ImageButton 
+        	android:id="@+id/btnAbout" 
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignParentTop="true"
+    	    android:layout_centerHorizontal="true"
+    	    android:clickable="true" 
+			android:contentDescription="@string/mainaboutdes"
+			android:src="@drawable/aboutselector" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/buttonsoptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="200dp">     
+       	<ImageButton
+        android:id="@+id/btnOptions"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_alignParentTop="true"
+    	android:layout_centerHorizontal="true"
+    	android:clickable="true"
+        android:contentDescription="@string/mainoptionsdes"
+        android:src="@drawable/optionselector" />    
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/buttonstop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="310dp">
-        <ImageButton 
-        	android:id="@+id/btnStart" 
-        	android:clickable="true"
-        	android:layout_alignParentLeft="true"
-        	android:layout_width="wrap_content" 
-        	android:src="@drawable/startselector" 
-        	android:layout_height="wrap_content" 
-        	android:contentDescription="@string/mainstartdes">
-        </ImageButton>
-    	<ImageButton 
-    		android:id="@+id/btnOptions"  
-    		android:layout_width="wrap_content" 
-    		android:src="@drawable/optionselector" 
-    		android:layout_height="wrap_content" 
-    		android:layout_alignParentRight="true"
-    		android:clickable="true" 
-    		android:contentDescription="@string/mainoptionsdes">
-    	</ImageButton>    
-    </RelativeLayout>    
+        android:layout_marginBottom="260dp">
+    	<ImageButton
+    	    android:id="@+id/btnStart"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignParentTop="true"
+    	    android:layout_centerHorizontal="true"
+    	    android:clickable="true"
+    	    android:contentDescription="@string/mainstartdes"
+    	    android:src="@drawable/startselector" />
+    </RelativeLayout>
+
+
    </RelativeLayout>

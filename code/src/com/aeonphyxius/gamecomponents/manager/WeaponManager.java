@@ -72,7 +72,8 @@ public class WeaponManager {
 		
 		if ( elapsed > Engine.SHOOT_SLEEP){ // TODO: add a constant
 			lastShoot=System.currentTimeMillis();
-			MusicManager.getInstance().playSound("blaster");
+			//MusicManager.getInstance().playSound(Engine.SOUND_FUSHIONSHOT);
+			MusicManager.getInstance().playSound(Engine.SOUND_BLASTER);
 			playeFireList.add(new Weapon());			
 		}
 		

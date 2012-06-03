@@ -17,7 +17,8 @@ public static final boolean LOOP_BACKGROUND_MUSIC = true;
 public static final int GAME_THREAD_FPS_SLEEP = (1000/60);
 public static float SCROLL_BACKGROUND_1 = .002f;
 public static float SCROLL_BACKGROUND_2 = .007f;
-public static float SHOOT_SLEEP = 250f;
+public static float SHOOT_SLEEP = 2500f;
+public static float EXPLOSIOM_SLEEP = 50f;
 
 public static final int PLAYER_BANK_LEFT_1 = 1;
 public static final int PLAYER_RELEASE = 3;
@@ -26,6 +27,10 @@ public static final int PLAYER_FRAMES_BETWEEN_ANI = 9;
 public static final float PLAYER_BANK_SPEED = .1f;
 
 public static final float EFFECTS_VOLUME = 0.3f;
+public static final String SOUND_BLASTER ="blaster";
+public static final String SOUND_EXPLOSION ="explosion";
+public static final String SOUND_LASER_HIT ="laserHit";
+public static final String SOUND_FUSHIONSHOT ="fushionShot";
 
 // sprites
 public static int CHARACTER_SHEET = R.drawable.character_sprite;

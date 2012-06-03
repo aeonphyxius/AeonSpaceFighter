@@ -7,6 +7,7 @@ import com.aeonphyxius.gamecomponents.drawable.Enemy;
 import com.aeonphyxius.gamecomponents.drawable.Player;
 import com.aeonphyxius.gamecomponents.drawable.Weapon;
 import com.aeonphyxius.gamecomponents.manager.BackGroundManager;
+import com.aeonphyxius.gamecomponents.manager.ExplosionManager;
 import com.aeonphyxius.gamecomponents.manager.HUDManager;
 import com.aeonphyxius.gamecomponents.manager.Squadron;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
@@ -57,6 +58,7 @@ public class GameRenderer implements Renderer {
 		moveEnemy(gl);
 		HUDManager.getInstance().draw(gl, spriteSheets);
 		detectCollisions();		
+		ExplosionManager.getInstance().draw(gl, spriteSheets);
 
 		gl.glEnable(GL10.GL_BLEND);
 		gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA);

@@ -3,5 +3,10 @@
 	<sound name="coin" src="coin.ogg"/>	
 	<sound name="hit" src="hit.ogg" />
 	<sound name="blaster" src="blaster.ogg" />
-	<sound name="finalEnemy" src="finalEnemy.ogg" />	
+	<sound name="blaster" src="blaster.ogg" />
+	<sound name="finalEnemy" src="finalEnemy.ogg" />
+	<sound name="explosion" src="explosion.ogg" />	
+	<sound name="fushionShot" src="fushion_shot.ogg" />
+	<sound name="laserHit" src="laser_hit.ogg" />
+			
 </sounds>

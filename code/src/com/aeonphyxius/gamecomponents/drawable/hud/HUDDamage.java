@@ -51,13 +51,13 @@ public class HUDDamage extends EngineGL{
 		TextureRegion tempTextureRegion = new TextureRegion( new float[] { 0.748f, 0.856f, 0.836f, 0.856f, 0.836f, 0.939f, 0.748f,0.939f,});
 		textureRegionList.add(tempTextureRegion); // Texture for damage at 0 %
 		
-		tempTextureRegion = new TextureRegion( new float[] { 0.758f, 0.691f, 0.877f, 0.691f, 0.877f, 0.814f, 0.758f,0.814f,}); 
+		tempTextureRegion = new TextureRegion( new float[] { 0.296f, 0.855f, 0.387f, 0.855f, 0.387f,  0.939f, 0.296f,0.939f,}); 
 		textureRegionList.add(tempTextureRegion); // Texture for damage at 25 %
 		
-		tempTextureRegion = new TextureRegion( new float[] { 0.611f, 0.683f, 0.730f, 0.683f, 0.730f, 0.805f, 0.611f,0.805f,});
+		tempTextureRegion = new TextureRegion( new float[] { 0.402f, 0.855f, 0.498f, 0.855f, 0.498f,  0.939f, 0.402f,0.939f,});
 		textureRegionList.add(tempTextureRegion); // Texture for damage at 50 %
 		
-		tempTextureRegion = new TextureRegion( new float[] { 0.332f, 0.683f, 0.453f, 0.683f, 0.453f, 0.805f, 0.332f,0.805f,});
+		tempTextureRegion = new TextureRegion( new float[] { 0.512f, 0.855f, 0.601f, 0.855f, 0.601f, 0.939f, 0.512f,0.939f,});
 		textureRegionList.add(tempTextureRegion); // Texture for shield damage at 75 %
 		
 		tempTextureRegion = new TextureRegion( new float[] { 0.623f, 0.855f, 0.717f, 0.855f, 0.717f, 0.939f, 0.623f,0.939f,});

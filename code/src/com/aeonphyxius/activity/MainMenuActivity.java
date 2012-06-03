@@ -62,6 +62,8 @@ public class MainMenuActivity extends Activity {
         ImageButton exit = (ImageButton)findViewById(R.id.btnExit);
         ImageButton options = (ImageButton)findViewById(R.id.btnOptions);
         ImageButton about = (ImageButton)findViewById(R.id.btnAbout);
+        ImageButton help = (ImageButton)findViewById(R.id.btnHelp);
+        
         
         
         // Apply alpha transparency and Haptic Feedback
@@ -77,7 +79,9 @@ public class MainMenuActivity extends Activity {
         about.getBackground().setAlpha(Engine.MENU_BUTTON_ALPHA);
         about.setHapticFeedbackEnabled(Engine.HAPTIC_BUTTON_FEEDBACK);
         
-        
+        help.getBackground().setAlpha(Engine.MENU_BUTTON_ALPHA);
+        help.setHapticFeedbackEnabled(Engine.HAPTIC_BUTTON_FEEDBACK);
+                
         // About button click event. Loads About activity
         about.setOnClickListener(new OnClickListener(){
 			@Override

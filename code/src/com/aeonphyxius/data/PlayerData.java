@@ -43,13 +43,13 @@ public class PlayerData {
 			this.lives = Engine.LIVES_HARD;
 			this.damage = Engine.DAMAGE_HARD;
 			this.shield = Engine.SHIELD_HARD;
-			break;			
-		}
+			break;
+		}		
 	}
 
 	public void increaseDamage(){
 		if (this.shield > 0){
-			this.shield -= 25;
+			this.shield -= 7;
 		}else{
 			this.damage -=25;
 		}

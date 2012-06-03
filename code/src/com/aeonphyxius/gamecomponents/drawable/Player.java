@@ -5,6 +5,7 @@ import com.aeonphyxius.data.PlayerData;
 import com.aeonphyxius.engine.DrawableComponent;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.EngineGL;
+import com.aeonphyxius.engine.MusicManager;
 import com.aeonphyxius.engine.TextureRegion;
 
 public class Player extends EngineGL implements DrawableComponent {
@@ -34,6 +35,7 @@ public class Player extends EngineGL implements DrawableComponent {
 	}
 	
 	public void applyDamage() {
+		MusicManager.getInstance().playSound(Engine.SOUND_LASER_HIT);
 		data.increaseDamage();
 		
 		/*if (data.getDamage() == Engine.PLAYER_SHIELDS) {

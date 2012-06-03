@@ -44,14 +44,14 @@ public class GameActivity extends Activity {
     protected void onResume() {
        super.onResume();
        gameView.onResume();
-       MusicManager.getInstance().resumeMusic();
+       //MusicManager.getInstance().resumeMusic();
     }
 
     @Override
     protected void onPause() {
        super.onPause();
        gameView.onPause();
-       MusicManager.getInstance().pauseMusic();
+       //MusicManager.getInstance().pauseMusic();
     }
 
    	@Override
