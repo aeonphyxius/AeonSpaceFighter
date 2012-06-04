@@ -90,6 +90,12 @@ public class MainMenuActivity extends Activity {
 				// load about screen
 				Intent help = new Intent(getApplicationContext(),Help1Activity.class);
 				MainMenuActivity.this.startActivity(help);
+				
+				Intent help2 = new Intent(getApplicationContext(),Help2Activity.class);
+				MainMenuActivity.this.startActivity(help2);
+				
+				Intent help3 = new Intent(getApplicationContext(),Help3Activity.class);
+				MainMenuActivity.this.startActivity(help3);
 
 			}        	
         });

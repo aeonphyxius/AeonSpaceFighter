@@ -38,8 +38,8 @@ public class Help2Activity extends Activity {
    	public boolean onTouchEvent(MotionEvent event) {
 		// load about screen
     	
-		Intent help3 = new Intent(getApplicationContext(),Help3Activity.class);
-		Help2Activity.this.startActivity(help3);
+		//Intent help3 = new Intent(getApplicationContext(),Help3Activity.class);
+		//Help2Activity.this.startActivity(help3);
 		Help2Activity.this.finish();
     	return true;
     }
