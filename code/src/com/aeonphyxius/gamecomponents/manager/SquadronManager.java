@@ -14,9 +14,9 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
-
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.gamecomponents.drawable.Enemy;
+
 
 
 public class SquadronManager {
@@ -54,7 +54,7 @@ public class SquadronManager {
 	}
 
 	public void loadSquadronsLevel(int level) throws Exception{
-		
+		squadronList = new ArrayList<Squadron>();
 		AssetManager assetManager = Engine.context.getAssets();
 		String fileName = "level" + level +".xml";
 		InputStream is;
@@ -79,103 +79,114 @@ public class SquadronManager {
 		int squadronNum = SquadronManager.getInstance().getSquadronList().size();		
 		Squadron tempSquadron;
 
-		for (int sqNum = 0; sqNum< squadronNum ; sqNum++) {	
-			tempSquadron = SquadronManager.getInstance().getSquadronList().get(sqNum);
-			if (!tempSquadron.isDestroyed()) {
-				Random randomPos = new Random();
-				int enemyNum = tempSquadron.getEnemyList().size();		
+		if (squadronNum<=0){							
+			Engine.GameSatus = Engine.GAMESTATUS.LEVEL_COMPLETE;					
+		}else{			
+			for (int sqNum = 0; sqNum< squadronNum ; sqNum++) {	
+				tempSquadron = SquadronManager.getInstance().getSquadronList().get(sqNum);
+				if (!tempSquadron.isDestroyed()) {
+					Random randomPos = new Random();
+					int enemyNum = tempSquadron.getEnemyList().size();		
 
-				for (int sqPos = 0; sqPos < enemyNum; sqPos++){
-					Enemy tempEnemy = SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqPos);
-					if (!tempEnemy.isDestroyed){
+					for (int sqPos = 0; sqPos < enemyNum; sqPos++){
+						Enemy tempEnemy = SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqPos);
+						if (!tempEnemy.isDestroyed){
 
-						gl.glMatrixMode(GL10.GL_MODELVIEW);
-						gl.glLoadIdentity();
-						gl.glPushMatrix();
-						gl.glScalef(.15f, .15f, 1f);
+							gl.glMatrixMode(GL10.GL_MODELVIEW);
+							gl.glLoadIdentity();
+							gl.glPushMatrix();
+							gl.glScalef(.15f, .15f, 1f);
 
-						switch (tempSquadron.getSquadronEnemyType()) {
-						case Engine.TYPE_INTERCEPTOR: // Interceptor
-							if (tempEnemy.posY >= Engine.SQUADRON_START_Y) {
-								tempEnemy.posY -= Engine.INTERCEPTOR_SPEED;
-							} else {
-								if (!tempEnemy.isShooting){
-									if( (Math.random())<0.05){
-										WeaponManager.getInstance().addEnemyShot(tempEnemy.posX, tempEnemy.posY);
-										tempEnemy.isShooting = true;
+							switch (tempSquadron.getSquadronEnemyType()) {
+							case Engine.TYPE_INTERCEPTOR: // Interceptor
+								if (tempEnemy.posY >= Engine.SQUADRON_START_Y) {
+									tempEnemy.posY -= Engine.INTERCEPTOR_SPEED;
+								} else {
+									if (!tempEnemy.isShooting){
+										if( (Math.random())<0.05){
+											WeaponManager.getInstance().addEnemyShot(tempEnemy.posX, tempEnemy.posY);
+											tempEnemy.isShooting = true;
+										}
+									}
+
+									if (!tempEnemy.isLockedOn) {
+										tempEnemy.lockOnPosX = Engine.playerBankPosX;
+										tempEnemy.isLockedOn = true;
+										tempEnemy.incrementXToTarget = (float) (
+												(tempEnemy.lockOnPosX - 
+														tempEnemy.posX) / 
+														(tempEnemy.posY  / (Engine.INTERCEPTOR_SPEED * 4)));
+									}								
+									tempEnemy.posX += tempEnemy.incrementXToTarget;
+									tempEnemy.posY -= (Engine.INTERCEPTOR_SPEED * 4);
+									if (tempEnemy.posY < Engine.SQUADRON_MIN_Y) {
+										tempEnemy.isDestroyed = true;
+										tempSquadron.increaseEnemiesDestroyed();
+									}	
+
+								}
+								break;							
+
+							case Engine.TYPE_SCOUT:
+								if (tempEnemy.posY >= Engine.SQUADRON_START_Y) {
+									tempEnemy.posY -= Engine.SCOUT_SPEED;
+								}else {
+									if (!tempEnemy.isShooting){
+										if( (Math.random())<0.05){
+											WeaponManager.getInstance().addEnemyShot(tempEnemy.posX, tempEnemy.posY);
+											tempEnemy.isShooting = true;
+										}
+									}
+									tempEnemy.posX = tempEnemy.getNextScoutX();
+									tempEnemy.posY = tempEnemy.getNextScoutY();
+									tempEnemy.posT += Engine.SCOUT_SPEED;
+									if (tempEnemy.posY < Engine.SQUADRON_MIN_Y) {
+										tempEnemy.isDestroyed = true;
+										tempSquadron.increaseEnemiesDestroyed();
 									}
 								}
+								break;
 
-								if (!tempEnemy.isLockedOn) {
-									tempEnemy.lockOnPosX = Engine.playerBankPosX;
-									tempEnemy.isLockedOn = true;
-									tempEnemy.incrementXToTarget = (float) (
-											(tempEnemy.lockOnPosX - 
-													tempEnemy.posX) / 
-													(tempEnemy.posY  / (Engine.INTERCEPTOR_SPEED * 4)));
-								}								
-								tempEnemy.posX += tempEnemy.incrementXToTarget;
-								tempEnemy.posY -= (Engine.INTERCEPTOR_SPEED * 4);
-								if (tempEnemy.posY < Engine.SQUADRON_MIN_Y) {
-									tempEnemy.isDestroyed = true;
-								}	
-
-							}
-							break;							
-
-						case Engine.TYPE_SCOUT:
-							if (tempEnemy.posY >= Engine.SQUADRON_START_Y) {
-								tempEnemy.posY -= Engine.SCOUT_SPEED;
-							}else {
-								if (!tempEnemy.isShooting){
-									if( (Math.random())<0.05){
-										WeaponManager.getInstance().addEnemyShot(tempEnemy.posX, tempEnemy.posY);
-										tempEnemy.isShooting = true;
+							case Engine.TYPE_WARSHIP:
+								if (tempEnemy.posY >= Engine.SQUADRON_START_Y) { 
+									tempEnemy.posY -= Engine.WARSHIP_SPEED;								
+								} else {
+									if (!tempEnemy.isShooting){
+										if( (Math.random())<0.05){
+											WeaponManager.getInstance().addEnemyShot(tempEnemy.posX, tempEnemy.posY);
+											tempEnemy.isShooting = true;
+										}
+									}		
+									if (!tempEnemy.isLockedOn) {
+										tempEnemy.lockOnPosX = randomPos.nextFloat() * 3;
+										tempEnemy.isLockedOn = true;
+										tempEnemy.incrementXToTarget = 
+												(float) ((tempEnemy.lockOnPosX - tempEnemy.posX) / (tempEnemy.posY/ (Engine.WARSHIP_SPEED * 4)));
+									}
+									tempEnemy.posY -= Engine.WARSHIP_SPEED * 2;
+									tempEnemy.posX += tempEnemy.incrementXToTarget;
+									if (tempEnemy.posY < Engine.SQUADRON_MIN_Y) {								
+										tempEnemy.isDestroyed = true;
+										tempSquadron.increaseEnemiesDestroyed();
 									}
 								}
-								tempEnemy.posX = tempEnemy.getNextScoutX();
-								tempEnemy.posY = tempEnemy.getNextScoutY();
-								tempEnemy.posT += Engine.SCOUT_SPEED;
-								if (tempEnemy.posY < Engine.SQUADRON_MIN_Y) {
-									tempEnemy.isDestroyed = true;
-								}
+								break;
 							}
-							break;
 
-						case Engine.TYPE_WARSHIP:
-							if (tempEnemy.posY >= Engine.SQUADRON_START_Y) { 
-								tempEnemy.posY -= Engine.WARSHIP_SPEED;								
-							} else {
-								if (!tempEnemy.isShooting){
-									if( (Math.random())<0.05){
-										WeaponManager.getInstance().addEnemyShot(tempEnemy.posX, tempEnemy.posY);
-										tempEnemy.isShooting = true;
-									}
-								}		
-								if (!tempEnemy.isLockedOn) {
-									tempEnemy.lockOnPosX = randomPos.nextFloat() * 3;
-									tempEnemy.isLockedOn = true;
-									tempEnemy.incrementXToTarget = 
-											(float) ((tempEnemy.lockOnPosX - tempEnemy.posX) / (tempEnemy.posY/ (Engine.WARSHIP_SPEED * 4)));
-								}
-								tempEnemy.posY -= Engine.WARSHIP_SPEED * 2;
-								tempEnemy.posX += tempEnemy.incrementXToTarget;
-								if (tempEnemy.posY < Engine.SQUADRON_MIN_Y) {								
-									tempEnemy.isDestroyed = true;
-								}
-							}
-							break;
+							gl.glTranslatef(tempEnemy.posX, tempEnemy.posY, 0f);
+							gl.glMatrixMode(GL10.GL_TEXTURE);
+							gl.glLoadIdentity();														
+							tempEnemy.draw(gl, spriteSheet);
+							gl.glPopMatrix();
+							gl.glLoadIdentity();
 						}
-						
-						gl.glTranslatef(tempEnemy.posX, tempEnemy.posY, 0f);
-						gl.glMatrixMode(GL10.GL_TEXTURE);
-						gl.glLoadIdentity();														
-						tempEnemy.draw(gl, spriteSheet);
-						gl.glPopMatrix();
-						gl.glLoadIdentity();
 					}
 				}
 			}
+			if (SquadronManager.getInstance().getSquadronList().get(0).isDestroyed()){
+				SquadronManager.getInstance().getSquadronList().remove(0);
+			}
+
 		}
 	}
 	
@@ -238,4 +249,5 @@ public class SquadronManager {
 	            }
 	        }
 	    }
+	    
 }

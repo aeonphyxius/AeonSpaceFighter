@@ -1,15 +1,18 @@
 package com.aeonphyxius.engine;
 
 import com.aeonphyxius.R;
+
+import android.app.Activity;
 import android.content.Context;
 import android.view.Display;
 
 
 public class Engine {
 /*Constants that will be used in the game*/
-public static enum GameSatus {START, PLAYING, DESTROYED, GAMEOVER};
-public static GameSatus GAMESTATUS;
-	
+public static enum GAMESTATUS {START, PLAYING, DESTROYED, GAMEOVER,END,LEVEL_COMPLETE};
+public static GAMESTATUS GameSatus;
+public static final int MAX_LEVEL = 2;
+
 public static final int GAME_THREAD_DELAY = 4000;
 public static final int MENU_BUTTON_ALPHA = 0;
 public static final boolean HAPTIC_BUTTON_FEEDBACK = true;
@@ -18,10 +21,11 @@ public static final int R_VOLUME = 100;
 public static final int L_VOLUME = 100;
 public static final boolean LOOP_BACKGROUND_MUSIC = true;
 public static final int GAME_THREAD_FPS_SLEEP = (1000/60);
+public static final int GAME_OVER_THREAD_WAIT = (1000/60)*50;
 public static float SCROLL_BACKGROUND_1 = .002f;
 public static float SCROLL_BACKGROUND_2 = .007f;
 public static float SHOOT_SLEEP = 250f;
-public static float ANIMATION_SLEEP = 250f;
+public static float ANIMATION_SLEEP = 100f;
 public static float EXPLOSIOM_SLEEP = 50f;
 
 public static final int PLAYER_BANK_LEFT_1 = 1;
@@ -106,6 +110,7 @@ public static Display display;
 public static int playerFlightAction = 0;
 public static float playerBankPosX = 1.75f;
 public static int difficulty = 2;
+public static Activity gameActivity;
 
 
 }

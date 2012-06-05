@@ -1,11 +1,8 @@
 package com.aeonphyxius.gamecomponents.manager;
 
 import java.util.Vector;
-
 import javax.microedition.khronos.opengles.GL10;
-
 import com.aeonphyxius.data.ExplosionData;
-import com.aeonphyxius.engine.DrawableComponent;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.gamecomponents.drawable.Explosion;
 
@@ -25,7 +22,7 @@ import com.aeonphyxius.gamecomponents.drawable.Explosion;
  * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
  */
 
-public class ExplosionManager implements DrawableComponent {
+public class ExplosionManager{
 	
 
 	private static ExplosionManager instance = null;			// Singleton implementation
@@ -42,7 +39,6 @@ public class ExplosionManager implements DrawableComponent {
 		}
 		return instance;
 	}
-		
 	
 	/**
 	 * private constructor to do not allow others instanciate this class. Empty
@@ -51,6 +47,18 @@ public class ExplosionManager implements DrawableComponent {
 		explosionList = new Vector<ExplosionData>();
 	}
 
+	/**
+	 * 
+	 */
+	public void resetExplosions(){
+		explosionList = new Vector<ExplosionData>();
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void addExplosion(float x, float y){
 		explosionList.add(new ExplosionData(x,y));		
 	}

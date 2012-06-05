@@ -47,6 +47,8 @@ public class Explosion extends EngineGL{
 		textureRegionList.add(tempTextureRegion); // Texture for explosion step 4
 	}
 	
+	
+	
 	/**
 	 * Draw the explosion animation at the specified position.
 	 * @param gl OpenGL handler

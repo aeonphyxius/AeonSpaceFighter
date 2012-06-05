@@ -2,19 +2,22 @@ package com.aeonphyxius.engine;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
-
 import com.aeonphyxius.data.LevelData;
+import com.aeonphyxius.engine.Engine.GAMESTATUS;
 import com.aeonphyxius.gamecomponents.drawable.Enemy;
-import com.aeonphyxius.gamecomponents.drawable.GameStartOvelay;
 import com.aeonphyxius.gamecomponents.drawable.Player;
-import com.aeonphyxius.gamecomponents.drawable.PlayerDestructionOverlay;
 import com.aeonphyxius.gamecomponents.drawable.Weapon;
+import com.aeonphyxius.gamecomponents.drawable.overlay.GameOverOvelay;
+import com.aeonphyxius.gamecomponents.drawable.overlay.GameStartOvelay;
+import com.aeonphyxius.gamecomponents.drawable.overlay.LevelCompleteOverOvelay;
+import com.aeonphyxius.gamecomponents.drawable.overlay.PlayerDestructionOverlay;
 import com.aeonphyxius.gamecomponents.manager.BackGroundManager;
 import com.aeonphyxius.gamecomponents.manager.ExplosionManager;
 import com.aeonphyxius.gamecomponents.manager.HUDManager;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 import com.aeonphyxius.gamecomponents.manager.WeaponManager;
 import android.opengl.GLSurfaceView.Renderer;
+
 
 /**
 * GameRenderer Object.
@@ -37,10 +40,10 @@ public class GameRenderer implements Renderer {
 	private long loopStart = 0;
 	private long loopEnd = 0;
 	private long loopRunTime = 0;
+
 	
 	
 
-	
 	@Override
 	public void onDrawFrame(GL10 gl) {
 		loopStart = System.currentTimeMillis();
@@ -54,7 +57,7 @@ public class GameRenderer implements Renderer {
 
 		gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 		
-		switch (Engine.GAMESTATUS){
+		switch (Engine.GameSatus){
 		
 		case START:
 			BackGroundManager.getInstance().scrollBackground(gl);
@@ -73,14 +76,23 @@ public class GameRenderer implements Renderer {
 			break;
 		
 		case DESTROYED:
-			BackGroundManager.getInstance().scrollBackground(gl);			
-			ExplosionManager.getInstance().draw(gl, spriteSheets);
+			BackGroundManager.getInstance().scrollBackground(gl);
 			PlayerDestructionOverlay.getInstance().draw(gl, spriteSheets);			
 			break;
 			
 		case GAMEOVER:
+			BackGroundManager.getInstance().scrollBackground(gl);
+			GameOverOvelay.getInstance().draw(gl, spriteSheets);
 			break;
-
+		case END:			
+			Engine.gameActivity.finish();
+			break;
+		case LEVEL_COMPLETE:
+			
+			BackGroundManager.getInstance().scrollBackground(gl);
+			LevelCompleteOverOvelay.getInstance().draw(gl, spriteSheets);			
+			
+			break;
 		}
 		gl.glEnable(GL10.GL_BLEND);
 		gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA);
@@ -161,7 +173,7 @@ public class GameRenderer implements Renderer {
 	}
 
 	@Override
-	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+	public void onSurfaceCreated(GL10 gl, EGLConfig config) {		
 		
 		MusicManager.getInstance().playMusic();		
 		textureLoader = new Texture(gl);

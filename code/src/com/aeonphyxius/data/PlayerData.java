@@ -44,10 +44,10 @@ public class PlayerData {
 			this.damage = Engine.DAMAGE_HARD;
 			this.shield = Engine.SHIELD_HARD;
 			break;
-		}		
+		}	
 	}
 
-	public void increaseDamage(){
+	public void increaseDamage(){ 
 		if (this.shield > 0){
 			this.shield -= 25;
 		}else{
@@ -57,6 +57,29 @@ public class PlayerData {
 	}
 	
 
+	public void resetAllStatus(){
+		this.damage = 0;
+		this.points = 0;
+		this.isDestroyed = false;
+		
+		switch(Engine.difficulty){
+		case Engine.DIFF_EASY:			
+			this.lives = Engine.LIVES_EASY;
+			this.damage = Engine.DAMAGE_EASY;
+			this.shield = Engine.SHIELD_EASY;
+			break;
+		case Engine.DIFF_NORMAL:
+			this.lives = Engine.LIVES_NORMAL;
+			this.damage = Engine.DAMAGE_NORMAL;
+			this.shield = Engine.SHIELD_NORMAL;
+			break;			
+		case Engine.DIFF_HARD:
+			this.lives = Engine.LIVES_HARD;
+			this.damage = Engine.DAMAGE_HARD;
+			this.shield = Engine.SHIELD_HARD;
+			break;
+		}		
+	}	
 	public void resetStatus(){
 		switch(Engine.difficulty){
 		case Engine.DIFF_EASY:

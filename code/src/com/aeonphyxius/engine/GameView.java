@@ -8,13 +8,9 @@ public class GameView extends GLSurfaceView {
 	private GameRenderer renderer;
 	
 	public GameView(Context context) {
-		super(context);
-		
-		renderer = new GameRenderer();
-		
+		super(context);		
+		renderer = new GameRenderer();		
 		this.setRenderer(renderer);
-		
-
 	}
 	
 

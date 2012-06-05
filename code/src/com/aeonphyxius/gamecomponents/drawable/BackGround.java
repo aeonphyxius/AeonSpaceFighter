@@ -6,7 +6,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import javax.microedition.khronos.opengles.GL10;
-import com.aeonphyxius.engine.DrawableComponent;
 import com.aeonphyxius.engine.Engine;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -26,7 +25,7 @@ import android.opengl.GLUtils;
 * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
 */
 
-public class BackGround implements DrawableComponent{
+public class BackGround {
 
 	private FloatBuffer vertexBuffer;
 	private FloatBuffer textureBuffer;

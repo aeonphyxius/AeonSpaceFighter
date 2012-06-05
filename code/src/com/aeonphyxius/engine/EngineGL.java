@@ -4,6 +4,31 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class EngineGL {
 	
+	
+	/**
+	 * 
+	 * @param gl
+	 * @param scaleX
+	 * @param scaleY
+	 * @param scaleZ
+	 * @param xpos
+	 * @param ypos
+	 * @param zpos
+	 */
+	public void update ( GL10 gl,float scaleX, float scaleY, float scaleZ, float xpos, float ypos, float zpos){
+		gl.glMatrixMode(GL10.GL_MODELVIEW);
+		gl.glLoadIdentity();
+		gl.glPushMatrix();
+		//gl.glScalef(.05f + (0.01f * animation), .05f+ (0.01f * animation), 1f);
+		gl.glScalef(scaleX,scaleY, scaleZ);
+		gl.glTranslatef(xpos, ypos, zpos);
+	}
+	
+	public void restoreMatrix(GL10 gl){
+		gl.glPopMatrix();													// Recover previous Matrix
+		gl.glLoadIdentity();
+	}
+	
 	/**
 	 * 
 	 * @param gl
@@ -13,6 +38,8 @@ public class EngineGL {
 	 */
 	public void draw(GL10 gl, int[] spriteSheet, int spriteIndex, TextureRegion textureRegion) {
 
+		gl.glMatrixMode(GL10.GL_TEXTURE);
+		gl.glLoadIdentity();
 		gl.glBindTexture(GL10.GL_TEXTURE_2D, spriteSheet[spriteIndex]);
 
 		gl.glFrontFace(GL10.GL_CCW);

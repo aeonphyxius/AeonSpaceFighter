@@ -1,5 +1,7 @@
 package com.aeonphyxius.data;
 
+import com.aeonphyxius.engine.Engine;
+
 
 public class LevelData {
 	
@@ -20,15 +22,17 @@ public class LevelData {
 	}
 
 
+	
 	public int getCurrentLevel() {
 		return currentLevel;
 	}
 
-
-	public void setCurrentLevel(int currentLevel) {
-		this.currentLevel = currentLevel;
+	public void increaseLevel(){
+		if (currentLevel < Engine.MAX_LEVEL){
+			currentLevel ++;
+		}
+		
 	}
-	
 	
 
 }

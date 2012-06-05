@@ -1,7 +1,6 @@
 package com.aeonphyxius.gamecomponents.manager;
 
 import javax.microedition.khronos.opengles.GL10;
-import com.aeonphyxius.engine.DrawableComponent;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.gamecomponents.drawable.Player;
 import com.aeonphyxius.gamecomponents.drawable.hud.HUDControl;
@@ -24,7 +23,7 @@ import com.aeonphyxius.gamecomponents.drawable.hud.HUDShield;
  * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
  */
 
-public class HUDManager implements DrawableComponent {
+public class HUDManager {
 	
 
 	private static HUDManager instance = null;			// Singleton implementation

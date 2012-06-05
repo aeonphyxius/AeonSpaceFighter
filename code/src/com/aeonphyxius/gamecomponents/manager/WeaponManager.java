@@ -51,7 +51,6 @@ public class WeaponManager {
 
 	}
 
-
 	public Vector<Weapon> getPlayeFireList() {
 		return playeFireList;
 	}
@@ -61,9 +60,23 @@ public class WeaponManager {
 		return enemyFireList;
 	}
 
+	/**
+	 * 
+	 */
+	public void resetWeapons(){
+		playeFireList = new Vector<Weapon>();
+		enemyFireList = new Vector<Weapon>();
+	}
+	
+	/**
+	 * 
+	 * @param posX
+	 * @param posY
+	 */
 	public void addEnemyShot(float posX, float posY){
 		enemyFireList.add(new Weapon(posX,posY));
 	}
+	
 	/**
 	 * Draw the control weapons fired 
 	 * @param gl OpenGL handler
@@ -77,7 +90,7 @@ public class WeaponManager {
 		if ( elapsed > Engine.SHOOT_SLEEP){ 
 			lastShoot=System.currentTimeMillis();
 			MusicManager.getInstance().playSound(Engine.SOUND_FUSHIONSHOT);
-			//playeFireList.add(new Weapon());			
+			playeFireList.add(new Weapon());			
 		}
 		
 		if(playeFireList.size()>0){

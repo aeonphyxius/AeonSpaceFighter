@@ -6,14 +6,14 @@ import javax.microedition.khronos.opengles.GL10;
 
 import com.aeonphyxius.data.LevelData;
 import com.aeonphyxius.data.PlayerData;
-import com.aeonphyxius.engine.DrawableComponent;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.EngineGL;
 import com.aeonphyxius.engine.MusicManager;
 import com.aeonphyxius.engine.TextureRegion;
+import com.aeonphyxius.gamecomponents.drawable.overlay.PlayerDestructionOverlay;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 
-public class Player extends EngineGL implements DrawableComponent {
+public class Player extends EngineGL {
 
 	private static Player instance = null;
 	private PlayerData data;	
@@ -65,9 +65,9 @@ public class Player extends EngineGL implements DrawableComponent {
 				data.resetStatus();
 				SquadronManager.getInstance().resetSquadrons(LevelData.getInstance().getCurrentLevel());				
 				PlayerDestructionOverlay.getInstance().resetOverlay();
-				Engine.GAMESTATUS = Engine.GameSatus.DESTROYED;
+				Engine.GameSatus = Engine.GAMESTATUS.DESTROYED;
 			}else{
-				Engine.GAMESTATUS = Engine.GameSatus.GAMEOVER;
+				Engine.GameSatus = Engine.GAMESTATUS.GAMEOVER;
 			}
 		}
 	}	
@@ -75,6 +75,10 @@ public class Player extends EngineGL implements DrawableComponent {
 	/*public BoundingBox getBoundingBox(){
 		
 	}*/
+	
+	public void resetPlayerStatus(){
+		data.resetAllStatus();
+	}
 	
 	public PlayerData getData() {
 		return data;
