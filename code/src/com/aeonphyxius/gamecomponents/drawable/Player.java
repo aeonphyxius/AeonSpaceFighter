@@ -3,12 +3,15 @@ package com.aeonphyxius.gamecomponents.drawable;
 import java.util.Vector;
 
 import javax.microedition.khronos.opengles.GL10;
+
+import com.aeonphyxius.data.LevelData;
 import com.aeonphyxius.data.PlayerData;
 import com.aeonphyxius.engine.DrawableComponent;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.EngineGL;
 import com.aeonphyxius.engine.MusicManager;
 import com.aeonphyxius.engine.TextureRegion;
+import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 
 public class Player extends EngineGL implements DrawableComponent {
 
@@ -54,9 +57,19 @@ public class Player extends EngineGL implements DrawableComponent {
 		MusicManager.getInstance().playSound(Engine.SOUND_LASER_HIT);
 		data.increaseDamage();
 		
-		/*if (data.getDamage() == Engine.PLAYER_SHIELDS) {
-			data.setDestroyed(true);
-		}*/
+		if (data.getDamage() <= 0) {
+			
+			data.setLives(data.getLives()-1);
+			
+			if (data.getLives() > 0){
+				data.resetStatus();
+				SquadronManager.getInstance().resetSquadrons(LevelData.getInstance().getCurrentLevel());				
+				PlayerDestructionOverlay.getInstance().resetOverlay();
+				Engine.GAMESTATUS = Engine.GameSatus.DESTROYED;
+			}else{
+				Engine.GAMESTATUS = Engine.GameSatus.GAMEOVER;
+			}
+		}
 	}	
 	
 	/*public BoundingBox getBoundingBox(){
@@ -133,7 +146,8 @@ public class Player extends EngineGL implements DrawableComponent {
 			break;
 		}
 		
-		super.draw(gl, spriteSheet, Engine.TEXTURES, playerTexturesList.get(texturePosition));		
+		super.draw(gl, spriteSheet, Engine.TEXTURES, playerTexturesList.get(texturePosition));	
+		//super.draw(gl,playerTexturesList.get(texturePosition));
 		// Recover previous Matrix
 		gl.glPopMatrix();
 		gl.glLoadIdentity();

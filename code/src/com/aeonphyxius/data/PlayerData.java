@@ -49,15 +49,29 @@ public class PlayerData {
 
 	public void increaseDamage(){
 		if (this.shield > 0){
-			this.shield -= 7;
+			this.shield -= 25;
 		}else{
 			this.damage -=25;
 		}
 		
 	}
 	
-	public int getShield() {
-		return shield;
+
+	public void resetStatus(){
+		switch(Engine.difficulty){
+		case Engine.DIFF_EASY:
+			this.damage = Engine.DAMAGE_EASY;
+			this.shield = Engine.SHIELD_EASY;
+			break;
+		case Engine.DIFF_NORMAL:			
+			this.damage = Engine.DAMAGE_NORMAL;
+			this.shield = Engine.SHIELD_NORMAL;
+			break;			
+		case Engine.DIFF_HARD:			
+			this.damage = Engine.DAMAGE_HARD;
+			this.shield = Engine.SHIELD_HARD;
+			break;
+		}	
 	}
 
 	public int getDamagePercentage() {
@@ -86,7 +100,11 @@ public class PlayerData {
 		}		
 		return 0;
 	}
-
+	
+	public int getShield() {
+		return shield;
+	}
+	
 	public void setShield(int shield) {
 		this.shield = shield;
 	}

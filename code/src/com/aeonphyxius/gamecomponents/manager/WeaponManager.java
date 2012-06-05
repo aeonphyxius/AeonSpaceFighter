@@ -77,20 +77,19 @@ public class WeaponManager {
 		if ( elapsed > Engine.SHOOT_SLEEP){ 
 			lastShoot=System.currentTimeMillis();
 			MusicManager.getInstance().playSound(Engine.SOUND_FUSHIONSHOT);
-			//MusicManager.getInstance().playSound(Engine.SOUND_BLASTER);
-			playeFireList.add(new Weapon());			
+			//playeFireList.add(new Weapon());			
 		}
 		
 		if(playeFireList.size()>0){
-			if (playeFireList.get(0).shootFired == false){
+			if (playeFireList.get(0).isFired == false){
 				playeFireList.remove(playeFireList.get(0));
 			}		
 			
 			for(int x = 0; x < playeFireList.size(); x++  ){
 	
 				if (playeFireList.get(x).posY > 5.5f){ // TODO: add constant
-					playeFireList.get(x).shootFired = false;
-				}else if(playeFireList.get(x).shootFired){
+					playeFireList.get(x).isFired = false;
+				}else if(playeFireList.get(x).isFired){
 	
 					playeFireList.get(x).posY += Engine.PLAYER_BULLET_SPEED;
 					gl.glMatrixMode(GL10.GL_MODELVIEW);
@@ -110,15 +109,15 @@ public class WeaponManager {
 		}
 		
 		if(enemyFireList.size()>0){
-			if (enemyFireList.get(0).shootFired == false){
+			if (enemyFireList.get(0).isFired == false){
 				enemyFireList.remove(enemyFireList.get(0));
 			}		
 			
 			for(int x = 0; x < enemyFireList.size(); x++  ){
 	
 				if (enemyFireList.get(x).posY < 0.4f){ // TODO: add constant
-					enemyFireList.get(x).shootFired = false;
-				}else if(enemyFireList.get(x).shootFired){
+					enemyFireList.get(x).isFired = false;
+				}else if(enemyFireList.get(x).isFired){
 	
 					enemyFireList.get(x).posY -= Engine.PLAYER_BULLET_SPEED;
 					gl.glMatrixMode(GL10.GL_MODELVIEW);

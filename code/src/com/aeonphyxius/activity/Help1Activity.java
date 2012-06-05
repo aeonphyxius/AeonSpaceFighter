@@ -3,7 +3,6 @@ package com.aeonphyxius.activity;
 import com.aeonphyxius.R;
 import com.aeonphyxius.engine.Engine;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.Window;

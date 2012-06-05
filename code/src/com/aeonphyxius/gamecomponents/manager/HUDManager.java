@@ -82,7 +82,6 @@ public class HUDManager implements DrawableComponent {
 			gl.glTranslatef(i+32.0f, 37.5f, 0f); 		// Position on screen (-0.1) because at 0 there is a small space at the bottom 		
 			gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 			gl.glLoadIdentity();
-			gl.glTranslatef(0.f, 0.f, 0.0f);			// Set texture
 			
 			// Select the correct texture (number) to display
 			if (Player.getInstance().getData().getPoints()< maxValue){
@@ -114,7 +113,6 @@ public class HUDManager implements DrawableComponent {
 		gl.glTranslatef(06.f, 11.3f, 0f);				// Position on screen
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();				
-		gl.glTranslatef(0.f, 0.f, 0.0f);
 		HUDDamage.getInstance().draw(gl, spriteSheet,Player.getInstance().getData().getDamagePercentage());	// Draw the damage texture
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();
@@ -135,7 +133,6 @@ public class HUDManager implements DrawableComponent {
 		gl.glTranslatef(0.0f, -0.1f, 0f); 			// Position on screen (-0.1) because at 0 there is a small space at the bottom 		
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();
-		gl.glTranslatef(0.f, 0.f, 0.0f);			// Set texture
 		HUDControl.getInstance().drawBkg(gl, spriteSheet); // Draw black background for controls zone
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();		
@@ -148,7 +145,6 @@ public class HUDManager implements DrawableComponent {
 		gl.glTranslatef(0.0f, 5.9f, 0f); 			// Position on screen (-0.1) because at 0 there is a small space at the bottom 		
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();
-		gl.glTranslatef(0.f, 0.f, 0.0f);			// Set texture
 		HUDControl.getInstance().drawBkg(gl, spriteSheet); // Draw black background for controls zone
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();		
@@ -163,7 +159,6 @@ public class HUDManager implements DrawableComponent {
 		gl.glTranslatef(0.4f, 0.f, 0f); 			// Position on screen		
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();
-		gl.glTranslatef(0.f, 0.f, 0.0f);			// Texture Start position for left arrow		
 		HUDControl.getInstance().drawLeftArrow(gl, spriteSheet,Engine.LEFT_TEXTURE_POSITION);	// Draw Left arrow
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();
@@ -176,7 +171,6 @@ public class HUDManager implements DrawableComponent {
 		gl.glTranslatef(1.9f, 0.f, 0f); 			// Position on screen		
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();
-		gl.glTranslatef(0.f, 0.f, 0.0f);			// Texture Start position for right arrow
 		HUDControl.getInstance().drawRightArrow(gl, spriteSheet,Engine.RIGHT_TEXTURE_POSITION);	// Draw Right arrow
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();
@@ -197,7 +191,6 @@ public class HUDManager implements DrawableComponent {
 		gl.glTranslatef(04.f, 11.3f, 0f);				// Position on screen
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();
-		gl.glTranslatef(0.f, 0.f, 0.0f);			// Texture Start position for shields icon
 		HUDShield.getInstance().draw(gl, spriteSheet,Player.getInstance().getData().getShieldPercentage()); // Draw the texture
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();
