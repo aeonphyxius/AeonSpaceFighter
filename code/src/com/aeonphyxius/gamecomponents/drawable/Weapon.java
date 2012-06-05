@@ -30,11 +30,18 @@ public class Weapon extends EngineGL {
 	 * Initialize a new weapon. 
 	 */
 	public Weapon() {
-		weaponTexture = new TextureRegion(new float[] { 0.474f, 0.605f, 0.496f,
-				0.605f, 0.496f, 0.626f, 0.474f, 0.626f, });
+		weaponTexture = new TextureRegion(new float[] { 0.474f, 0.605f, 0.496f,	0.605f, 0.496f, 0.626f, 0.474f, 0.626f, });
 		this.shootFired = true;
 		this.posX = Engine.playerBankPosX + Engine.PLAYER_FIRE_START_X;
 		this.posY = Engine.PLAYER_FIRE_START_Y; 
+	}
+	
+	public Weapon (float posX, float posY){
+		//weaponTexture = new TextureRegion(new float[] { 0.474f, 0.605f, 0.496f,	0.605f, 0.496f, 0.626f, 0.474f, 0.626f, });
+		weaponTexture = new TextureRegion(new float[] { 0.662f, 0.468f, 0.687f,	0.468f, 0.687f, 0.498f, 0.662f, 0.498f, });
+		this.shootFired = true;
+		this.posX = posX;
+		this.posY = posY; 
 	}
 
 	/**
@@ -43,7 +50,7 @@ public class Weapon extends EngineGL {
 	 * @param spriteSheet array containing all sprites ids
 	 */
 	public void draw(GL10 gl, int[] spriteSheet) {
-		super.draw(gl, spriteSheet, Engine.TEXTURE_ITEMS, weaponTexture);
+		super.draw(gl, spriteSheet, Engine.TEXTURES, weaponTexture);
 	}
 
 }

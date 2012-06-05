@@ -68,7 +68,7 @@ public class HUDControl extends EngineGL{
 	 * @param spriteSheet array containing all sprites ids
 	 */
 	public void drawBkg(GL10 gl, int[] spriteSheet) {
-		super.draw(gl, spriteSheet, Engine.TEXTURE_ITEMS, textureRegionList.get(0));
+		super.draw(gl, spriteSheet, Engine.TEXTURES, textureRegionList.get(0));
 
 	}
 	
@@ -81,9 +81,9 @@ public class HUDControl extends EngineGL{
 	public void drawLeftArrow (GL10 gl, int[] spriteSheet, int textureNum) {
 		// Draw the normal left arrow or the pressed version
 		if (Engine.playerFlightAction == Engine.PLAYER_BANK_LEFT_1){ 
-			super.draw(gl, spriteSheet, Engine.TEXTURE_ITEMS, textureRegionList.get(textureNum));
+			super.draw(gl, spriteSheet, Engine.TEXTURES, textureRegionList.get(textureNum));
 		}else{
-			super.draw(gl, spriteSheet, Engine.TEXTURE_ITEMS, textureRegionList.get(textureNum+1));
+			super.draw(gl, spriteSheet, Engine.TEXTURES, textureRegionList.get(textureNum+1));
 		}	
 	}
 	
@@ -96,10 +96,10 @@ public class HUDControl extends EngineGL{
 	public void drawRightArrow(GL10 gl, int[] spriteSheet,int textureNum) {
 		// Draw the right left arrow or the pressed version
 		if (Engine.playerFlightAction == Engine.PLAYER_BANK_RIGHT_1){
-			super.draw(gl, spriteSheet, Engine.TEXTURE_ITEMS, textureRegionList.get(textureNum));
+			super.draw(gl, spriteSheet, Engine.TEXTURES, textureRegionList.get(textureNum));
 		}
 		else {
-			super.draw(gl, spriteSheet, Engine.TEXTURE_ITEMS, textureRegionList.get(textureNum+1));
+			super.draw(gl, spriteSheet, Engine.TEXTURES, textureRegionList.get(textureNum+1));
 		}
 	}
 

@@ -42,8 +42,7 @@ public class HUDLives extends EngineGL {
 	 * Will create a TextureRegion containing the icon to display into the HUD lives
 	 */
 	private HUDLives() {
-		textureRegion = new TextureRegion(new float[] { 0.0f, 0.0f, 0.33f,
-				0.0f, 0.33f, 0.30f, 0.0f, 0.33f, });
+		textureRegion = new TextureRegion( new float[] { 0.808f, 0.201f, 0.885f, 0.201f, 0.885f, 0.273f, 0.808f, 0.273f, });
 
 	}
 
@@ -54,7 +53,7 @@ public class HUDLives extends EngineGL {
 	 * @param spriteSheet array containing all sprites ids
 	 */
 	public void draw(GL10 gl, int[] spriteSheet) {
-		super.draw(gl, spriteSheet, Engine.TEXTURE_PLAYER, textureRegion);
+		super.draw(gl, spriteSheet, Engine.TEXTURES, textureRegion);
 	}
 
 }

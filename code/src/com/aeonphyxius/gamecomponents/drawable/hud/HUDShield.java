@@ -71,7 +71,7 @@ public class HUDShield extends EngineGL{
 	 * @param textureNum position into the array of textures
 	 */
 	public void draw(GL10 gl, int[] spriteSheet,int textureNum) {		
-		super.draw(gl, spriteSheet, Engine.TEXTURE_ITEMS, textureRegionList.get(textureNum));		
+		super.draw(gl, spriteSheet, Engine.TEXTURES, textureRegionList.get(textureNum));		
 	}
 	
 }

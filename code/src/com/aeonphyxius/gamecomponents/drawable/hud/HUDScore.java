@@ -84,7 +84,7 @@ public class HUDScore extends EngineGL {
 	 */
 	public void draw(GL10 gl, int[] spriteSheet, int textureNum) {
 
-		super.draw(gl, spriteSheet, Engine.TEXTURE_ITEMS,
+		super.draw(gl, spriteSheet, Engine.TEXTURES,
 				textureRegionList.get(textureNum));
 
 	}

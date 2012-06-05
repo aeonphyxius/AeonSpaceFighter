@@ -1,17 +1,15 @@
 package com.aeonphyxius.gamecomponents.drawable;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
+
 import java.util.Random;
-
 import javax.microedition.khronos.opengles.GL10;
-
 import com.aeonphyxius.engine.Engine;
+import com.aeonphyxius.engine.EngineGL;
 import com.aeonphyxius.engine.MusicManager;
+import com.aeonphyxius.engine.TextureRegion;
 import com.aeonphyxius.gamecomponents.manager.ExplosionManager;
 
-public class Enemy {
+public class Enemy extends EngineGL{
 
 	private static final int TYPE_INTERCEPTOR = 1;
 	private static final int TYPE_SCOUT = 2;
@@ -23,6 +21,7 @@ public class Enemy {
 	public float posY = 0f;
 	public float posX = 0f;
 	public float posT = 0f;
+	public boolean isShooting;
 	public float incrementXToTarget = 0f;
 	public float incrementYToTarget = 0f;
 	public int attackDirection = 0;
@@ -36,24 +35,9 @@ public class Enemy {
 	public float lockOnPosY = 0f;
 
 	private Random randomPos = new Random();
+	
+	private TextureRegion enemyTexture;	// Texture region containing the enemy texture
 
-	private FloatBuffer vertexBuffer;
-	private FloatBuffer textureBuffer;
-	private ByteBuffer indexBuffer;
-
-	private float vertices[] = { 
-			0.0f, 0.0f, 0.0f, 
-			1.0f, 0.0f, 0.0f, 
-			1.0f,1.0f, 0.0f, 
-			0.0f, 1.0f, 0.0f, };
-
-	private float texture[] = { 
-			0.0f, 0.0f, 
-			0.25f, 0.0f, 
-			0.25f, 0.25f, 
-			0.0f, 0.25f, };
-
-	private byte indices[] = { 0, 1, 2, 0, 2, 3, };
 
 	public void applyDamage() {
 		damage++;
@@ -62,21 +46,21 @@ public class Enemy {
 			if (damage >= Engine.INTERCEPTOR_SHIELDS) {
 				isDestroyed = true;
 				ExplosionManager.getInstance().addExplosion(this.posX,this.posY);
-				//MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION);
+				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION);
 			}
 			break;
 		case TYPE_SCOUT:
 			if (damage >= Engine.SCOUT_SHIELDS) {
 				isDestroyed = true;
 				ExplosionManager.getInstance().addExplosion(this.posX,this.posY);
-				//MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION);
+				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION);
 			}
 			break;
 		case TYPE_WARSHIP:
 			if (damage >= Engine.WARSHIP_SHIELDS) {
 				isDestroyed = true;
 				ExplosionManager.getInstance().addExplosion(this.posX,this.posY);
-				//MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION);
+				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION);
 			}
 			break;
 		}
@@ -84,26 +68,42 @@ public class Enemy {
 	
 	public Enemy (int type,int direction,int x, int y){
 		enemyType = type;
-		attackDirection = direction;
-		posT = Engine.SCOUT_SPEED;
+		attackDirection = direction;		
 		posX = x;
 		posY = y;
-
-		ByteBuffer byteBuf = ByteBuffer.allocateDirect(vertices.length * 4);
-		byteBuf.order(ByteOrder.nativeOrder());
-		vertexBuffer = byteBuf.asFloatBuffer();
-		vertexBuffer.put(vertices);
-		vertexBuffer.position(0);
-
-		byteBuf = ByteBuffer.allocateDirect(texture.length * 4);
-		byteBuf.order(ByteOrder.nativeOrder());
-		textureBuffer = byteBuf.asFloatBuffer();
-		textureBuffer.put(texture);
-		textureBuffer.position(0);
-
-		indexBuffer = ByteBuffer.allocateDirect(indices.length);
-		indexBuffer.put(indices);
-		indexBuffer.position(0);
+		
+		
+		
+		
+		switch (enemyType) {
+		case TYPE_INTERCEPTOR:
+			posT = Engine.INTERCEPTOR_SPEED;
+			enemyTexture = new TextureRegion( new float[] { 0.027f, 0.548f, 0.183f, 0.548f, 0.183f, 0.713f, 0.027f, 0.713f, });
+			if (Math.random()< 0.3){
+				isShooting =true;
+			}else{
+				isShooting =false;
+			}
+			break;
+		case TYPE_SCOUT:
+			posT = Engine.SCOUT_SPEED;
+			enemyTexture = new TextureRegion(new float[] { 0.003f, 0.738f,	0.252f, 0.738f, 0.252f, 0.984f, 0.003f, 0.984f, });
+			if (Math.random()< 0.3){
+				isShooting =true;
+			}else{
+				isShooting =false;
+			}
+			break;
+		case TYPE_WARSHIP:
+			posT = Engine.WARSHIP_SPEED;
+			enemyTexture = new TextureRegion(new float[] { 0.029f, 0.011f, 0.215f, 0.011f, 0.215f, 0.258f, 0.029f, 0.258f, });
+			if (Math.random()< 0.3){
+				isShooting =true;
+			}else{
+				isShooting =false;
+			}
+			break;
+		}
 	}
 
 	public Enemy(int type, int direction) {
@@ -123,21 +123,6 @@ public class Enemy {
 		}
 		posT = Engine.SCOUT_SPEED;
 
-		ByteBuffer byteBuf = ByteBuffer.allocateDirect(vertices.length * 4);
-		byteBuf.order(ByteOrder.nativeOrder());
-		vertexBuffer = byteBuf.asFloatBuffer();
-		vertexBuffer.put(vertices);
-		vertexBuffer.position(0);
-
-		byteBuf = ByteBuffer.allocateDirect(texture.length * 4);
-		byteBuf.order(ByteOrder.nativeOrder());
-		textureBuffer = byteBuf.asFloatBuffer();
-		textureBuffer.put(texture);
-		textureBuffer.position(0);
-
-		indexBuffer = ByteBuffer.allocateDirect(indices.length);
-		indexBuffer.put(indices);
-		indexBuffer.position(0);
 	}
 
 	public float getNextScoutX() {
@@ -163,24 +148,7 @@ public class Enemy {
 	}
 
 	public void draw(GL10 gl, int[] spriteSheet) {
-		gl.glBindTexture(GL10.GL_TEXTURE_2D, spriteSheet[0]);
-
-		gl.glFrontFace(GL10.GL_CCW);
-		gl.glEnable(GL10.GL_CULL_FACE);
-		gl.glCullFace(GL10.GL_BACK);
-
-		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-
-		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
-		gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, textureBuffer);
-
-		gl.glDrawElements(GL10.GL_TRIANGLES, indices.length,
-				GL10.GL_UNSIGNED_BYTE, indexBuffer);
-
-		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-		gl.glDisable(GL10.GL_CULL_FACE);
+		super.draw(gl, spriteSheet, 0, enemyTexture);
 	}
 
 }

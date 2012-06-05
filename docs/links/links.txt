@@ -3,3 +3,4 @@ http://code.google.com/p/android-gamedev/source/browse/trunk/src/com/badlogic/ga
 http://thenewboston.org/list.php?cat=6
 http://code.google.com/p/osm-android/source/browse/trunk/OSMandroidConverter/src/com/google/code/osmandroidconverter/mapdata/BoundingBox.java?r=8
 http://www.grsites.com/archive/sounds/category/7/?offset=36
+http://stackoverflow.com/questions/10833751/drawing-rectangle-in-opengl-android

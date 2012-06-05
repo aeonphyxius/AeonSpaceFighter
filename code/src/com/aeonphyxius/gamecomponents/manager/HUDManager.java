@@ -216,10 +216,9 @@ public class HUDManager implements DrawableComponent {
 			gl.glLoadIdentity();
 			gl.glPushMatrix();							// Save Matrix before transformations
 			gl.glScalef(.05f, .05f, 1f);				// Scale the original image	
-			gl.glTranslatef(i+0.5f, 18.5f, 0f); 			// Position on screen			
+			gl.glTranslatef(i+0.5f, 18.5f, 0f);			// Position on screen			
 			gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 			gl.glLoadIdentity();
-			gl.glTranslatef(0.33f, 0.67f, 0.0f);		// Texture Start position for lives icon			
 			HUDLives.getInstance().draw(gl, spriteSheet);	// Draw the texture
 			gl.glPopMatrix();							// Recover previous Matrix
 			gl.glLoadIdentity();
