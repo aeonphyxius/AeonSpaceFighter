@@ -37,8 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="138dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="148dp"
         android:clickable="true"
         android:contentDescription="@string/ButtonImg"
         android:src="@drawable/yesselector" />
@@ -48,7 +48,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/btnYes"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="80dp"
         android:clickable="true"
         android:contentDescription="@string/ButtonImg"
         android:src="@drawable/noselector" />

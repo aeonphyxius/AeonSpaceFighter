@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import com.aeonphyxius.R;
@@ -25,26 +27,13 @@ import com.aeonphyxius.engine.MusicManager;
 public class MainMenuActivity extends Activity {
     /** Called when the activity is first created. */
 	
-	/*@Override
-	public void onResume (){
-		if (Engine.musicThread.)
-			Engine.musicThread.resume();
-	}
-	
-	
-	@Override
-	public void onPause (){
-		try {
-			Engine.musicThread.wait();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}*/
 	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.mainmenu);
         Engine.context = getApplicationContext();
        
@@ -73,6 +62,8 @@ public class MainMenuActivity extends Activity {
         ImageButton exit = (ImageButton)findViewById(R.id.btnExit);
         ImageButton options = (ImageButton)findViewById(R.id.btnOptions);
         ImageButton about = (ImageButton)findViewById(R.id.btnAbout);
+        ImageButton help = (ImageButton)findViewById(R.id.btnHelp);
+        
         
         
         // Apply alpha transparency and Haptic Feedback
@@ -88,6 +79,26 @@ public class MainMenuActivity extends Activity {
         about.getBackground().setAlpha(Engine.MENU_BUTTON_ALPHA);
         about.setHapticFeedbackEnabled(Engine.HAPTIC_BUTTON_FEEDBACK);
         
+        help.getBackground().setAlpha(Engine.MENU_BUTTON_ALPHA);
+        help.setHapticFeedbackEnabled(Engine.HAPTIC_BUTTON_FEEDBACK);
+                
+        
+        // About button click event. Loads About activity
+        help.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// load about screen
+				Intent help = new Intent(getApplicationContext(),Help1Activity.class);
+				MainMenuActivity.this.startActivity(help);
+				
+				Intent help2 = new Intent(getApplicationContext(),Help2Activity.class);
+				MainMenuActivity.this.startActivity(help2);
+				
+				Intent help3 = new Intent(getApplicationContext(),Help3Activity.class);
+				MainMenuActivity.this.startActivity(help3);
+
+			}        	
+        });
         
         // About button click event. Loads About activity
         about.setOnClickListener(new OnClickListener(){

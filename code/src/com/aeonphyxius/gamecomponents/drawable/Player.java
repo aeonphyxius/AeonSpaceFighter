@@ -1,42 +1,24 @@
 package com.aeonphyxius.gamecomponents.drawable;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
+import java.util.Vector;
 
 import javax.microedition.khronos.opengles.GL10;
-
 import com.aeonphyxius.data.PlayerData;
 import com.aeonphyxius.engine.DrawableComponent;
 import com.aeonphyxius.engine.Engine;
+import com.aeonphyxius.engine.EngineGL;
+import com.aeonphyxius.engine.MusicManager;
+import com.aeonphyxius.engine.TextureRegion;
 
-public class Player implements DrawableComponent {
+public class Player extends EngineGL implements DrawableComponent {
 
 	private static Player instance = null;
-	private PlayerData data;
-	private FloatBuffer vertexBuffer;
-	private FloatBuffer textureBuffer;
-	private ByteBuffer indexBuffer;
-	private final int SPRITE_INDEX = 2;
-
-	private float vertices[] = { 
-			0.0f, 0.0f, 0.0f, 
-			1.0f, 0.0f, 0.0f, 
-			1.0f, 1.0f, 0.0f,
-			0.0f, 1.0f, 0.0f, };
-
-	private float texture[] = { 
-			0.0f, 0.0f, 
-			0.33f, 0.0f, 
-			0.33f, 0.30f, 
-			0.0f,0.33f, };
-
-
-	private byte indices[] = { 
-			0, 1, 2, 
-			0, 2, 3, 
-			};
-
+	private PlayerData data;	
+	private Vector<TextureRegion> playerTexturesList;	// Texture region containing the icon to show
+	private int texturePosition; 						// position on texture list
+	private final int NORMAL_TEXTURE = 0;
+	private final int LEFT_TEXTURE = 1;
+	private final int RIGHT_TEXTURE = 2;
 
 	
 	public static Player getInstance() {
@@ -46,14 +28,40 @@ public class Player implements DrawableComponent {
 		return instance;
 	}
 	
-	public void applyDamage() {
-		data.increaseDamage();
-		if (data.getDamage() == Engine.PLAYER_SHIELDS) {
-			data.setDestroyed(true);
-		}
+	/**
+	 * 
+	 */
+	private Player() {
+		data = new PlayerData();
+		playerTexturesList = new Vector<TextureRegion>();
 
+		TextureRegion tempTextureRegion = new TextureRegion( new float[] { 0.808f, 0.027f, 0.885f, 0.027f, 0.885f, 0.106f, 0.808f, 0.106f, });
+		playerTexturesList.add(tempTextureRegion); // Texture for normal position spaceship texture
+
+		tempTextureRegion = new TextureRegion(new float[] { 0.736f, 0.111f,	0.793f, 0.111f, 0.793f, 0.195f, 0.736f, 0.195f, });
+		playerTexturesList.add(tempTextureRegion); // Texture for going right position spaceship texture
+
+		tempTextureRegion = new TextureRegion(new float[] { 0.898f, 0.111f,	0.957f, 0.111f, 0.957f, 0.195f, 0.898f, 0.195f, });
+		playerTexturesList.add(tempTextureRegion); // Texture for going left position spaceship texture
+		
+	}	
+	
+	public void increasePoints(){
+		this.data.setPoints(this.data.getPoints()+10);
 	}
 	
+	public void applyDamage() {
+		MusicManager.getInstance().playSound(Engine.SOUND_LASER_HIT);
+		data.increaseDamage();
+		
+		/*if (data.getDamage() == Engine.PLAYER_SHIELDS) {
+			data.setDestroyed(true);
+		}*/
+	}	
+	
+	/*public BoundingBox getBoundingBox(){
+		
+	}*/
 	
 	public PlayerData getData() {
 		return data;
@@ -67,28 +75,7 @@ public class Player implements DrawableComponent {
 		return data.isDestroyed();
 	}
 	
-	/**
-	 * 
-	 */
-	private Player() {
-		data = new PlayerData();
-		
-		ByteBuffer byteBuf = ByteBuffer.allocateDirect(vertices.length * 4);
-		byteBuf.order(ByteOrder.nativeOrder());
-		vertexBuffer = byteBuf.asFloatBuffer();
-		vertexBuffer.put(vertices);
-		vertexBuffer.position(0);
 
-		byteBuf = ByteBuffer.allocateDirect(texture.length * 4);
-		byteBuf.order(ByteOrder.nativeOrder());
-		textureBuffer = byteBuf.asFloatBuffer();
-		textureBuffer.put(texture);
-		textureBuffer.position(0);
-
-		indexBuffer = ByteBuffer.allocateDirect(indices.length);
-		indexBuffer.put(indices);
-		indexBuffer.position(0);
-	}
 
 	/**
 	 * 
@@ -96,23 +83,64 @@ public class Player implements DrawableComponent {
 	 * @param spriteSheet
 	 */
 	public void draw(GL10 gl, int[] spriteSheet) {
-		gl.glBindTexture(GL10.GL_TEXTURE_2D, spriteSheet[SPRITE_INDEX]);
-
-		gl.glFrontFace(GL10.GL_CCW);
-		gl.glEnable(GL10.GL_CULL_FACE);
-		gl.glCullFace(GL10.GL_BACK);
-
-		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-
-		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
-		gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, textureBuffer);
-
-		gl.glDrawElements(GL10.GL_TRIANGLES, indices.length, GL10.GL_UNSIGNED_BYTE, indexBuffer);
-
-		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-		gl.glDisable(GL10.GL_CULL_FACE);
+		
+		gl.glMatrixMode(GL10.GL_MODELVIEW);
+		gl.glLoadIdentity();
+		gl.glPushMatrix();
+		gl.glScalef(.15f, .15f, 1f);	
+		
+		switch (Engine.playerFlightAction) {
+		
+		case Engine.PLAYER_BANK_LEFT_1: // Going LEFT
+			texturePosition = LEFT_TEXTURE;
+			if (Engine.playerBankPosX > 0) {
+				Engine.playerBankPosX -= Engine.PLAYER_BANK_SPEED;
+				gl.glTranslatef(Engine.playerBankPosX, Engine.PLAYER_POS_Y, 0f);
+				gl.glMatrixMode(GL10.GL_TEXTURE);
+				gl.glLoadIdentity();				
+			} else {
+				gl.glTranslatef(Engine.playerBankPosX, Engine.PLAYER_POS_Y, 0f);
+				gl.glMatrixMode(GL10.GL_TEXTURE);
+				gl.glLoadIdentity();
+			}
+			break;
+			
+		case Engine.PLAYER_BANK_RIGHT_1: // Going RIGHT
+			texturePosition = RIGHT_TEXTURE;
+			if (Engine.playerBankPosX < 5.5f) {
+				Engine.playerBankPosX += Engine.PLAYER_BANK_SPEED;
+				gl.glTranslatef(Engine.playerBankPosX, Engine.PLAYER_POS_Y, 0f);
+				gl.glMatrixMode(GL10.GL_TEXTURE);
+				gl.glLoadIdentity();				
+			} else {
+				gl.glTranslatef(Engine.playerBankPosX, Engine.PLAYER_POS_Y, 0f);
+				gl.glMatrixMode(GL10.GL_TEXTURE);
+				gl.glLoadIdentity();									
+			}
+			break;
+			
+		case Engine.PLAYER_RELEASE: // Stay		
+			texturePosition = NORMAL_TEXTURE;
+			gl.glTranslatef(Engine.playerBankPosX,Engine.PLAYER_POS_Y, 0f);
+			gl.glMatrixMode(GL10.GL_TEXTURE);
+			gl.glLoadIdentity();
+			break;
+			
+		default:
+			gl.glTranslatef(Engine.playerBankPosX, Engine.PLAYER_POS_Y, 0f);
+			gl.glMatrixMode(GL10.GL_TEXTURE);
+			gl.glLoadIdentity();					
+			break;
+		}
+		
+		super.draw(gl, spriteSheet, Engine.TEXTURES, playerTexturesList.get(texturePosition));		
+		// Recover previous Matrix
+		gl.glPopMatrix();
+		gl.glLoadIdentity();
+		
+		
+		
+		
 	}
 
 }

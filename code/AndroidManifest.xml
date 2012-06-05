@@ -21,6 +21,9 @@
         <activity android:name=".activity.SoundOptionsActivity"></activity>
         <activity android:name=".activity.DiffOptionsActivity"></activity>
         <activity android:name=".activity.ExitActivity"></activity>
+        <activity android:name=".activity.Help1Activity"></activity>
+        <activity android:name=".activity.Help2Activity"></activity>
+        <activity android:name=".activity.Help3Activity"></activity>
 
     </application>
 </manifest>

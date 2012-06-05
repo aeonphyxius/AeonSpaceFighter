@@ -6,16 +6,15 @@ import com.aeonphyxius.gamecomponents.drawable.Enemy;
 
 public class Squadron {
 	
-	private ArrayList<Enemy> enemyList;
-	private float squadronPosY;
+	private ArrayList<Enemy> enemyList;	
 	private int squadronEnemyType;	
 	private int squadronNumEnemies;
 	private int squadronEnemiesDestroyed;
 	
 	
-	public Squadron(ArrayList<Enemy> enemyList, float ypos, int squadronEnemyType, int squadronNumEnemies,int squadronEnemiesDestroyed){
+	public Squadron(ArrayList<Enemy> enemyList,  int squadronEnemyType, int squadronNumEnemies,int squadronEnemiesDestroyed){
 		this.enemyList = enemyList;		
-		this.squadronPosY = ypos;
+		
 		this.squadronEnemyType = squadronEnemyType;
 		this.squadronNumEnemies = squadronNumEnemies;
 		this.squadronEnemiesDestroyed = squadronEnemiesDestroyed;		
@@ -70,17 +69,4 @@ public class Squadron {
 	public void setEnemyList(ArrayList<Enemy> enemyList) {
 		this.enemyList = enemyList;
 	}
-
-
-	public float getSquadronPosY() {
-		return squadronPosY;
-	}
-
-
-	public void setSquadronPosY(float squadronPosY) {
-		this.squadronPosY = squadronPosY;
-	}
-	
-	
-
 }

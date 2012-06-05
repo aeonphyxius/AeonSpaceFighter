@@ -17,6 +17,8 @@ public static final boolean LOOP_BACKGROUND_MUSIC = true;
 public static final int GAME_THREAD_FPS_SLEEP = (1000/60);
 public static float SCROLL_BACKGROUND_1 = .002f;
 public static float SCROLL_BACKGROUND_2 = .007f;
+public static float SHOOT_SLEEP = 250f;
+public static float EXPLOSIOM_SLEEP = 50f;
 
 public static final int PLAYER_BANK_LEFT_1 = 1;
 public static final int PLAYER_RELEASE = 3;
@@ -25,14 +27,25 @@ public static final int PLAYER_FRAMES_BETWEEN_ANI = 9;
 public static final float PLAYER_BANK_SPEED = .1f;
 
 public static final float EFFECTS_VOLUME = 0.3f;
+public static final String SOUND_BLASTER ="blaster";
+public static final String SOUND_EXPLOSION ="explosion";
+public static final String SOUND_LASER_HIT ="laserHit";
+public static final String SOUND_FUSHIONSHOT ="fushionShot";
 
 // sprites
-public static int CHARACTER_SHEET = R.drawable.character_sprite;
-public static final int WEAPONS_SHEET = R.drawable.destruction;
+public static int TEXTURES_FILE = R.drawable.textures;
+
 public static final int BACKGROUND_LAYER_ONE = R.drawable.level_01_bg;
 public static final int BACKGROUND_LAYER_TWO = R.drawable.debris;
-public static final int PLAYER_SHEET = R.drawable.spaceship_sprite;
 public static final int SPLASH_SCREEN_MUSIC = R.raw.warfieldedit;
+
+public static final int TEXTURES = 0;
+public static final int LEFT_TEXTURE_POSITION=1;
+public static final int RIGHT_TEXTURE_POSITION=3;
+
+public static final float PLAYER_POS_Y = 0.7f;
+public static final float PLAYER_FIRE_START_Y = 1.5f;
+public static final float PLAYER_FIRE_START_X = 0.34f;
 
 
 public static int TOTAL_INTERCEPTORS = 10;
@@ -55,12 +68,15 @@ public static final float BEZIER_Y_1 = 0f;
 public static final float BEZIER_Y_2 = 2.4f;
 public static final float BEZIER_Y_3 = 1.5f;
 public static final float BEZIER_Y_4 = 2.6f;
+public static final float SQUADRON_MIN_Y = 0.F;
+public static final float SQUADRON_START_Y = 5.0f;
 
-public static final int PLAYER_SHIELDS = 5;
-public static final int SCOUT_SHIELDS = 3;
+public static final int PLAYER_SHIELDS = 1;
+public static final int SCOUT_SHIELDS = 1;
 public static final int INTERCEPTOR_SHIELDS = 1;
-public static final int WARSHIP_SHIELDS = 5;
-public static final float PLAYER_BULLET_SPEED = .125f;
+
+public static final int WARSHIP_SHIELDS = 2;
+public static final float PLAYER_BULLET_SPEED = .075f;
 
 // Player configuration
 public static final int DIFF_EASY = 1;
@@ -70,11 +86,11 @@ public static final int LIVES_EASY = 3;
 public static final int LIVES_NORMAL = 2;
 public static final int LIVES_HARD = 2;
 public static final int SHIELD_EASY = 100;
-public static final int SHIELD_NORMAL = 80;
-public static final int SHIELD_HARD = 60;
-public static final int DAMAGE_EASY = 0;
-public static final int DAMAGE_NORMAL = 10;
-public static final int DAMAGE_HARD = 20;
+public static final int SHIELD_NORMAL = 75;
+public static final int SHIELD_HARD = 50;
+public static final int DAMAGE_EASY = 100;
+public static final int DAMAGE_NORMAL = 100;
+public static final int DAMAGE_HARD = 75;
 
 
 /*Game Variables*/
