@@ -2,6 +2,17 @@ package com.aeonphyxius.data;
 
 import com.aeonphyxius.engine.Engine;
 
+/**
+* LevelData Object.
+* 
+* <P>Data manager for level.
+*  
+* <P>Contains all information needed to manage each level (background, level number)
+*  
+* @author Alejandro Santiago
+* @version 1.0
+* @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+*/
 
 public class LevelData {
 	

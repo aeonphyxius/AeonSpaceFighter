@@ -4,34 +4,53 @@ import java.util.ArrayList;
 
 import com.aeonphyxius.gamecomponents.drawable.Enemy;
 
+/**
+ * BackGroundManager Object.
+ * 
+ * <P>Manager for all game background layers.
+ *  
+ * <P>This class contains logic manage the game's background layers. 
+ *  
+ * @author Alejandro Santiago
+ * @version 1.0
+ * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+ */
+
 public class Squadron {
-	
-	private ArrayList<Enemy> enemyList;	
-	private int squadronEnemyType;	
-	private int squadronNumEnemies;
-	private int squadronEnemiesDestroyed;
-	
-	
+
+	private ArrayList<Enemy> enemyList;						// Enemies list contained in this squadron
+	private int squadronEnemyType;							// Squadron type
+	private int squadronNumEnemies;							// Number of enemies in this squadron
+	private int squadronEnemiesDestroyed;					// is destroyed this squadron
+
+
+	/**
+	 * Creates a new squadron with the given  data
+	 * @param enemyList 
+	 * @param squadronEnemyType 
+	 * @param squadronNumEnemies
+	 * @param squadronEnemiesDestroyed
+	 */
 	public Squadron(ArrayList<Enemy> enemyList,  int squadronEnemyType, int squadronNumEnemies,int squadronEnemiesDestroyed){
 		this.enemyList = enemyList;		
-		
+
 		this.squadronEnemyType = squadronEnemyType;
 		this.squadronNumEnemies = squadronNumEnemies;
 		this.squadronEnemiesDestroyed = squadronEnemiesDestroyed;		
 	}
 
 
+
 	public boolean isDestroyed(){
 		return squadronNumEnemies <= squadronEnemiesDestroyed;
 	}
-	
+
 	public void increaseEnemiesDestroyed(){
 		squadronEnemiesDestroyed++;
 	}
 	public int getSquadronNumEnemies() {
 		return squadronNumEnemies;
 	}
-
 
 
 	public void setSquadronNumEnemies(int squadronNumEnemies) {
@@ -60,7 +79,7 @@ public class Squadron {
 		this.squadronEnemyType = squadronEnemyType;
 	}
 
-	
+
 	public ArrayList<Enemy> getEnemyList() {
 		return enemyList;
 	}

@@ -1,0 +1,62 @@
+[Box: ::com.aeonphyxius.activity - ::<<Unknown>>::Activity]
+X=1586
+Y=18
+
+[Box: ::com.aeonphyxius.activity - ::<<Unknown>>::OnClickListener]
+X=1401
+Y=682
+
+[Box: ::com.aeonphyxius.activity - ::com.aeonphyxius.activity::AboutActivity]
+X=2127
+Y=368
+
+[Box: ::com.aeonphyxius.activity - ::com.aeonphyxius.activity::DiffOptionsActivity]
+X=1454
+Y=248
+
+[Box: ::com.aeonphyxius.activity - ::com.aeonphyxius.activity::ExitActivity]
+X=2130
+Y=644
+
+[Box: ::com.aeonphyxius.activity - ::com.aeonphyxius.activity::GameActivity]
+X=1001
+Y=116
+
+[Box: ::com.aeonphyxius.activity - ::com.aeonphyxius.activity::Help1Activity]
+X=2123
+Y=498
+
+[Box: ::com.aeonphyxius.activity - ::com.aeonphyxius.activity::Help2Activity]
+X=1915
+Y=494
+
+[Box: ::com.aeonphyxius.activity - ::com.aeonphyxius.activity::Help3Activity]
+X=1687
+Y=480
+
+[Box: ::com.aeonphyxius.activity - ::com.aeonphyxius.activity::MainMenuActivity]
+X=2122
+Y=105
+
+[Box: ::com.aeonphyxius.activity - ::com.aeonphyxius.activity::OptionsActivity]
+X=2123
+Y=244
+
+[Box: ::com.aeonphyxius.activity - ::com.aeonphyxius.activity::SoundOptionsActivity]
+X=1688
+Y=247
+
+[Box: ::com.aeonphyxius.activity - ::com.aeonphyxius.activity::VibrationOptionsActivity]
+X=1901
+Y=247
+
+[Box: ::com.aeonphyxius.activity - ::com.aeonphyxius.activity::WelcomeActivity]
+X=1261
+Y=119
+
+[Diagram: ::com.aeonphyxius.activity]
+OffsetX=0
+OffsetY=0
+Visibility=0
+ShowAssoc=0
+

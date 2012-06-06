@@ -3,13 +3,13 @@ package com.aeonphyxius.data;
 import com.aeonphyxius.engine.Engine;
 
 /**
- * HUDControl Object.
+ * PlayerData Object.
  * 
  * <P>
- * HUD component to show the control area
+ * Player information. 
  * 
  * <P>
- * This class contains logic to display the user  controls at the bottom of the playable area 
+ * This class encapsulates all information related to the video game player (lives, damage, shields, points.... etc). 
  * 
  * @author Alejandro Santiago
  * @version 1.0
@@ -17,17 +17,21 @@ import com.aeonphyxius.engine.Engine;
  */
 
 public class PlayerData {
-	private boolean isDestroyed;
-	private int damage;
-	private int points;
-	private int lives;
-	private int shield;
-	
+	private boolean isDestroyed;				// Has the player been destroyed
+	private int damage;							// Damage on the player's ship
+	private int points;							// Player's points	
+	private int lives;							// Player's remaining lives
+	private int shield;							// Player's ship shields
+
+	/**
+	 * Default constructor, defining initial player information
+	 */
 	public PlayerData(){
 		this.damage = 0;
 		this.points = 0;
 		this.isDestroyed = false;
-		
+
+		// Using default values
 		switch(Engine.difficulty){
 		case Engine.DIFF_EASY:			
 			this.lives = Engine.LIVES_EASY;
@@ -47,21 +51,63 @@ public class PlayerData {
 		}	
 	}
 
-	public void increaseDamage(){ 
-		if (this.shield > 0){
-			this.shield -= 25;
-		}else{
-			this.damage -=25;
-		}
-		
-	}
-	
 
+	/**
+	 * Increase player points depending on game level
+	 */
+	public void increasePoints(){ 
+		switch(Engine.difficulty){
+		case Engine.DIFF_EASY:	
+			this.points += Engine.POINTS_EASY;
+			break;
+		case Engine.DIFF_NORMAL:
+			this.points += Engine.POINTS_NORMAL;
+			break;			
+		case Engine.DIFF_HARD:
+			this.points += Engine.POINTS_HARD;
+			break;
+		}
+	}
+
+
+	/**
+	 * Increase players Damage on shields and structure depending on game level
+	 */
+	public void increaseDamage(){ 
+		switch(Engine.difficulty){
+		case Engine.DIFF_EASY:	
+			if (this.shield > 0){
+				this.shield -= Engine.ENGINE_SHIELD_EASY;
+			}else{
+				this.damage -=Engine.ENGINE_DAMAGE_EASY;
+			}
+			break;
+		case Engine.DIFF_NORMAL:
+			if (this.shield > 0){
+				this.shield -= Engine.ENGINE_SHIELD_NORMAL;
+			}else{
+				this.damage -=Engine.ENGINE_DAMAGE_NORMAL;
+			}
+			break;			
+		case Engine.DIFF_HARD:
+			if (this.shield > 0){
+				this.shield -= Engine.ENGINE_SHIELD_HARD;
+			}else{
+				this.damage -=Engine.ENGINE_DAMAGE_NORMAL;
+			}
+			break;
+		}
+	}
+
+
+	/**
+	 * When the game have finished, restart all Player's data to default values
+	 */
 	public void resetAllStatus(){
 		this.damage = 0;
 		this.points = 0;
 		this.isDestroyed = false;
-		
+
 		switch(Engine.difficulty){
 		case Engine.DIFF_EASY:			
 			this.lives = Engine.LIVES_EASY;
@@ -80,6 +126,10 @@ public class PlayerData {
 			break;
 		}		
 	}	
+
+	/**
+	 * When the player space ship have been destroyed, reset the space ship related information
+	 */
 	public void resetStatus(){
 		switch(Engine.difficulty){
 		case Engine.DIFF_EASY:
@@ -97,6 +147,10 @@ public class PlayerData {
 		}	
 	}
 
+	/**
+	 * The structural damage of player's space ship status is displayed in 25% slots
+	 * @return percentage containing structural status
+	 */
 	public int getDamagePercentage() {
 		if (damage == 100){
 			return 4;
@@ -109,8 +163,11 @@ public class PlayerData {
 		}		
 		return 0;
 	}
-	
-	
+
+	/**
+	 * The structural damage of player's space ship status is displayed in 25% slots
+	 * @return percentage containing shields status
+	 */
 	public int getShieldPercentage() {
 		if (shield == 100){
 			return 4;
@@ -123,11 +180,11 @@ public class PlayerData {
 		}		
 		return 0;
 	}
-	
+
 	public int getShield() {
 		return shield;
 	}
-	
+
 	public void setShield(int shield) {
 		this.shield = shield;
 	}
@@ -164,7 +221,7 @@ public class PlayerData {
 	public void setLives(int lives) {
 		this.lives = lives;
 	}
-	
-	
+
+
 
 }

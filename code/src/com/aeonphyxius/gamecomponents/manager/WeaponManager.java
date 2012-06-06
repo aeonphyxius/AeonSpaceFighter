@@ -21,8 +21,8 @@ import com.aeonphyxius.gamecomponents.drawable.Weapon;
  */
 
 public class WeaponManager {
-	
-	
+
+
 	private static WeaponManager instance = null;	// Singleton implementation
 	private long lastShoot;							// Elapsed time since last shoot
 	private Vector<Weapon> playeFireList;			// list of shoots from player
@@ -30,7 +30,7 @@ public class WeaponManager {
 
 
 	/**
-	 * Singleton implementation of the unique instance of this class
+	 * Singleton implementation to manage the unique instance of this class
 	 * @return unique instance of this class
 	 */
 	public static WeaponManager getInstance() {
@@ -61,13 +61,13 @@ public class WeaponManager {
 	}
 
 	/**
-	 * 
+	 * When the player is destroyed, or the level is finished, reset all weapons
 	 */
 	public void resetWeapons(){
 		playeFireList = new Vector<Weapon>();
 		enemyFireList = new Vector<Weapon>();
 	}
-	
+
 	/**
 	 * 
 	 * @param posX
@@ -76,62 +76,66 @@ public class WeaponManager {
 	public void addEnemyShot(float posX, float posY){
 		enemyFireList.add(new Weapon(posX,posY));
 	}
-	
+
 	/**
 	 * Draw the control weapons fired 
 	 * @param gl OpenGL handler
 	 * @param spriteSheet array containing all sprites ids
 	 */
 	public void drawWeapon(GL10 gl,int[] spriteSheets){
-		
+
 		float elapsed = System.currentTimeMillis() - lastShoot;
-		
-		
+
+		// Automatic players shooting
 		if ( elapsed > Engine.SHOOT_SLEEP){ 
 			lastShoot=System.currentTimeMillis();
 			MusicManager.getInstance().playSound(Engine.SOUND_FUSHIONSHOT);
 			playeFireList.add(new Weapon());			
 		}
-		
+
+		// Check all player's shots and update + draw them
 		if(playeFireList.size()>0){
+			// If the first position is destroyed, should be removed from the list (to free resources)
 			if (playeFireList.get(0).isFired == false){
 				playeFireList.remove(playeFireList.get(0));
 			}		
-			
-			for(int x = 0; x < playeFireList.size(); x++  ){
-	
-				if (playeFireList.get(x).posY > 5.5f){ // TODO: add constant
+
+			for(int x = 0; x < playeFireList.size(); x++  ){	
+				// When the shot reaches the max position in screen
+				if (playeFireList.get(x).posY >  Engine.MAX_Y){
 					playeFireList.get(x).isFired = false;
 				}else if(playeFireList.get(x).isFired){
-	
+
 					playeFireList.get(x).posY += Engine.PLAYER_BULLET_SPEED;
 					gl.glMatrixMode(GL10.GL_MODELVIEW);
 					gl.glLoadIdentity();
 					gl.glPushMatrix();
 					gl.glScalef(.15f, .15f, 0f);
-					gl.glTranslatef(playeFireList.get(x).posX, playeFireList.get(x).posY, 0f); // TODO: add a constant
+					gl.glTranslatef(playeFireList.get(x).posX, playeFireList.get(x).posY, 0f); 
 					gl.glScalef(.4f, .4f, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
-		
+
 					playeFireList.get(x).draw(gl,spriteSheets);
 					gl.glPopMatrix();
 					gl.glLoadIdentity();
 				}
 			}
 		}
-		
+
+		// Check all enemies shots and update + draw them
 		if(enemyFireList.size()>0){
+			// If the first position is destroyed, should be removed from the list (to free resources)
 			if (enemyFireList.get(0).isFired == false){
 				enemyFireList.remove(enemyFireList.get(0));
 			}		
-			
+
 			for(int x = 0; x < enemyFireList.size(); x++  ){
-	
-				if (enemyFireList.get(x).posY < 0.4f){ // TODO: add constant
+				// When the shot reaches the min position in screen	
+				if (enemyFireList.get(x).posY <  Engine.MIN_Y){
 					enemyFireList.get(x).isFired = false;
 				}else if(enemyFireList.get(x).isFired){
-	
+
 					enemyFireList.get(x).posY -= Engine.PLAYER_BULLET_SPEED;
 					gl.glMatrixMode(GL10.GL_MODELVIEW);
 					gl.glLoadIdentity();

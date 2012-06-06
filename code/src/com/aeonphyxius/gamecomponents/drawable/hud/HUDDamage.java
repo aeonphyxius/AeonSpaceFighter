@@ -24,7 +24,7 @@ import com.aeonphyxius.engine.TextureRegion;
 
 public class HUDDamage extends EngineGL{
 
-	
+
 	private static HUDDamage instance = null;			// Singleton implementation
 	private Vector<TextureRegion> textureRegionList;	// Texture region containing the icon to show
 
@@ -50,16 +50,16 @@ public class HUDDamage extends EngineGL{
 
 		TextureRegion tempTextureRegion = new TextureRegion( new float[] { 0.748f, 0.856f, 0.836f, 0.856f, 0.836f, 0.939f, 0.748f,0.939f,});
 		textureRegionList.add(tempTextureRegion); // Texture for damage at 0 %
-		
+
 		tempTextureRegion = new TextureRegion( new float[] { 0.296f, 0.855f, 0.387f, 0.855f, 0.387f,  0.939f, 0.296f,0.939f,}); 
 		textureRegionList.add(tempTextureRegion); // Texture for damage at 25 %
-		
+
 		tempTextureRegion = new TextureRegion( new float[] { 0.402f, 0.855f, 0.498f, 0.855f, 0.498f,  0.939f, 0.402f,0.939f,});
 		textureRegionList.add(tempTextureRegion); // Texture for damage at 50 %
-		
+
 		tempTextureRegion = new TextureRegion( new float[] { 0.512f, 0.855f, 0.601f, 0.855f, 0.601f, 0.939f, 0.512f,0.939f,});
 		textureRegionList.add(tempTextureRegion); // Texture for shield damage at 75 %
-		
+
 		tempTextureRegion = new TextureRegion( new float[] { 0.623f, 0.855f, 0.717f, 0.855f, 0.717f, 0.939f, 0.623f,0.939f,});
 		textureRegionList.add(tempTextureRegion); // Texture for damage at 100 %
 	}

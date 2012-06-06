@@ -12,16 +12,16 @@ import android.view.Window;
 import android.view.WindowManager;
 
 /**
-* Game Activity Object.
-* 
-* <P>Game Activity .
-*  
-* <P>. 
-*  
-* @author Alejandro Santiago
-* @version 1.0
-* @email alejandro@aeonphyxius.com - asantiago@uoc.edu
-*/
+ * Game Activity Object.
+ * 
+ * <P>Game Activity .
+ *  
+ * <P>. 
+ *  
+ * @author Alejandro Santiago
+ * @version 1.0
+ * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+ */
 
 public class GameActivity extends Activity {
 
@@ -30,56 +30,102 @@ public class GameActivity extends Activity {
 	private static  final int PLAYER_BANK_RIGHT_1 = 4;
 	private static final int PLAYER_BANK_LEFT_1 = 1;
 	private static  final int PLAYER_RELEASE = 3;
-    
+
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		Engine.GameSatus = Engine.GAMESTATUS.START;		
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        Engine.gameActivity = this;
-        gameView = new GameView(this);
-        setContentView(gameView);
-        this.gameDisplayMetrics = new DisplayMetrics();
-        
-    }
-    @Override
-    protected void onResume() {
-       super.onResume();
-       gameView.onResume();
-       MusicManager.getInstance().resumeMusic();
-    }
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		Engine.gameActivity = this;
+		gameView = new GameView(this);
+		setContentView(gameView);
+		this.gameDisplayMetrics = new DisplayMetrics();
 
-    @Override
-    protected void onPause() {
-       super.onPause();
-       gameView.onPause();
-       MusicManager.getInstance().pauseMusic();
-    }
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		gameView.onResume();
+		MusicManager.getInstance().resumeMusic();
+	}
 
-   	@Override
-   	public boolean onTouchEvent(MotionEvent event) {
-   		//
-   		float x = event.getX();
-        float y = event.getY();
-        Engine.display.getMetrics(gameDisplayMetrics);
-        int height =  gameDisplayMetrics.heightPixels / 7;
-        int playableArea = (gameDisplayMetrics.heightPixels - height);
-        if (y > playableArea){
-        	switch (event.getAction()){
-        	case MotionEvent.ACTION_DOWN:
-        		if(x < gameDisplayMetrics.widthPixels / 2){
-        			Engine.playerFlightAction = PLAYER_BANK_LEFT_1;
-        		}else{
-        			Engine.playerFlightAction = PLAYER_BANK_RIGHT_1;
-        		}
-        		break;
-        	case MotionEvent.ACTION_UP:
-        		Engine.playerFlightAction = PLAYER_RELEASE;
-        		break;
-        	}        	
-        }
-		return false;
-    }
-	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		gameView.onPause();
+		MusicManager.getInstance().pauseMusic();
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		this.dumpEvent(event);
+		return true;
+	}
+
+	public void dumpEvent(MotionEvent event) {
+		//
+		float x = event.getX();
+		float y = event.getY();
+		Engine.display.getMetrics(gameDisplayMetrics);
+		int height =  gameDisplayMetrics.heightPixels / 7;
+		int playableArea = (gameDisplayMetrics.heightPixels - height);
+
+
+		if (y > playableArea){
+			switch (event.getAction()){
+			case MotionEvent.ACTION_DOWN:
+				if(x < gameDisplayMetrics.widthPixels / 2){
+					Engine.playerFlightAction = PLAYER_BANK_LEFT_1;
+				}else{
+					Engine.playerFlightAction = PLAYER_BANK_RIGHT_1;
+				}
+				break;
+			case MotionEvent.ACTION_UP:
+				Engine.playerFlightAction = PLAYER_RELEASE;
+				break;
+
+			case MotionEvent.ACTION_MOVE:
+				if(x < gameDisplayMetrics.widthPixels / 2){
+					Engine.playerFlightAction = PLAYER_BANK_LEFT_1;
+				}else{
+					Engine.playerFlightAction = PLAYER_BANK_RIGHT_1;
+				}        		        		
+				break;
+
+			case MotionEvent.ACTION_POINTER_1_DOWN:
+				if(x < gameDisplayMetrics.widthPixels / 2){
+					Engine.playerFlightAction = PLAYER_BANK_LEFT_1;
+				}else{
+					Engine.playerFlightAction = PLAYER_BANK_RIGHT_1;
+				}
+				break;
+			case MotionEvent.ACTION_POINTER_1_UP:
+				Engine.playerFlightAction = PLAYER_RELEASE;
+				break;
+
+			case MotionEvent.ACTION_POINTER_2_DOWN:
+				if(x < gameDisplayMetrics.widthPixels / 2){
+					Engine.playerFlightAction = PLAYER_BANK_LEFT_1;
+				}else{
+					Engine.playerFlightAction = PLAYER_BANK_RIGHT_1;
+				}
+				break;
+			case MotionEvent.ACTION_POINTER_2_UP:
+				Engine.playerFlightAction = PLAYER_RELEASE;
+				break;
+			}
+
+			/*for (int i = 0; i < event.getPointerCount(); i++) {
+        		  if(x < gameDisplayMetrics.widthPixels / 2){
+          			Engine.playerFlightAction = PLAYER_BANK_LEFT_1;
+          		}else{
+          			Engine.playerFlightAction = PLAYER_BANK_RIGHT_1;
+          		}
+          	  }  */
+
+		}
+
+	}
+
 }

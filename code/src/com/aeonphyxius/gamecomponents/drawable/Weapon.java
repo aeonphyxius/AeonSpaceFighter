@@ -20,12 +20,12 @@ import com.aeonphyxius.engine.TextureRegion;
  */
 
 public class Weapon extends EngineGL {
-	
-	public float posY = 0f;
-	public float posX = 0f;
-	public boolean isFired = false;
-	private TextureRegion weaponTexture;
-	
+
+	public float posY = 0f;							// X position of this weapon
+	public float posX = 0f;							// Y position of this weapon
+	public boolean isFired = false;					// Have been fired?
+	private TextureRegion weaponTexture;			// Wepaon's texture
+
 	/**
 	 * Initialize a new weapon. 
 	 */
@@ -35,9 +35,13 @@ public class Weapon extends EngineGL {
 		this.posX = Engine.playerBankPosX + Engine.PLAYER_FIRE_START_X;
 		this.posY = Engine.PLAYER_FIRE_START_Y; 
 	}
-	
+
+	/**
+	 * Initialize a new weapon at a given position
+	 * @param posX
+	 * @param posY
+	 */
 	public Weapon (float posX, float posY){
-		//weaponTexture = new TextureRegion(new float[] { 0.474f, 0.605f, 0.496f,	0.605f, 0.496f, 0.626f, 0.474f, 0.626f, });
 		weaponTexture = new TextureRegion(new float[] { 0.662f, 0.468f, 0.687f,	0.468f, 0.687f, 0.498f, 0.662f, 0.498f, });
 		this.isFired = true;
 		this.posX = posX;
@@ -45,7 +49,7 @@ public class Weapon extends EngineGL {
 	}
 
 	/**
-	 * Draw the weapon fired 
+	 * Draw the fired weapon 
 	 * @param gl OpenGL handler
 	 * @param spriteSheet array containing all sprites ids
 	 */

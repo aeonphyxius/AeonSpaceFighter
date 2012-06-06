@@ -119,7 +119,9 @@ public class GameRenderer implements Renderer {
 				for (int sqMember = 0; sqMember < enemyNum; sqMember++){	// loop all the enemies inside the squadron
 					tempEnemy  = SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember);								
 					if (!tempEnemy.isDestroyed){						
-						if (BoundingBox.getInstance().overlaps(Engine.playerBankPosX,Engine.PLAYER_POS_Y,Engine.playerBankPosX+0.6f,Engine.PLAYER_POS_Y+0.6f,tempEnemy.posX,tempEnemy.posY,tempEnemy.posX+0.6f,tempEnemy.posY+0.6f )){							
+						if (BoundingBox.getInstance().overlaps(
+								Engine.playerBankPosX,Engine.PLAYER_POS_Y,Engine.playerBankPosX+0.6f,Engine.PLAYER_POS_Y+0.6f,
+								tempEnemy.posX,tempEnemy.posY-0.6f,tempEnemy.posX+0.6f,tempEnemy.posY )){							
 							Player.getInstance().applyDamage();
 							Player.getInstance().increasePoints(); // TODO : add enemy type
 							SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).applyDamage();
@@ -130,7 +132,10 @@ public class GameRenderer implements Renderer {
 						if (!tempEnemy.isDestroyed ){
 							for (int shootNum =0; shootNum  < weaponsSize; shootNum++) {
 								tempWeapon = WeaponManager.getInstance().getPlayeFireList().get(shootNum);							
-								if (tempWeapon.isFired && BoundingBox.getInstance().overlaps(tempEnemy.posX,tempEnemy.posY,tempEnemy.posX+0.6f,tempEnemy.posY+0.6f,tempWeapon.posX,tempWeapon.posY,tempWeapon.posX+0.30f,tempWeapon.posY+0.3f )){
+								if (tempWeapon.isFired && 
+										BoundingBox.getInstance().overlaps(
+												tempEnemy.posX,tempEnemy.posY,tempEnemy.posX+0.6f,tempEnemy.posY+0.6f,
+												tempWeapon.posX,tempWeapon.posY,tempWeapon.posX+0.30f,tempWeapon.posY+0.3f )){
 									
 									Player.getInstance().increasePoints(); // TODO : add enemy type
 									SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).applyDamage();
@@ -144,8 +149,8 @@ public class GameRenderer implements Renderer {
 								tempWeapon = WeaponManager.getInstance().getEnemyFireList().get(shootNum);
 								
 								if (tempWeapon.isFired && BoundingBox.getInstance().overlaps(
-										Engine.playerBankPosX,Engine.PLAYER_POS_Y,Engine.playerBankPosX+0.6f,Engine.playerBankPosX+0.6f,
-										tempWeapon.posX,tempWeapon.posY,tempWeapon.posX+0.3f,tempWeapon.posY+0.3f )){
+										Engine.playerBankPosX,Engine.PLAYER_POS_Y,Engine.playerBankPosX+0.6f,Engine.PLAYER_POS_Y+0.8f,
+										tempWeapon.posX,tempWeapon.posY-0.3f,tempWeapon.posX+0.3f,tempWeapon.posY)){
 									Player.getInstance().applyDamage();
 									WeaponManager.getInstance().getEnemyFireList().get(shootNum).isFired = false;
 								}

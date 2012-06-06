@@ -28,9 +28,7 @@ public class GameOverOvelay extends EngineGL implements Overlay {
 	private static GameOverOvelay instance = null;			// Singleton pattern implementation
 	private TextureRegion gameOverTexture;					// Texture region containing the icon to show
 	private double timeStamp;								// times tamp at the start of each iteration
-	private double elapsed;									// elapsed time since last iteration	
-	private int animation;									// Current animation number inside the iteration	
-	private final int ANIM_FRAMES = 15;						// Number of animations (small effect per game over text)
+	private double elapsed;									// elapsed time since last iteration
 
 
 
@@ -52,14 +50,12 @@ public class GameOverOvelay extends EngineGL implements Overlay {
 
 		gameOverTexture = new TextureRegion( new float[] { 0.533f, 0.296f, 0.766f, 0.296f, 0.766f, 0.424f, 0.533f, 0.424f, });
 
-		timeStamp = System.currentTimeMillis();		
-		animation = 0;
+		timeStamp = System.currentTimeMillis();
 	}
 
 	@Override
 	public void resetOverlay(){
 		timeStamp = System.currentTimeMillis();		
-		animation = 0;		
 	}
 
 
@@ -69,7 +65,7 @@ public class GameOverOvelay extends EngineGL implements Overlay {
 		elapsed += System.currentTimeMillis() - timeStamp;
 
 		// update the sprite position
-		update (gl,.15f + (0.01f * animation), .15f+ (0.01f * animation), 1f,1.f, 1.f, 0f );
+		update (gl,.25f, .25f, 1f,1.f, 1.f, 0f );
 
 		// draw the sprite
 		draw(gl, spriteSheet, Engine.TEXTURES, gameOverTexture);
@@ -78,24 +74,13 @@ public class GameOverOvelay extends EngineGL implements Overlay {
 		restoreMatrix(gl);
 
 		// Continue the animation
-		if ( elapsed > Engine.ANIMATION_SLEEP){
-			elapsed = 0;
-			timeStamp = System.currentTimeMillis();
-			if (animation < ANIM_FRAMES){
-				animation ++ ;
-			}else{				
-				try {					
-					Thread.sleep(Engine.GAME_OVER_THREAD_WAIT*5);					
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				GameStartOvelay.getInstance().resetOverlay();					
-				WeaponManager.getInstance().resetWeapons();		
-				ExplosionManager.getInstance().resetExplosions();
-				Player.getInstance().resetPlayerStatus();
-				Engine.GameSatus = Engine.GAMESTATUS.END;			
+		if ( elapsed > Engine.GAME_OVER_SLEEP){			
+			GameStartOvelay.getInstance().resetOverlay();					
+			WeaponManager.getInstance().resetWeapons();		
+			ExplosionManager.getInstance().resetExplosions();
+			Player.getInstance().resetPlayerStatus();
+			Engine.GameSatus = Engine.GAMESTATUS.END;
 
-			}			
 		}
 	}
 

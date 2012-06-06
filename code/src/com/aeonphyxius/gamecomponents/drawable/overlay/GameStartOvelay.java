@@ -23,7 +23,7 @@ import com.aeonphyxius.engine.TextureRegion;
 
 
 public class GameStartOvelay extends EngineGL implements Overlay {
-	
+
 	private static GameStartOvelay instance = null;			// Singleton pattern implementation	
 	private Vector<TextureRegion> playerTexturesList;		// Texture region containing the icon to show
 	private double timeStamp;								// times tamp at the start of each iteration
@@ -44,7 +44,7 @@ public class GameStartOvelay extends EngineGL implements Overlay {
 		}
 		return instance;
 	}
-	
+
 
 	/**
 	 * Creates the textures and initializes the animation
@@ -60,12 +60,12 @@ public class GameStartOvelay extends EngineGL implements Overlay {
 
 		tempTextureRegion =  new TextureRegion( new float[] { 0.777f, 0.390f, 0.820f, 0.390f, 0.820f, 0.470f, 0.77f, 0.470f, });
 		playerTexturesList.add(tempTextureRegion); // Texture for number 1 texture
-		
+
 		timeStamp = System.currentTimeMillis();
 		frame = 0;
 		animation = 0;
 	}
-	
+
 	@Override
 	public void resetOverlay(){
 		timeStamp = System.currentTimeMillis();
@@ -79,14 +79,14 @@ public class GameStartOvelay extends EngineGL implements Overlay {
 
 		// update the sprite position
 		update(gl, (0.05f + (0.01f * animation)), (0.05f+ (0.01f * animation)) , 1.0f, 3.0f ,3.0f , 0.0f );
-		
+
 		// draw the sprite
 		draw(gl, spriteSheet, Engine.TEXTURES, playerTexturesList.get(frame));
-		
+
 		// restore Matrix transformations to its original configuration
 		restoreMatrix(gl);
-		
-		
+
+
 		// Continue the animation
 		if ( elapsed > Engine.ANIMATION_SLEEP){
 			elapsed = 0;

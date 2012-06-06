@@ -7,39 +7,35 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
- 
-/**Help1Activity
-* AboutActivity Object.
-* 
-* <P>Help screen activity
-*  
-* <P>Shows some information from this game creator 
-*  
-* @author Alejandro Santiago
-* @version 1.0
-* @email alejandro@aeonphyxius.com - asantiago@uoc.edu
-*/
+
+/**Help2Activity
+ * AboutActivity Object.
+ * 
+ * <P>Help screen activity number 2
+ *  
+ * <P>Shows the 2nd help screen
+ *  
+ * @author Alejandro Santiago
+ * @version 1.0
+ * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+ */
 
 public class Help2Activity extends Activity {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState)  {
-    	super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.help2);
-        Engine.context = getApplicationContext();
-          
-        // 
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState)  {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setContentView(R.layout.help2);
+		Engine.context = getApplicationContext();
 
-    @Override
-   	public boolean onTouchEvent(MotionEvent event) {
-		// load about screen
-    	
-		//Intent help3 = new Intent(getApplicationContext(),Help3Activity.class);
-		//Help2Activity.this.startActivity(help3);
-		Help2Activity.this.finish();
-    	return true;
-    }
+		// 
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		Help2Activity.this.finish();		
+		return true;
+	}
 }

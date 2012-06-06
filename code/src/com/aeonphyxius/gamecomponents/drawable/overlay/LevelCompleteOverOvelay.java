@@ -8,7 +8,6 @@ import com.aeonphyxius.engine.EngineGL;
 import com.aeonphyxius.engine.Overlay;
 import com.aeonphyxius.engine.TextureRegion;
 import com.aeonphyxius.engine.Engine.GAMESTATUS;
-import com.aeonphyxius.gamecomponents.drawable.Player;
 import com.aeonphyxius.gamecomponents.manager.ExplosionManager;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 import com.aeonphyxius.gamecomponents.manager.WeaponManager;
@@ -93,7 +92,7 @@ public class LevelCompleteOverOvelay extends EngineGL implements Overlay {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
+
 				LevelData.getInstance().increaseLevel();
 				GameStartOvelay.getInstance().resetOverlay();					
 				WeaponManager.getInstance().resetWeapons();		

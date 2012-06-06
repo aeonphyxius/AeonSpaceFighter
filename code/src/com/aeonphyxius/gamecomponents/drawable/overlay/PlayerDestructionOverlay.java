@@ -25,13 +25,13 @@ import com.aeonphyxius.gamecomponents.manager.WeaponManager;
  */
 
 public class PlayerDestructionOverlay implements Overlay {
-	
+
 
 	private static PlayerDestructionOverlay instance = null;			// Singleton implementation
 	private final int EXPLOSION_ANIMATION = 4;							//  Number of frames for each explosion	
 	private ExplosionData explosionData;								// Explosion information
-	
-	
+
+
 	/**
 	 * Singleton implementation of the unique instance of this class
 	 * @return unique instance of this class
@@ -42,8 +42,8 @@ public class PlayerDestructionOverlay implements Overlay {
 		}
 		return instance;
 	}
-		
-	
+
+
 	/**
 	 * Creates the textures information for the explosion
 	 */
@@ -59,13 +59,13 @@ public class PlayerDestructionOverlay implements Overlay {
 	@Override
 	public void draw(GL10 gl, int[] spriteSheet) {
 		float elapsed;
-			
+
 		// update the sprite position
 		Explosion.getInstance().update(gl, 0.4f, 0.4f, 1.0f, explosionData.x, explosionData.y, 0f);
-		
+
 		// draw the sprite
 		Explosion.getInstance().draw(gl, spriteSheet,explosionData.animation);
-		
+
 		// restore Matrix transformations to its original configuration
 		Explosion.getInstance().restoreMatrix(gl);
 

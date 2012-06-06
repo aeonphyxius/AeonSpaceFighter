@@ -7,16 +7,16 @@ import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.gamecomponents.drawable.BackGround;
 
 /**
-* BackGroundManager Object.
-* 
-* <P>Manager for all game background layers.
-*  
-* <P>This class contains logic manage the game's background layers. 
-*  
-* @author Alejandro Santiago
-* @version 1.0
-* @email alejandro@aeonphyxius.com - asantiago@uoc.edu
-*/
+ * BackGroundManager Object.
+ * 
+ * <P>Manager for all game background layers.
+ *  
+ * <P>This class contains logic manage the game's background layers. 
+ *  
+ * @author Alejandro Santiago
+ * @version 1.0
+ * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+ */
 
 public class BackGroundManager {
 
@@ -30,8 +30,8 @@ public class BackGroundManager {
 		background_list = new ArrayList<BackGround>();
 
 		// Add 2 layers for our background
-		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_1, 1f, 0f));
-		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_2, .5f,	1.5f));
+		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_1, 1f, 1.f,  0f));
+		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_2, 1.5f, 1.0f, -0.2f));
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class BackGroundManager {
 		return instance;
 	}
 
-	
+
 
 	/**
 	 * Loading all background textures.
@@ -74,7 +74,7 @@ public class BackGroundManager {
 			gl.glMatrixMode(GL10.GL_MODELVIEW);
 			gl.glLoadIdentity();
 			gl.glPushMatrix();
-			gl.glScalef(tempBG.getScaleX(), 1f, 1f);
+			gl.glScalef(tempBG.getScaleX(),tempBG.getScaleY(), 1f);
 			gl.glTranslatef(tempBG.getTranslateX(), 0f, 0f);
 
 			gl.glMatrixMode(GL10.GL_TEXTURE);

@@ -1,0 +1,30 @@
+[Box: ::com.aeonphyxius.gamecomponents.drawable.overlay - ::<<Unknown>>::EngineGL]
+X=445
+Y=40
+
+[Box: ::com.aeonphyxius.gamecomponents.drawable.overlay - ::<<Unknown>>::Overlay]
+X=341
+Y=542
+
+[Box: ::com.aeonphyxius.gamecomponents.drawable.overlay - ::com.aeonphyxius.gamecomponents.drawable.overlay::GameOverOvelay]
+X=240
+Y=252
+
+[Box: ::com.aeonphyxius.gamecomponents.drawable.overlay - ::com.aeonphyxius.gamecomponents.drawable.overlay::GameStartOvelay]
+X=650
+Y=252
+
+[Box: ::com.aeonphyxius.gamecomponents.drawable.overlay - ::com.aeonphyxius.gamecomponents.drawable.overlay::LevelCompleteOverOvelay]
+X=445
+Y=252
+
+[Box: ::com.aeonphyxius.gamecomponents.drawable.overlay - ::com.aeonphyxius.gamecomponents.drawable.overlay::PlayerDestructionOverlay]
+X=19
+Y=256
+
+[Diagram: ::com.aeonphyxius.gamecomponents.drawable.overlay]
+OffsetX=0
+OffsetY=0
+Visibility=0
+ShowAssoc=0
+
