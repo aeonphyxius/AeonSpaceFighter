@@ -2,6 +2,7 @@ package com.aeonphyxius.activity;
 
 import com.aeonphyxius.R;
 import com.aeonphyxius.engine.Engine;
+import com.aeonphyxius.engine.MusicManager;
 import com.aeonphyxius.engine.VibrationManager;
 import android.app.Activity;
 import android.os.Bundle;
@@ -61,17 +62,21 @@ public class VibrationOptionsActivity extends Activity implements OnClickListene
 		switch (view.getId()){
 		case R.id.btnBack: // Click on back
 			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK_BACK);
 			VibrationOptionsActivity.this.finish();
 			break;
 		case R.id.btnNo: // Click on No sound
-			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
 			Engine.isVibrated = false;
+			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
+			
 			// Closes this activity
 			VibrationOptionsActivity.this.finish();
 			break;			
 		case R.id.btnYes: // Click on YES sound
-			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
 			Engine.isVibrated= true; // Set sound to true
+			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);			
 			// Closes this activity
 			VibrationOptionsActivity.this.finish();
 			break;

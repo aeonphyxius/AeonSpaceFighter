@@ -2,6 +2,7 @@ package com.aeonphyxius.activity;
 
 import com.aeonphyxius.R;
 import com.aeonphyxius.engine.Engine;
+import com.aeonphyxius.engine.MusicManager;
 import com.aeonphyxius.engine.VibrationManager;
 
 import android.app.Activity;
@@ -48,6 +49,7 @@ public class AboutActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+		MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 		AboutActivity.this.finish();
 
 	}

@@ -85,6 +85,7 @@ public class MainMenuActivity extends Activity implements OnClickListener{
 		switch (view.getId()){
 		case R.id.btnExit: // Click on exit
 			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 			// Start exit activity !!!!
 			Intent exit = new Intent(getApplicationContext(),ExitActivity.class);
 			MainMenuActivity.this.finish();
@@ -92,24 +93,28 @@ public class MainMenuActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.btnStart: // Click on start
 			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 			// Start Game!!!!
 			Intent game = new Intent(getApplicationContext(),GameActivity.class);
 			MainMenuActivity.this.startActivity(game);
 			break;
 		case R.id.btnOptions: // Click on options
 			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 			// load options screen
 			Intent options = new Intent(getApplicationContext(),OptionsActivity.class);
 			MainMenuActivity.this.startActivity(options);
 			break;
 		case R.id.btnAbout: // Click on about
 			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 			// load about screen
 			Intent about = new Intent(getApplicationContext(),AboutActivity.class);
 			MainMenuActivity.this.startActivity(about);
 			break;
 		case R.id.btnHelp: // Click on help
 			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 			// load the help screen on reverse mode (so when they close themselves, we see the next one).			
 			Intent help3 = new Intent(getApplicationContext(),Help3Activity.class);
 			MainMenuActivity.this.startActivity(help3);

@@ -2,6 +2,7 @@ package com.aeonphyxius.activity;
 
 import com.aeonphyxius.R;
 import com.aeonphyxius.engine.Engine;
+import com.aeonphyxius.engine.MusicManager;
 import com.aeonphyxius.engine.VibrationManager;
 
 import android.app.Activity;
@@ -66,19 +67,23 @@ public class DiffOptionsActivity extends Activity implements OnClickListener{
 		switch (view.getId()){
 		case R.id.btnBack: // Click on back
 			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK_BACK);
 			// Close this activity screen
 			DiffOptionsActivity.this.finish();
 			break;
 		case R.id.btnHard: // Click on difficulty level HARD
 			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 			// Set difficulty level to hard (3)
 			Engine.difficulty = 3; 				
 			// Close this activity screen
 			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 			DiffOptionsActivity.this.finish();
 			break;
 		case R.id.btnNornmal: // Click on difficulty level NORMAL
 			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 			// Set difficulty level to normal (2)
 			Engine.difficulty = 2; 
 			// Close this activity screen
@@ -86,6 +91,7 @@ public class DiffOptionsActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.btnEasy: // Click on difficulty level EASY
 			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 			// Set difficulty level to easy (1)
 			Engine.difficulty = 1; 
 			// Close this activity screen

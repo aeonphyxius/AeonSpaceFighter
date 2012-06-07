@@ -36,8 +36,11 @@ public static final int PLAYER_FRAMES_BETWEEN_ANI = 9;
 public static final float PLAYER_BANK_SPEED = .1f;
 
 public static final float EFFECTS_VOLUME = 0.3f;
+public static final String SOUND_CLICK = "click";
+public static final String SOUND_CLICK_BACK = "clickBack";
 public static final String SOUND_BLASTER ="blaster";
 public static final String SOUND_EXPLOSION ="explosion";
+public static final String SOUND_EXPLOSION_ENEMY ="explosionEnemy";
 public static final String SOUND_LASER_HIT ="laserHit";
 public static final String SOUND_FUSHIONSHOT ="fushionShot";
 
@@ -87,10 +90,9 @@ public static final float BEZIER_Y_4 = 5.6f;
 public static final float SQUADRON_MIN_Y = 0.F;
 public static final float SQUADRON_START_Y = 5.0f;
 
-public static final int PLAYER_SHIELDS = 1;
+//public static final int PLAYER_SHIELDS = 1;
 public static final int SCOUT_SHIELDS = 1;
 public static final int INTERCEPTOR_SHIELDS = 1;
-
 public static final int WARSHIP_SHIELDS = 2;
 public static final float PLAYER_BULLET_SPEED = .075f;
 
@@ -108,7 +110,7 @@ public static final int DAMAGE_EASY = 100;
 public static final int DAMAGE_NORMAL = 100;
 public static final int DAMAGE_HARD = 75;
 public static final int ENGINE_SHIELD_EASY = 10;
-public static final int ENGINE_SHIELD_NORMAL = 100;
+public static final int ENGINE_SHIELD_NORMAL = 25;
 public static final int ENGINE_SHIELD_HARD = 25;
 public static final int ENGINE_DAMAGE_EASY = 10;
 public static final int ENGINE_DAMAGE_NORMAL = 100;
@@ -121,7 +123,7 @@ public static final int POINTS_HARD = 10;
 
 /*Game Variables*/
 
-public static boolean isMuted = true;
+public static boolean isMuted = false;
 public static boolean isVibrated = true;
 public static Context context;
 public static Thread musicThread;

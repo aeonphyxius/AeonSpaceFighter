@@ -91,21 +91,21 @@ public class Enemy extends EngineGL{
 			if (damage >= Engine.INTERCEPTOR_SHIELDS) {
 				isDestroyed = true;
 				ExplosionManager.getInstance().addExplosion(this.posX,this.posY);
-				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION);
+				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION_ENEMY);
 			}
 			break;
 		case Engine.TYPE_SCOUT:
 			if (damage >= Engine.SCOUT_SHIELDS) {
 				isDestroyed = true;
 				ExplosionManager.getInstance().addExplosion(this.posX,this.posY);
-				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION);
+				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION_ENEMY);
 			}
 			break;
 		case Engine.TYPE_WARSHIP:
 			if (damage >= Engine.WARSHIP_SHIELDS) {
 				isDestroyed = true;
 				ExplosionManager.getInstance().addExplosion(this.posX,this.posY);
-				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION);
+				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION_ENEMY);
 			}
 			break;
 		}
