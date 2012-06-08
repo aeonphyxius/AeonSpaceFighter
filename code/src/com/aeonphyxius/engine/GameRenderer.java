@@ -3,7 +3,6 @@ package com.aeonphyxius.engine;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import com.aeonphyxius.data.LevelData;
-import com.aeonphyxius.engine.Engine.GAMESTATUS;
 import com.aeonphyxius.gamecomponents.drawable.Enemy;
 import com.aeonphyxius.gamecomponents.drawable.Player;
 import com.aeonphyxius.gamecomponents.drawable.Weapon;
@@ -20,29 +19,29 @@ import android.opengl.GLSurfaceView.Renderer;
 
 
 /**
-* GameRenderer Object.
-* 
-* <P>All related rendering operations.
-*  
-* <P>This class contains logic to display enemies, player and firepower. 
-*  
-* @author Alejandro Santiago
-* @version 1.0
-* @email alejandro@aeonphyxius.com - asantiago@uoc.edu
-*/
+ * GameRenderer Object.
+ * 
+ * <P>All related rendering operations.
+ *  
+ * <P>This class contains logic to display enemies, player and firepower. 
+ *  
+ * @author Alejandro Santiago
+ * @version 1.0
+ * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+ */
 
 public class GameRenderer implements Renderer {
 
 
-	//private Player player1 = new Player();
-	private Texture textureLoader;
-	private int[] spriteSheets = new int[4];
-	private long loopStart = 0;
-	private long loopEnd = 0;
-	private long loopRunTime = 0;
 
-	
-	
+	private Texture textureLoader;					// Texture loader
+	private int[] spriteSheets = new int[4];		// Textures storage
+	private long loopStart = 0;						// game loop start time
+	private long loopEnd = 0;						// game loop loop end time
+	private long loopRunTime = 0;					// game loop running time
+
+
+
 
 	@Override
 	public void onDrawFrame(GL10 gl) {
@@ -56,15 +55,16 @@ public class GameRenderer implements Renderer {
 		}
 
 		gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-		
+
+		// States logic
 		switch (Engine.GameSatus){
-		
+
 		case START:
 			BackGroundManager.getInstance().scrollBackground(gl);
 			GameStartOvelay.getInstance().draw(gl, spriteSheets);
-			
+
 			break;
-		
+
 		case PLAYING:
 			BackGroundManager.getInstance().scrollBackground(gl);		
 			Player.getInstance().draw(gl, spriteSheets);
@@ -74,12 +74,12 @@ public class GameRenderer implements Renderer {
 			detectCollisions();		
 			ExplosionManager.getInstance().draw(gl, spriteSheets);
 			break;
-		
+
 		case DESTROYED:
 			BackGroundManager.getInstance().scrollBackground(gl);
 			PlayerDestructionOverlay.getInstance().draw(gl, spriteSheets);			
 			break;
-			
+
 		case GAMEOVER:
 			BackGroundManager.getInstance().scrollBackground(gl);
 			GameOverOvelay.getInstance().draw(gl, spriteSheets);
@@ -88,10 +88,10 @@ public class GameRenderer implements Renderer {
 			Engine.gameActivity.finish();
 			break;
 		case LEVEL_COMPLETE:
-			
+
 			BackGroundManager.getInstance().scrollBackground(gl);
 			LevelCompleteOverOvelay.getInstance().draw(gl, spriteSheets);			
-			
+
 			break;
 		}
 		gl.glEnable(GL10.GL_BLEND);
@@ -112,7 +112,7 @@ public class GameRenderer implements Renderer {
 		int squadronNum = SquadronManager.getInstance().getSquadronList().size();
 		int enemyNum;
 		Weapon tempWeapon;		
-		
+
 		for (int sqNum = 0; sqNum < squadronNum; sqNum++) { // loop all the squadrons
 			if (!SquadronManager.getInstance().getSquadronList().get(sqNum).isDestroyed() ){
 				enemyNum = SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().size();						
@@ -136,7 +136,7 @@ public class GameRenderer implements Renderer {
 										BoundingBox.getInstance().overlaps(
 												tempEnemy.posX,tempEnemy.posY,tempEnemy.posX+0.6f,tempEnemy.posY+0.6f,
 												tempWeapon.posX,tempWeapon.posY,tempWeapon.posX+0.30f,tempWeapon.posY+0.3f )){
-									
+
 									Player.getInstance().increasePoints(); // TODO : add enemy type
 									SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).applyDamage();
 									if (SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).isDestroyed){ // Add this destroyed enemy to the counter at Squadron level
@@ -147,7 +147,7 @@ public class GameRenderer implements Renderer {
 							}
 							for (int shootNum =0; shootNum  < weaponsEnemySize; shootNum++) {
 								tempWeapon = WeaponManager.getInstance().getEnemyFireList().get(shootNum);
-								
+
 								if (tempWeapon.isFired && BoundingBox.getInstance().overlaps(
 										Engine.playerBankPosX,Engine.PLAYER_POS_Y,Engine.playerBankPosX+0.6f,Engine.PLAYER_POS_Y+0.8f,
 										tempWeapon.posX,tempWeapon.posY-0.3f,tempWeapon.posX+0.3f,tempWeapon.posY)){
@@ -161,7 +161,7 @@ public class GameRenderer implements Renderer {
 			}			
 		}
 	}
-	
+
 
 	@Override
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
@@ -173,7 +173,7 @@ public class GameRenderer implements Renderer {
 
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {		
-		
+
 		MusicManager.getInstance().playMusic();		
 		textureLoader = new Texture(gl);
 		spriteSheets = textureLoader.loadTexture(gl, Engine.TEXTURES_FILE,Engine.context, 1);

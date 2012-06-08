@@ -3,7 +3,6 @@ package com.aeonphyxius.activity;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.GameView;
 import com.aeonphyxius.engine.MusicManager;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -25,11 +24,8 @@ import android.view.WindowManager;
 
 public class GameActivity extends Activity {
 
-	private GameView gameView;
-	private DisplayMetrics gameDisplayMetrics;
-	private static  final int PLAYER_BANK_RIGHT_1 = 4;
-	private static final int PLAYER_BANK_LEFT_1 = 1;
-	private static  final int PLAYER_RELEASE = 3;
+	private GameView gameView;								// Game view handler
+	private DisplayMetrics gameDisplayMetrics;				// Display metrics
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +59,10 @@ public class GameActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Handle all input events (device touch screen)
+	 * @param event
+	 */
 	public void dumpEvent(MotionEvent event) {
 		//
 		float x = event.getX();
@@ -76,53 +76,23 @@ public class GameActivity extends Activity {
 			switch (event.getAction()){
 			case MotionEvent.ACTION_DOWN:
 				if(x < gameDisplayMetrics.widthPixels / 2){
-					Engine.playerFlightAction = PLAYER_BANK_LEFT_1;
+					Engine.playerFlightAction = Engine.PLAYER_BANK_LEFT_1;
 				}else{
-					Engine.playerFlightAction = PLAYER_BANK_RIGHT_1;
+					Engine.playerFlightAction = Engine.PLAYER_BANK_RIGHT_1;
 				}
 				break;
 			case MotionEvent.ACTION_UP:
-				Engine.playerFlightAction = PLAYER_RELEASE;
+				Engine.playerFlightAction = Engine.PLAYER_RELEASE;
 				break;
 
 			case MotionEvent.ACTION_MOVE:
 				if(x < gameDisplayMetrics.widthPixels / 2){
-					Engine.playerFlightAction = PLAYER_BANK_LEFT_1;
+					Engine.playerFlightAction = Engine.PLAYER_BANK_LEFT_1;
 				}else{
-					Engine.playerFlightAction = PLAYER_BANK_RIGHT_1;
+					Engine.playerFlightAction = Engine.PLAYER_BANK_RIGHT_1;
 				}        		        		
 				break;
-
-			case MotionEvent.ACTION_POINTER_1_DOWN:
-				if(x < gameDisplayMetrics.widthPixels / 2){
-					Engine.playerFlightAction = PLAYER_BANK_LEFT_1;
-				}else{
-					Engine.playerFlightAction = PLAYER_BANK_RIGHT_1;
-				}
-				break;
-			case MotionEvent.ACTION_POINTER_1_UP:
-				Engine.playerFlightAction = PLAYER_RELEASE;
-				break;
-
-			case MotionEvent.ACTION_POINTER_2_DOWN:
-				if(x < gameDisplayMetrics.widthPixels / 2){
-					Engine.playerFlightAction = PLAYER_BANK_LEFT_1;
-				}else{
-					Engine.playerFlightAction = PLAYER_BANK_RIGHT_1;
-				}
-				break;
-			case MotionEvent.ACTION_POINTER_2_UP:
-				Engine.playerFlightAction = PLAYER_RELEASE;
-				break;
 			}
-
-			/*for (int i = 0; i < event.getPointerCount(); i++) {
-        		  if(x < gameDisplayMetrics.widthPixels / 2){
-          			Engine.playerFlightAction = PLAYER_BANK_LEFT_1;
-          		}else{
-          			Engine.playerFlightAction = PLAYER_BANK_RIGHT_1;
-          		}
-          	  }  */
 
 		}
 

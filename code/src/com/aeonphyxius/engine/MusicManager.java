@@ -23,7 +23,7 @@ import com.aeonphyxius.engine.sound.*;
  * MusicManager Object.
  * 
  * <P>
- * MusicManager class, containing all the information needed to manage textures
+ * MusicManager class, containing all the information needed to load and play music and sound effects
  * 
  * 
  * @author Alejandro Santiago
@@ -47,20 +47,27 @@ public class MusicManager {
 		}
 		return instance;
 	}
-	
+
+	/**
+	 * Creates unique instance of this class, initializing the sounds list
+	 */
 	private MusicManager(){
 		soundList = new HashMap<String, SoundImpl>();
 	}
-	
+
+	/**
+	 * play the given sound effect
+	 * @param soundName
+	 */
 	public void playSound(String soundName){
 		if (!Engine.isMuted){
 			soundList.get(soundName).play(Engine.EFFECTS_VOLUME);
 		}
-		
+
 	}
-	
+
 	/**
-	 * 
+	 * Load all sounds resources
 	 * @throws Exception
 	 */
 	public void loadSounds() throws Exception {
@@ -89,7 +96,7 @@ public class MusicManager {
 
 		@Override
 		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-			
+
 			String tempName, tempSrc;
 			int tempId;
 			SoundImpl tempSound;
@@ -111,56 +118,59 @@ public class MusicManager {
 				}
 
 				tempId = soundPool.load(descriptor,1);
-				
+
 				// create a new sound and insert it into the sounds list
 				tempSound = new SoundImpl(soundPool,tempId);
 				soundList.put(tempName,tempSound);
 			}
 		}
 	}
-	
+
 	/**
-	 * 
+	 * Load music file in ogg format
 	 */
 	public void loadMusic(){
 		AssetFileDescriptor assetDescriptor=null;
-		
+
 		try {
 			assetDescriptor = Engine.context.getAssets().openFd("level01.ogg"); 
-					//new AssetFileDescriptor(Engine.context.getContentResolver().openFileDescriptor(Uri.fromFile(new File("//assets/level01.ogg")),""),0,-1);
+			//new AssetFileDescriptor(Engine.context.getContentResolver().openFileDescriptor(Uri.fromFile(new File("//assets/level01.ogg")),""),0,-1);
 		} catch (FileNotFoundException ex) {
-            // fall through and open the fallback ringtone below
+			// fall through and open the fallback ringtone below
 			ex.printStackTrace();
-        } catch (IOException e) {
-        	// Problem reading the music file
+		} catch (IOException e) {
+			// Problem reading the music file
 			e.printStackTrace();
 		}
-		
+
 		music = new MusicImpl(assetDescriptor);
 	}
-	
+
 	/**
-	 * 
+	 * Starts music playback
 	 */
 	public void playMusic(){
 		if (!Engine.isMuted){
 			music.play();
 		}
-		
+
 	}
 
+	/**
+	 * Pauses music playback
+	 */
 	public void pauseMusic(){
 		if (!Engine.isMuted){
 			music.pause();
-		}
-		
+		}		
 	}
-	
+
+	/**
+	 * Resumes music playback
+	 */
 	public void resumeMusic(){
 		if (!Engine.isMuted){
 			music.play();
-		}
-		
+		}		
 	}
-
 }

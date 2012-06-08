@@ -1,12 +1,23 @@
 package com.aeonphyxius.engine;
 
 import javax.microedition.khronos.opengles.GL10;
+/**
+ * EngineGL Object.
+ * 
+ * <P>All OpenGL related rendering operations .
+ *  
+ * <P>This class contains logic to display enemies, player and firepower. 
+ *  
+ * @author Alejandro Santiago
+ * @version 1.0
+ * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+ */
 
 public class EngineGL {
-	
-	
+
+
 	/**
-	 * 
+	 * Update the current position with the given coordinates
 	 * @param gl
 	 * @param scaleX
 	 * @param scaleY
@@ -23,14 +34,14 @@ public class EngineGL {
 		gl.glScalef(scaleX,scaleY, scaleZ);
 		gl.glTranslatef(xpos, ypos, zpos);
 	}
-	
+
 	public void restoreMatrix(GL10 gl){
 		gl.glPopMatrix();													// Recover previous Matrix
 		gl.glLoadIdentity();
 	}
-	
+
 	/**
-	 * 
+	 * Draw the given texture at the position previously updated
 	 * @param gl
 	 * @param spriteSheet
 	 * @param spriteIndex
@@ -60,10 +71,10 @@ public class EngineGL {
 		gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
 		gl.glDisable(GL10.GL_CULL_FACE);
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Draw the given texture at the position previously updated
 	 * @param gl
 	 * @param spriteSheet
 	 * @param spriteIndex
@@ -91,6 +102,6 @@ public class EngineGL {
 		gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
 		gl.glDisable(GL10.GL_CULL_FACE);
 	}
-	
+
 
 }

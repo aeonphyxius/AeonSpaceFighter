@@ -2,7 +2,7 @@ com.aeonphyxius
 com.aeonphyxius.activity
 com.aeonphyxius.data
 com.aeonphyxius.engine
-com.aeonphyxius.engine.impl
+com.aeonphyxius.engine.sound
 com.aeonphyxius.gamecomponents.drawable
 com.aeonphyxius.gamecomponents.drawable.hud
 com.aeonphyxius.gamecomponents.drawable.overlay
