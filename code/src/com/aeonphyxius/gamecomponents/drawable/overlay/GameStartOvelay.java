@@ -96,7 +96,8 @@ public class GameStartOvelay extends EngineGL implements Overlay {
 			}else{
 				animation = 0;
 				frame++;
-				if (frame == MAX_FRAMES){					
+				if (frame == MAX_FRAMES){			
+					this.resetOverlay();
 					Engine.GameSatus = Engine.GAMESTATUS.PLAYING;			
 				}
 			}			

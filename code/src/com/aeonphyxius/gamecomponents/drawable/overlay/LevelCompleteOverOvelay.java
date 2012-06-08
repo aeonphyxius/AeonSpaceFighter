@@ -102,6 +102,7 @@ public class LevelCompleteOverOvelay extends EngineGL implements Overlay {
 				}catch (Exception e){
 					e.printStackTrace();
 				}
+				this.resetOverlay();
 				Engine.GameSatus = GAMESTATUS.START;	
 
 			}			

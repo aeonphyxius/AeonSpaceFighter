@@ -4,23 +4,38 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
+/**
+ * TextureRegion Object.
+ * 
+ * <P>
+ * Texture region class, containing all the information needed to manage textures
+ * 
+ * 
+ * @author Alejandro Santiago
+ * @version 1.0
+ * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+ */
+
 public class TextureRegion {
-	
-	private FloatBuffer vertexBuffer;
-	private FloatBuffer textureBuffer;
-	private ByteBuffer indexBuffer;	
-	
-	private float vertices[] = { 
+
+	private FloatBuffer vertexBuffer;						// array of vertex
+	private FloatBuffer textureBuffer;						// array of texture positions
+	private ByteBuffer indexBuffer;							// array of index
+
+	private float vertices[] = { 							// vertex list
 			0.0f, 0.0f, 0.0f, 
 			1.0f, 0.0f, 0.0f, 
 			1.0f, 1.0f, 0.0f,
 			0.0f, 1.0f, 0.0f, };
 
-	private float texture[];
-	
-	private byte indices[] = {0, 1, 2, 0, 2, 3, };
-	
-	
+	private float texture[];								// texture positions list
+
+	private byte indices[] = {0, 1, 2, 0, 2, 3, };			// list of index
+
+	/**
+	 * Will build all the buffers containing the texture's information 
+	 * @param texture
+	 */
 	public TextureRegion (float texture[]){
 		this.texture = texture;
 		ByteBuffer byteBuf = ByteBuffer.allocateDirect(vertices.length * 4);
@@ -38,16 +53,7 @@ public class TextureRegion {
 		indexBuffer.put(indices);
 		indexBuffer.position(0);
 	}
-	
-	public TextureRegion (FloatBuffer vertexBuffer,FloatBuffer textureBuffer,ByteBuffer indexBuffer,float vertices[],float texture[],byte indices[]){
-		this.vertexBuffer=vertexBuffer;
-		this.textureBuffer=textureBuffer;
-		this.indexBuffer = indexBuffer;
-		this.vertices=vertices;
-		this.texture=texture;
-		this.indices = indices;
-	}
-	
+
 
 	public FloatBuffer getVertexBuffer() {
 		return vertexBuffer;
@@ -96,7 +102,7 @@ public class TextureRegion {
 	public void setIndices(byte[] indices) {
 		this.indices = indices;
 	}
-	
-	
+
+
 
 }

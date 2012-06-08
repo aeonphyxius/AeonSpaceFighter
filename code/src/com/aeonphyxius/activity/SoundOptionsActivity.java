@@ -3,7 +3,7 @@ package com.aeonphyxius.activity;
 import com.aeonphyxius.R;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.MusicManager;
-import com.aeonphyxius.engine.VibrationManager;
+import com.aeonphyxius.engine.Vibration;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -61,20 +61,20 @@ public class SoundOptionsActivity extends Activity implements OnClickListener{
 	public void onClick(View view) {
 		switch (view.getId()){
 		case R.id.btnBack: // Click on back
-			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			Vibration.getInstance().setVibration(Engine.MENU_CLICK_VIB);
 			MusicManager.getInstance().playSound(Engine.SOUND_CLICK_BACK);
 			SoundOptionsActivity.this.finish();
 			break;
 		case R.id.btnNo: // Click on No sound
 			Engine.isMuted = true;
-			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			Vibration.getInstance().setVibration(Engine.MENU_CLICK_VIB);
 			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);			
 			// Closes this activity
 			SoundOptionsActivity.this.finish();
 			break;			
 		case R.id.btnYes: // Click on YES sound
 			Engine.isMuted= false; // Set sound to true
-			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			Vibration.getInstance().setVibration(Engine.MENU_CLICK_VIB);
 			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);			
 			// Closes this activity
 			SoundOptionsActivity.this.finish();

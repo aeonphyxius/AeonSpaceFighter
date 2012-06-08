@@ -3,7 +3,7 @@ package com.aeonphyxius.activity;
 import com.aeonphyxius.R;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.MusicManager;
-import com.aeonphyxius.engine.VibrationManager;
+import com.aeonphyxius.engine.Vibration;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -69,26 +69,26 @@ public class OptionsActivity extends Activity implements OnClickListener{
 	public void onClick(View view) {
 		switch (view.getId()){
 		case R.id.btnBack:
-			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			Vibration.getInstance().setVibration(Engine.MENU_CLICK_VIB);
 			MusicManager.getInstance().playSound(Engine.SOUND_CLICK_BACK);
 			OptionsActivity.this.finish();
 			break;
 		case R.id.btnDiff:
-			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			Vibration.getInstance().setVibration(Engine.MENU_CLICK_VIB);
 			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 			// load Difficulty level options screen
 			Intent diff = new Intent(getApplicationContext(),DiffOptionsActivity.class);
 			OptionsActivity.this.startActivity(diff);
 			break;
 		case R.id.btnSound:
-			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			Vibration.getInstance().setVibration(Engine.MENU_CLICK_VIB);
 			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 			// load sounds options screen
 			Intent sound = new Intent(getApplicationContext(),SoundOptionsActivity.class);
 			OptionsActivity.this.startActivity(sound);
 			break;
 		case R.id.btnVibration:
-			VibrationManager.getInstance().setVibration(Engine.MENU_CLICK_VIB);
+			Vibration.getInstance().setVibration(Engine.MENU_CLICK_VIB);
 			MusicManager.getInstance().playSound(Engine.SOUND_CLICK);
 			// load sounds options screen
 			Intent vib = new Intent(getApplicationContext(),VibrationOptionsActivity.class);

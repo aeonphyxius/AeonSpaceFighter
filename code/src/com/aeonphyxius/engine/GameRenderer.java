@@ -158,15 +158,9 @@ public class GameRenderer implements Renderer {
 						}
 					}
 				}
-			}
-			
+			}			
 		}
-
 	}
-
-	   
-
-
 	
 
 	@Override

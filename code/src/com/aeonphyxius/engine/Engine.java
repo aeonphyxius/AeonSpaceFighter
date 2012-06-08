@@ -26,7 +26,7 @@ public static float SCROLL_BACKGROUND_1 = .002f;
 public static float SCROLL_BACKGROUND_2 = .007f;
 public static float SHOOT_SLEEP = 250f;
 public static float ANIMATION_SLEEP = 100f;
-public static float GAME_OVER_SLEEP = (1000/60)*500000;
+public static float GAME_OVER_SLEEP = (1000/60)*5000;
 public static float EXPLOSIOM_SLEEP = 50f;
 
 public static final int PLAYER_BANK_LEFT_1 = 1;
@@ -113,7 +113,7 @@ public static final int ENGINE_SHIELD_EASY = 10;
 public static final int ENGINE_SHIELD_NORMAL = 25;
 public static final int ENGINE_SHIELD_HARD = 25;
 public static final int ENGINE_DAMAGE_EASY = 10;
-public static final int ENGINE_DAMAGE_NORMAL = 100;
+public static final int ENGINE_DAMAGE_NORMAL = 25;
 public static final int ENGINE_DAMAGE_HARD = 25;
 
 public static final int POINTS_EASY = 5;

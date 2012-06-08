@@ -2,7 +2,17 @@ package com.aeonphyxius.engine;
 
 import javax.microedition.khronos.opengles.GL10;
 
-
+/**
+ * Overlay Interface.
+ * 
+ * <P>
+ * Interface to be implemented for all Overlay classes
+ * 
+ * 
+ * @author Alejandro Santiago
+ * @version 1.0
+ * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+ */
 
 public interface Overlay {	
 	

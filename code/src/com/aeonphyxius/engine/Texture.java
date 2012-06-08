@@ -10,23 +10,38 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLUtils;
 
+/**
+ * Texture Object.
+ * 
+ * <P>
+ * Texture class, containing all the information needed to manage textures
+ * 
+ * 
+ * @author Alejandro Santiago
+ * @version 1.0
+ * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+ */
+
 public class Texture {
 
-	private int[] textures = new int[3];
+	private int[] textures = new int[3];			// textures array
 
+	/**
+	 * Generates textures
+	 * @param gl
+	 */
 	public Texture(GL10 gl){
-
 		gl.glGenTextures(2, textures, 0);
 
 	}
 	
 	/**
-	 * 
+	 * To load the texture given by parameter. 
 	 * @param gl
 	 * @param texture
 	 * @param context
 	 * @param textureNumber
-	 * @return
+	 * @return array containing the loaded textures ids
 	 */
 	public int[] loadTexture(GL10 gl,int texture, Context context,int textureNumber) {
 		InputStream imagestream = context.getResources().openRawResource(texture);

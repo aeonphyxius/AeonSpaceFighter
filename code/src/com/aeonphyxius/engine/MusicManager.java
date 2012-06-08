@@ -19,7 +19,17 @@ import android.media.SoundPool;
 
 import com.aeonphyxius.engine.sound.*;
 
-
+/**
+ * MusicManager Object.
+ * 
+ * <P>
+ * MusicManager class, containing all the information needed to manage textures
+ * 
+ * 
+ * @author Alejandro Santiago
+ * @version 1.0
+ * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
+ */
 
 public class MusicManager {
 

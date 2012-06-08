@@ -8,7 +8,7 @@ import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.EngineGL;
 import com.aeonphyxius.engine.MusicManager;
 import com.aeonphyxius.engine.TextureRegion;
-import com.aeonphyxius.engine.VibrationManager;
+import com.aeonphyxius.engine.Vibration;
 import com.aeonphyxius.gamecomponents.drawable.overlay.PlayerDestructionOverlay;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 
@@ -77,12 +77,12 @@ public class Player extends EngineGL {
 		MusicManager.getInstance().playSound(Engine.SOUND_LASER_HIT);
 		data.increaseDamage();
 
-		VibrationManager.getInstance().setVibration(Engine.PLAYER_DAMAGE_VIB);
+		Vibration.getInstance().setVibration(Engine.PLAYER_DAMAGE_VIB);
 
 		// Check if we have been destroyed
 		if (data.getDamage() <= 0) {
 
-			VibrationManager.getInstance().setVibration(Engine.PLAYER_DESTROYED_VIB);			
+			Vibration.getInstance().setVibration(Engine.PLAYER_DESTROYED_VIB);			
 			data.setLives(data.getLives()-1);
 
 			if (data.getLives() > 0){
