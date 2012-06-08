@@ -70,9 +70,9 @@ public final class R {
         public static final int yesselector=0x7f020038;
     }
     public static final class id {
-        public static final int AboutContact=0x7f060005;
-        public static final int AboutInfo=0x7f060006;
-        public static final int AboutMsg1=0x7f060004;
+        public static final int AboutContact=0x7f060004;
+        public static final int AboutInfo=0x7f060005;
+        public static final int AboutMsg1=0x7f060006;
         public static final int AboutThanks=0x7f060003;
         public static final int Help1BackImage=0x7f06000d;
         public static final int Help2BackImage=0x7f06000f;

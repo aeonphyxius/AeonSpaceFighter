@@ -10,7 +10,7 @@
     <string name="mainmenu">Main menu background</string>
     <string name="AboutBkgImg">Background image for About screen</string>
     <string name="AboutBackImg">Back button for About screen</string>
-    <string name="AboutMsg1">This game have been developed as a final thesis of my masters degree. </string>
+    <string name="AboutMsg1">This game have been developed as a final thesis of my masters degree.  \nSound effects have been dowloaded from http://www.freesound.org/ and music from http://www.mattmcfarland.com/</string>
     <string name="AboutMsg4">Thanks Estela for all your support and patince during this time. All those nights awake would have not been possible without you.</string>
     <string name="AboutMsg2">You cand find more information on my webpage http://www.aeonphyxius and find more about my projects at http://www.aeonphyxius/projects</string>
     <string name="AboutMsg3">Please do not hesitate to contact if you have any question or sugestion at \r\n http://www.aeonphyxius.com/contact/ \r\n or using my email: \r\n alejandro@aeonphyxius.com</string>
