@@ -27,6 +27,10 @@ public class LevelData {
 		return instance;				
 	}
 	
+
+	public void resetLevelData(){
+		this.currentLevel = 1;
+	}
 	
 	private LevelData(){
 		this.currentLevel  = 1; 			// First level, is always level 1.
@@ -41,9 +45,6 @@ public class LevelData {
 	public void increaseLevel(){
 		if (currentLevel < Engine.MAX_LEVEL){
 			currentLevel ++;
-		}
-		
+		}		
 	}
-	
-
 }

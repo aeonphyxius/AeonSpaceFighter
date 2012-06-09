@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <squadrons>
-	<squadron ypos="01" enemy="1" dir="0" xpos1="0" xpos2="2" xpos3="3" xpos4="4" xpos5="6"/>
-	<squadron ypos="02" enemy="1" dir="0" xpos1="1" xpos2="3" xpos3="4" xpos4="5" xpos5="6"/>
-	<squadron ypos="03" enemy="1" dir="0" xpos1="0" xpos2="2" xpos3="3" xpos4="4" xpos5="6"/>
-	<squadron ypos="04" enemy="1" dir="0" xpos1="1" xpos2="3" xpos3="4" xpos4="5" xpos5="6"/>
 	<squadron ypos="06" enemy="1" dir="0" xpos1="0" xpos2="2" xpos3="3" xpos4="4" xpos5="6"/>
 	<squadron ypos="08" enemy="1" dir="0" xpos1="1" xpos2="3" xpos3="4" xpos4="5" xpos5="6"/>
 	<squadron ypos="09" enemy="1" dir="0" xpos1="0" xpos2="2" xpos3="3" xpos4="4" xpos5="6"/>	

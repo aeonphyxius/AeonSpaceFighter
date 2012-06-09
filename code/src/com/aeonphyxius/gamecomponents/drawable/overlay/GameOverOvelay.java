@@ -1,6 +1,8 @@
 package com.aeonphyxius.gamecomponents.drawable.overlay;
 
 import javax.microedition.khronos.opengles.GL10;
+
+import com.aeonphyxius.data.LevelData;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.EngineGL;
 import com.aeonphyxius.engine.Overlay;
@@ -79,6 +81,7 @@ public class GameOverOvelay extends EngineGL implements Overlay {
 			WeaponManager.getInstance().resetWeapons();		
 			ExplosionManager.getInstance().resetExplosions();
 			Player.getInstance().resetPlayerStatus();
+			LevelData.getInstance().resetLevelData();
 			this.resetOverlay();
 			Engine.GameSatus = Engine.GAMESTATUS.END;
 
