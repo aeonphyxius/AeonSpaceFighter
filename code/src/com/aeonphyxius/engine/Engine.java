@@ -95,6 +95,7 @@ public static final int SCOUT_SHIELDS = 1;
 public static final int INTERCEPTOR_SHIELDS = 1;
 public static final int WARSHIP_SHIELDS = 2;
 public static final float PLAYER_BULLET_SPEED = .075f;
+public static final float ENEMY_BULLET_SPEED = .040f;
 
 // Player configuration
 public static final int DIFF_EASY = 1;

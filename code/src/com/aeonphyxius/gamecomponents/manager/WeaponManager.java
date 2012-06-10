@@ -136,7 +136,7 @@ public class WeaponManager {
 					enemyFireList.get(x).isFired = false;
 				}else if(enemyFireList.get(x).isFired){
 
-					enemyFireList.get(x).posY -= Engine.PLAYER_BULLET_SPEED;
+					enemyFireList.get(x).posY -= Engine.ENEMY_BULLET_SPEED;
 					gl.glMatrixMode(GL10.GL_MODELVIEW);
 					gl.glLoadIdentity();
 					gl.glPushMatrix();

@@ -54,20 +54,18 @@ public final class R {
         public static final int icon=0x7f020028;
         public static final int intro=0x7f020029;
         public static final int level_01_bg=0x7f02002a;
-        public static final int level_02_bg=0x7f02002b;
-        public static final int level_03_bg=0x7f02002c;
-        public static final int level_04_bg=0x7f02002d;
-        public static final int mainmenu=0x7f02002e;
-        public static final int normalselector=0x7f02002f;
-        public static final int noselector=0x7f020030;
-        public static final int olddebris=0x7f020031;
-        public static final int optionselector=0x7f020032;
-        public static final int soundselector=0x7f020033;
-        public static final int startselector=0x7f020034;
-        public static final int textures=0x7f020035;
-        public static final int vibrationselector=0x7f020036;
-        public static final int welcome=0x7f020037;
-        public static final int yesselector=0x7f020038;
+        public static final int level_03_bg=0x7f02002b;
+        public static final int level_04_bg=0x7f02002c;
+        public static final int mainmenu=0x7f02002d;
+        public static final int normalselector=0x7f02002e;
+        public static final int noselector=0x7f02002f;
+        public static final int optionselector=0x7f020030;
+        public static final int soundselector=0x7f020031;
+        public static final int startselector=0x7f020032;
+        public static final int textures=0x7f020033;
+        public static final int vibrationselector=0x7f020034;
+        public static final int welcome=0x7f020035;
+        public static final int yesselector=0x7f020036;
     }
     public static final class id {
         public static final int AboutContact=0x7f060004;
