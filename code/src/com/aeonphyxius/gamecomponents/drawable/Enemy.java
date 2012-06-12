@@ -54,7 +54,7 @@ public class Enemy extends EngineGL{
 		case Engine.TYPE_INTERCEPTOR:
 			posT = Engine.INTERCEPTOR_SPEED;
 			enemyTexture = new TextureRegion( new float[] { 0.027f, 0.548f, 0.183f, 0.548f, 0.183f, 0.713f, 0.027f, 0.713f, });
-			if (Math.random()< 0.3){
+			if (Math.random()< 0.2){
 				isShooting =true;
 			}else{
 				isShooting =false;
@@ -63,7 +63,7 @@ public class Enemy extends EngineGL{
 		case Engine.TYPE_SCOUT:
 			posT = Engine.SCOUT_SPEED;
 			enemyTexture = new TextureRegion(new float[] { 0.003f, 0.738f,	0.252f, 0.738f, 0.252f, 0.984f, 0.003f, 0.984f, });
-			if (Math.random()< 0.3){
+			if (Math.random()< 0.2){
 				isShooting =true;
 			}else{
 				isShooting =false;
@@ -72,7 +72,7 @@ public class Enemy extends EngineGL{
 		case Engine.TYPE_WARSHIP:
 			posT = Engine.WARSHIP_SPEED;
 			enemyTexture = new TextureRegion(new float[] { 0.029f, 0.011f, 0.215f, 0.011f, 0.215f, 0.258f, 0.029f, 0.258f, });
-			if (Math.random()< 0.3){
+			if (Math.random()< 0.1){
 				isShooting =true;
 			}else{
 				isShooting =false;
