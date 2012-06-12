@@ -144,6 +144,7 @@ public class MusicManager {
 		}
 
 		music = new MusicImpl(assetDescriptor);
+		music.setLooping(true);
 	}
 
 	/**

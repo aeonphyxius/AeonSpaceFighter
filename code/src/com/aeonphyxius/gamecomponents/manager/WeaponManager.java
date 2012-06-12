@@ -90,7 +90,7 @@ public class WeaponManager {
 		if ( elapsed > Engine.SHOOT_SLEEP){ 
 			lastShoot=System.currentTimeMillis();
 			MusicManager.getInstance().playSound(Engine.SOUND_FUSHIONSHOT);
-			playeFireList.add(new Weapon());			
+			//playeFireList.add(new Weapon());			
 		}
 
 		// Check all player's shots and update + draw them
