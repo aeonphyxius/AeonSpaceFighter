@@ -2,6 +2,8 @@ package com.aeonphyxius.engine.sound;
 
 import java.io.IOException;
 
+import com.aeonphyxius.engine.Engine;
+
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -33,6 +35,7 @@ public class MusicImpl implements Music, OnCompletionListener {
             mediaPlayer.prepare();
             isPrepared = true;
             mediaPlayer.setOnCompletionListener(this);
+            mediaPlayer.setVolume(Engine.L_VOLUME, Engine.R_VOLUME);
         } catch (Exception e) {
             throw new RuntimeException("Couldn't load music");
         }

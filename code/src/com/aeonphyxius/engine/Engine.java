@@ -17,8 +17,8 @@ public static final int GAME_THREAD_DELAY = 4000;
 public static final int MENU_BUTTON_ALPHA = 0;
 public static final boolean HAPTIC_BUTTON_FEEDBACK = true;
 
-public static final int R_VOLUME = 100;
-public static final int L_VOLUME = 100;
+public static final float R_VOLUME = 0.3f;
+public static final float L_VOLUME = 0.3f;
 public static final boolean LOOP_BACKGROUND_MUSIC = true;
 public static final int GAME_THREAD_FPS_SLEEP = (1000/60);
 public static final int GAME_OVER_THREAD_WAIT = (1000/60)*50;
@@ -35,7 +35,7 @@ public static final int PLAYER_BANK_RIGHT_1 = 4;
 public static final int PLAYER_FRAMES_BETWEEN_ANI = 9;
 public static final float PLAYER_BANK_SPEED = .1f;
 
-public static final float EFFECTS_VOLUME = 0.3f;
+public static final float EFFECTS_VOLUME = 0.4f;
 public static final String SOUND_CLICK = "click";
 public static final String SOUND_CLICK_BACK = "clickBack";
 public static final String SOUND_BLASTER ="blaster";
