@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, StarfighterActivity!</string>
     <string name="app_name">Aeon Space Fighter</string>
     <string name="welcome">Game developed by @aeonphyxius</string>
     <string name="mainexitdes">Exit button description</string>
