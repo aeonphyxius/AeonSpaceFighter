@@ -31,7 +31,7 @@ public class BackGroundManager {
 
 		// Add 2 layers for our background
 		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_1, 1f, 1.f,  0f));
-		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_2, 1.5f, 1.0f, -0.3f));
+		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_2, 1.6f, 1.0f, -0.3f));
 	}
 
 	/**
