@@ -1,10 +1,7 @@
 package com.aeonphyxius.engine;
 
-import java.io.IOException;
 import java.io.InputStream;
-
 import javax.microedition.khronos.opengles.GL10;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,12 +23,23 @@ public class Texture {
 
 	private int[] textures = new int[3];			// textures array
 
+	
+	
+	
+	public int[] getTextures() {
+		return textures;
+	}
+
+	public void setTextures(int[] textures) {
+		this.textures = textures;
+	}
+
 	/**
 	 * Generates textures
 	 * @param gl
 	 */
 	public Texture(GL10 gl){
-		gl.glGenTextures(2, textures, 0);
+		gl.glGenTextures(3, textures, 0);
 
 	}
 	
@@ -43,23 +51,20 @@ public class Texture {
 	 * @param textureNumber
 	 * @return array containing the loaded textures ids
 	 */
-	public int[] loadTexture(GL10 gl,int texture, Context context,int textureNumber) {
-		InputStream imagestream = context.getResources().openRawResource(texture);
+	//public int[] loadTexture(GL10 gl,int texture, Context context,int textureNumber) {
+	public int[] loadTexture(GL10 gl,String fileName, Context context,int textureNumber) {
+		//InputStream imagestream = context.getResources().openRawResource(texture);
+		InputStream imagestream;
 		Bitmap bitmap = null;
 		try {
-
+			imagestream = context.getAssets().open(fileName);			
 			bitmap = BitmapFactory.decodeStream(imagestream);
-
+			imagestream.close();
+			imagestream = null;
 		}catch(Exception e){
 
-		}finally {
-			//Always clear and close
-			try {
-				imagestream.close();
-				imagestream = null;
-			} catch (IOException e) {
-			}
 		}
+		
 
 		gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[textureNumber - 1]);
 
@@ -71,6 +76,8 @@ public class Texture {
 
 		GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
 
+		
+		
 		bitmap.recycle();
 
 		return textures;

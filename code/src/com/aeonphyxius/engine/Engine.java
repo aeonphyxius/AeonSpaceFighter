@@ -50,10 +50,11 @@ public static final long PLAYER_DESTROYED_VIB = 2000;
 public  static final long MENU_CLICK_VIB = 10;
 
 // sprites
-public static int TEXTURES_FILE = R.drawable.textures;
+public static String TEXTURES_FILE = "textures.png";
 
-public static final int BACKGROUND_LAYER_ONE = R.drawable.level_01_bg;
-public static final int BACKGROUND_LAYER_TWO = R.drawable.debris;
+public static final String BACKGROUND_LAYER_ONE = "level_01_bg.png";
+public static final String BACKGROUND_LAYER_TWO = "debris.png";
+
 public static final int SPLASH_SCREEN_MUSIC = R.raw.warfieldedit;
 
 public static final int TEXTURES = 0;
@@ -70,11 +71,8 @@ public static final float MAX_Y = 5.5f;
 public static int TOTAL_INTERCEPTORS = 10;
 public static int TOTAL_SCOUTS = 15;
 public static int TOTAL_WARSHIPS = 5;
-//Spublic static float INTERCEPTOR_SPEED = SCROLL_BACKGROUND_1 * 4f;
 public static float INTERCEPTOR_SPEED = 0.008f;
-//public static float SCOUT_SPEED = SCROLL_BACKGROUND_1 * 6f;
 public static float SCOUT_SPEED = 0.012f;
-//public static float WARSHIP_SPEED = SCROLL_BACKGROUND_2 * 4f;
 public static float WARSHIP_SPEED = 0.028f;
 public static final int TYPE_INTERCEPTOR = 1;
 public static final int TYPE_SCOUT = 2;

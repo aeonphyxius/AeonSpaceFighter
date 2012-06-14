@@ -13,11 +13,11 @@ import android.opengl.GLUtils;
 
 /**
  * BackGround Object.
- * 
+ *
  * <P> Class to manage a background layer. Contains all logic to display an image as a background,
- *  
- * <P> and load the texture. 
- *  
+ *
+ * <P> and load the texture.
+ *
  * @author Alejandro Santiago
  * @version 1.0
  * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
@@ -26,13 +26,13 @@ import android.opengl.GLUtils;
 public class BackGround extends EngineGL{
 
 
-	private float scroll;							// Background layer scroll speed
-	private float scrollElapse;						// Scroll elapse time
-	private float scaleX;							// Background scroll image X scale
-	private float scaleY;							// Background scroll image Y scale
-	private float translateX;						// Background scroll image X translation
-	private TextureRegion backgroundTexture;		// Background texture region
-	private int[] textures = new int[1];			// Background texture
+	private float scroll; // Background layer scroll speed
+	private float scrollElapse; // Scroll elapse time
+	private float scaleX; // Background scroll image X scale
+	private float scaleY; // Background scroll image Y scale
+	private float translateX; // Background scroll image X translation
+	private TextureRegion backgroundTexture; // Background texture region
+	private int[] textures = new int[1]; // Background texture
 
 
 	public float getScaleY() {
@@ -127,7 +127,7 @@ public class BackGround extends EngineGL{
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, backgroundTexture.getVertexBuffer());
 		gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, backgroundTexture.getTextureBuffer());
 
-		gl.glDrawElements(GL10.GL_TRIANGLES, backgroundTexture.getIndices().length, GL10.GL_UNSIGNED_BYTE, backgroundTexture.getIndexBuffer());      
+		gl.glDrawElements(GL10.GL_TRIANGLES, backgroundTexture.getIndices().length, GL10.GL_UNSIGNED_BYTE, backgroundTexture.getIndexBuffer());
 
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
@@ -141,24 +141,19 @@ public class BackGround extends EngineGL{
 	 * @param texture texture number
 	 * @param context application context with all resources
 	 */
-	public void loadTexture(GL10 gl,int texture, Context context) {
-		InputStream imagestream = context.getResources().openRawResource(texture);
+	public void loadTexture(GL10 gl,String textureFile, Context context) {
+		
+		InputStream imagestream; // = context.getResources().openRawResource(texture);
 		Bitmap bitmap = null;
 		try {
+			imagestream = context.getAssets().open (textureFile);
 			// load the image
 			bitmap = BitmapFactory.decodeStream(imagestream);
-
+			imagestream.close();
+			imagestream = null;
 		}catch(Exception e){
 
-		}finally {
-			//Always clear and close
-			try {
-				imagestream.close();
-				imagestream = null;
-			} catch (IOException e) {
-			}
 		}
-
 		// Bind texture
 		gl.glGenTextures(1, textures, 0);
 		gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[0]);

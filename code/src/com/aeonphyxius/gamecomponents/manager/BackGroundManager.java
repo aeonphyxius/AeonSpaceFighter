@@ -8,11 +8,11 @@ import com.aeonphyxius.gamecomponents.drawable.BackGround;
 
 /**
  * BackGroundManager Object.
- * 
+ *
  * <P>Manager for all game background layers.
- *  
- * <P>This class contains logic manage the game's background layers. 
- *  
+ *
+ * <P>This class contains logic manage the game's background layers.
+ *
  * @author Alejandro Santiago
  * @version 1.0
  * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
@@ -30,7 +30,7 @@ public class BackGroundManager {
 		background_list = new ArrayList<BackGround>();
 
 		// Add 2 layers for our background
-		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_1, 1f, 1.f,  0f));
+		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_1, 1f, 1.f, 0f));
 		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_2, 1.6f, 1.0f, -0.3f));
 	}
 
@@ -52,7 +52,7 @@ public class BackGroundManager {
 	 * @param gl Open GL handler
 	 */
 	public void loadTextures(GL10 gl) {
-		background_list.get(0).loadTexture(gl, Engine.BACKGROUND_LAYER_ONE,	Engine.context);
+		background_list.get(0).loadTexture(gl, Engine.BACKGROUND_LAYER_ONE, Engine.context); 
 		background_list.get(1).loadTexture(gl, Engine.BACKGROUND_LAYER_TWO, Engine.context);
 	}
 

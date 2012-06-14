@@ -90,7 +90,7 @@ public class EngineGL {
 
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-		gl.glColor4f(0.5f, 1.f, 0.3f, 0.7f);
+		//gl.glColor4f(0.5f, 1.f, 0.3f, 0.7f);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, textureRegion.getVertexBuffer());
 		gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0,
 				textureRegion.getTextureBuffer());

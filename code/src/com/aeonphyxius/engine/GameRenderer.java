@@ -177,13 +177,14 @@ public class GameRenderer implements Renderer {
 		MusicManager.getInstance().playMusic();		
 		textureLoader = new Texture(gl);
 		spriteSheets = textureLoader.loadTexture(gl, Engine.TEXTURES_FILE,Engine.context, 1);
-
+		BackGroundManager.getInstance().loadTextures(gl);
+		
 		gl.glEnable(GL10.GL_TEXTURE_2D);
 		gl.glClearDepthf(1.0f);
 		gl.glEnable(GL10.GL_DEPTH_TEST);
 		gl.glDepthFunc(GL10.GL_LEQUAL);
 
-		BackGroundManager.getInstance().loadTextures(gl);
+		
 		try{
 			SquadronManager.getInstance().loadSquadronsLevel(LevelData.getInstance().getCurrentLevel());
 		}catch (Exception e){
