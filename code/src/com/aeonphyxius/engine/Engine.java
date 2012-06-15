@@ -68,15 +68,24 @@ public static final float MIN_Y = 0.0f;
 public static final float MAX_Y = 5.5f;
 
 
-public static int TOTAL_INTERCEPTORS = 10;
-public static int TOTAL_SCOUTS = 15;
-public static int TOTAL_WARSHIPS = 5;
-public static float INTERCEPTOR_SPEED = 0.008f;
+//public static int TOTAL_INTERCEPTORS = 10;
+//public static int TOTAL_SCOUTS = 15;
+//public static int TOTAL_WARSHIPS = 5;
+public static float INTERCEPTOR_SPEED = 0.028f;
 public static float SCOUT_SPEED = 0.012f;
-public static float WARSHIP_SPEED = 0.028f;
+public static float WARSHIP_SPEED = 0.008f;
+public static float FINAL1_SPEED = 0.0018f;
+public static float FINAL2_SPEED = 0.0018f;
+public static float FINAL3_SPEED = 0.0018f;
+public static float MOVING_OUT_SCOPE = 0.028f;
+
 public static final int TYPE_INTERCEPTOR = 1;
 public static final int TYPE_SCOUT = 2;
 public static final int TYPE_WARSHIP = 3;
+public static final int TYPE_FINAL1 = 10;
+public static final int TYPE_FINAL2 = 11;
+public static final int TYPE_FINAL3 = 12;
+
 public static final int ATTACK_RANDOM = 0;
 public static final int ATTACK_RIGHT = 1;
 public static final int ATTACK_LEFT = 2;
@@ -95,6 +104,7 @@ public static final float SQUADRON_START_Y = 5.0f;
 public static final int SCOUT_SHIELDS = 1;
 public static final int INTERCEPTOR_SHIELDS = 1;
 public static final int WARSHIP_SHIELDS = 2;
+public static final int FINAL_SHIELDS = 50;
 public static final float PLAYER_BULLET_SPEED = .075f;
 public static final float ENEMY_BULLET_SPEED = .040f;
 
@@ -124,8 +134,7 @@ public static final int POINTS_HARD = 10;
 
 
 /*Game Variables*/
-
-public static boolean isMuted = false;
+public static boolean isMuted = true;
 public static boolean isVibrated = true;
 public static Context context;
 public static Thread musicThread;

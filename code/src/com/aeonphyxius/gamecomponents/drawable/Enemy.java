@@ -81,6 +81,12 @@ public class Enemy extends EngineGL{
 				isShooting =false;
 			}
 			break;
+		case Engine.TYPE_FINAL1:
+			posT = Engine.WARSHIP_SPEED;
+			enemyTexture = new TextureRegion(new float[] { 0.029f, 0.011f, 0.215f, 0.011f, 0.215f, 0.258f, 0.029f, 0.258f, });
+			
+			isShooting =true;
+			break;
 		}
 	}
 
@@ -111,7 +117,16 @@ public class Enemy extends EngineGL{
 				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION_ENEMY);
 			}
 			break;
+		case Engine.TYPE_FINAL1:
+			if (damage >= Engine.FINAL_SHIELDS) {
+				isDestroyed = true;
+				ExplosionManager.getInstance().addExplosion(this.posX,this.posY);
+				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION_ENEMY);
+			}
+			break;
+
 		}
+		
 	}
 
 	/**
