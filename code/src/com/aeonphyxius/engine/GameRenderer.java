@@ -1,5 +1,7 @@
 package com.aeonphyxius.engine;
 
+import java.util.Iterator;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import com.aeonphyxius.data.LevelData;
@@ -13,6 +15,7 @@ import com.aeonphyxius.gamecomponents.drawable.overlay.PlayerDestructionOverlay;
 import com.aeonphyxius.gamecomponents.manager.BackGroundManager;
 import com.aeonphyxius.gamecomponents.manager.ExplosionManager;
 import com.aeonphyxius.gamecomponents.manager.HUDManager;
+import com.aeonphyxius.gamecomponents.manager.Squadron;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 import com.aeonphyxius.gamecomponents.manager.WeaponManager;
 import android.opengl.GLSurfaceView.Renderer;
@@ -105,61 +108,55 @@ public class GameRenderer implements Renderer {
 	/**
 	 * Detects collision between all the weapons on screen and the enemies. 
 	 */
-	private void detectCollisions() {
-		Enemy tempEnemy;
-		int weaponsSize = WeaponManager.getInstance().getPlayeFireList().size();
-		int weaponsEnemySize = WeaponManager.getInstance().getEnemyFireList().size();
-		int squadronNum = SquadronManager.getInstance().getSquadronList().size();
-		int enemyNum;
-		Weapon tempWeapon;		
+	private void detectCollisions() {		
 
-		for (int sqNum = 0; sqNum < squadronNum; sqNum++) { // loop all the squadrons
-			if (!SquadronManager.getInstance().getSquadronList().get(sqNum).isDestroyed() ){
-				enemyNum = SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().size();						
-				for (int sqMember = 0; sqMember < enemyNum; sqMember++){	// loop all the enemies inside the squadron
-					tempEnemy  = SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember);								
-					if (!tempEnemy.isDestroyed){						
-						if (BoundingBox.getInstance().overlaps(
-								Engine.playerBankPosX,Engine.PLAYER_POS_Y,Engine.playerBankPosX+0.6f,Engine.PLAYER_POS_Y+0.6f,
-								tempEnemy.posX,tempEnemy.posY-0.6f,tempEnemy.posX+0.6f,tempEnemy.posY )){							
+		Squadron iterSquadron;
+		Weapon iterWeapon;		
+		Enemy iterEnemy;
+
+		for (Iterator<Squadron> iteratorS = SquadronManager.getInstance().getSquadronList().iterator(); iteratorS.hasNext();) {		
+			iterSquadron = iteratorS.next();
+
+			if (!iterSquadron.isDestroyed() ){
+				for (Iterator<Enemy> iteratorE = iterSquadron.getEnemyList().iterator(); iteratorE.hasNext();){		
+					iterEnemy = iteratorE.next();
+					if (!iterEnemy.isDestroyed){						
+						if (BoundingBox.getInstance().overlapsPlayer(iterEnemy)){
 							Player.getInstance().applyDamage();
 							Player.getInstance().increasePoints(); // TODO : add enemy type
-							SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).applyDamage();
-							if (SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).isDestroyed){ // Add this destroyed enemy to the counter at Squadron level
-								SquadronManager.getInstance().getSquadronList().get(sqNum).increaseEnemiesDestroyed();
+							iterEnemy.applyDamage();
+							if (iterEnemy.isDestroyed){ // Add this destroyed enemy to the counter at Squadron level
+								iterSquadron.increaseEnemiesDestroyed();
 							}	
 						}
-						if (!tempEnemy.isDestroyed ){
-							for (int shootNum =0; shootNum  < weaponsSize; shootNum++) {
-								tempWeapon = WeaponManager.getInstance().getPlayeFireList().get(shootNum);							
-								if (tempWeapon.isFired && 
-										BoundingBox.getInstance().overlaps(
-												tempEnemy.posX,tempEnemy.posY,tempEnemy.posX+0.6f,tempEnemy.posY+0.6f,
-												tempWeapon.posX,tempWeapon.posY,tempWeapon.posX+0.30f,tempWeapon.posY+0.3f )){
 
-									Player.getInstance().increasePoints(); // TODO : add enemy type
-									SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).applyDamage();
-									if (SquadronManager.getInstance().getSquadronList().get(sqNum).getEnemyList().get(sqMember).isDestroyed){ // Add this destroyed enemy to the counter at Squadron level
-										SquadronManager.getInstance().getSquadronList().get(sqNum).increaseEnemiesDestroyed();
-									}	
-									WeaponManager.getInstance().getPlayeFireList().get(shootNum).isFired = false;
-								}
+						for (Iterator<Weapon> iteratorW = WeaponManager.getInstance().getPlayeFireList().iterator(); iteratorW.hasNext();) {				
+							iterWeapon = iteratorW.next();
+
+							if (iterWeapon.isFired && BoundingBox.getInstance().overlapsEnemy(iterEnemy,iterWeapon)){
+								Player.getInstance().increasePoints(); // TODO : add enemy type
+								iterEnemy.applyDamage();
+								if (iterEnemy.isDestroyed){ // Add this destroyed enemy to the counter at Squadron level
+									iterSquadron.increaseEnemiesDestroyed();
+								}	
+								iterWeapon.isFired = false;
 							}
-							for (int shootNum =0; shootNum  < weaponsEnemySize; shootNum++) {
-								tempWeapon = WeaponManager.getInstance().getEnemyFireList().get(shootNum);
-
-								if (tempWeapon.isFired && BoundingBox.getInstance().overlaps(
-										Engine.playerBankPosX,Engine.PLAYER_POS_Y,Engine.playerBankPosX+0.6f,Engine.PLAYER_POS_Y+0.8f,
-										tempWeapon.posX,tempWeapon.posY-0.3f,tempWeapon.posX+0.3f,tempWeapon.posY)){
-									Player.getInstance().applyDamage();
-									WeaponManager.getInstance().getEnemyFireList().get(shootNum).isFired = false;
-								}
-							}							
 						}
 					}
 				}
 			}			
 		}
+
+		
+		for (Iterator<Weapon> i = WeaponManager.getInstance().getEnemyFireList().iterator(); i.hasNext();) {				
+			iterWeapon = i.next();								
+			if (iterWeapon.isFired && BoundingBox.getInstance().overlapsPlayer(iterWeapon)){
+				Player.getInstance().applyDamage();
+				iterWeapon.isFired = false;
+			}
+		}	
+		
+		
 	}
 
 
@@ -178,13 +175,13 @@ public class GameRenderer implements Renderer {
 		textureLoader = new Texture(gl);
 		spriteSheets = textureLoader.loadTexture(gl, Engine.TEXTURES_FILE,Engine.context, 1);
 		BackGroundManager.getInstance().loadTextures(gl);
-		
+
 		gl.glEnable(GL10.GL_TEXTURE_2D);
 		gl.glClearDepthf(1.0f);
 		gl.glEnable(GL10.GL_DEPTH_TEST);
 		gl.glDepthFunc(GL10.GL_LEQUAL);
 
-		
+
 		try{
 			SquadronManager.getInstance().loadSquadronsLevel(LevelData.getInstance().getCurrentLevel());
 		}catch (Exception e){

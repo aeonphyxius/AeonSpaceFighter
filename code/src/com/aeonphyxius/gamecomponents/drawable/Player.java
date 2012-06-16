@@ -51,7 +51,10 @@ public class Player extends EngineGL {
 		data = new PlayerData();
 		playerTexturesList = new Vector<TextureRegion>();
 
-		TextureRegion tempTextureRegion = new TextureRegion( new float[] { 0.808f, 0.027f, 0.885f, 0.027f, 0.885f, 0.106f, 0.808f, 0.106f, });
+		// TODO: Rollback
+		
+		//TextureRegion tempTextureRegion = new TextureRegion( new float[] { 0.808f, 0.027f, 0.885f, 0.027f, 0.885f, 0.106f, 0.808f, 0.106f, });
+		TextureRegion tempTextureRegion = new TextureRegion(new float[] { 0.003f, 0.738f,	0.252f, 0.738f, 0.252f, 0.984f, 0.003f, 0.984f, });
 		playerTexturesList.add(tempTextureRegion); // Texture for normal position spaceship texture
 
 		tempTextureRegion = new TextureRegion(new float[] { 0.736f, 0.111f,	0.793f, 0.111f, 0.793f, 0.195f, 0.736f, 0.195f, });

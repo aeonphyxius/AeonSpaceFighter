@@ -1,5 +1,6 @@
 package com.aeonphyxius.gamecomponents.manager;
 
+import java.util.Iterator;
 import java.util.Vector;
 import javax.microedition.khronos.opengles.GL10;
 import com.aeonphyxius.engine.Engine;
@@ -85,12 +86,12 @@ public class WeaponManager {
 	public void drawWeapon(GL10 gl,int[] spriteSheets){
 
 		float elapsed = System.currentTimeMillis() - lastShoot;
-
+		Weapon iterWeapon;
 		// Automatic players shooting
 		if ( elapsed > Engine.SHOOT_SLEEP){ 
 			lastShoot=System.currentTimeMillis();
 			MusicManager.getInstance().playSound(Engine.SOUND_FUSHIONSHOT);
-			//playeFireList.add(new Weapon());			
+			playeFireList.add(new Weapon());			
 		}
 
 		// Check all player's shots and update + draw them
@@ -100,23 +101,25 @@ public class WeaponManager {
 				playeFireList.remove(playeFireList.get(0));
 			}		
 
-			for(int x = 0; x < playeFireList.size(); x++  ){	
+			for (Iterator<Weapon> i = playeFireList.iterator(); i.hasNext();) {				
+				iterWeapon = i.next();
 				// When the shot reaches the max position in screen
-				if (playeFireList.get(x).posY >  Engine.MAX_Y){
-					playeFireList.get(x).isFired = false;
-				}else if(playeFireList.get(x).isFired){
+				if (iterWeapon.posY >  Engine.MAX_Y){
+					iterWeapon.isFired = false;
+				}else if(iterWeapon.isFired){
 
-					playeFireList.get(x).posY += Engine.PLAYER_BULLET_SPEED;
+					iterWeapon.posY += Engine.PLAYER_BULLET_SPEED;
 					gl.glMatrixMode(GL10.GL_MODELVIEW);
 					gl.glLoadIdentity();
 					gl.glPushMatrix();
 					gl.glScalef(.15f, .15f, 0f);
-					gl.glTranslatef(playeFireList.get(x).posX, playeFireList.get(x).posY, 0f); 
+					//gl.glTranslatef(iterWeapon.posX, iterWeapon.posY, 0f);
+					gl.glTranslatef(Engine.playerBankPosX+0.3f,Engine.PLAYER_POS_Y+0.0f, 0f);
 					gl.glScalef(.4f, .4f, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
 
-					playeFireList.get(x).draw(gl,spriteSheets);
+					iterWeapon.draw(gl,spriteSheets);
 					gl.glPopMatrix();
 					gl.glLoadIdentity();
 				}
@@ -130,22 +133,23 @@ public class WeaponManager {
 				enemyFireList.remove(enemyFireList.get(0));
 			}		
 
-			for(int x = 0; x < enemyFireList.size(); x++  ){
+			for (Iterator<Weapon> i = enemyFireList.iterator(); i.hasNext();) {				
+				iterWeapon = i.next();			
 				// When the shot reaches the min position in screen	
-				if (enemyFireList.get(x).posY <  Engine.MIN_Y){
-					enemyFireList.get(x).isFired = false;
-				}else if(enemyFireList.get(x).isFired){
+				if (iterWeapon.posY <  Engine.MIN_Y){
+					iterWeapon.isFired = false;
+				}else if(iterWeapon.isFired){
 
-					enemyFireList.get(x).posY -= Engine.ENEMY_BULLET_SPEED;
+					iterWeapon.posY -= Engine.ENEMY_BULLET_SPEED;
 					gl.glMatrixMode(GL10.GL_MODELVIEW);
 					gl.glLoadIdentity();
 					gl.glPushMatrix();
 					gl.glScalef(.15f, .15f, 0f);
-					gl.glTranslatef(enemyFireList.get(x).posX, enemyFireList.get(x).posY, 0f); 
+					gl.glTranslatef(iterWeapon.posX, iterWeapon.posY, 0f); 
 					gl.glScalef(.4f, .4f, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();		
-					enemyFireList.get(x).draw(gl,spriteSheets);
+					iterWeapon.draw(gl,spriteSheets);
 					gl.glPopMatrix();
 					gl.glLoadIdentity();
 				}
