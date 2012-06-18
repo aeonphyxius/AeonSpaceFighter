@@ -33,7 +33,7 @@ import android.opengl.GLSurfaceView.Renderer;
  * @email alejandro@aeonphyxius.com - asantiago@uoc.edu
  */
 
-public class GameRenderer implements Renderer {
+public class GameLogic implements Renderer {
 
 
 

@@ -17,11 +17,11 @@ import android.opengl.GLSurfaceView;
  */
 
 public class GameView extends GLSurfaceView {
-	private GameRenderer renderer;
+	private GameLogic renderer;
 	
 	public GameView(Context context) {
 		super(context);		
-		renderer = new GameRenderer();		
+		renderer = new GameLogic();		
 		this.setRenderer(renderer);
 	}
 	
