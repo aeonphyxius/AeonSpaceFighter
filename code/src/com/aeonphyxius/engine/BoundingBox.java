@@ -162,23 +162,19 @@ public class BoundingBox {
 	 * @param weapon
 	 * @return
 	 */
-	public boolean overlapsPlayer(Weapon weapon) {
-		//tempWeapon.posX,tempWeapon.posY-0.3f,tempWeapon.posX+0.3f,tempWeapon.posY
+	public boolean overlapsPlayer(Weapon weapon) {		
+		boolean isOverlaping;
 		
-		// Player Bottom Bounding Box
-		if (weapon.posX + 0.30f <= Engine.playerBankPosX + 0.15f || weapon.posX >= Engine.playerBankPosX + 0.80f) // TODO: Add constants
-			return false;
-		if (weapon.posY - 0.30f <= Engine.PLAYER_POS_Y || weapon.posY >= Engine.PLAYER_POS_Y + 0.60f)
-			return false;
-		
-		
-		// Player Top Bounding Box
-		if (weapon.posX + 0.30f <= Engine.playerBankPosX+0.35f || weapon.posX >= Engine.playerBankPosX+0.60f)
-			return false;
-		if (weapon.posY - 0.30f <= Engine.PLAYER_POS_Y+0.60f || weapon.posY >= Engine.PLAYER_POS_Y + 0.90f)
-			return false;
-		
-		return true;
+		// Bottom Bounding Box
+		isOverlaping=overlaps ( weapon.posX,weapon.posY, weapon.posX + 0.30f,weapon.posY + 0.30f,
+				Engine.playerBankPosX + 0.15f,Engine.PLAYER_POS_Y,Engine.PLAYER_POS_Y + 0.60f,Engine.playerBankPosX + 0.80f);
+	
+		// Player Top Bounding Box		
+		isOverlaping=overlaps (weapon.posX,weapon.posY, weapon.posX + 0.30f,weapon.posY + 0.30f, 
+				 Engine.playerBankPosX+0.35f,Engine.PLAYER_POS_Y+0.60f,Engine.playerBankPosX+0.60f,Engine.PLAYER_POS_Y + 0.90f);
+
+
+		return isOverlaping;
 	}
 	
 	/**
@@ -187,29 +183,30 @@ public class BoundingBox {
 	 * @return
 	 */
 	public boolean overlapsPlayer(Enemy enemy) {
+		boolean isOverlaping = false;
 		
 		switch (enemy.enemyType) {
 		case Engine.TYPE_INTERCEPTOR:
-			ovelapsInterceptor(enemy);
+			isOverlaping=ovelapsInterceptor(enemy);
 			break;
 		case Engine.TYPE_SCOUT:
-			ovelapsScout(enemy);
+			isOverlaping=ovelapsScout(enemy);
 			break;
 		case Engine.TYPE_WARSHIP:
-			ovelapsInterceptor(enemy);
+			isOverlaping=ovelapsInterceptor(enemy);
 			break;
 		case Engine.TYPE_FINAL1:
-			ovelapsInterceptor(enemy);
+			isOverlaping=ovelapsInterceptor(enemy);
 			break;
 		case Engine.TYPE_FINAL2:
-			ovelapsInterceptor(enemy);
+			isOverlaping=ovelapsInterceptor(enemy);
 			break;
 		case Engine.TYPE_FINAL3:
-			ovelapsInterceptor(enemy);
+			isOverlaping=ovelapsInterceptor(enemy);
 			break;
 		}
 		
-		return true;
+		return isOverlaping;
 	}
 	
 	/**
@@ -218,26 +215,26 @@ public class BoundingBox {
 	 * @return
 	 */
 	public boolean ovelapsInterceptor(Enemy enemy){
-		//(float minX1, float minY1, float maxX1, float maxY1,float minX2, float minY2, float maxX2, float maxY2) {
+		boolean isOverlaping = false;
 		
 		// Player bottom bounding box <--> enemy bottom bounding box 
-		overlaps (enemy.posX + 0.30f,enemy.posY,enemy.posX + 0.60f,enemy.posY + 0.60f, // minX1, minY1, maxX1, maxY1
+		isOverlaping=overlaps (enemy.posX + 0.30f,enemy.posY,enemy.posX + 0.60f,enemy.posY + 0.60f, // minX1, minY1, maxX1, maxY1
 				Engine.playerBankPosX+0.15f,Engine.PLAYER_POS_Y+0.2f,Engine.playerBankPosX+0.80f,Engine.PLAYER_POS_Y + 0.60f ); //minX2, minY2, maxX2, maxY2
 		
 		// Player bottom bounding box <--> enemy top bounding box
-		overlaps (enemy.posX ,enemy.posY + 0.3f, enemy.posX + 0.90f,enemy.posY + 0.60f, // minX1, minY1, maxX1, maxY1
+		isOverlaping=overlaps (enemy.posX ,enemy.posY + 0.3f, enemy.posX + 0.90f,enemy.posY + 0.60f, // minX1, minY1, maxX1, maxY1
 				Engine.playerBankPosX+0.15f,Engine.PLAYER_POS_Y+0.2f,Engine.playerBankPosX+0.80f,Engine.PLAYER_POS_Y + 0.60f );	//minX2, minY2, maxX2, maxY2
 		
 		
 		// Player top bounding box <--> enemy bottom bounding box 
-		overlaps (enemy.posX + 0.30f,enemy.posY,enemy.posX + 0.60f,enemy.posY + 0.60f, // minX1, minY1, maxX1, maxY1
+		isOverlaping=overlaps (enemy.posX + 0.30f,enemy.posY,enemy.posX + 0.60f,enemy.posY + 0.60f, // minX1, minY1, maxX1, maxY1
 				Engine.playerBankPosX+0.35f,Engine.PLAYER_POS_Y+0.6f,Engine.playerBankPosX+0.60f,Engine.PLAYER_POS_Y + 0.90f ); //minX2, minY2, maxX2, maxY2
 		
 		// Player top bounding box <--> enemy top bounding box
-		overlaps (enemy.posX ,enemy.posY + 0.3f, enemy.posX + 0.90f,enemy.posY + 0.60f, // minX1, minY1, maxX1, maxY1
+		isOverlaping=overlaps (enemy.posX ,enemy.posY + 0.3f, enemy.posX + 0.90f,enemy.posY + 0.60f, // minX1, minY1, maxX1, maxY1
 				Engine.playerBankPosX+0.35f,Engine.PLAYER_POS_Y+0.6f,Engine.playerBankPosX+0.60f,Engine.PLAYER_POS_Y + 0.90f ); //minX2, minY2, maxX2, maxY2
 		
-		return true;
+		return isOverlaping;
 	}
 	
 	/**
@@ -246,26 +243,26 @@ public class BoundingBox {
 	 * @return
 	 */
 	public boolean ovelapsScout(Enemy enemy){
-		//(float minX1, float minY1, float maxX1, float maxY1,float minX2, float minY2, float maxX2, float maxY2) {
+		boolean isOverlaping = false;
 		
 		// Player bottom bounding box <--> enemy bottom bounding box 
-		overlaps (enemy.posX + 0.30f,enemy.posY,enemy.posX + 0.60f,enemy.posY + 0.60f, // minX1, minY1, maxX1, maxY1
+		isOverlaping=overlaps (enemy.posX ,enemy.posY,enemy.posX + 1.0f,enemy.posY + 0.45f, // minX1, minY1, maxX1, maxY1
 				Engine.playerBankPosX+0.15f,Engine.PLAYER_POS_Y+0.2f,Engine.playerBankPosX+0.80f,Engine.PLAYER_POS_Y + 0.60f ); //minX2, minY2, maxX2, maxY2
 		
 		// Player bottom bounding box <--> enemy top bounding box
-		overlaps (enemy.posX ,enemy.posY + 0.3f, enemy.posX + 0.90f,enemy.posY + 0.60f, // minX1, minY1, maxX1, maxY1
+		isOverlaping=overlaps (enemy.posX+0.25f ,enemy.posY + 0.45f, enemy.posX + 0.7f,enemy.posY + 0.7f, // minX1, minY1, maxX1, maxY1
 				Engine.playerBankPosX+0.15f,Engine.PLAYER_POS_Y+0.2f,Engine.playerBankPosX+0.80f,Engine.PLAYER_POS_Y + 0.60f );	//minX2, minY2, maxX2, maxY2
 		
 		
 		// Player top bounding box <--> enemy bottom bounding box 
-		overlaps (enemy.posX + 0.30f,enemy.posY,enemy.posX + 0.60f,enemy.posY + 0.60f, // minX1, minY1, maxX1, maxY1
+		isOverlaping=overlaps (enemy.posX ,enemy.posY,enemy.posX + 1.0f,enemy.posY + 0.45f, // minX1, minY1, maxX1, maxY1
 				Engine.playerBankPosX+0.35f,Engine.PLAYER_POS_Y+0.6f,Engine.playerBankPosX+0.60f,Engine.PLAYER_POS_Y + 0.90f ); //minX2, minY2, maxX2, maxY2
 		
 		// Player top bounding box <--> enemy top bounding box
-		overlaps (enemy.posX ,enemy.posY + 0.3f, enemy.posX + 0.90f,enemy.posY + 0.60f, // minX1, minY1, maxX1, maxY1
+		isOverlaping=overlaps (enemy.posX+0.25f ,enemy.posY + 0.45f, enemy.posX + 0.7f,enemy.posY + 0.7f, // minX1, minY1, maxX1, maxY1
 				Engine.playerBankPosX+0.35f,Engine.PLAYER_POS_Y+0.6f,Engine.playerBankPosX+0.60f,Engine.PLAYER_POS_Y + 0.90f ); //minX2, minY2, maxX2, maxY2
 		
-		return true;
+		return isOverlaping;
 	}
 	
 	

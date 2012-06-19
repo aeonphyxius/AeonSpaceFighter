@@ -5,8 +5,10 @@
     android:layout_height="match_parent">
     <ImageView android:id="@+id/Help1BackImage"
     	android:src="@drawable/help1" 
-    	android:layout_width="match_parent" 
-    	android:layout_height="match_parent"
+    	android:layout_width="fill_parent" 
+    	android:layout_height="fill_parent"
+    	android:adjustViewBounds="true"
+    	android:scaleType="fitXY"
     	android:contentDescription="@string/AboutBkgImg">
     </ImageView>
     <RelativeLayout

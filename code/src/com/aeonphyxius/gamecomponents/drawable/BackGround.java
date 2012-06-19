@@ -1,6 +1,5 @@
 package com.aeonphyxius.gamecomponents.drawable;
 
-import java.io.IOException;
 import java.io.InputStream;
 import javax.microedition.khronos.opengles.GL10;
 import com.aeonphyxius.engine.Engine;
