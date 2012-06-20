@@ -193,16 +193,16 @@ public class BoundingBox {
 			isOverlaping=ovelapsScout(enemy);
 			break;
 		case Engine.TYPE_WARSHIP:
-			isOverlaping=ovelapsInterceptor(enemy);
+			//isOverlaping=ovelapsInterceptor(enemy);
 			break;
 		case Engine.TYPE_FINAL1:
-			isOverlaping=ovelapsInterceptor(enemy);
+			//isOverlaping=ovelapsInterceptor(enemy);
 			break;
 		case Engine.TYPE_FINAL2:
-			isOverlaping=ovelapsInterceptor(enemy);
+			//isOverlaping=ovelapsInterceptor(enemy);
 			break;
 		case Engine.TYPE_FINAL3:
-			isOverlaping=ovelapsInterceptor(enemy);
+			//isOverlaping=ovelapsInterceptor(enemy);
 			break;
 		}
 		
