@@ -27,9 +27,9 @@ public class TextureManager {
 	private int[] textures = new int[10];					// textures array
 	private static TextureManager instance = null;			// Singleton implementation
 	
-	public static final String TEXTURE_PLAYER_FILE = "img_ship.png";
-	public static final String TEXTURE_PLAYER_LEFT_FILE = "img_ship_left.png";
-	public static final String TEXTURE_PLAYER_RIGHT_FILE = "img_ship_right.png";
+	private static final String TEXTURE_PLAYER_FILE = "img_ship.png";
+	private static final String TEXTURE_PLAYER_LEFT_FILE = "img_ship_left.png";
+	private static final String TEXTURE_PLAYER_RIGHT_FILE = "img_ship_right.png";
 
 
 	/**
@@ -96,7 +96,9 @@ public class TextureManager {
 
 		}		
 
-		gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[textureNumber]);
+		textures[textureNumber] = textureNumber;
+		//gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[textureNumber]);
+		gl.glBindTexture(GL10.GL_TEXTURE_2D, textureNumber);
 		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
 		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
 		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_S, GL10.GL_CLAMP_TO_EDGE);
@@ -128,17 +130,14 @@ public class TextureManager {
 		}catch(Exception e){
 
 		}		
-
-		gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[textureNumber - 1]);
-
+		textures[textureNumber] = textureNumber;
+		//gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[textureNumber]);
+		gl.glBindTexture(GL10.GL_TEXTURE_2D, textureNumber);
 		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
 		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
-
 		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_S, GL10.GL_CLAMP_TO_EDGE);
 		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_T, GL10.GL_CLAMP_TO_EDGE);
-
 		GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
-
 		bitmap.recycle();
 
 		return textures;

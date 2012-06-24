@@ -57,14 +57,14 @@ public class PlayerDestructionOverlay implements Overlay {
 	}
 
 	@Override
-	public void draw(GL10 gl, int[] spriteSheet) {
+	public void draw(GL10 gl) {
 		float elapsed;
 
 		// update the sprite position
 		Explosion.getInstance().update(gl, 0.4f, 0.4f, 1.0f, explosionData.x, explosionData.y, 0f);
 
 		// draw the sprite
-		Explosion.getInstance().draw(gl, spriteSheet,explosionData.animation);
+		Explosion.getInstance().draw(gl, explosionData.animation);
 
 		// restore Matrix transformations to its original configuration
 		Explosion.getInstance().restoreMatrix(gl);

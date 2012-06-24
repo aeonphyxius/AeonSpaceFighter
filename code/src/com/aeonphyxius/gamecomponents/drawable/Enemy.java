@@ -164,8 +164,8 @@ public class Enemy extends EngineGL{
 	 * @param gl
 	 * @param spriteSheet
 	 */
-	public void draw(GL10 gl, int[] spriteSheet) {
-		super.draw(gl, spriteSheet, 0, enemyTexture);
+	public void draw(GL10 gl) {
+		super.draw(gl, Engine.TEXTURE_FILE_OLD, enemyTexture);
 	}
 
 }

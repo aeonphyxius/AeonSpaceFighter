@@ -53,8 +53,8 @@ public class Weapon extends EngineGL {
 	 * @param gl OpenGL handler
 	 * @param spriteSheet array containing all sprites ids
 	 */
-	public void draw(GL10 gl, int[] spriteSheet) {
-		super.draw(gl, spriteSheet, Engine.TEXTURES, weaponTexture);
+	public void draw(GL10 gl) {
+		super.draw(gl,  Engine.TEXTURE_FILE_OLD, weaponTexture);
 	}
 
 }

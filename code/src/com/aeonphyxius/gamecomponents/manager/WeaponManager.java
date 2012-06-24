@@ -120,7 +120,7 @@ public class WeaponManager {
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
 
-					iterWeapon.draw(gl,spriteSheets);
+					iterWeapon.draw(gl);
 					gl.glPopMatrix();
 					gl.glLoadIdentity();
 				}
@@ -150,7 +150,7 @@ public class WeaponManager {
 					gl.glScalef(.4f, .4f, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();		
-					iterWeapon.draw(gl,spriteSheets);
+					iterWeapon.draw(gl);
 					gl.glPopMatrix();
 					gl.glLoadIdentity();
 				}

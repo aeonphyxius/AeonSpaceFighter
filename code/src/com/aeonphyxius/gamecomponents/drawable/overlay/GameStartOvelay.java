@@ -74,14 +74,14 @@ public class GameStartOvelay extends EngineGL implements Overlay {
 	}
 
 	@Override	
-	public void draw(GL10 gl, int[] spriteSheet) {		
+	public void draw(GL10 gl) {		
 		elapsed += System.currentTimeMillis() - timeStamp;
 
 		// update the sprite position
 		update(gl, (0.05f + (0.01f * animation)), (0.05f+ (0.01f * animation)) , 1.0f, 3.0f ,3.0f , 0.0f );
 
 		// draw the sprite
-		draw(gl, spriteSheet, Engine.TEXTURES, playerTexturesList.get(frame));
+		draw(gl, Engine.TEXTURE_FILE_OLD, playerTexturesList.get(frame));
 
 		// restore Matrix transformations to its original configuration
 		restoreMatrix(gl);

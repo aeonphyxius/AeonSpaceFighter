@@ -66,9 +66,8 @@ public class ExplosionManager{
 	/**
 	 * HUD draw method to display all components on screen
 	 * @param gl OpenGL handler
-	 * @param spriteSheet array containing all sprites ids
 	 */
-	public void draw(GL10 gl, int[] spriteSheet) {
+	public void draw(GL10 gl) {
 		float elapsed;
 
 		for (int i = 0; i < explosionList.size();i++){		
@@ -83,7 +82,7 @@ public class ExplosionManager{
 				gl.glScalef(.35f, .35f, 1f);				// Scale the original image (half more to make it even more small)
 				gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 				gl.glLoadIdentity();				
-				Explosion.getInstance().draw(gl, spriteSheet,explosionList.get(i).animation);	
+				Explosion.getInstance().draw(gl, explosionList.get(i).animation);	
 				gl.glPopMatrix();							// Recover previous Matrix
 				gl.glLoadIdentity();
 

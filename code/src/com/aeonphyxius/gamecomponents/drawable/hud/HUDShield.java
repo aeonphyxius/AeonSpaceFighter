@@ -67,11 +67,10 @@ public class HUDShield extends EngineGL{
 	/**
 	 * Draw the shields status at the specified position.
 	 * @param gl OpenGL handler
-	 * @param spriteSheet array containing all sprites ids
 	 * @param textureNum position into the array of textures
 	 */
-	public void draw(GL10 gl, int[] spriteSheet,int textureNum) {		
-		super.draw(gl, spriteSheet, Engine.TEXTURES, textureRegionList.get(textureNum));		
+	public void draw(GL10 gl, int textureNum) {		
+		super.draw(gl, Engine.TEXTURE_FILE_OLD, textureRegionList.get(textureNum));		
 	}
 
 }

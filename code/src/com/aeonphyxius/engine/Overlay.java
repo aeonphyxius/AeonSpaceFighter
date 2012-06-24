@@ -26,7 +26,7 @@ public interface Overlay {
 	 * @param gl
 	 * @param spriteSheet
 	 */
-	public void draw(GL10 gl, int[] spriteSheet);
+	public void draw(GL10 gl);
 	
 
 }

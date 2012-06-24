@@ -50,10 +50,9 @@ public class HUDLives extends EngineGL {
 	 * Draw the lives icon at the specified position.
 	 * 
 	 * @param gl OpenGL handler
-	 * @param spriteSheet array containing all sprites ids
 	 */
-	public void draw(GL10 gl, int[] spriteSheet) {
-		super.draw(gl, spriteSheet, Engine.TEXTURES, textureRegion);
+	public void draw(GL10 gl) {
+		super.draw(gl, Engine.TEXTURE_FILE_OLD, textureRegion);
 	}
 
 }

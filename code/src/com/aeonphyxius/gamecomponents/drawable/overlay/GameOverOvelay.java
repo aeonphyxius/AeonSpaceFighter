@@ -62,7 +62,7 @@ public class GameOverOvelay extends EngineGL implements Overlay {
 
 
 	@Override
-	public void draw(GL10 gl, int[] spriteSheet) {
+	public void draw(GL10 gl) {
 
 		elapsed += System.currentTimeMillis() - timeStamp;
 
@@ -70,7 +70,7 @@ public class GameOverOvelay extends EngineGL implements Overlay {
 		update (gl,.25f, .25f, 1f,1.f, 1.f, 0f );
 
 		// draw the sprite
-		draw(gl, spriteSheet, Engine.TEXTURES, gameOverTexture);
+		draw(gl, Engine.TEXTURE_FILE_OLD, gameOverTexture);
 
 		// restore Matrix transformations to its original configuration
 		restoreMatrix(gl);

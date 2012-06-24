@@ -67,7 +67,7 @@ public class LevelCompleteOverOvelay extends EngineGL implements Overlay {
 
 
 	@Override
-	public void draw(GL10 gl, int[] spriteSheet) {
+	public void draw(GL10 gl) {
 
 		elapsed += System.currentTimeMillis() - timeStamp;
 
@@ -75,7 +75,7 @@ public class LevelCompleteOverOvelay extends EngineGL implements Overlay {
 		update (gl,.10f + (0.01f * animation), .10f+ (0.01f * animation), 1f,4.f, 2.f, 0f );
 
 		// draw the sprite
-		draw(gl, spriteSheet, Engine.TEXTURES, gameOverTexture);
+		draw(gl, Engine.TEXTURE_FILE_OLD, gameOverTexture);
 
 		// restore Matrix transformations to its original configuration
 		restoreMatrix(gl);

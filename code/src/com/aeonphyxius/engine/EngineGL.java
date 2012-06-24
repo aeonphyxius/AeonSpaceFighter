@@ -47,11 +47,11 @@ public class EngineGL {
 	 * @param spriteIndex
 	 * @param textureRegion
 	 */
-	public void draw(GL10 gl, int[] spriteSheet, int spriteIndex, TextureRegion textureRegion) {
+	/*public void draw(GL10 gl, int textureIndex, TextureRegion textureRegion) {
 
 		gl.glMatrixMode(GL10.GL_TEXTURE);
 		gl.glLoadIdentity();
-		gl.glBindTexture(GL10.GL_TEXTURE_2D, spriteSheet[spriteIndex]);
+		gl.glBindTexture(GL10.GL_TEXTURE_2D, textureIndex);
 
 		gl.glFrontFace(GL10.GL_CCW);
 		gl.glEnable(GL10.GL_CULL_FACE);
@@ -70,7 +70,7 @@ public class EngineGL {
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
 		gl.glDisable(GL10.GL_CULL_FACE);
-	}
+	}*/
 
 	/**
 	 * Draw the given texture at the position previously updated
@@ -79,11 +79,11 @@ public class EngineGL {
 	 * @param spriteIndex
 	 * @param textureRegion
 	 */
-	public void draw(GL10 gl, int spriteIndex, TextureRegion textureRegion) {
+	public void draw(GL10 gl, int textureIndex, TextureRegion textureRegion) {
 
 		gl.glMatrixMode(GL10.GL_TEXTURE);
 		gl.glLoadIdentity();
-		gl.glBindTexture(GL10.GL_TEXTURE_2D, TextureManager.getInstance().getTextures()[spriteIndex]);
+		gl.glBindTexture(GL10.GL_TEXTURE_2D, textureIndex);
 
 		gl.glFrontFace(GL10.GL_CCW);
 		gl.glEnable(GL10.GL_CULL_FACE);

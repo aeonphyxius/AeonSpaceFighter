@@ -57,9 +57,6 @@ public static final String BACKGROUND_LAYER_TWO = "debris.png";
 
 public static final int SPLASH_SCREEN_MUSIC = R.raw.warfieldedit;
 
-public static final int TEXTURES = 0;
-public static final int LEFT_TEXTURE_POSITION=1;
-public static final int RIGHT_TEXTURE_POSITION=3;
 
 public static final float PLAYER_POS_Y = 0.7f;
 public static final float PLAYER_FIRE_START_Y = 1.5f;
@@ -135,6 +132,10 @@ public static final int POINTS_HARD = 10;
 public static final int TEXTURE_PLAYER = 4;
 public static final int TEXTURE_PLAYER_RIGHT = 5;
 public static final int TEXTURE_PLAYER_LEFT = 6;
+
+public static final int TEXTURE_FILE_OLD = 0;
+public static final int LEFT_TEXTURE_POSITION=1;
+public static final int RIGHT_TEXTURE_POSITION=3;
 
 /*Game Variables*/
 public static boolean isMuted = true;

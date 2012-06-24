@@ -230,7 +230,7 @@ public class SquadronManager {
 							// Draw the enemy, rollback matrix, etc.							
 							gl.glMatrixMode(GL10.GL_TEXTURE);
 							gl.glLoadIdentity();														
-							iterEnemy.draw(gl, spriteSheet);
+							iterEnemy.draw(gl);
 							gl.glPopMatrix();
 							gl.glLoadIdentity();
 						}

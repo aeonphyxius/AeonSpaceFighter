@@ -82,9 +82,9 @@ public class HUDScore extends EngineGL {
 	 * @param spriteSheet array containing all sprites ids
 	 * @param textureNum position into the array of textures
 	 */
-	public void draw(GL10 gl, int[] spriteSheet, int textureNum) {
+	public void draw(GL10 gl, int textureNum) {
 
-		super.draw(gl, spriteSheet, Engine.TEXTURES,
+		super.draw(gl, Engine.TEXTURE_FILE_OLD,
 				textureRegionList.get(textureNum));
 
 	}

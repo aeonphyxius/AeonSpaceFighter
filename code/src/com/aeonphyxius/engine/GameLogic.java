@@ -37,7 +37,7 @@ public class GameLogic implements Renderer {
 
 
 
-	private TextureManager textureLoader;					// Texture loader
+	//private TextureManager textureLoader;					// Texture loader
 	private int[] spriteSheets = new int[4];		// Textures storage
 	private long loopStart = 0;						// game loop start time
 	private long loopEnd = 0;						// game loop loop end time
@@ -73,19 +73,19 @@ public class GameLogic implements Renderer {
 			Player.getInstance().draw(gl, spriteSheets);
 			WeaponManager.getInstance().drawWeapon(gl, spriteSheets);
 			SquadronManager.getInstance().draw(gl, spriteSheets);
-			HUDManager.getInstance().draw(gl, spriteSheets);
+			HUDManager.getInstance().draw(gl);
 			detectCollisions();		
-			ExplosionManager.getInstance().draw(gl, spriteSheets);
+			ExplosionManager.getInstance().draw(gl);
 			break;
 
 		case DESTROYED:
 			BackGroundManager.getInstance().scrollBackground(gl);
-			PlayerDestructionOverlay.getInstance().draw(gl, spriteSheets);			
+			PlayerDestructionOverlay.getInstance().draw(gl);			
 			break;
 
 		case GAMEOVER:
 			BackGroundManager.getInstance().scrollBackground(gl);
-			GameOverOvelay.getInstance().draw(gl, spriteSheets);
+			GameOverOvelay.getInstance().draw(gl);
 			break;
 		case END:			
 			Engine.gameActivity.finish();
@@ -93,7 +93,7 @@ public class GameLogic implements Renderer {
 		case LEVEL_COMPLETE:
 
 			BackGroundManager.getInstance().scrollBackground(gl);
-			LevelCompleteOverOvelay.getInstance().draw(gl, spriteSheets);			
+			LevelCompleteOverOvelay.getInstance().draw(gl);			
 
 			break;
 		}
@@ -172,10 +172,12 @@ public class GameLogic implements Renderer {
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {		
 
 		MusicManager.getInstance().playMusic();
-		textureLoader = new TextureManager(gl);
-		spriteSheets = textureLoader.loadTexture(gl, Engine.TEXTURES_FILE,Engine.context, 1);
+		//textureLoader = new TextureManager(gl);
+		//spriteSheets = textureLoader.loadTexture(gl, Engine.TEXTURES_FILE,Engine.context, 1);
+		spriteSheets = TextureManager.getInstance().loadTexture(gl, Engine.TEXTURES_FILE,Engine.context, 0);
+		TextureManager.getInstance().loadPlayerTexture(gl, Engine.context);
 		BackGroundManager.getInstance().loadTextures(gl);
-		textureLoader.loadPlayerTexture(gl, Engine.context);
+		
 
 		gl.glEnable(GL10.GL_TEXTURE_2D);
 		gl.glClearDepthf(1.0f);

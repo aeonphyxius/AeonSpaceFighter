@@ -50,23 +50,21 @@ public class HUDManager {
 	/**
 	 * HUD draw method to display all components on screen
 	 * @param gl OpenGL handler
-	 * @param spriteSheet array containing all sprites ids
 	 */
-	public void draw(GL10 gl, int[] spriteSheet) {
+	public void draw(GL10 gl) {
 
-		drawControl (gl,spriteSheet);
-		drawLives  (gl,spriteSheet);		
-		drawShields(gl,spriteSheet);
-		drawDamage (gl,spriteSheet);
-		drawScore (gl,spriteSheet);
+		drawControl (gl);
+		drawLives  (gl);		
+		drawShields(gl);
+		drawDamage (gl);
+		drawScore (gl);
 	}
 
 	/**
 	 * Preparation to draw the player's score 
 	 * @param gl OpenGL handler
-	 * @param spriteSheet array containing all sprites ids
 	 */
-	private void drawScore(GL10 gl, int[] spriteSheet) {
+	private void drawScore(GL10 gl) {
 
 		int maxValue = 10000;
 		int countStringPos = 0;
@@ -84,9 +82,9 @@ public class HUDManager {
 
 			// Select the correct texture (number) to display
 			if (Player.getInstance().getData().getPoints()< maxValue){
-				HUDScore.getInstance().draw(gl, spriteSheet,0); 
+				HUDScore.getInstance().draw(gl, Engine.TEXTURE_FILE_OLD); 
 			}else{				
-				HUDScore.getInstance().draw(gl, spriteSheet,Integer.parseInt(tempScore.charAt(countStringPos)+"") ); 
+				HUDScore.getInstance().draw(gl, Integer.parseInt(tempScore.charAt(countStringPos)+"") ); 
 				countStringPos++;
 			}
 
@@ -101,9 +99,8 @@ public class HUDManager {
 	/**
 	 * Preparation to draw the player's damage status 
 	 * @param gl OpenGL handler
-	 * @param spriteSheet array containing all sprites ids
 	 */
-	private void drawDamage(GL10 gl, int[] spriteSheet) {
+	private void drawDamage(GL10 gl) {
 
 		gl.glMatrixMode(GL10.GL_MODELVIEW);
 		gl.glLoadIdentity();
@@ -112,7 +109,7 @@ public class HUDManager {
 		gl.glTranslatef(06.f, 11.3f, 0f);				// Position on screen
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();				
-		HUDDamage.getInstance().draw(gl, spriteSheet,Player.getInstance().getData().getDamagePercentage());	// Draw the damage texture
+		HUDDamage.getInstance().draw(gl, Player.getInstance().getData().getDamagePercentage());	// Draw the damage texture
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();
 	}
@@ -120,9 +117,8 @@ public class HUDManager {
 	/**
 	 * Preparation to draw the player's controls 
 	 * @param gl OpenGL handler
-	 * @param spriteSheet array containing all sprites ids
 	 */
-	public void drawControl(GL10 gl, int[] spriteSheet) {
+	public void drawControl(GL10 gl) {
 
 		// Background BOTTOM
 		gl.glMatrixMode(GL10.GL_MODELVIEW);
@@ -132,7 +128,7 @@ public class HUDManager {
 		gl.glTranslatef(0.0f, -0.1f, 0f); 			// Position on screen (-0.1) because at 0 there is a small space at the bottom 		
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();
-		HUDControl.getInstance().drawBkg(gl, spriteSheet); // Draw black background for controls zone
+		HUDControl.getInstance().drawBkg(gl); // Draw black background for controls zone
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();		
 
@@ -144,7 +140,7 @@ public class HUDManager {
 		gl.glTranslatef(0.0f, 5.9f, 0f); 			// Position on screen (-0.1) because at 0 there is a small space at the bottom 		
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();
-		HUDControl.getInstance().drawBkg(gl, spriteSheet); // Draw black background for controls zone
+		HUDControl.getInstance().drawBkg(gl); // Draw black background for controls zone
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();		
 
@@ -158,7 +154,7 @@ public class HUDManager {
 		gl.glTranslatef(0.4f, 0.f, 0f); 			// Position on screen		
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();
-		HUDControl.getInstance().drawLeftArrow(gl, spriteSheet,Engine.LEFT_TEXTURE_POSITION);	// Draw Left arrow
+		HUDControl.getInstance().drawLeftArrow(gl,Engine.LEFT_TEXTURE_POSITION);	// Draw Left arrow
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();
 
@@ -170,7 +166,7 @@ public class HUDManager {
 		gl.glTranslatef(1.9f, 0.f, 0f); 			// Position on screen		
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();
-		HUDControl.getInstance().drawRightArrow(gl, spriteSheet,Engine.RIGHT_TEXTURE_POSITION);	// Draw Right arrow
+		HUDControl.getInstance().drawRightArrow(gl, Engine.RIGHT_TEXTURE_POSITION);	// Draw Right arrow
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();
 
@@ -179,9 +175,8 @@ public class HUDManager {
 	/**
 	 * Preparation to draw the player's shields status 
 	 * @param gl OpenGL handler
-	 * @param spriteSheet array containing all sprites ids
 	 */
-	private void drawShields (GL10 gl, int[] spriteSheet) {
+	private void drawShields (GL10 gl) {
 
 		gl.glMatrixMode(GL10.GL_MODELVIEW);		
 		gl.glLoadIdentity();
@@ -190,7 +185,7 @@ public class HUDManager {
 		gl.glTranslatef(04.f, 11.3f, 0f);				// Position on screen
 		gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 		gl.glLoadIdentity();
-		HUDShield.getInstance().draw(gl, spriteSheet,Player.getInstance().getData().getShieldPercentage()); // Draw the texture
+		HUDShield.getInstance().draw(gl, Player.getInstance().getData().getShieldPercentage()); // Draw the texture
 		gl.glPopMatrix();							// Recover previous Matrix
 		gl.glLoadIdentity();
 	}
@@ -198,9 +193,8 @@ public class HUDManager {
 	/**
 	 * Preparation to draw the player's remaining lives 
 	 * @param gl OpenGL handler
-	 * @param spriteSheet array containing all sprites ids
 	 */
-	private void drawLives (GL10 gl, int[] spriteSheet) {
+	private void drawLives (GL10 gl) {
 
 
 		for (int i=0;i<Player.getInstance().getData().getLives();i++){
@@ -211,7 +205,7 @@ public class HUDManager {
 			gl.glTranslatef(i+0.5f, 18.5f, 0f);			// Position on screen			
 			gl.glMatrixMode(GL10.GL_TEXTURE);			// Texture Mode
 			gl.glLoadIdentity();
-			HUDLives.getInstance().draw(gl, spriteSheet);	// Draw the texture
+			HUDLives.getInstance().draw(gl);	// Draw the texture
 			gl.glPopMatrix();							// Recover previous Matrix
 			gl.glLoadIdentity();
 		}
