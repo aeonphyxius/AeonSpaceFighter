@@ -37,7 +37,7 @@ public class GameLogic implements Renderer {
 
 
 
-	private Texture textureLoader;					// Texture loader
+	private TextureManager textureLoader;					// Texture loader
 	private int[] spriteSheets = new int[4];		// Textures storage
 	private long loopStart = 0;						// game loop start time
 	private long loopEnd = 0;						// game loop loop end time
@@ -171,16 +171,16 @@ public class GameLogic implements Renderer {
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {		
 
-		MusicManager.getInstance().playMusic();		
-		textureLoader = new Texture(gl);
+		MusicManager.getInstance().playMusic();
+		textureLoader = new TextureManager(gl);
 		spriteSheets = textureLoader.loadTexture(gl, Engine.TEXTURES_FILE,Engine.context, 1);
 		BackGroundManager.getInstance().loadTextures(gl);
+		textureLoader.loadPlayerTexture(gl, Engine.context);
 
 		gl.glEnable(GL10.GL_TEXTURE_2D);
 		gl.glClearDepthf(1.0f);
 		gl.glEnable(GL10.GL_DEPTH_TEST);
 		gl.glDepthFunc(GL10.GL_LEQUAL);
-
 
 		try{
 			SquadronManager.getInstance().loadSquadronsLevel(LevelData.getInstance().getCurrentLevel());

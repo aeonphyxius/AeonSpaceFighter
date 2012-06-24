@@ -132,6 +132,9 @@ public static final int POINTS_EASY = 5;
 public static final int POINTS_NORMAL = 10;
 public static final int POINTS_HARD = 10;
 
+public static final int TEXTURE_PLAYER = 4;
+public static final int TEXTURE_PLAYER_RIGHT = 5;
+public static final int TEXTURE_PLAYER_LEFT = 6;
 
 /*Game Variables*/
 public static boolean isMuted = true;

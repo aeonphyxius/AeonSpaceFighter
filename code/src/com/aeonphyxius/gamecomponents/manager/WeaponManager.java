@@ -83,6 +83,7 @@ public class WeaponManager {
 	 * @param gl OpenGL handler
 	 * @param spriteSheet array containing all sprites ids
 	 */
+
 	public void drawWeapon(GL10 gl,int[] spriteSheets){
 
 		float elapsed = System.currentTimeMillis() - lastShoot;
@@ -90,8 +91,8 @@ public class WeaponManager {
 		// Automatic players shooting
 		if ( elapsed > Engine.SHOOT_SLEEP){ 
 			lastShoot=System.currentTimeMillis();
-			MusicManager.getInstance().playSound(Engine.SOUND_FUSHIONSHOT);
-			playeFireList.add(new Weapon());			
+			//MusicManager.getInstance().playSound(Engine.SOUND_FUSHIONSHOT);
+			//playeFireList.add(new Weapon());			
 		}
 
 		// Check all player's shots and update + draw them

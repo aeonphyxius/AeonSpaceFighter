@@ -54,13 +54,17 @@ public class Player extends EngineGL {
 		// TODO: Rollback
 		
 		//TextureRegion tempTextureRegion = new TextureRegion( new float[] { 0.808f, 0.027f, 0.885f, 0.027f, 0.885f, 0.106f, 0.808f, 0.106f, });
-		TextureRegion tempTextureRegion = new TextureRegion(new float[] { 0.003f, 0.738f,	0.252f, 0.738f, 0.252f, 0.984f, 0.003f, 0.984f, });
+		//TextureRegion tempTextureRegion = new TextureRegion(new float[] { 0.003f, 0.738f,	0.252f, 0.738f, 0.252f, 0.984f, 0.003f, 0.984f, });
+		//TextureRegion tempTextureRegion = new TextureRegion(new float[] { 0.191f, 0.182f, 0.808f, 0.182f, 0.808f, 0.813f, 0.191f, 0.813f, });
+		TextureRegion tempTextureRegion = new TextureRegion(new float[] { 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.f, });
 		playerTexturesList.add(tempTextureRegion); // Texture for normal position spaceship texture
 
-		tempTextureRegion = new TextureRegion(new float[] { 0.736f, 0.111f,	0.793f, 0.111f, 0.793f, 0.195f, 0.736f, 0.195f, });
+		//tempTextureRegion = new TextureRegion(new float[] { 0.736f, 0.111f,	0.793f, 0.111f, 0.793f, 0.195f, 0.736f, 0.195f, });
+		tempTextureRegion = new TextureRegion(new float[] { 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.f, });
 		playerTexturesList.add(tempTextureRegion); // Texture for going right position spaceship texture
 
-		tempTextureRegion = new TextureRegion(new float[] { 0.898f, 0.111f,	0.957f, 0.111f, 0.957f, 0.195f, 0.898f, 0.195f, });
+		//tempTextureRegion = new TextureRegion(new float[] { 0.898f, 0.111f,	0.957f, 0.111f, 0.957f, 0.195f, 0.898f, 0.195f, });
+		tempTextureRegion = new TextureRegion(new float[] { 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.f, });
 		playerTexturesList.add(tempTextureRegion); // Texture for going left position spaceship texture
 
 	}	
@@ -146,6 +150,7 @@ public class Player extends EngineGL {
 				gl.glMatrixMode(GL10.GL_TEXTURE);
 				gl.glLoadIdentity();
 			}
+			super.draw(gl, Engine.TEXTURE_PLAYER_LEFT, playerTexturesList.get(texturePosition));
 			break;
 
 		case Engine.PLAYER_BANK_RIGHT_1: // Going RIGHT
@@ -160,6 +165,7 @@ public class Player extends EngineGL {
 				gl.glMatrixMode(GL10.GL_TEXTURE);
 				gl.glLoadIdentity();									
 			}
+			super.draw(gl, Engine.TEXTURE_PLAYER_RIGHT, playerTexturesList.get(texturePosition));
 			break;
 
 		case Engine.PLAYER_RELEASE: // Stay		
@@ -167,19 +173,20 @@ public class Player extends EngineGL {
 			gl.glTranslatef(Engine.playerBankPosX,Engine.PLAYER_POS_Y, 0f);
 			gl.glMatrixMode(GL10.GL_TEXTURE);
 			gl.glLoadIdentity();
+			super.draw(gl, Engine.TEXTURE_PLAYER, playerTexturesList.get(texturePosition));
 			break;
 
 		default:
 			gl.glTranslatef(Engine.playerBankPosX, Engine.PLAYER_POS_Y, 0f);
 			gl.glMatrixMode(GL10.GL_TEXTURE);
-			gl.glLoadIdentity();					
+			gl.glLoadIdentity();
+			super.draw(gl, Engine.TEXTURE_PLAYER, playerTexturesList.get(texturePosition));
 			break;
 		}		
-		super.draw(gl, spriteSheet, Engine.TEXTURES, playerTexturesList.get(texturePosition));
+		
 
 		// Recover previous Matrix
 		gl.glPopMatrix();
 		gl.glLoadIdentity();
 	}
-
 }
