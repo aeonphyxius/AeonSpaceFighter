@@ -2,6 +2,7 @@ package com.aeonphyxius.gamecomponents.manager;
 
 import java.util.ArrayList;
 
+import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.gamecomponents.drawable.Enemy;
 
 /**
@@ -22,6 +23,7 @@ public class Squadron {
 	private int squadronEnemyType;							// Squadron type
 	private int squadronNumEnemies;							// Number of enemies in this squadron
 	private int squadronEnemiesDestroyed;					// is destroyed this squadron
+	private float squadronYPos;
 
 
 	/**
@@ -31,15 +33,22 @@ public class Squadron {
 	 * @param squadronNumEnemies
 	 * @param squadronEnemiesDestroyed
 	 */
-	public Squadron(ArrayList<Enemy> enemyList,  int squadronEnemyType, int squadronNumEnemies,int squadronEnemiesDestroyed){
+	public Squadron(ArrayList<Enemy> enemyList,  int squadronEnemyType, int squadronNumEnemies,int squadronEnemiesDestroyed, int squadronYPos){
 		this.enemyList = enemyList;		
 
 		this.squadronEnemyType = squadronEnemyType;
 		this.squadronNumEnemies = squadronNumEnemies;
-		this.squadronEnemiesDestroyed = squadronEnemiesDestroyed;		
+		this.squadronEnemiesDestroyed = squadronEnemiesDestroyed;	
+		this.squadronYPos = squadronYPos;		
 	}
 
-
+	public boolean isVisible (){
+		if (squadronYPos-Engine.yScroll >= Engine.SQUADRON_START_Y){
+			return false;
+		}else{
+			return true;
+		}		
+	}
 
 	public boolean isDestroyed(){
 		return squadronNumEnemies <= squadronEnemiesDestroyed;

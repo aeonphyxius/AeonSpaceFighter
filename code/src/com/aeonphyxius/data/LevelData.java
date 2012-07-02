@@ -1,6 +1,5 @@
 package com.aeonphyxius.data;
 
-import com.aeonphyxius.engine.Engine;
 
 /**
 * LevelData Object.
@@ -16,35 +15,49 @@ import com.aeonphyxius.engine.Engine;
 
 public class LevelData {
 	
-	private int currentLevel;
 	
-	private static LevelData instance = null;
+	private String bg1TextureFile;
+	private String bg2TextureFile;
+	private String musicFile;
+	private String endTextureFile;
 	
-	public static LevelData getInstance() {
-		if (instance == null) {
-			instance = new LevelData();
-		}
-		return instance;				
+	
+	
+	public LevelData(String bg1TextureFile, String bg2TextureFile, String musicFile, String endTextureFile) {
+		
+		this.bg1TextureFile = bg1TextureFile;
+		this.bg2TextureFile = bg2TextureFile;
+		this.musicFile = musicFile;
+		this.endTextureFile = endTextureFile;
 	}
+	
+	
+	public String getBg1TextureFile() {
+		return bg1TextureFile;
+	}
+	public void setBg1TextureFile(String bg1TextureFile) {
+		this.bg1TextureFile = bg1TextureFile;
+	}
+	public String getBg2TextureFile() {
+		return bg2TextureFile;
+	}
+	public void setBg2TextureFile(String bg2TextureFile) {
+		this.bg2TextureFile = bg2TextureFile;
+	}
+	public String getMusicFile() {
+		return musicFile;
+	}
+	public void setMusicFile(String musicFile) {
+		this.musicFile = musicFile;
+	}
+	public String getEndTextureFile() {
+		return endTextureFile;
+	}
+	public void setEndTextureFile(String endTextureFile) {
+		this.endTextureFile = endTextureFile;
+	}
+	
+	
 	
 
-	public void resetLevelData(){
-		this.currentLevel = 1;
-	}
-	
-	private LevelData(){
-		this.currentLevel  = 1; 			// First level, is always level 1.
-	}
-
-
-	
-	public int getCurrentLevel() {
-		return currentLevel;
-	}
-
-	public void increaseLevel(){
-		if (currentLevel < Engine.MAX_LEVEL){
-			currentLevel ++;
-		}		
-	}
 }

@@ -81,18 +81,17 @@ public class WeaponManager {
 	/**
 	 * Draw the control weapons fired 
 	 * @param gl OpenGL handler
-	 * @param spriteSheet array containing all sprites ids
 	 */
 
-	public void drawWeapon(GL10 gl,int[] spriteSheets){
+	public void drawWeapon(GL10 gl){
 
 		float elapsed = System.currentTimeMillis() - lastShoot;
 		Weapon iterWeapon;
 		// Automatic players shooting
 		if ( elapsed > Engine.SHOOT_SLEEP){ 
 			lastShoot=System.currentTimeMillis();
-			//MusicManager.getInstance().playSound(Engine.SOUND_FUSHIONSHOT);
-			//playeFireList.add(new Weapon());			
+			MusicManager.getInstance().playSound(Engine.SOUND_FUSHIONSHOT);
+			playeFireList.add(new Weapon());			
 		}
 
 		// Check all player's shots and update + draw them
@@ -100,22 +99,20 @@ public class WeaponManager {
 			// If the first position is destroyed, should be removed from the list (to free resources)
 			if (playeFireList.get(0).isFired == false){
 				playeFireList.remove(playeFireList.get(0));
-			}		
-
+			}
 			for (Iterator<Weapon> i = playeFireList.iterator(); i.hasNext();) {				
 				iterWeapon = i.next();
 				// When the shot reaches the max position in screen
 				if (iterWeapon.posY >  Engine.MAX_Y){
 					iterWeapon.isFired = false;
 				}else if(iterWeapon.isFired){
-
 					iterWeapon.posY += Engine.PLAYER_BULLET_SPEED;
 					gl.glMatrixMode(GL10.GL_MODELVIEW);
 					gl.glLoadIdentity();
 					gl.glPushMatrix();
 					gl.glScalef(.15f, .15f, 0f);
 					//gl.glTranslatef(iterWeapon.posX, iterWeapon.posY, 0f);
-					gl.glTranslatef(Engine.playerBankPosX+0.7f,Engine.PLAYER_POS_Y+0.70f, 0f);
+					gl.glTranslatef(Engine.playerBankPosX+0.20f,Engine.PLAYER_POS_Y+0.5f, 0f);
 					gl.glScalef(.4f, .4f, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();
@@ -138,9 +135,8 @@ public class WeaponManager {
 				iterWeapon = i.next();			
 				// When the shot reaches the min position in screen	
 				if (iterWeapon.posY <  Engine.MIN_Y){
-					iterWeapon.isFired = false;
+					iterWeapon.isFired = false;					
 				}else if(iterWeapon.isFired){
-
 					iterWeapon.posY -= Engine.ENEMY_BULLET_SPEED;
 					gl.glMatrixMode(GL10.GL_MODELVIEW);
 					gl.glLoadIdentity();
@@ -153,7 +149,7 @@ public class WeaponManager {
 					iterWeapon.draw(gl);
 					gl.glPopMatrix();
 					gl.glLoadIdentity();
-				}
+				}				
 			}
 		}
 	}

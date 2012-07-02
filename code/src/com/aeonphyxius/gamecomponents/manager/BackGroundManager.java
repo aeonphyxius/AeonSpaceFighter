@@ -30,8 +30,8 @@ public class BackGroundManager {
 		background_list = new ArrayList<BackGround>();
 
 		// Add 2 layers for our background
-		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_1, 1f, 1.f, 0f));
-		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_2, 1.6f, 1.0f, -0.3f));
+		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_1, 1f, 1.f, 0f,Engine.TEXTURE_BG1));
+		background_list.add(new BackGround(Engine.SCROLL_BACKGROUND_2, 1.6f, 1.0f, -0.3f,Engine.TEXTURE_BG2));
 	}
 
 	/**
@@ -45,16 +45,6 @@ public class BackGroundManager {
 		return instance;
 	}
 
-
-
-	/**
-	 * Loading all background textures.
-	 * @param gl Open GL handler
-	 */
-	public void loadTextures(GL10 gl) {
-		background_list.get(0).loadTexture(gl, Engine.BACKGROUND_LAYER_ONE, Engine.context); 
-		background_list.get(1).loadTexture(gl, Engine.BACKGROUND_LAYER_TWO, Engine.context);
-	}
 
 	/**
 	 * Moves background layers to simulate scrolling

@@ -2,13 +2,14 @@ package com.aeonphyxius.gamecomponents.drawable.overlay;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import com.aeonphyxius.data.LevelData;
+import android.view.MotionEvent;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.EngineGL;
 import com.aeonphyxius.engine.Overlay;
 import com.aeonphyxius.engine.TextureRegion;
 import com.aeonphyxius.gamecomponents.drawable.Player;
 import com.aeonphyxius.gamecomponents.manager.ExplosionManager;
+import com.aeonphyxius.gamecomponents.manager.LevelManager;
 import com.aeonphyxius.gamecomponents.manager.WeaponManager;
 
 /**
@@ -50,7 +51,9 @@ public class GameOverOvelay extends EngineGL implements Overlay {
 	 */
 	private GameOverOvelay() {
 
-		gameOverTexture = new TextureRegion( new float[] { 0.533f, 0.296f, 0.766f, 0.296f, 0.766f, 0.424f, 0.533f, 0.424f, });
+		//gameOverTexture = new TextureRegion( new float[] { 0.533f, 0.296f, 0.766f, 0.296f, 0.766f, 0.424f, 0.533f, 0.424f, });
+		//gameOverTexture = new TextureRegion(new float[] { 1f, 1f, 0f, 1f, 0f, 0f, 1f, 0f, });
+		gameOverTexture = new TextureRegion(new float[]   { 0f, 1f, 1f, 1f, 1f, 0f, 0f, 0f, });
 
 		timeStamp = System.currentTimeMillis();
 	}
@@ -67,25 +70,36 @@ public class GameOverOvelay extends EngineGL implements Overlay {
 		elapsed += System.currentTimeMillis() - timeStamp;
 
 		// update the sprite position
-		update (gl,.25f, .25f, 1f,1.f, 1.f, 0f );
+		gl.glMatrixMode(GL10.GL_MODELVIEW);
+		gl.glLoadIdentity();
+		gl.glPushMatrix();
+		gl.glScalef(1f,1f, 0f);
+		gl.glTranslatef(0f, 0f, 0f);
+
+		gl.glMatrixMode(GL10.GL_TEXTURE);
+		gl.glLoadIdentity();
 
 		// draw the sprite
-		draw(gl, Engine.TEXTURE_FILE_OLD, gameOverTexture);
+		draw(gl, Engine.TEXTURE_GAME_OVER, gameOverTexture);
 
 		// restore Matrix transformations to its original configuration
 		restoreMatrix(gl);
 
 		// Continue the animation
-		if ( elapsed > Engine.GAME_OVER_SLEEP){			
-			GameStartOvelay.getInstance().resetOverlay();					
-			WeaponManager.getInstance().resetWeapons();		
-			ExplosionManager.getInstance().resetExplosions();
-			Player.getInstance().resetPlayerStatus();
-			LevelData.getInstance().resetLevelData();
-			this.resetOverlay();
-			Engine.GameSatus = Engine.GAMESTATUS.END;
-
+		if ( elapsed > Engine.GAME_OVER_SLEEP){
+			if (Engine.event != null){
+				switch (Engine.event.getAction()){
+				case MotionEvent.ACTION_DOWN:
+					GameStartOvelay.getInstance().resetOverlay();					
+					WeaponManager.getInstance().resetWeapons();		
+					ExplosionManager.getInstance().resetExplosions();
+					Player.getInstance().resetPlayerStatus();
+					LevelManager.getInstance().resetLevelData();
+					this.resetOverlay();
+					Engine.GameSatus = Engine.GAMESTATUS.END;
+					break;
+				}
+			}			
 		}
 	}
-
 }

@@ -70,8 +70,8 @@ public class GameActivity extends Activity {
 		Engine.display.getMetrics(gameDisplayMetrics);
 		int height =  gameDisplayMetrics.heightPixels / 7;
 		int playableArea = (gameDisplayMetrics.heightPixels - height);
-
-
+		Engine.event = event;
+		
 		if (y > playableArea){
 			switch (event.getAction()){
 			case MotionEvent.ACTION_DOWN:

@@ -81,8 +81,9 @@ public class EngineGL {
 	 */
 	public void draw(GL10 gl, int textureIndex, TextureRegion textureRegion) {
 
-		gl.glMatrixMode(GL10.GL_TEXTURE);
-		gl.glLoadIdentity();
+		//gl.glMatrixMode(GL10.GL_TEXTURE);
+		//gl.glLoadIdentity();
+		
 		gl.glBindTexture(GL10.GL_TEXTURE_2D, textureIndex);
 
 		gl.glFrontFace(GL10.GL_CCW);
@@ -112,7 +113,7 @@ public class EngineGL {
 	 * @param spriteIndex
 	 * @param textureRegion
 	 */
-	public void draw(GL10 gl , TextureRegion textureRegion) {
+	/*public void draw(GL10 gl , TextureRegion textureRegion) {
 
 		//gl.glBindTexture(GL10.GL_TEXTURE_2D, spriteSheet[spriteIndex]);
 
@@ -133,7 +134,7 @@ public class EngineGL {
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
 		gl.glDisable(GL10.GL_CULL_FACE);
-	}
+	}*/
 
 
 }

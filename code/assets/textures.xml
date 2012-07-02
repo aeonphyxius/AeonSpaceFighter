@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<textures>
+	<texture index="0" fileName="img_textures.png"/>
+	<texture index="4" fileName="img_ship.png"/>
+	<texture index="6" fileName="img_ship_right.png"/>
+	<texture index="5" fileName="img_ship_left.png"/>	
+	<texture index="10" fileName="img_arrows.png"/>
+	<texture index="11" fileName="img_game_over.png"/>	
+</textures>

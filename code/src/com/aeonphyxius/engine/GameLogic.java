@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
-import com.aeonphyxius.data.LevelData;
 import com.aeonphyxius.gamecomponents.drawable.Enemy;
 import com.aeonphyxius.gamecomponents.drawable.Player;
 import com.aeonphyxius.gamecomponents.drawable.Weapon;
@@ -15,6 +14,7 @@ import com.aeonphyxius.gamecomponents.drawable.overlay.PlayerDestructionOverlay;
 import com.aeonphyxius.gamecomponents.manager.BackGroundManager;
 import com.aeonphyxius.gamecomponents.manager.ExplosionManager;
 import com.aeonphyxius.gamecomponents.manager.HUDManager;
+import com.aeonphyxius.gamecomponents.manager.LevelManager;
 import com.aeonphyxius.gamecomponents.manager.Squadron;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 import com.aeonphyxius.gamecomponents.manager.WeaponManager;
@@ -35,16 +35,9 @@ import android.opengl.GLSurfaceView.Renderer;
 
 public class GameLogic implements Renderer {
 
-
-
-	//private TextureManager textureLoader;					// Texture loader
-	private int[] spriteSheets = new int[4];		// Textures storage
 	private long loopStart = 0;						// game loop start time
 	private long loopEnd = 0;						// game loop loop end time
 	private long loopRunTime = 0;					// game loop running time
-
-
-
 
 	@Override
 	public void onDrawFrame(GL10 gl) {
@@ -64,15 +57,15 @@ public class GameLogic implements Renderer {
 
 		case START:
 			BackGroundManager.getInstance().scrollBackground(gl);
-			GameStartOvelay.getInstance().draw(gl, spriteSheets);
-
+			GameStartOvelay.getInstance().draw(gl);
 			break;
 
 		case PLAYING:
+			Engine.yScroll += Engine.MOVING_OUT_SCOPE;
 			BackGroundManager.getInstance().scrollBackground(gl);		
-			Player.getInstance().draw(gl, spriteSheets);
-			WeaponManager.getInstance().drawWeapon(gl, spriteSheets);
-			SquadronManager.getInstance().draw(gl, spriteSheets);
+			Player.getInstance().draw(gl);
+			WeaponManager.getInstance().drawWeapon(gl);
+			SquadronManager.getInstance().draw(gl);
 			HUDManager.getInstance().draw(gl);
 			detectCollisions();		
 			ExplosionManager.getInstance().draw(gl);
@@ -87,6 +80,7 @@ public class GameLogic implements Renderer {
 			BackGroundManager.getInstance().scrollBackground(gl);
 			GameOverOvelay.getInstance().draw(gl);
 			break;
+			
 		case END:			
 			Engine.gameActivity.finish();
 			break;
@@ -117,10 +111,10 @@ public class GameLogic implements Renderer {
 		for (Iterator<Squadron> iteratorS = SquadronManager.getInstance().getSquadronList().iterator(); iteratorS.hasNext();) {		
 			iterSquadron = iteratorS.next();
 
-			if (!iterSquadron.isDestroyed() ){
+			if (!iterSquadron.isDestroyed() && iterSquadron.isVisible() ){
 				for (Iterator<Enemy> iteratorE = iterSquadron.getEnemyList().iterator(); iteratorE.hasNext();){		
 					iterEnemy = iteratorE.next();
-					if (!iterEnemy.isDestroyed){						
+					if (!iterEnemy.isDestroyed &&  iterEnemy.posY <= Engine.SQUADRON_START_Y){						
 						if (BoundingBox.getInstance().overlapsPlayer(iterEnemy)){
 							Player.getInstance().applyDamage();
 							Player.getInstance().increasePoints(); // TODO : add enemy type
@@ -129,8 +123,8 @@ public class GameLogic implements Renderer {
 								iterSquadron.increaseEnemiesDestroyed();
 							}	
 						}
-
-						for (Iterator<Weapon> iteratorW = WeaponManager.getInstance().getPlayeFireList().iterator(); iteratorW.hasNext();) {				
+	
+						/*for (Iterator<Weapon> iteratorW = WeaponManager.getInstance().getPlayeFireList().iterator(); iteratorW.hasNext();) {				
 							iterWeapon = iteratorW.next();
 
 							if (iterWeapon.isFired && BoundingBox.getInstance().overlapsEnemy(iterEnemy,iterWeapon)){
@@ -141,12 +135,11 @@ public class GameLogic implements Renderer {
 								}	
 								iterWeapon.isFired = false;
 							}
-						}
+						}*/
 					}
 				}
 			}			
 		}
-
 		
 		for (Iterator<Weapon> i = WeaponManager.getInstance().getEnemyFireList().iterator(); i.hasNext();) {				
 			iterWeapon = i.next();								
@@ -172,20 +165,23 @@ public class GameLogic implements Renderer {
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {		
 
 		MusicManager.getInstance().playMusic();
-		//textureLoader = new TextureManager(gl);
-		//spriteSheets = textureLoader.loadTexture(gl, Engine.TEXTURES_FILE,Engine.context, 1);
-		spriteSheets = TextureManager.getInstance().loadTexture(gl, Engine.TEXTURES_FILE,Engine.context, 0);
-		TextureManager.getInstance().loadPlayerTexture(gl, Engine.context);
-		BackGroundManager.getInstance().loadTextures(gl);
+		try {
+			TextureManager.getInstance().loadTextures(gl);
+			LevelManager.getInstance().loadLevelsData();
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
-
 		gl.glEnable(GL10.GL_TEXTURE_2D);
 		gl.glClearDepthf(1.0f);
 		gl.glEnable(GL10.GL_DEPTH_TEST);
 		gl.glDepthFunc(GL10.GL_LEQUAL);
-
+		
 		try{
-			SquadronManager.getInstance().loadSquadronsLevel(LevelData.getInstance().getCurrentLevel());
+			LevelManager.getInstance().loadCurrentLevelData(gl);
+			SquadronManager.getInstance().loadSquadronsLevel(LevelManager.getInstance().getCurrentLevel());
 		}catch (Exception e){
 			e.printStackTrace();
 		}

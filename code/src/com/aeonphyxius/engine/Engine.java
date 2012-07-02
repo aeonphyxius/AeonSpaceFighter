@@ -5,13 +5,14 @@ import com.aeonphyxius.R;
 import android.app.Activity;
 import android.content.Context;
 import android.view.Display;
+import android.view.MotionEvent;
 
 
 public class Engine {
 /*Constants that will be used in the game*/
 public static enum GAMESTATUS {START, PLAYING, DESTROYED, GAMEOVER,END,LEVEL_COMPLETE};
 public static GAMESTATUS GameSatus;
-public static final int MAX_LEVEL = 2;
+public static final int MAX_LEVEL = 10;
 
 public static final int GAME_THREAD_DELAY = 4000;
 public static final int MENU_BUTTON_ALPHA = 0;
@@ -26,7 +27,7 @@ public static float SCROLL_BACKGROUND_1 = .001f;
 public static float SCROLL_BACKGROUND_2 = .003f;
 public static float SHOOT_SLEEP = 250;
 public static float ANIMATION_SLEEP = 100f;
-public static float GAME_OVER_SLEEP = (1000/60)*5000;
+public static float GAME_OVER_SLEEP = (1000/60) * 5000;
 public static float EXPLOSIOM_SLEEP = 50f;
 
 public static final int PLAYER_BANK_LEFT_1 = 1;
@@ -52,8 +53,8 @@ public  static final long MENU_CLICK_VIB = 10;
 // sprites
 public static String TEXTURES_FILE = "textures.png";
 
-public static final String BACKGROUND_LAYER_ONE = "level_01_bg.png";
-public static final String BACKGROUND_LAYER_TWO = "debris.png";
+//public static final String BACKGROUND_LAYER_ONE = "level_01_bg.png";
+//public static final String BACKGROUND_LAYER_TWO = "debris.png";
 
 public static final int SPLASH_SCREEN_MUSIC = R.raw.warfieldedit;
 
@@ -65,9 +66,6 @@ public static final float MIN_Y = 0.0f;
 public static final float MAX_Y = 5.5f;
 
 
-//public static int TOTAL_INTERCEPTORS = 10;
-//public static int TOTAL_SCOUTS = 15;
-//public static int TOTAL_WARSHIPS = 5;
 public static float INTERCEPTOR_SPEED = 0.028f;
 public static float SCOUT_SPEED = 0.012f;
 public static float WARSHIP_SPEED = 0.008f;
@@ -129,9 +127,14 @@ public static final int POINTS_EASY = 5;
 public static final int POINTS_NORMAL = 10;
 public static final int POINTS_HARD = 10;
 
+public static final int TEXTURE_BG1 = 2;
+public static final int TEXTURE_BG2 = 3;
 public static final int TEXTURE_PLAYER = 4;
 public static final int TEXTURE_PLAYER_RIGHT = 5;
 public static final int TEXTURE_PLAYER_LEFT = 6;
+public static final int TEXTURE_GAME_OVER = 11;
+public static final int TEXTURE_ARROWS = 10;
+public static final int TEXTURE_END_LEVEL = 12;
 
 public static final int TEXTURE_FILE_OLD = 0;
 public static final int LEFT_TEXTURE_POSITION=1;
@@ -140,10 +143,12 @@ public static final int RIGHT_TEXTURE_POSITION=3;
 /*Game Variables*/
 public static boolean isMuted = true;
 public static boolean isVibrated = true;
+public static float yScroll = 0.0f;
 public static Context context;
 public static Thread musicThread;
 public static Display display;
 public static int playerFlightAction = 0;
+public static MotionEvent event;
 public static float playerBankPosX = 1.75f;
 public static int difficulty = 2;
 public static Activity gameActivity;

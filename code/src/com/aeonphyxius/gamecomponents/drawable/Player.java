@@ -2,7 +2,6 @@ package com.aeonphyxius.gamecomponents.drawable;
 
 import java.util.Vector;
 import javax.microedition.khronos.opengles.GL10;
-import com.aeonphyxius.data.LevelData;
 import com.aeonphyxius.data.PlayerData;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.EngineGL;
@@ -10,6 +9,7 @@ import com.aeonphyxius.engine.MusicManager;
 import com.aeonphyxius.engine.TextureRegion;
 import com.aeonphyxius.engine.Vibration;
 import com.aeonphyxius.gamecomponents.drawable.overlay.PlayerDestructionOverlay;
+import com.aeonphyxius.gamecomponents.manager.LevelManager;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 
 /**
@@ -51,20 +51,17 @@ public class Player extends EngineGL {
 		data = new PlayerData();
 		playerTexturesList = new Vector<TextureRegion>();
 
-		// TODO: Rollback
-		
-		//TextureRegion tempTextureRegion = new TextureRegion( new float[] { 0.808f, 0.027f, 0.885f, 0.027f, 0.885f, 0.106f, 0.808f, 0.106f, });
-		//TextureRegion tempTextureRegion = new TextureRegion(new float[] { 0.003f, 0.738f,	0.252f, 0.738f, 0.252f, 0.984f, 0.003f, 0.984f, });
 		//TextureRegion tempTextureRegion = new TextureRegion(new float[] { 0.191f, 0.182f, 0.808f, 0.182f, 0.808f, 0.813f, 0.191f, 0.813f, });
-		TextureRegion tempTextureRegion = new TextureRegion(new float[] { 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.f, });
+		//TextureRegion tempTextureRegion = new TextureRegion(new float[] { 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.f, });
+		TextureRegion tempTextureRegion = new TextureRegion(new float[] { 0.808f, 0.813f,  0.191f, 0.813f,  0.191f, 0.182f, 0.808f,  0.182f, });
 		playerTexturesList.add(tempTextureRegion); // Texture for normal position spaceship texture
 
 		//tempTextureRegion = new TextureRegion(new float[] { 0.736f, 0.111f,	0.793f, 0.111f, 0.793f, 0.195f, 0.736f, 0.195f, });
-		tempTextureRegion = new TextureRegion(new float[] { 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.f, });
+		tempTextureRegion = new TextureRegion(new float[] { 0.760f, 0.875f,	0.195f, 0.875f, 0.195f, 0.182f, 0.760f, 0.182f, });
 		playerTexturesList.add(tempTextureRegion); // Texture for going right position spaceship texture
 
 		//tempTextureRegion = new TextureRegion(new float[] { 0.898f, 0.111f,	0.957f, 0.111f, 0.957f, 0.195f, 0.898f, 0.195f, });
-		tempTextureRegion = new TextureRegion(new float[] { 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.f, });
+		tempTextureRegion = new TextureRegion(new float[] { 0.760f, 0.875f,	0.195f, 0.875f, 0.195f, 0.182f, 0.760f, 0.182f, });
 		playerTexturesList.add(tempTextureRegion); // Texture for going left position spaceship texture
 
 	}	
@@ -94,7 +91,7 @@ public class Player extends EngineGL {
 
 			if (data.getLives() > 0){
 				data.resetStatus();
-				SquadronManager.getInstance().resetSquadrons(LevelData.getInstance().getCurrentLevel());				
+				SquadronManager.getInstance().resetSquadrons(LevelManager.getInstance().getCurrentLevel());				
 				PlayerDestructionOverlay.getInstance().resetOverlay();
 				Engine.GameSatus = Engine.GAMESTATUS.DESTROYED;
 			}else{
@@ -128,7 +125,7 @@ public class Player extends EngineGL {
 	 * @param gl
 	 * @param spriteSheet
 	 */
-	public void draw(GL10 gl, int[] spriteSheet) {
+	public void draw(GL10 gl) {
 
 		gl.glMatrixMode(GL10.GL_MODELVIEW);
 		gl.glLoadIdentity();
@@ -142,14 +139,14 @@ public class Player extends EngineGL {
 			texturePosition = LEFT_TEXTURE;
 			if (Engine.playerBankPosX > 0) {
 				Engine.playerBankPosX -= Engine.PLAYER_BANK_SPEED;
-				gl.glTranslatef(Engine.playerBankPosX, Engine.PLAYER_POS_Y, 0f);
-				gl.glMatrixMode(GL10.GL_TEXTURE);
-				gl.glLoadIdentity();				
-			} else {
-				gl.glTranslatef(Engine.playerBankPosX, Engine.PLAYER_POS_Y, 0f);
+				gl.glTranslatef(Engine.playerBankPosX, Engine.PLAYER_POS_Y, 0f);				
 				gl.glMatrixMode(GL10.GL_TEXTURE);
 				gl.glLoadIdentity();
-			}
+			} else {
+				gl.glTranslatef(Engine.playerBankPosX, Engine.PLAYER_POS_Y, 0f);				
+				gl.glMatrixMode(GL10.GL_TEXTURE);
+				gl.glLoadIdentity();				 	
+			}			
 			super.draw(gl, Engine.TEXTURE_PLAYER_LEFT, playerTexturesList.get(texturePosition));
 			break;
 

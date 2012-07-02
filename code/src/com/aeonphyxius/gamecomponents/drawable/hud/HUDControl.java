@@ -48,17 +48,17 @@ public class HUDControl extends EngineGL{
 		TextureRegion tempTextureRegion = new TextureRegion( new float[] { 0.248f, 0.0f, 0.280f, 0.0f, 0.280f, 0.125f, 0.248f,0.125f, });
 		textureRegionList.add(tempTextureRegion); // Texture for background image (black)
 
-		tempTextureRegion = new TextureRegion( new float[]  { 0.308f, 0.143f, 0.476f, 0.143f, 0.476f, 0.279f, 0.308f,0.279f, });
-		textureRegionList.add(tempTextureRegion); // Texture for left arrow
-
-		tempTextureRegion = new TextureRegion( new float[] { 0.316f, 0.0f, 0.484f, 0.0f, 0.484f, 0.136f,0.316f,0.136f, });				
+		tempTextureRegion = new TextureRegion( new float[]  { 0.585f, 0.2f, 0.739f, 0.2f, 0.739f, 0.0f, 0.585f,0.0f, });
 		textureRegionList.add(tempTextureRegion); // Texture for left pressed arrow
 
-		tempTextureRegion = new TextureRegion( new float[] { 0.488f, 0.143f, 0.654f, 0.143f, 0.654f, 0.279f, 0.488f,0.279f, });
-		textureRegionList.add(tempTextureRegion); // Texture for right arrow
+		tempTextureRegion = new TextureRegion( new float[]  { 0.101f, 0.2f, 0.254f, 0.2f, 0.254f, 0.0f, 0.101f,0.0f, });				
+		textureRegionList.add(tempTextureRegion); // Texture for left arrow
 
-		tempTextureRegion = new TextureRegion( new float[] { 0.488f, 0.0f, 0.654f, 0.0f, 0.654f, 0.136f, 0.488f,0.136f, });
+		tempTextureRegion = new TextureRegion( new float[]  { 0.749f, 0.2f, 0.902f, 0.2f, 0.902f, 0.0f, 0.749f,0.0f, });
 		textureRegionList.add(tempTextureRegion); // Texture for right pressed arrow
+
+		tempTextureRegion = new TextureRegion( new float[]  { 0.280f, 0.2f, 0.434f, 0.2f, 0.434f, 0.0f, 0.280f,0.0f, });
+		textureRegionList.add(tempTextureRegion); // Texture for right arrow
 	}	
 
 
@@ -81,9 +81,9 @@ public class HUDControl extends EngineGL{
 	public void drawLeftArrow (GL10 gl, int textureNum) {
 		// Draw the normal left arrow or the pressed version
 		if (Engine.playerFlightAction == Engine.PLAYER_BANK_LEFT_1){ 
-			super.draw(gl, Engine.TEXTURE_FILE_OLD, textureRegionList.get(textureNum));
+			super.draw(gl, Engine.TEXTURE_ARROWS, textureRegionList.get(textureNum));
 		}else{
-			super.draw(gl, Engine.TEXTURE_FILE_OLD, textureRegionList.get(textureNum+1));
+			super.draw(gl, Engine.TEXTURE_ARROWS, textureRegionList.get(textureNum+1));
 		}	
 	}
 
@@ -96,10 +96,10 @@ public class HUDControl extends EngineGL{
 	public void drawRightArrow(GL10 gl,int textureNum) {
 		// Draw the right left arrow or the pressed version
 		if (Engine.playerFlightAction == Engine.PLAYER_BANK_RIGHT_1){
-			super.draw(gl,  Engine.TEXTURE_FILE_OLD, textureRegionList.get(textureNum));
+			super.draw(gl,  Engine.TEXTURE_ARROWS, textureRegionList.get(textureNum));
 		}
 		else {
-			super.draw(gl, Engine.TEXTURE_FILE_OLD, textureRegionList.get(textureNum+1));
+			super.draw(gl, Engine.TEXTURE_ARROWS, textureRegionList.get(textureNum+1));
 		}
 	}
 

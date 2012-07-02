@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<levels>
+	<level num="1" bg1TextureFile="img_bg_level_01.png" bg2TextureFile="img_debris1.png" musicFile="mus_level.ogg" endTextureFile="img_level1.png"/>
+	<level num="2" bg1TextureFile="img_bg_level_02.png" bg2TextureFile="img_debris2.png" musicFile="mus_level.ogg" endTextureFile="img_level2.png"/>
+	<level num="3" bg1TextureFile="img_bg_level_03.png" bg2TextureFile="img_debris3.png" musicFile="mus_level.ogg" endTextureFile="img_level3.png"/>
+	<level num="4" bg1TextureFile="img_bg_level_04.png" bg2TextureFile="img_debris4.png" musicFile="mus_level.ogg" endTextureFile="img_level4.png"/>
+	<level num="5" bg1TextureFile="img_bg_level_05.png" bg2TextureFile="img_debris5.png" musicFile="mus_level.ogg" endTextureFile="img_level5.png"/>
+	<level num="6" bg1TextureFile="img_bg_level_06.png" bg2TextureFile="img_debris6.png" musicFile="mus_level.ogg" endTextureFile="img_level6.png"/>
+	<level num="7" bg1TextureFile="img_bg_level_07.png" bg2TextureFile="img_debris7.png" musicFile="mus_level.ogg" endTextureFile="img_level7.png"/>
+	<level num="8" bg1TextureFile="img_bg_level_08.png" bg2TextureFile="img_debris8.png" musicFile="mus_level.ogg" endTextureFile="img_level8.png"/>
+	<level num="9" bg1TextureFile="img_bg_level_09.png" bg2TextureFile="img_debris9.png" musicFile="mus_level.ogg" endTextureFile="img_level9.png"/>
+	<level num="10" bg1TextureFile="img_bg_level_10.png" bg2TextureFile="img_debris10.png" musicFile="mus_level.ogg" endTextureFile="img_level10.png"/>			
+</levels>

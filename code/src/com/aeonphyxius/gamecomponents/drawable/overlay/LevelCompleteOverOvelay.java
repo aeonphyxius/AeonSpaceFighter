@@ -2,13 +2,14 @@ package com.aeonphyxius.gamecomponents.drawable.overlay;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import com.aeonphyxius.data.LevelData;
+import android.view.MotionEvent;
 import com.aeonphyxius.engine.Engine;
 import com.aeonphyxius.engine.EngineGL;
 import com.aeonphyxius.engine.Overlay;
 import com.aeonphyxius.engine.TextureRegion;
 import com.aeonphyxius.engine.Engine.GAMESTATUS;
 import com.aeonphyxius.gamecomponents.manager.ExplosionManager;
+import com.aeonphyxius.gamecomponents.manager.LevelManager;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
 import com.aeonphyxius.gamecomponents.manager.WeaponManager;
 
@@ -28,12 +29,10 @@ import com.aeonphyxius.gamecomponents.manager.WeaponManager;
 
 public class LevelCompleteOverOvelay extends EngineGL implements Overlay {
 
-	private static LevelCompleteOverOvelay instance = null;			// Singleton pattern implementation
+	private static LevelCompleteOverOvelay instance = null;	// Singleton pattern implementation
 	private TextureRegion gameOverTexture;					// Texture region containing the icon to show
 	private double timeStamp;								// times tamp at the start of each iteration
 	private double elapsed;									// elapsed time since last iteration	
-	private int animation;									// Current animation number inside the iteration	
-	private final int ANIM_FRAMES = 11;						// Number of animations (small effect per game over text)
 
 
 
@@ -53,16 +52,15 @@ public class LevelCompleteOverOvelay extends EngineGL implements Overlay {
 	 */
 	private LevelCompleteOverOvelay() {
 
-		gameOverTexture = new TextureRegion( new float[] { 0.0f, 0.363f, 0.449f, 0.363f, 0.449f, 0.523f, 0.0f, 0.523f, });
+		//gameOverTexture = new TextureRegion( new float[] { 0.0f, 0.363f, 0.449f, 0.363f, 0.449f, 0.523f, 0.0f, 0.523f, });
+		gameOverTexture = new TextureRegion(new float[]   { 0f, 1f, 1f, 1f, 1f, 0f, 0f, 0f, });
 
 		timeStamp = System.currentTimeMillis();		
-		animation = 0;
 	}
 
 	@Override
 	public void resetOverlay(){
 		timeStamp = System.currentTimeMillis();		
-		animation = 0;		
 	}
 
 
@@ -72,40 +70,43 @@ public class LevelCompleteOverOvelay extends EngineGL implements Overlay {
 		elapsed += System.currentTimeMillis() - timeStamp;
 
 		// update the sprite position
-		update (gl,.10f + (0.01f * animation), .10f+ (0.01f * animation), 1f,4.f, 2.f, 0f );
+		gl.glMatrixMode(GL10.GL_MODELVIEW);
+		gl.glLoadIdentity();
+		gl.glPushMatrix();
+		gl.glScalef(1f,1f, 0f);
+		gl.glTranslatef(0f, 0f, 0f);
+
+		gl.glMatrixMode(GL10.GL_TEXTURE);
+		gl.glLoadIdentity();
 
 		// draw the sprite
-		draw(gl, Engine.TEXTURE_FILE_OLD, gameOverTexture);
+		draw(gl, Engine.TEXTURE_END_LEVEL, gameOverTexture);
 
 		// restore Matrix transformations to its original configuration
 		restoreMatrix(gl);
 
 		// Continue the animation
-		if ( elapsed > Engine.ANIMATION_SLEEP){
-			elapsed = 0;
-			timeStamp = System.currentTimeMillis();
-			if (animation < ANIM_FRAMES){
-				animation ++ ;
-			}else{				
-				try {					
-					Thread.sleep(Engine.GAME_OVER_THREAD_WAIT*5);					
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+		if ( elapsed > Engine.GAME_OVER_SLEEP){
+			if (Engine.event != null){
+				switch (Engine.event.getAction()){
+				case MotionEvent.ACTION_DOWN:
+					LevelManager.getInstance().increaseLevel();
+					GameStartOvelay.getInstance().resetOverlay();
+					WeaponManager.getInstance().resetWeapons();
+					ExplosionManager.getInstance().resetExplosions();
+					LevelManager.getInstance().loadCurrentLevelData(gl);
+					try{
+						SquadronManager.getInstance().loadSquadronsLevel(LevelManager.getInstance().getCurrentLevel());
+					}catch (Exception e){
+						e.printStackTrace();
+					}
+					this.resetOverlay();
+					Engine.GameSatus = GAMESTATUS.START;
 
-				LevelData.getInstance().increaseLevel();
-				GameStartOvelay.getInstance().resetOverlay();					
-				WeaponManager.getInstance().resetWeapons();		
-				ExplosionManager.getInstance().resetExplosions();
-				try{
-					SquadronManager.getInstance().loadSquadronsLevel(LevelData.getInstance().getCurrentLevel());
-				}catch (Exception e){
-					e.printStackTrace();
-				}
-				this.resetOverlay();
-				Engine.GameSatus = GAMESTATUS.START;	
 
-			}			
+					break;
+				}
+			}
 		}
 	}
 
