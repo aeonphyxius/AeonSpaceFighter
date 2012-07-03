@@ -111,8 +111,8 @@ public class WeaponManager {
 					gl.glLoadIdentity();
 					gl.glPushMatrix();
 					gl.glScalef(.15f, .15f, 0f);
-					//gl.glTranslatef(iterWeapon.posX, iterWeapon.posY, 0f);
-					gl.glTranslatef(Engine.playerBankPosX+0.20f,Engine.PLAYER_POS_Y+0.5f, 0f);
+					gl.glTranslatef(iterWeapon.posX, iterWeapon.posY, 0f);
+					//gl.glTranslatef(Engine.playerBankPosX+0.20f,Engine.PLAYER_POS_Y+0.5f, 0f);
 					gl.glScalef(.4f, .4f, 0f);
 					gl.glMatrixMode(GL10.GL_TEXTURE);
 					gl.glLoadIdentity();

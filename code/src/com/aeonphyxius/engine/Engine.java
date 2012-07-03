@@ -52,10 +52,6 @@ public  static final long MENU_CLICK_VIB = 10;
 
 // sprites
 public static String TEXTURES_FILE = "textures.png";
-
-//public static final String BACKGROUND_LAYER_ONE = "level_01_bg.png";
-//public static final String BACKGROUND_LAYER_TWO = "debris.png";
-
 public static final int SPLASH_SCREEN_MUSIC = R.raw.warfieldedit;
 
 

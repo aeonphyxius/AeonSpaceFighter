@@ -50,6 +50,9 @@ public class Squadron {
 		}		
 	}
 
+	public float getSquadronYPos(){
+		return this.squadronYPos;
+	}
 	public boolean isDestroyed(){
 		return squadronNumEnemies <= squadronEnemiesDestroyed;
 	}

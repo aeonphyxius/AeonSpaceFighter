@@ -106,16 +106,16 @@ public class BoundingBox {
 	}
 	
 	public boolean overlapsEnemy(Enemy enemy, Weapon weapon){
-		
+		boolean isOverlaping = false;
 		switch (enemy.enemyType) {
 			case Engine.TYPE_INTERCEPTOR:
-				ovelapsInterceptorWeapon(enemy, weapon);
+				isOverlaping=ovelapsInterceptorWeapon(enemy, weapon);
 				break;
 			case Engine.TYPE_SCOUT:
-				ovelapsScoutWeapon(enemy, weapon);
+				isOverlaping = ovelapsScoutWeapon(enemy, weapon);
 				break;
 		}
-		return true;
+		return isOverlaping;
 	}
 	
 	/**
