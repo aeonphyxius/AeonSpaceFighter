@@ -117,7 +117,7 @@ public class SquadronManager {
 				iterSquadron = i.next();
 
 				if (iterSquadron.isVisible() && !iterSquadron.isDestroyed()) {	// If the squadron is destroyed, don't draw it anymore
-					Random randomPos = new Random();	
+	
 					// Step 2: Loop all enemies, inside every squadron
 					for (Iterator<Enemy> iterE = iterSquadron.getEnemyList().iterator(); iterE.hasNext();) {
 						iterEnemy = iterE.next();
@@ -148,7 +148,7 @@ public class SquadronManager {
 														(iterEnemy.posY  / (Engine.INTERCEPTOR_SPEED * 4)));
 									}								
 									iterEnemy.posX += iterEnemy.incrementXToTarget;
-									iterEnemy.posY -= (Engine.INTERCEPTOR_SPEED );
+									iterEnemy.posY -= (Engine.INTERCEPTOR_SPEED *4 );
 									if (iterEnemy.posY < Engine.SQUADRON_MIN_Y) {
 										iterEnemy.isDestroyed = true;
 										iterSquadron.increaseEnemiesDestroyed();
@@ -179,6 +179,7 @@ public class SquadronManager {
 								break;
 
 							case Engine.TYPE_WARSHIP: // WARSHIP
+								Random randomPos = new Random();
 								gl.glScalef(.15f, .15f, 1f); 
 								if (iterEnemy.posY == iterSquadron.getSquadronYPos()) {
 									iterEnemy.posY = iterEnemy.posY - Engine.yScroll;

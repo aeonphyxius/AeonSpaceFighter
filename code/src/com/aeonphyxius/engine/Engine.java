@@ -62,7 +62,7 @@ public static final float MIN_Y = 0.0f;
 public static final float MAX_Y = 5.5f;
 
 
-public static float INTERCEPTOR_SPEED = 0.028f;
+public static float INTERCEPTOR_SPEED = 0.014f;
 public static float SCOUT_SPEED = 0.012f;
 public static float WARSHIP_SPEED = 0.008f;
 public static float FINAL1_SPEED = 0.0018f;
