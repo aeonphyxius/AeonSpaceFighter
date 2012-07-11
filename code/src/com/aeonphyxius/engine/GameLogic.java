@@ -67,7 +67,7 @@ public class GameLogic implements Renderer {
 			WeaponManager.getInstance().drawWeapon(gl);
 			SquadronManager.getInstance().draw(gl);
 			HUDManager.getInstance().draw(gl);
-			detectCollisions();		
+			//detectCollisions();		
 			ExplosionManager.getInstance().draw(gl);
 			break;
 
@@ -124,7 +124,7 @@ public class GameLogic implements Renderer {
 							}	
 						}
 	
-						/*for (Iterator<Weapon> iteratorW = WeaponManager.getInstance().getPlayeFireList().iterator(); iteratorW.hasNext();) {				
+						for (Iterator<Weapon> iteratorW = WeaponManager.getInstance().getPlayeFireList().iterator(); iteratorW.hasNext();) {				
 							iterWeapon = iteratorW.next();
 							if (iterWeapon.isFired && BoundingBox.getInstance().overlapsEnemy(iterEnemy,iterWeapon)){
 								Player.getInstance().increasePoints(); // TODO : add enemy type
@@ -134,7 +134,7 @@ public class GameLogic implements Renderer {
 								}	
 								iterWeapon.isFired = false;
 							}
-						}*/
+						}
 					}
 				}
 			}			

@@ -36,6 +36,7 @@ public class SquadronManager {
 
 	private static SquadronManager instance = null;			// Singleton implementation
 	private ArrayList<Squadron> squadronList;				// List of squadrons
+	private boolean isGoingLeft = false;
 
 	/**
 	 * 
@@ -111,7 +112,10 @@ public class SquadronManager {
 
 		if (SquadronManager.getInstance().getSquadronList().size()<=0){							
 			Engine.GameSatus = Engine.GAMESTATUS.LEVEL_COMPLETE; // As a trick, when all the squadrons have been overtake or destroyed, the level will be completed					
-		}else{			
+		}else{	
+			if (SquadronManager.getInstance().getSquadronList().get(0).isDestroyed()){ 
+				SquadronManager.getInstance().getSquadronList().remove(0);
+			}
 			// Step 1: Loop all squadrons
 			for (Iterator<Squadron> i = SquadronManager.getInstance().getSquadronList().iterator(); i.hasNext();) {
 				iterSquadron = i.next();
@@ -205,14 +209,22 @@ public class SquadronManager {
 								break;
 							case Engine.TYPE_FINAL1:
 								gl.glScalef(.30f, .30f, 1f); 
-								if (iterEnemy.posY > 3) {
-									iterEnemy.posY = iterSquadron.getSquadronYPos();
-
+								
+								if (iterEnemy.posY == iterSquadron.getSquadronYPos()) {
+									iterEnemy.posY = iterEnemy.posY - Engine.yScroll;
 								} else {
 									if (iterEnemy.posY>=1.8f ){
 										iterEnemy.posY -= Engine.FINAL1_SPEED;
 									}else{ // TODO: moving left an right 
-										iterEnemy.posX += Engine.FINAL1_SPEED;
+										if (isGoingLeft){
+											iterEnemy.posX -= Engine.FINAL1_SPEED;
+											if (iterEnemy.posX < 0)
+												isGoingLeft = false;
+										}else{
+											iterEnemy.posX += Engine.FINAL1_SPEED;
+											if (iterEnemy.posX > Engine.FINAL_MAX_X)
+												isGoingLeft = true;											
+										}
 
 									}									
 								}
@@ -232,10 +244,6 @@ public class SquadronManager {
 					}
 				}
 			}
-		}
-		// To free resources, if the squadron have been destroyed, we will delete it from the list
-		if (SquadronManager.getInstance().getSquadronList().get(0).isDestroyed()){ // TODO: check if empty !!
-			SquadronManager.getInstance().getSquadronList().remove(0);
 		}
 
 	}

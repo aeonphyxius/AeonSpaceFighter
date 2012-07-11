@@ -51,16 +51,14 @@ public class Player extends EngineGL {
 		data = new PlayerData();
 		playerTexturesList = new Vector<TextureRegion>();
 
-		//TextureRegion tempTextureRegion = new TextureRegion(new float[] { 0.808f, 0.813f,  0.191f, 0.813f,  0.191f, 0.182f, 0.808f,  0.182f, });
-		TextureRegion tempTextureRegion = new TextureRegion(new float[] { 0.029f, 0.011f, 0.215f, 0.011f, 0.215f, 0.258f, 0.029f, 0.258f, });
-		//enemyTexture = new TextureRegion(new float[] { 0.029f, 0.011f, 0.215f, 0.011f, 0.215f, 0.258f, 0.029f, 0.258f, });
+		TextureRegion tempTextureRegion = new TextureRegion(new float[] { 0.808f, 0.813f,  0.191f, 0.813f,  0.191f, 0.182f, 0.808f,  0.182f, });
 		playerTexturesList.add(tempTextureRegion); // Texture for normal position spaceship texture
 
-		//tempTextureRegion = new TextureRegion(new float[] { 0.736f, 0.111f,	0.793f, 0.111f, 0.793f, 0.195f, 0.736f, 0.195f, });
+
 		tempTextureRegion = new TextureRegion(new float[] { 0.760f, 0.875f,	0.195f, 0.875f, 0.195f, 0.182f, 0.760f, 0.182f, });
 		playerTexturesList.add(tempTextureRegion); // Texture for going right position spaceship texture
 
-		//tempTextureRegion = new TextureRegion(new float[] { 0.898f, 0.111f,	0.957f, 0.111f, 0.957f, 0.195f, 0.898f, 0.195f, });
+		//
 		tempTextureRegion = new TextureRegion(new float[] { 0.760f, 0.875f,	0.195f, 0.875f, 0.195f, 0.182f, 0.760f, 0.182f, });
 		playerTexturesList.add(tempTextureRegion); // Texture for going left position spaceship texture
 
@@ -170,16 +168,16 @@ public class Player extends EngineGL {
 			gl.glTranslatef(Engine.playerBankPosX,Engine.PLAYER_POS_Y, 0f);
 			gl.glMatrixMode(GL10.GL_TEXTURE);
 			gl.glLoadIdentity();
-			//super.draw(gl, Engine.TEXTURE_PLAYER, playerTexturesList.get(texturePosition));
-			super.draw(gl, Engine.TEXTURE_FILE_OLD, playerTexturesList.get(texturePosition));
+			super.draw(gl, Engine.TEXTURE_PLAYER, playerTexturesList.get(texturePosition));
+			//super.draw(gl, Engine.TEXTURE_FILE_OLD, playerTexturesList.get(texturePosition));
 			break;
 
 		default:
 			gl.glTranslatef(Engine.playerBankPosX, Engine.PLAYER_POS_Y, 0f);
 			gl.glMatrixMode(GL10.GL_TEXTURE);
 			gl.glLoadIdentity();
-			//super.draw(gl, Engine.TEXTURE_PLAYER, playerTexturesList.get(texturePosition));
-			super.draw(gl, Engine.TEXTURE_FILE_OLD, playerTexturesList.get(texturePosition));
+			super.draw(gl, Engine.TEXTURE_PLAYER, playerTexturesList.get(texturePosition));
+			//super.draw(gl, Engine.TEXTURE_FILE_OLD, playerTexturesList.get(texturePosition));
 			break;
 		}
 		// Recover previous Matrix

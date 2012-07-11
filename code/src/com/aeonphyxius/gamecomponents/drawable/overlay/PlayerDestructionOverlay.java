@@ -79,6 +79,7 @@ public class PlayerDestructionOverlay implements Overlay {
 				Engine.GameSatus = Engine.GAMESTATUS.START;	
 				WeaponManager.getInstance().resetWeapons();
 				ExplosionManager.getInstance().resetExplosions();
+				Engine.yScroll = 0;
 				this.resetOverlay();
 			}
 		}

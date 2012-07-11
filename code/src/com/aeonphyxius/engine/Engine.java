@@ -60,12 +60,13 @@ public static final float PLAYER_FIRE_START_Y = 1.5f;
 public static final float PLAYER_FIRE_START_X = 0.34f;
 public static final float MIN_Y = 0.0f;
 public static final float MAX_Y = 5.5f;
+public static final float FINAL_MAX_X= 2.35f;
 
 
 public static float INTERCEPTOR_SPEED = 0.014f;
 public static float SCOUT_SPEED = 0.012f;
 public static float WARSHIP_SPEED = 0.008f;
-public static float FINAL1_SPEED = 0.0018f;
+public static float FINAL1_SPEED = 0.018f;
 public static float FINAL2_SPEED = 0.0018f;
 public static float FINAL3_SPEED = 0.0018f;
 public static float MOVING_OUT_SCOPE = 0.028f;

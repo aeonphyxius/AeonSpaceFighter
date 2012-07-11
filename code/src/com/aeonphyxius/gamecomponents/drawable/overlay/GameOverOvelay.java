@@ -95,6 +95,7 @@ public class GameOverOvelay extends EngineGL implements Overlay {
 					ExplosionManager.getInstance().resetExplosions();
 					Player.getInstance().resetPlayerStatus();
 					LevelManager.getInstance().resetLevelData();
+					Engine.yScroll = 0;
 					this.resetOverlay();
 					Engine.GameSatus = Engine.GAMESTATUS.END;
 					break;
