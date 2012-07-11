@@ -178,11 +178,10 @@ public class Player extends EngineGL {
 			gl.glTranslatef(Engine.playerBankPosX, Engine.PLAYER_POS_Y, 0f);
 			gl.glMatrixMode(GL10.GL_TEXTURE);
 			gl.glLoadIdentity();
-			super.draw(gl, Engine.TEXTURE_PLAYER, playerTexturesList.get(texturePosition));
+			//super.draw(gl, Engine.TEXTURE_PLAYER, playerTexturesList.get(texturePosition));
+			super.draw(gl, Engine.TEXTURE_FILE_OLD, playerTexturesList.get(texturePosition));
 			break;
-		}		
-		
-
+		}
 		// Recover previous Matrix
 		gl.glPopMatrix();
 		gl.glLoadIdentity();

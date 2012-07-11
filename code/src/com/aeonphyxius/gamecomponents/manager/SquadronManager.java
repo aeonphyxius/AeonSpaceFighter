@@ -234,7 +234,7 @@ public class SquadronManager {
 			}
 		}
 		// To free resources, if the squadron have been destroyed, we will delete it from the list
-		if (SquadronManager.getInstance().getSquadronList().get(0).isDestroyed()){
+		if (SquadronManager.getInstance().getSquadronList().get(0).isDestroyed()){ // TODO: check if empty !!
 			SquadronManager.getInstance().getSquadronList().remove(0);
 		}
 
