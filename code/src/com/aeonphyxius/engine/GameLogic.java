@@ -67,7 +67,7 @@ public class GameLogic implements Renderer {
 			WeaponManager.getInstance().drawWeapon(gl);
 			SquadronManager.getInstance().draw(gl);
 			HUDManager.getInstance().draw(gl);
-			//detectCollisions();		
+			detectCollisions();		
 			ExplosionManager.getInstance().draw(gl);
 			break;
 
