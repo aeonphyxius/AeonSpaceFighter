@@ -115,14 +115,14 @@ public class GameLogic implements Renderer {
 				for (Iterator<Enemy> iteratorE = iterSquadron.getEnemyList().iterator(); iteratorE.hasNext();){		
 					iterEnemy = iteratorE.next();
 					if (!iterEnemy.isDestroyed){						
-						if (BoundingBox.getInstance().overlapsPlayer(iterEnemy)){
+					/*	if (BoundingBox.getInstance().overlapsPlayer(iterEnemy)){
 							Player.getInstance().applyDamage();
 							Player.getInstance().increasePoints(); // TODO : add enemy type
 							iterEnemy.applyDamage();
 							if (iterEnemy.isDestroyed){ // Add this destroyed enemy to the counter at Squadron level
 								iterSquadron.increaseEnemiesDestroyed();
 							}	
-						}
+						}*/
 	
 						for (Iterator<Weapon> iteratorW = WeaponManager.getInstance().getPlayeFireList().iterator(); iteratorW.hasNext();) {				
 							iterWeapon = iteratorW.next();

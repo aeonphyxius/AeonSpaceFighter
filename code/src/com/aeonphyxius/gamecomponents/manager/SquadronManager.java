@@ -208,14 +208,14 @@ public class SquadronManager {
 								gl.glTranslatef(iterEnemy.posX, iterEnemy.posY, 0f);
 								break;
 							case Engine.TYPE_FINAL1:
-								gl.glScalef(.30f, .30f, 1f); 
+								gl.glScalef(.15f, .15f, 1f); 
 								
 								if (iterEnemy.posY == iterSquadron.getSquadronYPos()) {
 									iterEnemy.posY = iterEnemy.posY - Engine.yScroll;
 								} else {
-									if (iterEnemy.posY>=1.8f ){
+									if (iterEnemy.posY>=4.0f ){
 										iterEnemy.posY -= Engine.FINAL1_SPEED;
-									}else{ // TODO: moving left an right 
+									}else{  
 										if (isGoingLeft){
 											iterEnemy.posX -= Engine.FINAL1_SPEED;
 											if (iterEnemy.posX < 0)
@@ -225,12 +225,13 @@ public class SquadronManager {
 											if (iterEnemy.posX > Engine.FINAL_MAX_X)
 												isGoingLeft = true;											
 										}
-
+										Random r=new Random();
+										if (r.nextFloat()< 0.1){
+											WeaponManager.getInstance().addEnemyShot(iterEnemy.posX, iterEnemy.posY);																				
+										}
 									}									
 								}
-								// Draw the enemy, rollback matrix, etc.
 								gl.glTranslatef(iterEnemy.posX, iterEnemy.posY, 0f);
-
 								break;
 							}
 

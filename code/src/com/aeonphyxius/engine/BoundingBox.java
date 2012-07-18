@@ -136,13 +136,13 @@ public class BoundingBox {
 		// WarShip Bottom Bounding Box			
 
 		isOverlapingTop=overlaps(enemy.posX, enemy.posY + 0.05f,enemy.posX + 0.95f,enemy.posY + 0.55f, // minX1, minY1, maxX1, maxY1
-					weapon.posX,weapon.posY,weapon.posX+0.3f,weapon.posY+0.3f); // minX2, minY2, maxX2, maxY2
-					
-		// WarShip Top Bounding Box
-		isOverlapingBottom=overlaps(enemy.posX+0.2f ,enemy.posY + 0.55f, enemy.posX + 0.8f,enemy.posY + 0.9f, // minX1, minY1, maxX1, maxY1
 				weapon.posX,weapon.posY,weapon.posX+0.3f,weapon.posY+0.3f); // minX2, minY2, maxX2, maxY2
 				
-		return isOverlapingTop || isOverlapingBottom ;
+	// WarShip Top Bounding Box
+	isOverlapingBottom=overlaps(enemy.posX+0.2f ,enemy.posY + 0.55f, enemy.posX + 0.8f,enemy.posY + 0.9f, // minX1, minY1, maxX1, maxY1
+			weapon.posX,weapon.posY,weapon.posX+0.3f,weapon.posY+0.3f); // minX2, minY2, maxX2, maxY2
+			
+	return isOverlapingTop || isOverlapingBottom ;
 	} 
 	
 	
