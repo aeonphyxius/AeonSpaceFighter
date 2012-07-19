@@ -60,7 +60,7 @@ public static final float PLAYER_FIRE_START_Y = 1.5f;
 public static final float PLAYER_FIRE_START_X = 0.34f;
 public static final float MIN_Y = 0.0f;
 public static final float MAX_Y = 5.5f;
-public static final float FINAL_MAX_X= 2.35f;
+public static final float FINAL_MAX_X= 5.7f;
 
 
 public static float INTERCEPTOR_SPEED = 0.014f;
@@ -90,7 +90,7 @@ public static final float BEZIER_Y_2 = 4.4f;
 public static final float BEZIER_Y_3 = 3.5f;
 public static final float BEZIER_Y_4 = 5.6f;
 public static final float SQUADRON_MIN_Y = 0.F;
-public static final float SQUADRON_START_Y = 5.0f;
+public static final float SQUADRON_START_Y = 5.6f;
 
 //public static final int PLAYER_SHIELDS = 1;
 public static final int SCOUT_SHIELDS = 1;
