@@ -69,5 +69,6 @@
 	<squadron ypos="96" enemy="1" dir="0" xpos1="0" xpos2="2" xpos3="4" xpos4="6"/>
 	<squadron ypos="98" enemy="1" dir="0" xpos1="1" xpos2="3" xpos3="5" xpos4="6"/>
 	<squadron ypos="99" enemy="1" dir="0" xpos1="0" xpos2="2" xpos3="4" xpos4="6"/>	
-	<squadron ypos="100" enemy="3" dir="0" xpos1="0" xpos2="2" xpos3="3"xpos4="4" xpos4="6"/>
+	<squadron ypos="100" enemy="3" dir="0" xpos1="0" xpos2="2" xpos3="3" xpos4="4"/>   
+	<squadron ypos="102" enemy="12" dir="0" xpos1="0" />
 </squadrons>

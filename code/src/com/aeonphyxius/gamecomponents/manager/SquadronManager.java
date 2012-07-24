@@ -226,7 +226,59 @@ public class SquadronManager {
 												isGoingLeft = true;											
 										}
 										Random r=new Random();
-										if (r.nextFloat()< 0.1){
+										if (r.nextFloat()< 0.02){
+											WeaponManager.getInstance().addEnemyShot(iterEnemy.posX, iterEnemy.posY);																				
+										}
+									}									
+								}
+								gl.glTranslatef(iterEnemy.posX, iterEnemy.posY, 0f);
+								break;
+							case Engine.TYPE_FINAL2:
+								gl.glScalef(.15f, .15f, 1f); 
+								
+								if (iterEnemy.posY == iterSquadron.getSquadronYPos()) {
+									iterEnemy.posY = iterEnemy.posY - Engine.yScroll;
+								} else {
+									if (iterEnemy.posY>=4.0f ){
+										iterEnemy.posY -= Engine.FINAL1_SPEED;
+									}else{  
+										if (isGoingLeft){
+											iterEnemy.posX -= Engine.FINAL1_SPEED;
+											if (iterEnemy.posX < 0)
+												isGoingLeft = false;
+										}else{
+											iterEnemy.posX += Engine.FINAL1_SPEED;
+											if (iterEnemy.posX > Engine.FINAL_MAX_X)
+												isGoingLeft = true;											
+										}
+										Random r=new Random();
+										if (r.nextFloat()< 0.02){
+											WeaponManager.getInstance().addEnemyShot(iterEnemy.posX, iterEnemy.posY);																				
+										}
+									}									
+								}
+								gl.glTranslatef(iterEnemy.posX, iterEnemy.posY, 0f);
+								break;
+							case Engine.TYPE_FINAL3:
+								gl.glScalef(.15f, .15f, 1f); 
+								
+								if (iterEnemy.posY == iterSquadron.getSquadronYPos()) {
+									iterEnemy.posY = iterEnemy.posY - Engine.yScroll;
+								} else {
+									if (iterEnemy.posY>=4.0f ){
+										iterEnemy.posY -= Engine.FINAL1_SPEED;
+									}else{  
+										if (isGoingLeft){
+											iterEnemy.posX -= Engine.FINAL1_SPEED;
+											if (iterEnemy.posX < 0)
+												isGoingLeft = false;
+										}else{
+											iterEnemy.posX += Engine.FINAL1_SPEED;
+											if (iterEnemy.posX > Engine.FINAL_MAX_X)
+												isGoingLeft = true;											
+										}
+										Random r=new Random();
+										if (r.nextFloat()< 0.02){
 											WeaponManager.getInstance().addEnemyShot(iterEnemy.posX, iterEnemy.posY);																				
 										}
 									}									

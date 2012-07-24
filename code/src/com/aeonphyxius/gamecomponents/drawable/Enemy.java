@@ -83,8 +83,17 @@ public class Enemy extends EngineGL{
 			break;
 		case Engine.TYPE_FINAL1:
 			posT = Engine.WARSHIP_SPEED;
-			enemyTexture = new TextureRegion(new float[] { 0.029f, 0.011f, 0.215f, 0.011f, 0.215f, 0.258f, 0.029f, 0.258f, });
-			
+			enemyTexture = new TextureRegion(new float[] { 0.029f, 0.011f, 0.215f, 0.011f, 0.215f, 0.258f, 0.029f, 0.258f, });			
+			isShooting =true;
+			break;
+		case Engine.TYPE_FINAL2:
+			posT = Engine.SCOUT_SPEED;
+			enemyTexture = new TextureRegion(new float[] { 0.003f, 0.738f,	0.252f, 0.738f, 0.252f, 0.984f, 0.003f, 0.984f, });			
+			isShooting =true;
+			break;
+		case Engine.TYPE_FINAL3:
+			posT = Engine.INTERCEPTOR_SPEED;
+			enemyTexture = new TextureRegion( new float[] { 0.027f, 0.548f, 0.183f, 0.548f, 0.183f, 0.713f, 0.027f, 0.713f, });			
 			isShooting =true;
 			break;
 		}
@@ -124,7 +133,20 @@ public class Enemy extends EngineGL{
 				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION_ENEMY);
 			}
 			break;
-
+		case Engine.TYPE_FINAL2:
+			if (damage >= Engine.FINAL_SHIELDS) {
+				isDestroyed = true;
+				ExplosionManager.getInstance().addExplosion(this.posX,this.posY);
+				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION_ENEMY);
+			}
+			break;
+		case Engine.TYPE_FINAL3:
+			if (damage >= Engine.FINAL_SHIELDS) {
+				isDestroyed = true;
+				ExplosionManager.getInstance().addExplosion(this.posX,this.posY);
+				MusicManager.getInstance().playSound(Engine.SOUND_EXPLOSION_ENEMY);
+			}
+			break;
 		}
 		
 	}

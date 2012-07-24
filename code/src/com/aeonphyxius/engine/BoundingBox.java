@@ -121,10 +121,10 @@ public class BoundingBox {
 				isOverlaping=ovelapsEnemy1Weapon(enemy,weapon);
 				break;
 			case Engine.TYPE_FINAL2:
-				//isOverlaping=ovelapsInterceptor(enemy);
+				isOverlaping=ovelapsScoutWeapon(enemy,weapon);
 				break;
 			case Engine.TYPE_FINAL3:
-				//isOverlaping=ovelapsInterceptor(enemy);
+				isOverlaping=ovelapsInterceptorWeapon(enemy,weapon);
 				break;
 		}
 		return isOverlaping;
@@ -138,8 +138,8 @@ public class BoundingBox {
 		isOverlapingTop=overlaps(enemy.posX, enemy.posY + 0.05f,enemy.posX + 0.95f,enemy.posY + 0.55f, // minX1, minY1, maxX1, maxY1
 				weapon.posX,weapon.posY,weapon.posX+0.3f,weapon.posY+0.3f); // minX2, minY2, maxX2, maxY2
 				
-	// WarShip Top Bounding Box
-	isOverlapingBottom=overlaps(enemy.posX+0.2f ,enemy.posY + 0.55f, enemy.posX + 0.8f,enemy.posY + 0.9f, // minX1, minY1, maxX1, maxY1
+		// WarShip Top Bounding Box
+		isOverlapingBottom=overlaps(enemy.posX+0.2f ,enemy.posY + 0.55f, enemy.posX + 0.8f,enemy.posY + 0.9f, // minX1, minY1, maxX1, maxY1
 			weapon.posX,weapon.posY,weapon.posX+0.3f,weapon.posY+0.3f); // minX2, minY2, maxX2, maxY2
 			
 	return isOverlapingTop || isOverlapingBottom ;
