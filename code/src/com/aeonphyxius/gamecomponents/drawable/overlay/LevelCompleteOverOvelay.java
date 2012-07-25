@@ -8,6 +8,7 @@ import com.aeonphyxius.engine.EngineGL;
 import com.aeonphyxius.engine.Overlay;
 import com.aeonphyxius.engine.TextureRegion;
 import com.aeonphyxius.engine.Engine.GAMESTATUS;
+import com.aeonphyxius.gamecomponents.drawable.Player;
 import com.aeonphyxius.gamecomponents.manager.ExplosionManager;
 import com.aeonphyxius.gamecomponents.manager.LevelManager;
 import com.aeonphyxius.gamecomponents.manager.SquadronManager;
@@ -51,10 +52,7 @@ public class LevelCompleteOverOvelay extends EngineGL implements Overlay {
 	 * Creates the textures and initializes the animation
 	 */
 	private LevelCompleteOverOvelay() {
-
-		//gameOverTexture = new TextureRegion( new float[] { 0.0f, 0.363f, 0.449f, 0.363f, 0.449f, 0.523f, 0.0f, 0.523f, });
 		gameOverTexture = new TextureRegion(new float[]   { 0f, 1f, 1f, 1f, 1f, 0f, 0f, 0f, });
-
 		timeStamp = System.currentTimeMillis();		
 	}
 
@@ -90,20 +88,30 @@ public class LevelCompleteOverOvelay extends EngineGL implements Overlay {
 			if (Engine.event != null){
 				switch (Engine.event.getAction()){
 				case MotionEvent.ACTION_DOWN:
-					LevelManager.getInstance().increaseLevel();
-					GameStartOvelay.getInstance().resetOverlay();
-					WeaponManager.getInstance().resetWeapons();
-					ExplosionManager.getInstance().resetExplosions();
-					LevelManager.getInstance().loadCurrentLevelData(gl);
-					try{
-						SquadronManager.getInstance().loadSquadronsLevel(LevelManager.getInstance().getCurrentLevel());
-					}catch (Exception e){
-						e.printStackTrace();
+					if (LevelManager.getInstance().getCurrentLevel() < 10){
+						LevelManager.getInstance().increaseLevel();
+						GameStartOvelay.getInstance().resetOverlay();
+						WeaponManager.getInstance().resetWeapons();
+						ExplosionManager.getInstance().resetExplosions();
+						LevelManager.getInstance().loadCurrentLevelData(gl);
+						try{
+							SquadronManager.getInstance().loadSquadronsLevel(LevelManager.getInstance().getCurrentLevel());
+						}catch (Exception e){
+							e.printStackTrace();
+						}
+						this.resetOverlay();
+						Engine.yScroll = 0;
+						Engine.GameSatus = GAMESTATUS.START;
+					}else{
+						GameStartOvelay.getInstance().resetOverlay();					
+						WeaponManager.getInstance().resetWeapons();		
+						ExplosionManager.getInstance().resetExplosions();
+						Player.getInstance().resetPlayerStatus();
+						LevelManager.getInstance().resetLevelData();
+						Engine.yScroll = 0;
+						this.resetOverlay();
+						Engine.GameSatus = Engine.GAMESTATUS.END;
 					}
-					this.resetOverlay();
-					Engine.yScroll = 0;
-					Engine.GameSatus = GAMESTATUS.START;
-
 
 					break;
 				}
