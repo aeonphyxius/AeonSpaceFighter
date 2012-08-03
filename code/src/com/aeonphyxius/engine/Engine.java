@@ -138,11 +138,10 @@ public static final int LEFT_TEXTURE_POSITION=1;
 public static final int RIGHT_TEXTURE_POSITION=3;
 
 /*Game Variables*/
-public static boolean isMuted = true;
+public static boolean isMuted = false;
 public static boolean isVibrated = true;
 public static float yScroll = 0.0f;
 public static Context context;
-public static Thread musicThread;
 public static Display display;
 public static int playerFlightAction = 0;
 public static MotionEvent event;

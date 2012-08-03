@@ -48,8 +48,7 @@ public class PlayerData {
 			this.damage = Engine.DAMAGE_HARD;
 			this.shield = Engine.SHIELD_HARD;
 			break;
-		}	
-		this.lives = 1;
+		}
 	}
 
 
