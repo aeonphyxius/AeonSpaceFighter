@@ -133,7 +133,7 @@ public class MusicManager {
 		AssetFileDescriptor assetDescriptor=null;
 
 		try {
-			assetDescriptor = Engine.context.getAssets().openFd("level01.ogg"); 
+			assetDescriptor = Engine.context.getAssets().openFd("mus_level.ogg"); 
 			//new AssetFileDescriptor(Engine.context.getContentResolver().openFileDescriptor(Uri.fromFile(new File("//assets/level01.ogg")),""),0,-1);
 		} catch (FileNotFoundException ex) {
 			// fall through and open the fallback ringtone below

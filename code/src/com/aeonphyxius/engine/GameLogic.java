@@ -162,16 +162,15 @@ public class GameLogic implements Renderer {
 
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {		
-
-		MusicManager.getInstance().playMusic();
+		
 		try {
 			TextureManager.getInstance().loadTextures(gl);
-			LevelManager.getInstance().loadLevelsData();
-			
+			LevelManager.getInstance().loadLevelsData();						
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		MusicManager.getInstance().playMusic();
 		
 		gl.glEnable(GL10.GL_TEXTURE_2D);
 		gl.glClearDepthf(1.0f);
